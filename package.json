@@ -1,0 +1,12 @@
+{
+  "name": "first_steps_mongoose",
+  "version": "0.0.1",
+  "description": "First steps with Mongoose",
+  "main": "app.js",
+  "dependencies": {
+    "express": "*",
+    "body-parser": "*",
+    "mongoose": "*",
+    "mongoosefromclass": "*"
+  }
+}
