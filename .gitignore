@@ -3,6 +3,7 @@ all.css
 nbproject
 desktop.ini
 .vscode
+.eslintrc*
 
 ### Node ###
 # Logs
