@@ -1,17 +1,21 @@
 module.exports = class Kitten {
 
-	schema() {
+	schema(){
 		return {
 			name: {type: String, required: true},
-			age: Number
+			age: {type: Number, min:0, max:30},
+			owner: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Owner'
+			}
 		}
 	}
 
-	speak() {
+	speak(){
 		var greeting = this.name
 			? "Meow name is " + this.name
 			: "I don't have a name";
-
 		return greeting;
-	};
+	}
+
 }

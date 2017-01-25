@@ -1,0 +1,16 @@
+body {
+  font-family:Verdana;
+}
+
+h1 {
+  font-size:24px;
+}
+
+h2 {
+  font-size:18px;
+}
+
+code {
+  border:1px solid #999;
+  border-radius:5px;
+}
