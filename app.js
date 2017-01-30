@@ -4,6 +4,8 @@ var bodyparser = require('body-parser');
 var mongoose = require('mongoose');
 require('mongoosefromclass')(mongoose);
 
+global.mongoose = mongoose;
+
 // Classes (as modules)
 var Restrouter = require('./modules/restrouter.class');
 var Kitten = require('./modules/kitten.class');
