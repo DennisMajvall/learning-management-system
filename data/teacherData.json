@@ -1,0 +1,36 @@
+[{
+  "firstname": "Miles",
+  "lastname": "Davis",
+  "phonenumber": "070-4453456",
+  "courses": ["588f5e8a205b985ee4187f9b"],
+  "email": "miles@gmail.com",
+  "password": "abv1234"
+},{
+  "firstname": "Benjamin",
+  "lastname": "Svensson",
+  "phonenumber": "020-4453456",
+  "courses": ["588f5e8a205b985ee4187f9b"],
+  "email": "benjamin@gmail.com",
+  "password": "cbv1234"
+},{
+  "firstname": "Karin",
+  "lastname": "Swahn",
+  "phonenumber": "040-2341545",
+  "courses": ["588f5e8a205b985ee4187f9b", "588f5e8a205b985ee4187f9a"],
+  "email": "karinswahn@hotmail.com",
+  "password": "434524567fgfs"
+},{
+  "firstname": "Dennis",
+  "lastname": "Cosmos",
+  "phonenumber": "010-234321",
+  "courses": ["588f5e8a205b985ee4187f9b"],
+  "email": "msngoogle@mac.com",
+  "password": "4542653bsb"
+},{
+  "firstname": "Tom",
+  "lastname": "Araya",
+  "phonenumber": "040-8832676",
+  "courses": ["588f5e8a205b985ee4187f9b"],
+  "email": "slayer@slayer.com",
+  "password": "fluffykitten"
+}]

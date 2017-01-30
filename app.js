@@ -6,6 +6,9 @@ require('mongoosefromclass')(mongoose);
 
 global.mongoose = mongoose;
 
+// My JSON Data
+var teacherData = require('./data/teacherData.json');
+
 // Classes (as modules)
 var Restrouter = require('./modules/restrouter.class');
 var Teacher = require('./modules/teacher.class');
@@ -33,8 +36,42 @@ app.use(express.static('www'));
 // Connect to mongoDB
 // and when that is done start the express server
 mongoose.connect('mongodb://localhost/lms');
-mongoose.connection.once('open', function() {
-	app.listen(3000,  function () {
-		console.log('Express app listening on port 3000!');
-	});
-});
+mongoose.connection.once('open', onceConnected);
+
+function onceConnected() {
+    app.listen(3000, function() {
+        console.log('Express app listening on port 3000');
+    });
+
+    // Add my Default Teachers from json. 
+    // check how many Teachers are in our database.
+    // If 0 exist, add all the teachers from teacherData.json to our lms database
+
+    Teacher.count(function(err, teacherCount) {
+        if (teacherCount === 0) {
+            createDeafultTeachers();
+        } else {
+        	return;
+        }
+    });
+}
+
+function createDeafultTeachers() {
+
+        var teachersLeftToSave = teacherData.length;
+
+        teacherData.forEach(function(teacher) {
+            var aTeacher = new Teacher({
+            	firstname: teacher.firstname,
+            	lastname: teacher.lastname,
+            	phonenumber: teacher.phonenumber,
+            	courses: teacher.courses,
+            	email: teacher.email,
+            	password: teacher.password
+            });
+            aTeacher.save(function(err, teachers) {
+                console.log("Saved", teachers);
+                teachersLeftToSave--;
+            });
+        });
+    }
