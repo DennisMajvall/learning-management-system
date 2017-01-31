@@ -8,6 +8,7 @@ require('mongoosefromclass')(mongoose);
 
 // My JSON Data
 var teacherData = require('./data/teacherData.json');
+var courseData = require('./data/courseData.json');
 
 // Make some things global
 global.mongoose = mongoose;
@@ -90,7 +91,7 @@ function onceConnected() {
         console.log('Express app listening on port 3000');
     });
 
-    // Add my Default Teachers from json. 
+    // Add my Default Teachers from json.
     // check how many Teachers are in our database.
     // If 0 exist, add all the teachers from teacherData.json to our lms database
 
@@ -100,6 +101,14 @@ function onceConnected() {
         } else {
             return;
         }
+    });
+
+    Course.count(function(err, courseCount) {
+    	if (courseCount === 0) {
+    		createDefaultCourses();
+    	} else {
+    		return;
+    	}
     });
 }
 
@@ -122,3 +131,22 @@ function createDeafultTeachers() {
             });
         });
     }
+
+function createDefaultCourses() {
+
+	var coursesLeftToSave = courseData.length;
+
+	courseData.forEach(function(course) {
+		var aCourse = new Course({
+			name: course.name,
+			teachers: course.teachers,
+			students: course.students,
+			description: course.description,
+			period: course.period
+		});
+		aCourse.save(function(err, courses) {
+			console.log("Saved", courses);
+			coursesLeftToSave--;
+		});
+	});
+}
