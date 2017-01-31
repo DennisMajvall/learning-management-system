@@ -31,7 +31,9 @@ var classesToLoad = {
   Kitten: 'module',
   Owner: 'module',
   Course: 'module',
-  Teacher: 'module'
+  Teacher: 'module',
+  Admin: 'module',
+  Education: 'module'
 };
 for(let className in classesToLoad){
   let pathName = './modules/' + className.toLowerCase() + '.class';
@@ -70,6 +72,8 @@ new Restrouter(app,Kitten);
 new Restrouter(app,Owner);
 new Restrouter(app,Teacher);
 new Restrouter(app,Course);
+new Restrouter(app,Education);
+new Restrouter(app,Admin);
 new Loginhandler(app);
 
 // A path to get user roles

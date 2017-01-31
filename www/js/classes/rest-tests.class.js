@@ -2,16 +2,17 @@ class RestTests {
 
     constructor() {
 
-      // // Example Create a Teacher
+         // Example Create a Teacher
 
-      //   Teacher.create({
-      //       username: "info@ttt.com",
-      //       password: "1234",
-      //       firstname: "Miles",
-      //       lastname: "Davis",
-      //       phonenumber: "070-4453456",
-      //       courses: ["588f5e8a205b985ee4187f9b"]
-      //   }, next);
+        // Teacher.create({
+        //     username: "info@ttt.com",
+        //     password: "1234",
+        //     firstname: "Miles",
+        //     lastname: "Davis",
+        //     phonenumber: "070-4453456",
+        //     role: 'teacher',
+        //     courses: ["588f5e8a205b985ee4187f9b"]
+        // }, next);
 
         // Test communication with the server
         // through the Kitten and Owner objects
