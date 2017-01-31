@@ -1,16 +1,15 @@
-module.exports = class Teacher {
+module.exports = class Teacher extends User {
 
 	schema(){
-		return {
+		return Object.assign({},super.schema(),{
 			firstname: {type: String, required: true},
 			lastname: {type: String, required: true},
 			phonenumber: {type: String},
 			courses: [{
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Course'
-			}],
-			email: {type: String, required: true},
-			password: {type: String, required: true}
-		}
+			}]
+		});
 	}
+
 }
