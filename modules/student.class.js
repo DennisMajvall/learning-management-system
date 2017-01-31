@@ -15,4 +15,11 @@ module.exports = class Student extends User {
 			}]
     	});
 	}
+
+	// Thomas used one single thing that needed a populate() in the examples.
+	// Students will have two things to populate(),
+	// so probably will we have to make a fix here with something _like_ this:
+	// populate(){
+	// 	return 'courses' || return 'educations';
+	// }
 }
