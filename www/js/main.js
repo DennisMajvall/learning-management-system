@@ -7,6 +7,7 @@ var Teacher = new RestEntity('teacher');
 var Course = new RestEntity('course');
 var Education = new RestEntity('education');
 var Admin = new RestEntity('admin');
+var Student = new RestEntity('student');
 
 // Some utility methods for forms
 var formHelpers = new FormHelpers();

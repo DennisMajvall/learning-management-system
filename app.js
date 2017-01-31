@@ -8,6 +8,7 @@ require('mongoosefromclass')(mongoose);
 
 // My JSON Data
 var teacherData = require('./data/teacherData.json');
+var studentData = require('./data/studentData.json');
 var courseData = require('./data/courseData.json');
 
 // Make some things global
@@ -34,6 +35,7 @@ var classesToLoad = {
   Teacher: 'module',
   Admin: 'module',
   Education: 'module'
+  Student: 'module'
 };
 for(let className in classesToLoad){
   let pathName = './modules/' + className.toLowerCase() + '.class';
@@ -71,6 +73,7 @@ app.use((req,res,next)=>{
 new Restrouter(app,Kitten);
 new Restrouter(app,Owner);
 new Restrouter(app,Teacher);
+new Restrouter(app,Student);
 new Restrouter(app,Course);
 new Restrouter(app,Education);
 new Restrouter(app,Admin);
@@ -107,6 +110,14 @@ function onceConnected() {
         }
     });
 
+    Student.count(function(err, studentCount) {
+        if (studentCount === 0) {
+            createDeafultStudents();
+        } else {
+            return;
+        }
+    });
+
     Course.count(function(err, courseCount) {
     	if (courseCount === 0) {
     		createDefaultCourses();
@@ -118,25 +129,48 @@ function onceConnected() {
 
 function createDeafultTeachers() {
 
-        var teachersLeftToSave = teacherData.length;
+    var teachersLeftToSave = teacherData.length;
 
-        console.log(teacherData);
+    console.log(teacherData);
 
-        teacherData.forEach(function(teacher) {
-            var aTeacher = new Teacher({
-                username: teacher.username,
-                password: teacher.password,
-                firstname: teacher.firstname,
-                lastname: teacher.lastname,
-                phonenumber: teacher.phonenumber,
-                courses: teacher.courses
-            });
-            aTeacher.save(function(err, teachers) {
-                console.log("Saved", teachers);
-                teachersLeftToSave--;
-            });
+    teacherData.forEach(function(teacher) {
+        var aTeacher = new Teacher({
+            username: teacher.username,
+            password: teacher.password,
+            firstname: teacher.firstname,
+            lastname: teacher.lastname,
+            phonenumber: teacher.phonenumber,
+            courses: teacher.courses
         });
-    }
+        aTeacher.save(function(err, teachers) {
+            console.log("Saved", teachers);
+            teachersLeftToSave--;
+        });
+    });
+}
+
+function createDeafultStudents() {
+
+    var studentsLeftToSave = studentData.length;
+
+    console.log(studentData);
+
+    studentData.forEach(function(student) {
+        var aStudent = new Student({
+            username: student.username,
+            password: student.password,
+            firstname: student.firstname,
+            lastname: student.lastname,
+            phonenumber: student.phonenumber,
+            courses: student.courses,
+            educations: student.educations
+        });
+        aStudent.save(function(err, students) {
+            console.log("Saved", students);
+            studentsLeftToSave--;
+        });
+    });
+}
 
 function createDefaultCourses() {
 
