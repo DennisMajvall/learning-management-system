@@ -37,13 +37,13 @@ var classesToLoad = {
   Education: 'module',
   Student: 'module'
 };
-for(let className in classesToLoad){
+for(let className in classesToLoad) {
   let pathName = './modules/' + className.toLowerCase() + '.class';
   let required = require(pathName);
   global[className] = required;
 }
-for(let className in classesToLoad){
-  if(classesToLoad[className] == 'module'){
+for(let className in classesToLoad) {
+  if(classesToLoad[className] == 'module') {
     global[className] = mongoose.fromClass(global[className]);
   }
 }
@@ -61,8 +61,8 @@ app.use(cookieparser());
 app.use(new Sessionhandler(Session).middleware());
 
 // Never cache request starting with "/rest/"
-app.use((req,res,next)=>{
-  if(req.url.indexOf('/rest/') >= 0){
+app.use((req, res, next)=>{
+  if(req.url.indexOf('/rest/') >= 0) {
     // never cache rest requests
     res.set("Cache-Control", "no-store, must-revalidate");
   }
@@ -70,17 +70,17 @@ app.use((req,res,next)=>{
 });
 
 // Create restroutes to selected classes/mongoose models
-new Restrouter(app,Kitten);
-new Restrouter(app,Owner);
-new Restrouter(app,Teacher);
-new Restrouter(app,Student);
-new Restrouter(app,Course);
-new Restrouter(app,Education);
-new Restrouter(app,Admin);
+new Restrouter(app, Kitten);
+new Restrouter(app, Owner);
+new Restrouter(app, Teacher);
+new Restrouter(app, Student);
+new Restrouter(app, Course);
+new Restrouter(app, Education);
+new Restrouter(app, Admin);
 new Loginhandler(app);
 
 // A path to get user roles
-app.get('/rest/user-roles',(req,res)=>{
+app.get('/rest/user-roles',(req, res)=>{
   res.json(global.userRoles);
 });
 
@@ -105,33 +105,24 @@ function onceConnected() {
     Teacher.count(function(err, teacherCount) {
         if (teacherCount === 0) {
             createDeafultTeachers();
-        } else {
-            return;
         }
     });
 
     Student.count(function(err, studentCount) {
         if (studentCount === 0) {
             createDeafultStudents();
-        } else {
-            return;
         }
     });
 
     Course.count(function(err, courseCount) {
     	if (courseCount === 0) {
     		createDefaultCourses();
-    	} else {
-    		return;
     	}
     });
 }
 
 function createDeafultTeachers() {
-
-    var teachersLeftToSave = teacherData.length;
-
-    console.log(teacherData);
+    thingsLeftToSave += teacherData.length;
 
     teacherData.forEach(function(teacher) {
         var aTeacher = new Teacher({
@@ -139,54 +130,98 @@ function createDeafultTeachers() {
             password: teacher.password,
             firstname: teacher.firstname,
             lastname: teacher.lastname,
-            phonenumber: teacher.phonenumber,
-            courses: teacher.courses
+            phonenumber: teacher.phonenumber
         });
         aTeacher.save(function(err, teachers) {
-            console.log("Saved", teachers);
-            teachersLeftToSave--;
+            thingsLeftToSave--;
+			linkCollectionsToEachother();
         });
     });
 }
 
 function createDeafultStudents() {
+    thingsLeftToSave += studentData.length;
 
-    var studentsLeftToSave = studentData.length;
-
-    console.log(studentData);
-
-    studentData.forEach(function(student) {
+    studentData.forEach(function(student, indexx) {
         var aStudent = new Student({
             username: student.username,
             password: student.password,
             firstname: student.firstname,
             lastname: student.lastname,
-            phonenumber: student.phonenumber,
-            courses: student.courses,
-            educations: student.educations
+            phonenumber: student.phonenumber
         });
         aStudent.save(function(err, students) {
-            console.log("Saved", students);
-            studentsLeftToSave--;
+            thingsLeftToSave--;
+			linkCollectionsToEachother();
         });
     });
 }
 
 function createDefaultCourses() {
 
-	var coursesLeftToSave = courseData.length;
+	thingsLeftToSave += courseData.length;
 
 	courseData.forEach(function(course) {
 		var aCourse = new Course({
 			name: course.name,
-			teachers: course.teachers,
-			students: course.students,
 			description: course.description,
 			period: course.period
 		});
 		aCourse.save(function(err, courses) {
-			console.log("Saved", courses);
-			coursesLeftToSave--;
+			thingsLeftToSave--;
+			linkCollectionsToEachother();
 		});
 	});
+}
+
+var thingsLeftToSave = 0; // Change this to 1 to disable the populating
+function linkCollectionsToEachother() {
+	if (thingsLeftToSave != 0)
+		return;
+
+	var courses = null;
+	var teachers = null;
+	var students = null;
+
+	Course.find('', function(err, result) {
+		courses = result;
+		doLast();
+	});
+
+	Teacher.find('', function(err, result) {
+		teachers = result;
+		console.log(result);
+		doLast();
+	});
+
+	Student.find('', function(err, result) {
+		students = result;
+		doLast();
+	});
+
+	function doLast() {
+		if (!courses || !teachers || !students)
+			return;
+
+		teachers.courses = courses;
+		students.courses = courses;
+		courses.teachers = teachers;
+		courses.students = students;
+
+		teachers.forEach((v)=>{
+			v.courses = courses;
+			v.save();
+		});
+
+		students.forEach((v)=>{
+			v.courses = courses;
+			v.save();
+		});
+
+		courses.forEach((v)=>{
+			v.students = students;
+			v.teachers = teachers;
+			v.save();
+		});
+	}
 }
