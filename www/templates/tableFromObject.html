@@ -1,0 +1,22 @@
+<table class="table">
+ <thead>
+  <tr>
+    <th>
+      ${heading.key}
+    </th>
+    <th>${heading.val}</th>
+  </tr>
+ </thead>
+ [repeat r.result,key,val]
+  <tr>
+    <td>${key}</td>
+    <td>
+      [if typeof val == "object"]
+        <pre><code>${JSON.stringify(val,'','  ')}</code></pre>
+      [else]
+        ${val}
+      [endif]
+    </td>
+  </tr>
+  [endrepeat]
+</table>

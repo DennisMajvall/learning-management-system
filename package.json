@@ -6,6 +6,8 @@
   "dependencies": {
     "express": "*",
     "body-parser": "*",
+    "cookie-parser": "*",
+    "sha1": "*",
     "mongoose": "*",
     "mongoosefromclass": "*"
   }

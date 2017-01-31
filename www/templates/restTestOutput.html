@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="test-content row">
+  [repeat results,r]
+    <div>
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">${r.explanation}</h3>
+          </div>
+          <div class="panel-body">
+            <pre><code [if r.explanation=='Error']
+              style="background-color:#f7dce7"
+            [endif]
+            >${JSON.stringify(r.result,'','  ')}</code></pre>
+            [if r.result.constructor instanceof Object]
+              [template tableFromObject, {heading:{
+                key: r.result.constructor === Array ? 'Item' : 'Property',
+                val:'Value'
+              }}]
+            [endif]
+          </div>
+        </div>
+      </div>
+    </div>
+  [endrepeat]
+  </div>
+</div>
