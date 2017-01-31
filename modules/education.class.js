@@ -8,7 +8,7 @@ module.exports = class Education{
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Course'
 			}]
-		}
+		};
 	}
 
 }
