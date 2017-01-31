@@ -107,14 +107,16 @@ function createDeafultTeachers() {
 
         var teachersLeftToSave = teacherData.length;
 
+        console.log(teacherData);
+
         teacherData.forEach(function(teacher) {
             var aTeacher = new Teacher({
+                username: teacher.username,
+                password: teacher.password,
                 firstname: teacher.firstname,
                 lastname: teacher.lastname,
                 phonenumber: teacher.phonenumber,
-                courses: teacher.courses,
-                email: teacher.email,
-                password: teacher.password
+                courses: teacher.courses
             });
             aTeacher.save(function(err, teachers) {
                 console.log("Saved", teachers);
