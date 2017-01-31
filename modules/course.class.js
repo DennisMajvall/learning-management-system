@@ -2,7 +2,17 @@ module.exports = class Course {
 
 	schema(){
 		return {
-			name: String
+			name: {type: String, required: true},
+			teachers: [{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Teacher'
+			}],
+			students: [{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Student'
+			}],
+			description: {type: String},
+			period: {type: String}
 		};
 	}
 };

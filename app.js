@@ -6,6 +6,11 @@ var sha1 = require('sha1');
 var mongoose = require('mongoose');
 require('mongoosefromclass')(mongoose);
 
+// My JSON Data
+var teacherData = require('./data/teacherData.json');
+var studentData = require('./data/studentData.json');
+var courseData = require('./data/courseData.json');
+
 // Make some things global
 global.mongoose = mongoose;
 global.sha1 = sha1;
@@ -25,7 +30,12 @@ var classesToLoad = {
   Session: 'module',
   User: 'module',
   Kitten: 'module',
-  Owner: 'module'
+  Owner: 'module',
+  Course: 'module',
+  Teacher: 'module',
+  Admin: 'module',
+  Education: 'module'
+  Student: 'module'
 };
 for(let className in classesToLoad){
   let pathName = './modules/' + className.toLowerCase() + '.class';
@@ -62,6 +72,11 @@ app.use((req,res,next)=>{
 // Create restroutes to selected classes/mongoose models
 new Restrouter(app,Kitten);
 new Restrouter(app,Owner);
+new Restrouter(app,Teacher);
+new Restrouter(app,Student);
+new Restrouter(app,Course);
+new Restrouter(app,Education);
+new Restrouter(app,Admin);
 new Loginhandler(app);
 
 // A path to get user roles
@@ -75,9 +90,103 @@ app.use(express.static('www'));
 
 // Connect to mongoDB
 // and when that is done start the express server
-mongoose.connect('mongodb://localhost/kittendb');
-mongoose.connection.once('open',function(){
-  app.listen(3000, function () {
-    console.log('Express app listening on port 3000!');
-  });
-});
+mongoose.connect('mongodb://localhost/lms');
+mongoose.connection.once('open', onceConnected);
+
+function onceConnected() {
+    app.listen(3000, function() {
+        console.log('Express app listening on port 3000');
+    });
+
+    // Add my Default Teachers from json.
+    // check how many Teachers are in our database.
+    // If 0 exist, add all the teachers from teacherData.json to our lms database
+
+    Teacher.count(function(err, teacherCount) {
+        if (teacherCount === 0) {
+            createDeafultTeachers();
+        } else {
+            return;
+        }
+    });
+
+    Student.count(function(err, studentCount) {
+        if (studentCount === 0) {
+            createDeafultStudents();
+        } else {
+            return;
+        }
+    });
+
+    Course.count(function(err, courseCount) {
+    	if (courseCount === 0) {
+    		createDefaultCourses();
+    	} else {
+    		return;
+    	}
+    });
+}
+
+function createDeafultTeachers() {
+
+    var teachersLeftToSave = teacherData.length;
+
+    console.log(teacherData);
+
+    teacherData.forEach(function(teacher) {
+        var aTeacher = new Teacher({
+            username: teacher.username,
+            password: teacher.password,
+            firstname: teacher.firstname,
+            lastname: teacher.lastname,
+            phonenumber: teacher.phonenumber,
+            courses: teacher.courses
+        });
+        aTeacher.save(function(err, teachers) {
+            console.log("Saved", teachers);
+            teachersLeftToSave--;
+        });
+    });
+}
+
+function createDeafultStudents() {
+
+    var studentsLeftToSave = studentData.length;
+
+    console.log(studentData);
+
+    studentData.forEach(function(student) {
+        var aStudent = new Student({
+            username: student.username,
+            password: student.password,
+            firstname: student.firstname,
+            lastname: student.lastname,
+            phonenumber: student.phonenumber,
+            courses: student.courses,
+            educations: student.educations
+        });
+        aStudent.save(function(err, students) {
+            console.log("Saved", students);
+            studentsLeftToSave--;
+        });
+    });
+}
+
+function createDefaultCourses() {
+
+	var coursesLeftToSave = courseData.length;
+
+	courseData.forEach(function(course) {
+		var aCourse = new Course({
+			name: course.name,
+			teachers: course.teachers,
+			students: course.students,
+			description: course.description,
+			period: course.period
+		});
+		aCourse.save(function(err, courses) {
+			console.log("Saved", courses);
+			coursesLeftToSave--;
+		});
+	});
+}
