@@ -1,7 +1,7 @@
 module.exports = class Teacher extends User {
 
-	schema(){
-		return Object.assign({},super.schema(),{
+	schema() {
+		return Object.assign({}, super.schema(),{
 			firstname: {type: String, required: true},
 			lastname: {type: String, required: true},
 			phonenumber: {type: String},
@@ -12,4 +12,7 @@ module.exports = class Teacher extends User {
 		});
 	}
 
+	populate() {
+		return 'courses';
+	}
 }

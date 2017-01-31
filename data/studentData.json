@@ -1,0 +1,31 @@
+[{
+  "username": "mango@gmail.com",
+  "password": "fra1234",
+  "firstname": "Mango",
+  "lastname": "Lugosson",
+  "phonenumber": "070-4153456"
+},{
+  "username": "lisa@gmail.com",
+  "password": "hwa1234",
+  "firstname": "Lisa",
+  "lastname": "Milos",
+  "phonenumber": "020-4443456"
+},{
+  "username": "kent@gmail.com",
+  "password": "lol1234",
+  "firstname": "Kent",
+  "lastname": "Fågel",
+  "phonenumber": "040-2342545"
+},{
+  "username": "erik@gmail.com",
+  "password": "plo1234",
+  "firstname": "Erik",
+  "lastname": "Gadd",
+  "phonenumber": "010-234311"
+},{
+  "username": "old_minister@gmail.com",
+  "password": "liq1234",
+  "firstname": "Göran",
+  "lastname": "Persson",
+  "phonenumber": "020-8831676"
+}]

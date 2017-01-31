@@ -4,6 +4,8 @@ nbproject
 desktop.ini
 .vscode
 .eslintrc*
+.project
+*.sketch
 
 ### Node ###
 # Logs
