@@ -34,7 +34,7 @@ var classesToLoad = {
   Course: 'module',
   Teacher: 'module',
   Admin: 'module',
-  Education: 'module'
+  Education: 'module',
   Student: 'module'
 };
 for(let className in classesToLoad){
