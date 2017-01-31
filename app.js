@@ -131,8 +131,6 @@ function createDeafultTeachers() {
 
     var teachersLeftToSave = teacherData.length;
 
-    console.log(teacherData);
-
     teacherData.forEach(function(teacher) {
         var aTeacher = new Teacher({
             username: teacher.username,
@@ -152,8 +150,6 @@ function createDeafultTeachers() {
 function createDeafultStudents() {
 
     var studentsLeftToSave = studentData.length;
-
-    console.log(studentData);
 
     studentData.forEach(function(student) {
         var aStudent = new Student({
