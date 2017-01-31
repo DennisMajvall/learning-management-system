@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-11">
+            	<div class="temp-x"><a>X(A temporary clickable hamburger)</a></div>
+            <div class="menu-slider">
+                <ul>
+                    <li class="head-text">${header}</li>
+                    <li class="divider"></li>
+                    <li class="second-head-text">${education}</li>
+                    <li class="head-text">Your Courses:</li>
+                      [repeat courses,course]
+                        <li class="third-head-text"><a href="#">${course.name}</a></li>
+                      [endrepeat]
+                    <li class="head-text"><a href="#">${booking}</a></li>
+                    <li class="spacer"></li>
+                    <li class="divider"></li>
+                    <li class="second-head-text">${account}</li>
+                    <li class="head-text"><a href="#">${usersettings}</a></li>
+                    <li class="head-text"><a href="#">${password}</a></li>
+                    <li class="spacer"></li>
+                    <li class="log-out"><button>${logout}</button></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
