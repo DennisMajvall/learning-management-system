@@ -6,6 +6,9 @@ var sha1 = require('sha1');
 var mongoose = require('mongoose');
 require('mongoosefromclass')(mongoose);
 
+// My JSON Data
+var teacherData = require('./data/teacherData.json');
+
 // Make some things global
 global.mongoose = mongoose;
 global.sha1 = sha1;
@@ -25,7 +28,9 @@ var classesToLoad = {
   Session: 'module',
   User: 'module',
   Kitten: 'module',
-  Owner: 'module'
+  Owner: 'module',
+  Course: 'module',
+  Teacher: 'module'
 };
 for(let className in classesToLoad){
   let pathName = './modules/' + className.toLowerCase() + '.class';
@@ -62,6 +67,8 @@ app.use((req,res,next)=>{
 // Create restroutes to selected classes/mongoose models
 new Restrouter(app,Kitten);
 new Restrouter(app,Owner);
+new Restrouter(app,Teacher);
+new Restrouter(app,Course);
 new Loginhandler(app);
 
 // A path to get user roles
@@ -75,9 +82,43 @@ app.use(express.static('www'));
 
 // Connect to mongoDB
 // and when that is done start the express server
-mongoose.connect('mongodb://localhost/kittendb');
-mongoose.connection.once('open',function(){
-  app.listen(3000, function () {
-    console.log('Express app listening on port 3000!');
-  });
-});
+mongoose.connect('mongodb://localhost/lms');
+mongoose.connection.once('open', onceConnected);
+
+function onceConnected() {
+    app.listen(3000, function() {
+        console.log('Express app listening on port 3000');
+    });
+
+    // Add my Default Teachers from json. 
+    // check how many Teachers are in our database.
+    // If 0 exist, add all the teachers from teacherData.json to our lms database
+
+    Teacher.count(function(err, teacherCount) {
+        if (teacherCount === 0) {
+            createDeafultTeachers();
+        } else {
+            return;
+        }
+    });
+}
+
+function createDeafultTeachers() {
+
+        var teachersLeftToSave = teacherData.length;
+
+        teacherData.forEach(function(teacher) {
+            var aTeacher = new Teacher({
+                firstname: teacher.firstname,
+                lastname: teacher.lastname,
+                phonenumber: teacher.phonenumber,
+                courses: teacher.courses,
+                email: teacher.email,
+                password: teacher.password
+            });
+            aTeacher.save(function(err, teachers) {
+                console.log("Saved", teachers);
+                teachersLeftToSave--;
+            });
+        });
+    }
