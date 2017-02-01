@@ -29,14 +29,14 @@ function start() {
     // Wait for DOM ready
     $(() => {
 
-        // Create the main navbar
-        // new MainNavbar();
-
         // Run the rest tests
         // new RestTests();
 
         // Create the menu
         new Menu();
+
+        // Create the navbar
+        new Navbar();
 
         // slide in (animate) the menu 
         menuSlideIn();
