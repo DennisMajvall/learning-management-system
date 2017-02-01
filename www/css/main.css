@@ -49,91 +49,6 @@ a:active {
     transition: all ease-in-out 200ms;
 }
 
-.temp-x {
-    font-size: 30px;
-    position: fixed;
-    left: 400px;
-}
-
-.menu-slider {
-  position: absolute;
-    left: 0px;
-    width: 365px;
-    height: 100vh;
-    background-color: #262228;
-    display: block;
-    margin: 0;
-    padding-top: 20px;
-}
-
-.menu-slider ul {
-    list-style-type: none;
-}
-
-.head-text {
-    color: #fff;
-    font-size: 18px;
-    margin: 6px 0;
-}
-
-.head-text a {
-    color: #fff;
-}
-
-.head-text a:hover {
-    color: rgb(80, 80, 80);
-    -webkit-transition: all ease-in-out 200ms;
-    transition: all ease-in-out 200ms;
-}
-
-.divider {
-    margin: 20px 0;
-    width: 90%;
-    border: 1px solid #fff;
-}
-
-.spacer {
-    margin: 80px 0;
-}
-
-.second-head-text {
-    color: #c1c1c1;
-    font-size: 20px;
-    text-transform: uppercase;
-}
-
-.third-head-text a{
-    display: block;
-    font-size: 16px;
-    margin-left: 40px;
-    padding-bottom: 8px;
-    padding-top: 5px;
-    list-style-type: square;
-}
-
-.log-out button{
-  position: absolute;
-  right: 0;
-  bottom: 30px;
-  left: 40px;
-  color: #fff;
-  background-color: #262228;
-  padding: 10px;
-  border: 1px solid #fff;
-  -webkit-transition: all ease-in-out 200ms;
-    transition: all ease-in-out 200ms;
-
-}
-
-.log-out button:hover{
-  color: #262228;
-  background-color: #fff;
-  -webkit-transition: all ease-in-out 200ms;
-    transition: all ease-in-out 200ms;
-
-}
-
-
 
 /* Forms */
 
@@ -178,4 +93,16 @@ a:active {
     .menu-slider {
         width: 365px;
     }
+
+    .teacher-message{
+        width: 365px
+    }
+
+}
+
+@media screen and (max-width: 365px) {
+    .divider2 {
+        display: none;
+    }
+
 }

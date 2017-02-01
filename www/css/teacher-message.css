@@ -1,0 +1,52 @@
+/* Teacher Message */
+
+.teacher-message{
+    margin: auto 0;
+    width: 96%;
+    padding: 10px;
+}
+
+.new-message {
+    color: #262228;
+    font-size: 19px;
+    margin: 6px 0;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.divider2 {
+    margin: 3px 0;
+    margin-left: 10px;
+    width: 120px;
+    border: 1px solid #262228;
+    display: inline-block;
+}
+
+.teacher-input-area{
+    width: 100%;
+    margin: 0;
+    margin-bottom: 14px;
+    border: 1px solid #262228;
+    border-radius: 0;
+    height: 80px;
+    padding: 10px;
+    font-size: 14px;
+    color: #000;
+}
+
+.teacher-input-area:focus{
+    border: 2px dashed #262228;
+}
+
+.btn-group button {
+    background-color: #fff;
+    padding: 4px 20px;
+    border: 1px solid #262228;
+    -webkit-transition: all ease-in-out 200ms;
+      transition: all ease-in-out 200ms;
+    margin-right: 10px;
+}
+
+.caret {
+    margin-left: 10px;
+}

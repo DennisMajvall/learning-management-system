@@ -15,20 +15,24 @@ var formHelpers = new FormHelpers();
 // Load html templates
 // (also see libs/template.jquery.js)
 $.loadTemplates([
-    'header',
-    'menu-slider',
-    'teacher-mess',
-    'modal',
-    'navbar',
-    'restTestOutput',
-    'tableFromObject',
-    'formFromObject'
+	'modal',
+	'menu-slider',
+	'teacher-mess',
+	'navbar',
+	'tableFromObject',
+	'formFromObject',
+	'course-frontpage'
 ], start);
+
 
 // Start the app
 function start() {
     // Wait for DOM ready
     $(() => {
+
+        // Create the main navbar
+        // new MainNavbar();
+
         // Run the rest tests
         // new RestTests();
         new Teachermessage();
@@ -36,11 +40,9 @@ function start() {
         // Create the menu
         new Menu();
 
-        // Create the navbar
-        new Navbar();
-
         // // slide in (animate) the menu 
         menuSlideIn();
+
     });
 }
 
