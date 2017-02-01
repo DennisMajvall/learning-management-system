@@ -37,32 +37,26 @@ function start() {
         new Menu();
 
         // Create the navbar
-        new Navbar();
+        new Navbar()
 
-        // // slide in (animate) the menu 
-        menuSlideIn();
+        // Toggle the sidebar menu on logo click
+        $('body').on('click','.navigationbar',function(){
+            // retrieve current state, initially undefined
+            var state = $(this).data('state');
+
+            // toggle the state - first click will make this "true"
+            state = !state;
+
+            if (state) {
+                $(".menu-slider").animate({ left: '-400px' }, 200);
+            } else {
+                $(".menu-slider").animate({ left: '0' }, 200);
+            }
+
+            // put the state back
+            $(this).data('state', state);
+        });
     });
 }
 
-function menuSlideIn() {
 
-    $('.temp-x').click(function() {
-
-        // retrieve current state, initially undefined
-        var state = $(this).data('state');
-
-        // toggle the state - first click will make this "true"
-        state = !state;
-
-        if (state) {
-            $(".menu-slider").animate({ left: '-400px' }, 200);
-        } else {
-            $(".menu-slider").animate({ left: '0' }, 200);
-        }
-
-        // put the state back
-        $(this).data('state', state);
-
-    });
-
-}

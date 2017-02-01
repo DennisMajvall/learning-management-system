@@ -1,4 +1,14 @@
 .navigationbar{
-	background-color: red;
-	height: 100px;
+	background-color: #c1c1c1;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	font-weight: bold;
+	font-size: 20px;
+	padding: 10px;
+}
+
+.navigationbar > .logo{
+	color: #337ab7;
 }
