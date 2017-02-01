@@ -1,8 +1,8 @@
 /* Teacher Message */
 
 .teacher-message{
-    margin: auto 0;
-    width: 96%;
+    margin: 20px auto 0;
+    width: 90%;
     padding: 10px;
 }
 
@@ -17,7 +17,7 @@
 .divider2 {
     margin: 3px 0;
     margin-left: 10px;
-    width: 120px;
+    width: 90px;
     border: 1px solid #262228;
     display: inline-block;
 }
