@@ -1,35 +1,26 @@
 .navigationbar{
-	background-color: #c1c1c1;
+	background-color: #d1d1d1;
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	font-weight: bold;
 	font-size: 20px;
-	padding: 10px;
-	margin-bottom: 200px;
-}
-
-.navigationbar > .logo-div {
-	height: 30px;
-	display: inline-block;
-	padding: 2px;
-	float: left;
-}
-
-.navigationbar > .logo-div >.logo {
-	color: #337ab7;
+	padding: 10px 10px 16px;
 }
 
 .navigationbar > .fake-hamb {
 	height: 28px;
 	display: inline-block;
-	padding: 2px;
-	float: right;
 	margin-right: 20px;
-	 -webkit-transition-duration: 0.4s;
+	-webkit-transition-duration: 0.4s;
+	-moz-transition-duration: 0.4s;
+	-o-transition-duration: 0.4s;
     transition-duration: 0.4s;
+    padding: 0;
 }
+
 .navigationbar > .fake-hamb img {
-	height: 30px;
+	width: 30px;
+	height: 100%;
 }
