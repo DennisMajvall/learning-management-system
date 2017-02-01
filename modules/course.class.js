@@ -15,4 +15,8 @@ module.exports = class Course {
 			period: {type: String}
 		};
 	}
+
+	populate() {
+		return 'teachers students';
+	}
 };

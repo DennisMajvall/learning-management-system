@@ -21,7 +21,7 @@ $.loadTemplates([
 	'navbar',
 	'tableFromObject',
 	'formFromObject',
-	'course-frontpage'
+	'courses-frontpage'
 ], start);
 
 
