@@ -1,49 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Trying out some REST</title>
-	<meta charset="utf8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/login-page.css">
-	<script src="js/libs/jquery.js"></script>
-	<script src="js/libs/template.jquery.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="js/classes/rest-entity.class.js"></script>
-	<script src="js/classes/main-navbar.class.js"></script>
-	<script src="js/classes/modal.class.js"></script>
-	<script src="js/classes/form-helpers.class.js"></script>
-</head>
-<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-11">
+            	<div class="temp-x"><a>X(A temporary clickable hamburger)</a></div>
+            <div class="menu-slider">
+                <ul>
+                    <li class="head-text">${header}</li>
+                    <li class="divider"></li>
+                    <li class="second-head-text">${education}</li>
+                    <li class="head-text">Your Courses:</li>
+                      [repeat courses,course]
+                        <li class="third-head-text"><a href="#">${course.name}</a></li>
+                      [endrepeat]
+                    <li class="head-text"><a href="#">${booking}</a></li>
+                    <li class="spacer"></li>
+                    <li class="divider"></li>
+                    <li class="second-head-text">${account}</li>
+                    <li class="head-text"><a href="#">${usersettings}</a></li>
+                    <li class="head-text"><a href="#">${password}</a></li>
+                    <li class="spacer"></li>
+                    <li class="log-out"><button>${logout}</button></li>
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-12 teacher-messages">
-				<input type="text" class="form-control input-lg input-area">
-			</div>
-
-			<div class="col-xs-12">
-				<div class="btn-group">
-					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Dropdown!<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-				    	<li><a href="#">Action</a></li>
-				    	<li><a href="#">Another action</a></li>
-				    	<li><a href="#">Something else here</a></li>
-				    	<li role="separator" class="divider"></li>
-				    	<li><a href="#">Separated link</a></li>
-					</ul>
-				</div>
-
-				<button class="btn btn-default send-button" type="button">Send</button>
-			</div>
-		</div>
-	</div>
-
-
-
-</body>
-</html>
+                </ul>
+            </div>
+        </div>
+    </div>

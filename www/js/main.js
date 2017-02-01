@@ -17,6 +17,7 @@ var formHelpers = new FormHelpers();
 $.loadTemplates([
     'header',
     'menu-slider',
+    'teacher-mess',
     'modal',
     'navbar',
     'restTestOutput',
@@ -34,16 +35,16 @@ function start() {
 
         // Run the rest tests
         // new RestTests();
+        new Teachermessage();
 
         // Create the menu
         new Menu();
 
-        // slide in (animate) the menu 
+        // // slide in (animate) the menu 
         menuSlideIn();
 
     });
 }
-
 
 function menuSlideIn() {
 
@@ -58,7 +59,7 @@ function menuSlideIn() {
         if (state) {
             $(".menu-slider").animate({ left: '-400px' }, 200);
         } else {
-            $(".menu-slider").animate({ left: '10px' }, 200);
+            $(".menu-slider").animate({ left: '0' }, 200);
         }
 
         // put the state back
