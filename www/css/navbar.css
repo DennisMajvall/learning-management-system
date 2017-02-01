@@ -7,8 +7,29 @@
 	font-weight: bold;
 	font-size: 20px;
 	padding: 10px;
+	margin-bottom: 200px;
 }
 
-.navigationbar > .logo{
+.navigationbar > .logo-div {
+	height: 30px;
+	display: inline-block;
+	padding: 2px;
+	float: left;
+}
+
+.navigationbar > .logo-div >.logo {
 	color: #337ab7;
+}
+
+.navigationbar > .fake-hamb {
+	height: 28px;
+	display: inline-block;
+	padding: 2px;
+	float: right;
+	margin-right: 20px;
+	 -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+.navigationbar > .fake-hamb img {
+	height: 30px;
 }
