@@ -90,33 +90,55 @@ a:active {
 /*MEDIA QUERIES*/
 
 @media screen and (min-width: 450px) {
-    .menu-slider {
-        width: 365px;
-        left: 0;
-    }
 
-    .teacher-message{
-        width: 365px
-    }
+    // TO USE LATER SPRINT 2
 
-    .navigationbar{
-    background-color: #c1c1c1;
-    position: fixed;
-    top: 0;
-    left: 365px;
+//     .menu-slider {
+//         width: 365px;
+//         left: 0;
+//     }
+
+//     .teacher-message{
+//         width: 365px
+//     }
+
+//     .navigationbar{
+//     background-color: #c1c1c1;
+//     position: fixed;
+//     top: 0;
+//     left: 365px;
     
+// }
+
+//     .navigationbar > .fake-hamb img {
+//         display: none;
+//     }
+
+//     .fake-hamb-2 {
+//         display: none;
+//     }
+
 }
 
-    .navigationbar > .fake-hamb img {
-        display: none;
+@media screen and (max-width: 372px) {
+
+    // For the smaller devices iPhone 5 etc. 
+        .menu-slider {
+        position: fixed;
+        left: -400px;
+        width: 80%;
     }
+
+    .menu-slider ul {
+        width: 300px;
+    }
+
 
     .fake-hamb-2 {
-        display: none;
+        position: absolute;
+        top: 20px;
+        right: 56px;
     }
-}
-
-@media screen and (max-width: 365px) {
 
     .divider2 {
         display: none;
