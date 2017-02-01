@@ -1,0 +1,26 @@
+//Temp CSS, will be integrated with rest of menu classes
+
+@media screen and (min-width: 450px) {
+
+    .menu-slider-admin {
+        width: 365px;
+        left: 0;
+    }
+}
+
+.menu-slider-admin {
+    position: fixed;
+    top: 0;
+    left: -400px;
+    width: 365px;
+    height: 100vh;
+    background-color: #262228;
+    display: block;
+    margin: 0;
+    padding-top: 20px;
+    z-index: 1;
+}
+
+.menu-slider-admin ul {
+    list-style-type: none;
+}
