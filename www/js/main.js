@@ -34,6 +34,9 @@ function start() {
         // new RestTests();
         // new TeacherTest();
 
+        // Create teacher message area
+        // new Teachermessage();
+
         // Create the menu
         new Menu();
 
