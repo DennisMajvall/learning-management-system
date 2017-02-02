@@ -10,6 +10,7 @@ require('mongoosefromclass')(mongoose);
 var teacherData = require('./data/teacherData.json');
 var studentData = require('./data/studentData.json');
 var courseData = require('./data/courseData.json');
+var roomData = require('./data/roomData.json');
 
 // Make some things global
 global.mongoose = mongoose;
@@ -35,6 +36,7 @@ var classesToLoad = {
   Teacher: 'module',
   Admin: 'module',
   Education: 'module',
+  Room: 'module',
   Announcement: 'module',
   Student: 'module'
 };
@@ -77,6 +79,7 @@ new Restrouter(app, Teacher);
 new Restrouter(app, Student);
 new Restrouter(app, Course);
 new Restrouter(app, Education);
+new Restrouter(app, Room);
 new Restrouter(app, Admin);
 new Restrouter(app, Announcement);
 new Loginhandler(app);
@@ -121,6 +124,14 @@ function onceConnected() {
     		createDefaultCourses();
     	}
     });
+
+    Room.count(function(err, roomCount) {
+    	if (roomCount === 0) {
+    		createDefaultRooms();
+    	}
+    });
+
+
 }
 
 function createDeafultTeachers() {
@@ -175,6 +186,21 @@ function createDefaultCourses() {
 		});
 	});
 }
+
+function createDefaultRooms() {
+
+	thingsLeftToSave += roomData.length;
+
+	roomData.forEach(function(room) {
+		var aRoom = new Room({
+			name: room.name
+		});
+		aRoom.save(function(err, rooms) {
+			thingsLeftToSave--;
+		});
+	});
+}
+
 
 var thingsLeftToSave = 0; // Change this to 1 to disable the populating
 function linkCollectionsToEachother() {

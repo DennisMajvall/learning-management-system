@@ -37,7 +37,7 @@
 
 .startfrontpage-li {
 	display: block;
-    font-size: 18px;
+    font-size: 22px;
     list-style-type: none;
 }
 
@@ -54,6 +54,12 @@
 }
 
 .student-list-li {
+	display: block;
+    font-size: 18px;
+    list-style-type: none;
+}
+
+.educationpage-li {
 	display: block;
     font-size: 18px;
     list-style-type: none;

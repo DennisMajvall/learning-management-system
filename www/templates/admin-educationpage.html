@@ -1,0 +1,14 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Educations</h3>
+			<ul>
+                [repeat educations,education]
+                	<li class="educationpage-li">
+                		<a class="education-${education.name}" href="#">${education.name}</a>
+                   	</li>
+                [endrepeat]
+			</ul>
+		</div>
+	</div>
+</div>

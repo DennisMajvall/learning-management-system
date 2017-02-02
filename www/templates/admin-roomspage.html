@@ -1,0 +1,14 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Rooms</h3>
+			<ul>
+                [repeat rooms,room]
+                	<li class="roomspage-li">
+                		<a class="room-${room.name}" href="#">${room.name}</a>
+                   	</li>
+                [endrepeat]
+			</ul>
+		</div>
+	</div>
+</div>

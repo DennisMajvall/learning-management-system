@@ -6,6 +6,7 @@ var Login = new RestEntity('login');
 var Teacher = new RestEntity('teacher');
 var Course = new RestEntity('course');
 var Education = new RestEntity('education');
+var Room = new RestEntity('room');
 var Admin = new RestEntity('admin');
 var Student = new RestEntity('student');
 

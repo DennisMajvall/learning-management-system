@@ -4,6 +4,7 @@ var Teacher = new RestEntity('teacher');
 var Course = new RestEntity('course');
 var Student = new RestEntity('student');
 var Education = new RestEntity('education');
+var Room = new RestEntity('room');
 var Admin = new RestEntity('admin');
 
 // Some utility methods for forms
@@ -16,11 +17,13 @@ $.loadTemplates([
   	'menu-slider-admin',
   	'navbar',
   	'tableFromObject',
-    'admin-student-list',
   	'formFromObject',
-    'admin-startfrontpage',
+  	'admin-startfrontpage',
+    'admin-educationpage',
     'admin-coursepage',
-    'admin-teacherpage'
+    'admin-roomspage',
+    'admin-teacherpage',
+    'admin-student-list'
 ], start);
 
 // Start the app
