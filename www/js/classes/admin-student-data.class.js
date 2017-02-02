@@ -1,7 +1,6 @@
 class AdminStudentData {
 
 	constructor() {
-
 		var someStudents;
 
 		Student.find('', function(data, err) {

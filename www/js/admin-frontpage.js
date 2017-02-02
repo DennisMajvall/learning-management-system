@@ -19,7 +19,8 @@ $.loadTemplates([
     'admin-student-list',
   	'formFromObject',
     'admin-startfrontpage',
-    'admin-coursepage'
+    'admin-coursepage',
+    'admin-teacherpage'
 ], start);
 
 // Start the app
@@ -28,8 +29,6 @@ function start() {
   	$(()=>{
 
   		new AdminFrontpage();
-
-  		new AdminCoursepage();
 
   	  // Create the menu
       new MenuAdmin();

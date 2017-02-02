@@ -2,7 +2,7 @@
 
 @media screen and (max-width: 372px) {
 
-    // For the smaller devices iPhone 5 etc. 
+    // For the smaller devices iPhone 5 etc.
     .menu-slider-admin {
         position: fixed;
         left: -400px;
@@ -37,14 +37,24 @@
 
 .startfrontpage-li {
 	display: block;
-    font-size: 20px;
+    font-size: 18px;
     list-style-type: none;
 }
 
 .coursepage-li {
 	display: block;
-    font-size: 20px;
+    font-size: 18px;
     list-style-type: none;
-    padding: 5px;
-    border: 1px solid black;
+}
+
+.teacherpage-li {
+	display: block;
+    font-size: 18px;
+    list-style-type: none;
+}
+
+.student-list-li {
+	display: block;
+    font-size: 18px;
+    list-style-type: none;
 }

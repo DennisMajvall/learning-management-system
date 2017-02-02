@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Teachers</h3>
+			<ul>
+                [repeat teachers,teacher]
+                	<li class="teacherpage-li">
+                		<a class="teacher-${teacher.firstname}" href="#">${teacher.firstname}</a>
+                		<a class="teacher-${teacher.lastname}" href="#">${teacher.lastname}</a>
+                   	</li>
+                [endrepeat]
+			</ul>
+		</div>
+	</div>
+</div>
