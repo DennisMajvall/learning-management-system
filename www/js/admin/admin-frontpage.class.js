@@ -2,7 +2,7 @@ class AdminFrontpage {
 
 	constructor() {
 
-		$('body div.page-top').template('admin-startfrontpage', {
+		$('body div.page-top').template('admin-frontpage', {
             categories: [
                 {name: 'Educations'},
                 {name: 'Courses'},

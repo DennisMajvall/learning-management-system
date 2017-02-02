@@ -17,7 +17,7 @@ class CoursesOnFrontpage {
 		}
 
 		function createTemplate(courses, err) {
-			$('body').template('courses-frontpage', { courses: courses });
+			$('body').template('courses', { courses: courses });
 		}
 	}
 }
