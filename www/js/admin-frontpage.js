@@ -16,7 +16,7 @@ $.loadTemplates([
   	'menu-slider-admin',
   	'navbar',
   	'tableFromObject',
-    'student-list-frontpage',
+    'admin-student-list',
   	'formFromObject',
     'admin-startfrontpage'
 ], start);
@@ -25,9 +25,10 @@ $.loadTemplates([
 function start() {
   	// Wait for DOM ready
   	$(()=>{
-    	// Create the main navbar
+      	// Create the main navbar
         new AdminFrontpage();
-    	        // Create the menu
+        
+        // Create the menu
         new MenuAdmin();
 
         // Create the navbar

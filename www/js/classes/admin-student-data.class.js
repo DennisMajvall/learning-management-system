@@ -1,17 +1,18 @@
-class AdminTest {
+class AdminStudentData {
 
 	constructor() {
 
 		var someStudents;
 
 		Student.find('', function(data, err) {
-			if(data.length >= 21) {
+			if(data.length > 20) {
 				someStudents = data.slice(data.length-20, data.length+1);
 			} else {
 				someStudents = data;
 			}
 
-			$('body').template('student-list-frontpage', {students: someStudents});
+			$('body div.page-content').html('');
+			$('body div.page-content').template('admin-student-list', {students: someStudents});
 		});
 	}
 }
