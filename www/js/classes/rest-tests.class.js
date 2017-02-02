@@ -14,6 +14,13 @@ class RestTests {
         //     courses: ["588f5e8a205b985ee4187f9b"]
         // }, next);
 
+        // Announcement.create({
+        //     author: "teacher id 1",
+        //     message: 'Start working, you lazy unflappable morons!',
+        //     courses: ["588f5e8a205b985ee4187f9b"]
+        // }, next);
+
+
         // Test communication with the server
         // through the Kitten and Owner objects
 

@@ -31,7 +31,7 @@ function start() {
     $(() => {
         // Run the rest tests
         // new RestTests();
-        new Teachermessage();
+        // new TeacherTest();
 
         // Create the menu
         new Menu();
