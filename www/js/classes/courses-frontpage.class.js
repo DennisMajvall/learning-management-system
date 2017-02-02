@@ -1,12 +1,19 @@
 class CoursesOnFrontpage {
 
-	constructor() {
+	constructor(role) {
 		// When we have login working we won't have to 'find' Students (or Teachers)
 		// and instead just populate the courses of the one logged in.
-		Student.find('', function(data, err) {
-			let student = data[0];
+		// Student.find('', function(data, err) {
+		// 	let student = data[0];
 
-			populateCourses(student.courses);
+		// 	populateCourses(student.courses);
+		// });
+
+		let schema = role == "Student" ? Student : Teacher;
+		schema.find('', function(data,err){
+			let user = data[0];
+
+			populateCourses(user.courses);
 		});
 
 		function populateCourses(courses) {
