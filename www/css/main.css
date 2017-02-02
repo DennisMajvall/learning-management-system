@@ -3,16 +3,11 @@
 body {
     font-family: 'Roboto Slab', serif;
     font-weight: 400;
-    overflow:hidden;
     padding-top: 40px;
 }
 
 
 /* Modal vertical center align */
-
-.container-fluid {
-    padding: 0;
-}
 
 .modal {
     text-align: center;
