@@ -5,8 +5,11 @@ class AdminTest {
 		var someStudents;
 
 		Student.find('', function(data, err) {
-			someStudents = data.slice(data.length-3, data.length+1);
-			console.log(someStudents);
+			if(data.length >= 21) {
+				someStudents = data.slice(data.length-20, data.length+1);
+			} else {
+				someStudents = data;
+			}
 
 			$('body').template('student-list-frontpage', {students: someStudents});
 		});
