@@ -90,7 +90,7 @@ app.use(express.static('www'));
 
 // Connect to mongoDB
 // and when that is done start the express server
-mongoose.connect('mongodb://localhost/lms');
+mongoose.connect('mongodb://127.0.0.1/lms');
 mongoose.connection.once('open', onceConnected);
 
 function onceConnected() {
