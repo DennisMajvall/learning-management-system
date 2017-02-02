@@ -24,3 +24,21 @@
 .menu-slider-admin ul {
     list-style-type: none;
 }
+
+.startfrontpage-marginator {
+	margin-top: 30px;
+}
+
+.startfrontpage-li {
+	display: block;
+    font-size: 20px;
+    list-style-type: none;
+}
+
+.coursepage-li {
+	display: block;
+    font-size: 20px;
+    list-style-type: none;
+    padding: 5px;
+    border: 1px solid black;
+}

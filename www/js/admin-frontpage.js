@@ -18,15 +18,19 @@ $.loadTemplates([
   	'tableFromObject',
     'student-list-frontpage',
   	'formFromObject',
-    'admin-startfrontpage'
+    'admin-startfrontpage',
+    'admin-coursepage'
 ], start);
 
 // Start the app
 function start() {
   	// Wait for DOM ready
   	$(()=>{
+  		new AdminFrontpage();
+
+  		new AdminCoursepage();
+
     	// Create the main navbar
-        new AdminFrontpage();
     	        // Create the menu
         new MenuAdmin();
 
