@@ -17,7 +17,8 @@ $.loadTemplates([
   	'navbar',
   	'tableFromObject',
     'student-list-frontpage',
-  	'formFromObject'
+  	'formFromObject',
+    'admin-startfrontpage'
 ], start);
 
 // Start the app
@@ -25,6 +26,7 @@ function start() {
   	// Wait for DOM ready
   	$(()=>{
     	// Create the main navbar
+        new AdminFrontpage();
     	        // Create the menu
         new MenuAdmin();
 
