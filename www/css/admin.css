@@ -1,10 +1,16 @@
 //Temp CSS, will be integrated with rest of menu classes
 
-@media screen and (min-width: 450px) {
+@media screen and (max-width: 372px) {
 
+    // For the smaller devices iPhone 5 etc. 
     .menu-slider-admin {
-        width: 365px;
-        left: 0;
+        position: fixed;
+        left: -400px;
+        width: 80%;
+    }
+
+    .menu-slider-admin ul {
+        width: 300px;
     }
 }
 
@@ -18,7 +24,7 @@
     display: block;
     margin: 0;
     padding-top: 20px;
-    z-index: 1;
+    z-index: 3;
 }
 
 .menu-slider-admin ul {
