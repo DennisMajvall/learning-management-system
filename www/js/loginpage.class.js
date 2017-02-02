@@ -1,6 +1,6 @@
-class Startpage {
+class Loginpage {
     constructor() {
-        $('body').template('startpage',{
+        $('body').template('loginpage',{
             "text": "The login page!"
         });
     }

@@ -9,15 +9,23 @@ var Student = new RestEntity('student');
 var Teacher = new RestEntity('teacher');
 
 // Edit your role here
-var role = role || 'Admin';
+var role = role || 'Teacher';
+
+// Edit your logged in status here
+var loggedIn = true;
 
 (()=>{
 	// Put templates used by ALL ROLES here
 	$.loadTemplates([
-		'navbar'
+		'navbar',
+		'loginpage'
 	], start);
 
 	function start() {
+		if (!loggedIn) {
+			new Loginpage();
+			return;
+		}
 		new Navbar();
 
 		// Load and initialize role-specific templates
