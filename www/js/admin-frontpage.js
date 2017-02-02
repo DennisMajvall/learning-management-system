@@ -18,23 +18,26 @@ $.loadTemplates([
   	'tableFromObject',
     'admin-student-list',
   	'formFromObject',
-    'admin-startfrontpage'
+    'admin-startfrontpage',
+    'admin-coursepage'
 ], start);
 
 // Start the app
 function start() {
   	// Wait for DOM ready
   	$(()=>{
-      	// Create the main navbar
-        new AdminFrontpage();
-        
-        // Create the menu
-        new MenuAdmin();
 
-        // Create the navbar
-        new Navbar();
+  		new AdminFrontpage();
 
-        menuSlideInAdmin();
+  		new AdminCoursepage();
+
+  	  // Create the menu
+      new MenuAdmin();
+
+      // Create the navbar
+      new Navbar();
+
+      menuSlideInAdmin();
 
     });
 }

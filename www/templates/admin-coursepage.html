@@ -4,9 +4,8 @@
 			<h3>Courses</h3>
 			<ul>
                 [repeat courses,course]
-                	<li class="third-head-text"><a hr ef="#">${course.name}</a>
-                    <br>
-                   	<p>${course.description} ${course.period}</p>
+                	<li class="coursepage-li">
+                		<a class="course-${course.name}" href="#">${course.name}</a>
                    	</li>
                 [endrepeat]
 			</ul>
