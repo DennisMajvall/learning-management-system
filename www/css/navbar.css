@@ -6,21 +6,30 @@
 	right: 0;
 	font-weight: bold;
 	font-size: 20px;
-	padding: 10px 10px 16px;
+	height: 50px;
 }
 
-.navigationbar > .fake-hamb {
-	height: 28px;
+.navigationbar .fake-hamb {
+	height: 100%;
 	display: inline-block;
-	margin-right: 20px;
 	-webkit-transition-duration: 0.4s;
 	-moz-transition-duration: 0.4s;
 	-o-transition-duration: 0.4s;
     transition-duration: 0.4s;
-    padding: 0;
+    padding-top: 8px;
 }
 
-.navigationbar > .fake-hamb img {
+.navigationbar .fake-hamb img {
 	width: 30px;
 	height: 100%;
+}
+
+.nav-info{
+	height: 100%;
+	color: #337ab7;
+	padding-top: 10px;
+}
+
+.nav-info p{
+	margin-bottom: 0;
 }
