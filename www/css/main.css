@@ -9,10 +9,6 @@ body {
 
 /* Modal vertical center align */
 
-.container-fluid {
-    padding: 0;
-}
-
 .modal {
     text-align: center;
     padding: 0!important;
