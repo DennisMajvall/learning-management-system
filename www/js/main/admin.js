@@ -14,8 +14,6 @@ function loadAdmin(callback) {
 		new AdminMenuSlider();
   		new AdminFrontpage();
 
-  		new AdminStudentEditPage();
-
 		callback();
 	}
 };

@@ -7,7 +7,7 @@
 			<ul>
 			    [repeat students, student]
 			        <li class="student-list-li">
-			        	<a class="student-${student.firstname} student-${student.lastname}" href="#">${student.firstname} ${student.lastname}</a>
+			        	<a class="student-info id-${student._id}" href="#">${student.firstname} ${student.lastname}</a>
 			        </li>
 			    [endrepeat]
 			</ul>

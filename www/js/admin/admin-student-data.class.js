@@ -13,5 +13,7 @@ class AdminStudentData {
 			$('body div.page-content').html('');
 			$('body div.page-content').template('admin-student-list', {students: someStudents});
 		});
+    	
+    	$('body').on('click', 'a.student-info', ()=>{ new AdminStudentEditPage();});
 	}
 }

@@ -11,6 +11,7 @@ var teacherData = require('./data/teacherData.json');
 var studentData = require('./data/studentData.json');
 var courseData = require('./data/courseData.json');
 var roomData = require('./data/roomData.json');
+var announcementData = require('./data/announcementData.json');
 
 // Make some things global
 global.mongoose = mongoose;
