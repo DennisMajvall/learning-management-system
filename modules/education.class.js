@@ -11,4 +11,8 @@ module.exports = class Education{
 		};
 	}
 
+	limit() {
+		return 20;
+	}
+
 }

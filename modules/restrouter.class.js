@@ -29,6 +29,7 @@ module.exports = class Restrouter {
     if(_class.orgClass){
       let p = _class.orgClass.prototype;
       this.populate = populate || (p.populate && p.populate());
+      this.limit = p.limit && p.limit();
       this.access = access || ({
         post: p.postAccess,
         get: p.getAccess,
@@ -96,6 +97,9 @@ module.exports = class Restrouter {
     var m = this._class[method](query);
     if(this.populate){
       m.populate(this.populate);
+    }
+    if(this.limit){
+      m.limit(this.limit);
     }
     m.exec((err,result)=>{
       this.json(res,err,result);

@@ -7,4 +7,8 @@ module.exports = class Room {
 			bookedBy: { type: String}
 		};
 	}
+
+	limit() {
+		return 20;
+	}
 };

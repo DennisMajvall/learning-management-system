@@ -4,4 +4,8 @@ module.exports = class Admin extends User{
 		return Object.assign({}, super.schema());
 	}
 
+	limit() {
+		return 20;
+	}
+
 }

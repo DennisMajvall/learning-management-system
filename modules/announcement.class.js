@@ -14,4 +14,8 @@ module.exports = class Announcement {
 			}]
 		};
 	}
+
+	limit() {
+		return 20;
+	}
 };

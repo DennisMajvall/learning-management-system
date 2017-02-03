@@ -19,4 +19,8 @@ module.exports = class Student extends User {
 	populate() {
 		return 'courses educations';
 	}
+
+	limit() {
+		return 20;
+	}
 }
