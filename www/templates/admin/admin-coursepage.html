@@ -5,7 +5,8 @@
 			<ul>
                 [repeat courses,course]
                 	<li class="coursepage-li">
-                		<a class="course-${course.name}" href="#">${course.name}</a>
+                		<a class="course-${course.name}" href="#">${course.name}</a><br>
+                		<p class="course-${course.period}">${course.period}</p>
                    	</li>
                 [endrepeat]
 			</ul>

@@ -7,11 +7,14 @@ function loadAdmin(callback) {
 		'admin-roomspage',
 		'admin-student-list',
 		'admin-teacherpage',
+		'admin-studenteditpage',
 	], onTemplatesLoaded, 'templates/admin');
 
 	function onTemplatesLoaded() {
 		new AdminMenuSlider();
   		new AdminFrontpage();
+
+  		new AdminStudentEditPage();
 
 		callback();
 	}
