@@ -3,12 +3,10 @@ class CoursesOnFrontpage {
 	constructor(role) {
 		// When we have login working we won't have to 'find' Students (or Teachers)
 		// and instead just populate the courses of the one logged in.
-		console.log(role);
 		let schema = role == "Student" ? Student : Teacher;
-		console.log(schema);
+
 		schema.find('', function(data,err){
 			let user = data[0];
-			console.log(user);
 
 			populateCourses(user.courses);
 		});
@@ -21,7 +19,16 @@ class CoursesOnFrontpage {
 		}
 
 		function createTemplate(courses, err) {
-			$('body').template('courses', { courses: courses });
+			$('.page-content').template('courses', { courses: courses });
 		}
+
+		// wait for DOM ready
+		$(() => {
+			$('body').on('click', '.course-panel', function(){
+				var id = $(this).data('id');
+				$('.page-content').empty();
+				new CoursePage(id);
+			});
+		});
 	}
 }

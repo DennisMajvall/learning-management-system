@@ -19,7 +19,7 @@ class TeacherMessage {
         }
 
         function createTemplate(courses, err) {
-            $('body').template('teacher-message', { courses: courses });
+            $('.page-top').template('teacher-message', { courses: courses });
         }
 
         function makeAnnouncement(teacher) {
