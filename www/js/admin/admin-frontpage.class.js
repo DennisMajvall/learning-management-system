@@ -18,5 +18,8 @@ class AdminFrontpage {
         $('li a.category-Teachers').click(()=>{ new AdminTeacherpage(); });
         $('li a.category-Students').click(()=>{ new AdminStudentData(); });
 
+
+        $('li a.student-info').click(()=>{ new AdminStudentEditPage(); });
+
 	}
 }
