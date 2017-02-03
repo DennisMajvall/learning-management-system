@@ -1,15 +1,15 @@
 function loadTeacher(callback) {
 	$.loadTemplates([
 		'menu-slider',
-		'frontpage/courses',
+		// 'frontpage/courses',
+		// 'course-page'
 		'frontpage/teacher-message',
-		'course-page'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
 		new MenuSlider();
 		new TeacherMessage();
-		new CoursesOnFrontpage("Teacher");
+		// new CoursesOnFrontpage("Teacher");
 		callback();
 	}
 };

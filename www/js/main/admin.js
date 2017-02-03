@@ -13,7 +13,6 @@ function loadAdmin(callback) {
 	function onTemplatesLoaded() {
 		new AdminMenuSlider();
   		new AdminFrontpage();
-
   		new AdminStudentEditPage();
 
 		callback();

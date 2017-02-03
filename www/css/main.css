@@ -119,7 +119,7 @@ a:active {
 
 @media screen and (max-width: 372px) {
 
-     For the smaller devices iPhone 5 etc. 
+    // For the smaller devices iPhone 5 etc. 
     .menu-slider {
         position: fixed;
         left: -400px;
