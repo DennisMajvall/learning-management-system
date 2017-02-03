@@ -1,8 +1,5 @@
 class AdminTeacherEditPage {
-
-	constructor() {
-
-       	$('body div.page-content').html('');
-       	$('body div.page-content').template('admin-teacher-edit-page');
+	constructor(teacher) {
+       	$('body div.page-content').html('').template('admin-teacher-edit-page', { teacher: teacher });
     }
 }

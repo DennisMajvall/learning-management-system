@@ -5,9 +5,9 @@
 			<input type="search" class="form-control" placeholder="search"></input>
 			<div class="vspace"></div>
 			<ul>
-                [repeat teachers,teacher]
+                [repeat teachers, teacher]
                 	<li class="teacherpage-li">
-                		<a class="teacher-info id-${teacher._id}" href="#">${teacher.firstname} ${teacher.lastname}</a>
+                		<a class="teacher-info" teacher-id="${teacher._id}" href="#">${teacher.firstname} ${teacher.lastname}</a>
                    	</li>
                 [endrepeat]
 			</ul>
