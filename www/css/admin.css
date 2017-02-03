@@ -74,6 +74,9 @@ Temp CSS, will be integrated with rest of menu classes
 }
 
 .edit-buttons {
-	margin-left: 35px;
-	margin-top: 10px;
+    background-color: #fff;
+    padding: 4px 20px;
+    -webkit-transition: all ease-in-out 200ms;
+      transition: all ease-in-out 200ms;
+    margin-left: 30px;
 }
