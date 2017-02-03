@@ -1,8 +1,11 @@
 /* Teacher Message */
 
 .teacher-message{
-    width: 90%;
+    width: 100%;
     padding: 10px;
+    margin-bottom: 15px;
+    background-color: #e1e1e1 ;
+    border-radius: 5px;
 }
 
 .new-message {
