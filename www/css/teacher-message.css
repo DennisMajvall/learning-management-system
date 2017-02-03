@@ -1,7 +1,6 @@
 /* Teacher Message */
 
 .teacher-message{
-    margin: 20px auto 0;
     width: 90%;
     padding: 10px;
 }
@@ -11,7 +10,7 @@
     font-size: 19px;
     margin: 6px 0;
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .divider2 {
@@ -32,10 +31,6 @@
     padding: 10px;
     font-size: 14px;
     color: #000;
-}
-
-.teacher-input-area:focus{
-    border: 2px dashed #262228;
 }
 
 .btn-group button {
