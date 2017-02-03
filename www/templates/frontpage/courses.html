@@ -1,10 +1,11 @@
-<div class="container">
+<div class="container courses">
 	<div class="row">
-		<div class="col xs-12">
+		<div class="col-xs-12">
 			[repeat courses, course]
-				<h1>${course.name}</h1>
-				<p>${course.description}</p>
-				<p>${course.period}</p>
+				<div class="panel panel-default">
+				  	<div class="panel-heading">${course.name} ${course.period}</div>
+				  	<div class="panel-body">${course.description}</div>
+				</div>
 			[endrepeat]
 		</div>
 	</div>

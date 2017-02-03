@@ -8,7 +8,7 @@ function loadTeacher(callback) {
 	function onTemplatesLoaded() {
 		new MenuSlider();
 		new TeacherMessage();
-		new CoursesOnFrontpage();
+		new CoursesOnFrontpage("Teacher");
 
 		callback();
 	}
