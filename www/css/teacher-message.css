@@ -25,15 +25,8 @@
 }
 
 .teacher-input-area{
-    width: 100%;
-    margin: 0;
-    margin-bottom: 14px;
-    border: 1px solid #262228;
-    border-radius: 0;
-    height: 80px;
-    padding: 10px;
-    font-size: 14px;
-    color: #000;
+    resize: none;
+    font-family: Verdana;
 }
 
 .btn-group button {
