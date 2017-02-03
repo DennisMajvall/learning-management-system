@@ -26,6 +26,7 @@ class CoursesOnFrontpage {
 		$(() => {
 			$('body').on('click', '.course-panel', function(){
 				var id = $(this).data('id');
+				$('.page-top').empty();
 				$('.page-content').empty();
 				new CoursePage(id);
 			});
