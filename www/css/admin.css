@@ -72,3 +72,7 @@ Temp CSS, will be integrated with rest of menu classes
     font-size: 18px;
     list-style-type: none;
 }
+
+.studenteditpage-li {
+	list-style-type: none;
+}

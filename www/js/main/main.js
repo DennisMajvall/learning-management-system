@@ -9,7 +9,7 @@ var Student = new RestEntity('student');
 var Teacher = new RestEntity('teacher');
 
 // Edit your role here
-var role = role || 'Student';
+var role = role || 'Admin';
 
 // Edit your logged in status here
 var loggedIn = true;
