@@ -5,10 +5,10 @@
 			<input type="search" class="form-control" placeholder="search"></input>
 			<div class="vspace"></div>
 			<ul>
-                [repeat courses,course]
+                [repeat courses, course]
                 	<li class="coursepage-li">
-                		<a class="course-${course.name}" href="#">${course.name}</a><br>
-                		<p class="course-${course.period}">${course.period}</p>
+                		<a class="course-info" course-id="${course._id}" href="#">${course.name}</a><br>
+                		<p>${course.period}</p>
                    	</li>
                 [endrepeat]
 			</ul>

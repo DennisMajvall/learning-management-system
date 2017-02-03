@@ -1,5 +1,4 @@
 class AdminMenuSlider {
-
     constructor(){
         $('body').template('admin-menu-slider',{
             header: 'Startpage',
@@ -17,6 +16,6 @@ class AdminMenuSlider {
             logout: 'log out'
         });
 
-        $('li a.category-Students').click(()=>{new AdminStudentData();});
+        $('li a.category-Students').click(()=> { new AdminStudentData(); });
     }
 }
