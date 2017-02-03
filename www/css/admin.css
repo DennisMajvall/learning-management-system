@@ -1,4 +1,5 @@
-//Temp CSS, will be integrated with rest of menu classes
+/*
+Temp CSS, will be integrated with rest of menu classes
 
 @media screen and (max-width: 372px) {
 
@@ -13,6 +14,7 @@
         width: 300px;
     }
 }
+*/
 
 .menu-slider-admin {
     position: fixed;
@@ -31,11 +33,11 @@
     list-style-type: none;
 }
 
-.startfrontpage-marginator {
+.frontpage-marginator {
 	margin-top: 30px;
 }
 
-.startfrontpage-li {
+.frontpage-li {
 	display: block;
     font-size: 22px;
     list-style-type: none;

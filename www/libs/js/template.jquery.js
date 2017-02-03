@@ -86,23 +86,28 @@
     return x;
   }
 
-  $.loadTemplates = (
-    fileNames,
-    callback,
-    folderPath = "templates",
-    extension = "html"
-  ) => {
-    var co = 0;
-    fileNames.forEach((tname)=>{
-      $.get(folderPath + '/' + tname + '.' + extension,(data)=>{
-        co++;
-        templates[tname] = replacements(data);
-        if(co == fileNames.length){
-          callback();
-        }
-      });
-    });
-  };
+	$.loadTemplates = (
+		fileNames,
+		callback,
+		folderPath = "templates",
+		extension = "html"
+	) => {
+		let co = 0;
+		fileNames.forEach((tname)=>{
+			$.get(folderPath + '/' + tname + '.' + extension,(data)=>{
+				co++;
+				templates[nameWithoutFolder(tname)] = replacements(data);
+				if(co == fileNames.length){
+					callback();
+				}
+			});
+		});
+	};
+
+	function nameWithoutFolder(name) {
+		let names = name.split('/');
+		return names[names.length - 1];
+	}
 
   var ifscopes = [];
 

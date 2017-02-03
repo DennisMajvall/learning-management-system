@@ -1,4 +1,4 @@
-class TeacherTest {
+class TeacherMessage {
 
     constructor() {
 
@@ -19,7 +19,7 @@ class TeacherTest {
         }
 
         function createTemplate(courses, err) {
-            $('body').template('teacher-mess', { courses: courses });
+            $('body').template('teacher-message', { courses: courses });
         }
 
         function makeAnnouncement(teacher) {
