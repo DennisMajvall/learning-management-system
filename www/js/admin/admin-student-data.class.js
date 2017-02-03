@@ -2,6 +2,7 @@ class AdminStudentData {
 
 	constructor() {
 		var studentsDisplayed;
+		let studentIds;
 
 		Student.find('', function(data, err) {
 			if(data.length > 20) {
@@ -11,20 +12,19 @@ class AdminStudentData {
 			}
 
 			$('body div.page-content').html('').template('admin-student-list', { students: studentsDisplayed });
-			
-			// Store the students in their respective data-attribute.
-			let studentIds = studentsDisplayed.map( student => student._id );
-			$('a.student-info').each((index, elem) => {
-				let me = $(elem);
-				let studentId = me.attr('student-id');
-				let foundIndex = studentIds.indexOf(studentId);
-				me.data('student', studentsDisplayed[foundIndex]);
-			});
+
+			// Make an array mapping the _id of every student displayed.
+			studentIds = studentsDisplayed.map( student => student._id );
 		});
-    	
+
+		function getStudent(element) {
+			let studentId = element.attr('student-id');
+			let foundIndex = studentIds.indexOf(studentId);
+			return studentsDisplayed[foundIndex];
+		}
+
 		$('body').on('click', 'a.student-info', function() {
-			let student = $(this).data('student');
-			new AdminStudentEditPage(student);
+			new AdminStudentEditPage(getStudent($(this)));
 		});
 	}
 }
