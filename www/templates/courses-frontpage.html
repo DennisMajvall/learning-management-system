@@ -5,25 +5,6 @@
 				<h1>${course.name}</h1>
 				<p>${course.description}</p>
 				<p>${course.period}</p>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">Teachers</div>
-					<div class="panel-body">
-						[repeat course.teachers, teacher]
-							<h4>${teacher.firstname} ${teacher.lastname}</h4>
-							<p>${teacher.phonenumber}</p>
-						[endrepeat]
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">Students</div>
-					<div class="panel-body">
-						[repeat course.students, student]
-							<h4>${student.firstname} ${student.lastname}</h4>
-							<p>${student.phonenumber}, ${student.username}</p>
-						[endrepeat]
-					</div>
-				</div>
 			[endrepeat]
 		</div>
 	</div>
