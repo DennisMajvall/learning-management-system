@@ -73,6 +73,7 @@ Temp CSS, will be integrated with rest of menu classes
     list-style-type: none;
 }
 
-.studenteditpage-li {
-	list-style-type: none;
+.edit-buttons {
+	margin-left: 35px;
+	margin-top: 10px;
 }

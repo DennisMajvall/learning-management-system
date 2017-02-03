@@ -5,7 +5,7 @@
 			<ul>
                 [repeat teachers,teacher]
                 	<li class="teacherpage-li">
-                		<a class="teacher-${teacher.firstname} teacher-${teacher.lastname}" href="#">${teacher.firstname} ${teacher.lastname}</a>
+                		<a class="teacher-info id-${teacher._id}" href="#">${teacher.firstname} ${teacher.lastname}</a>
                    	</li>
                 [endrepeat]
 			</ul>

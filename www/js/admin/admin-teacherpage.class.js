@@ -13,5 +13,7 @@ class AdminTeacherpage {
 			$('body div.page-content').html('');
 			$('body div.page-content').template('admin-teacherpage', {teachers: someTeachers} );
 		});
+
+		$('body').on('click', 'a.teacher-info', ()=>{ new AdminTeacherEditPage();});
 	}
 }

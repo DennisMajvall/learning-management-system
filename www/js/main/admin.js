@@ -7,7 +7,8 @@ function loadAdmin(callback) {
 		'admin-roomspage',
 		'admin-student-list',
 		'admin-teacherpage',
-		'admin-studenteditpage',
+		'admin-student-edit-page',
+		'admin-teacher-edit-page'
 	], onTemplatesLoaded, 'templates/admin');
 
 	function onTemplatesLoaded() {
