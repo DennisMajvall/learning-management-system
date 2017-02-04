@@ -37,7 +37,7 @@ class AdminSearch {
 
 		$('body').on('click', 'button.save-item', function() {
 			let item = itemHashMap[$(this).attr('item-id')];
-			dbSchema.update(item._id, () => {
+			dbSchema.update(item._id, item, () => {
 				location.reload();
 			});
 		});
