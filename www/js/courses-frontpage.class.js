@@ -28,7 +28,7 @@ class CoursesOnFrontpage {
 				var id = $(this).data('id');
 				$('.page-top').empty();
 				$('.page-content').empty();
-				new CoursePage(id);
+				$('.page-content').template('specific-course', { course: course });
 			});
 		});
 	}
