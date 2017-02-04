@@ -9,14 +9,23 @@ class AdminSearch {
 	init() {
 		this.dbSchema = this.getDbSchema();
 
+		this.container.empty().template('admin-search', {
+			title: this.getTitleFromDbType()
+		});
+
 		this.findItems(new AdminFilter().defaultQuery);
 
-		// Event listeners
 		new AdminEdit (this.dbSchema, (elem) => {
 			return this.getItemIdFromElement(elem);
 		});
-		
+
+		this.addEventListeners();
+	}
+
+	addEventListeners() {
 		let that = this;
+
+		// on item click
 		that.container.on('click', '.search-list a', function() {
 			let item = that.getItemIdFromElement($(this));
 
@@ -25,9 +34,31 @@ class AdminSearch {
 				item: item
 			});
 		});
+
+		// search box
+		let oldInputLength = 0;
+		let delayTimeout = null;
+		
+		that.container.on('keyup', 'input[type="search"]', function() {
+			let input = $(this).val();
+
+			// abort if the input.length hasn't changed.
+			if (oldInputLength == input.length) return;
+			oldInputLength = input.length;
+
+			// Abort the old Timeout if there's one active.
+			if (delayTimeout !== null) clearTimeout(delayTimeout);
+
+			// Wait a few milliseconds for more input
+			delayTimeout = setTimeout(()=>{
+				console.log(input);
+				that.findItems(new AdminFilter(input).dbType, input);
+				delayTimeout = null;
+			}, 300);
+		});
 	}
 
-	findItems(query) {
+	findItems(query, input = '') {
 		if (!this.dbSchema) {
 			console.log('AdminSearch.findItems failed due to missing dbSchema.');
 			return;
@@ -36,10 +67,9 @@ class AdminSearch {
 		this.dbSchema.find(query, (data, err) => {
 			var itemsDisplayed = data;
 
-			this.container.empty().template('admin-search', {
-				title: this.getTitleFromDbType(),
-				type: this.dbType,
+			this.container.find('.search-list').empty().template('admin-search-list', {
 				items: itemsDisplayed,
+				type: this.dbType
 			});
 
 			// Make an array mapping the _id as an index for each item.

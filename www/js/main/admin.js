@@ -7,9 +7,10 @@ function loadAdmin(callback) {
 		'edit/edit-student',
 		'edit/edit-teacher',
 		'admin-edit',
-		'admin-search',
 		'admin-frontpage',
-		'admin-menu-slider'
+		'admin-menu-slider',
+		'admin-search',
+		'admin-search-list'
 	], onTemplatesLoaded, 'templates/admin');
 
 	function onTemplatesLoaded() {
