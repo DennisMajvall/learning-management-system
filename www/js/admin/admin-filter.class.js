@@ -6,6 +6,9 @@ class AdminFilter {
 		let inputArray = input.replace(/\s{2,}/g, ' ').split(' ');
 		
 		this.admin = '';
+		this.course = '';
+		this.edcuation = '';
+		this.room = '';
 		this.student = createNormalUser();
 		this.teacher = createNormalUser();
 

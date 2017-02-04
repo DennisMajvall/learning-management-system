@@ -13,7 +13,7 @@ class AdminSearch {
 			title: this.getTitleFromDbType()
 		});
 
-		this.findItems(new AdminFilter().defaultQuery);
+		this.findItems('');
 
 		new AdminEdit (this.dbSchema, (elem) => {
 			return this.getItemIdFromElement(elem);
@@ -58,11 +58,6 @@ class AdminSearch {
 	}
 
 	findItems(query, input = '') {
-		if (!this.dbSchema) {
-			console.log('AdminSearch.findItems failed due to missing dbSchema.');
-			return;
-		}
-
 		this.dbSchema.find(query, (data, err) => {
 			var itemsDisplayed = data;
 
