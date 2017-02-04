@@ -59,8 +59,6 @@ class AdminSearch {
 
 	findItems(query, input = '') {
 		this.dbSchema.find(query, (data, err) => {
-			console.log(data);
-
 			var itemsDisplayed = data;
 
 			this.container.find('.search-list').empty().template('admin-search-list', {
