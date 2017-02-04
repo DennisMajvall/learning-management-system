@@ -40,7 +40,7 @@ body {
 a:hover,
 a:focus,
 a:active {
-    text-decoration: none; 
+    text-decoration: none;
     -webkit-transition: all ease-in-out 200ms;
     transition: all ease-in-out 200ms;
 }
@@ -82,6 +82,19 @@ a:active {
     border-color: rgb(212, 63, 58);
 }
 
+.course-panel {
+	cursor: pointer;
+}
+
+.specific-course-participants-ul {
+	border-top: 1px solid black;
+}
+
+.specific-course-li {
+	list-style-type: none;
+	display: inline-block;
+}
+
 
 /*MEDIA QUERIES*/
 /*
@@ -103,7 +116,7 @@ a:active {
      position: fixed;
      top: 0;
      left: 365px;
-    
+
  }
 
      .navigationbar > .fake-hamb img {
@@ -119,7 +132,7 @@ a:active {
 
 @media screen and (max-width: 372px) {
 
-     For the smaller devices iPhone 5 etc. 
+     For the smaller devices iPhone 5 etc.
     .menu-slider {
         position: fixed;
         left: -400px;
