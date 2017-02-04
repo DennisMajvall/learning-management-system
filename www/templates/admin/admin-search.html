@@ -7,8 +7,10 @@
 			<ul class="search-list">
 			    [repeat items, item]
 					<li item-id="${item._id}">
-						[if type == "student" || type == "teacher" || type == "admin"]
+						[if type == "student" || type == "teacher"]
 							<a>${item.firstname} ${item.lastname}</a>
+						[else if type == "admin"]
+							<a>${item.username}</a>
 						[else if type == "education" || type == "course"]
 							<a>${item.name}</a>
 						[else if type == "room"]

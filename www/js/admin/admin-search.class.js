@@ -45,11 +45,12 @@ class AdminSearch {
 
 		function getDbSchema(dbType) {
 			let schemas = {
-				education: Education,
+				admin: Admin,
 				course: Course,
+				education: Education,
 				room: Room,
-				teacher: Teacher,
-				student: Student
+				student: Student,
+				teacher: Teacher
 			};
 
 			return schemas[dbType];

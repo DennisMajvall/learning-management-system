@@ -6,7 +6,8 @@ var sha1 = require('sha1');
 var mongoose = require('mongoose');
 require('mongoosefromclass')(mongoose);
 
-// My JSON Data
+// Fake JSON Data
+var adminData = require('./data/adminData.json');
 var teacherData = require('./data/teacherData.json');
 var studentData = require('./data/studentData.json');
 var courseData = require('./data/courseData.json');
@@ -23,32 +24,32 @@ global.passwordSalt = "shouldBeHardToGuess132638@@@@x";
 // (takes away the warning "mpromise is deprecated")
 mongoose.Promise = Promise;
 
-// Load classes, make them global and
-// then convert selected ones to modules
+// Load classes, make them global and then convert selected ones to modules
 var classesToLoad = {
-  Sessionhandler: true,
-  Loginhandler: true,
-  Restrouter: true,
-  Session: 'module',
-  User: 'module',
-  Owner: 'module',
-  Course: 'module',
-  Teacher: 'module',
-  Admin: 'module',
-  Education: 'module',
-  Room: 'module',
-  Announcement: 'module',
-  Student: 'module'
+	Sessionhandler: true,
+	Loginhandler: true,
+	Restrouter: true,
+	Session: 'module',
+	User: 'module',
+	Owner: 'module',
+	Course: 'module',
+	Teacher: 'module',
+	Admin: 'module',
+	Education: 'module',
+	Room: 'module',
+	Announcement: 'module',
+	Student: 'module'
 };
+
 for(let className in classesToLoad) {
-  let pathName = './modules/' + className.toLowerCase() + '.class';
-  let required = require(pathName);
-  global[className] = required;
+	let pathName = './modules/' + className.toLowerCase() + '.class';
+	global[className] = require(pathName);
 }
+
 for(let className in classesToLoad) {
-  if(classesToLoad[className] == 'module') {
-    global[className] = mongoose.fromClass(global[className]);
-  }
+	if(classesToLoad[className] == 'module') {
+		global[className] = mongoose.fromClass(global[className]);
+	}
 }
 
 // Create a new express server, store in the variable app
@@ -65,11 +66,10 @@ app.use(new Sessionhandler(Session).middleware());
 
 // Never cache request starting with "/rest/"
 app.use((req, res, next)=>{
-  if(req.url.indexOf('/rest/') >= 0) {
-    // never cache rest requests
-    res.set("Cache-Control", "no-store, must-revalidate");
-  }
-  next();
+	if(req.url.indexOf('/rest/') >= 0) {
+		res.set("Cache-Control", "no-store, must-revalidate");
+	}
+	next();
 });
 
 // Create restroutes to selected classes/mongoose models
@@ -85,7 +85,7 @@ new Loginhandler(app);
 
 // A path to get user roles
 app.get('/rest/user-roles',(req, res)=>{
-  res.json(global.userRoles);
+  	res.json(global.userRoles);
 });
 
 // Point to a folder where we have static files
@@ -102,153 +102,136 @@ function onceConnected() {
         console.log('Express app listening on port 3000');
     });
 
-    // Add my Default Teachers from json.
-    // check how many Teachers are in our database.
-    // If 0 exist, add all the teachers from teacherData.json to our lms database
+	// For each collection type we have JSON of
+	// If the db counts 0 of either item
+	// It will insert the JSON into the db.
+	createFakeDataFromJSON();
+}
 
-    Teacher.count(function(err, teacherCount) {
-        if (teacherCount === 0) {
+function createFakeDataFromJSON() {
+    Admin.count(function(err, count) {
+        if (count === 0) {
+            createDeafultAdmins();
+        }
+    });
+
+    Teacher.count(function(err, count) {
+        if (count === 0) {
             createDeafultTeachers();
         }
     });
 
-    Student.count(function(err, studentCount) {
-        if (studentCount === 0) {
+    Student.count(function(err, count) {
+        if (count === 0) {
             createDeafultStudents();
         }
     });
 
-    Course.count(function(err, courseCount) {
-    	if (courseCount === 0) {
+    Course.count(function(err, count) {
+    	if (count === 0) {
     		createDefaultCourses();
     	}
     });
 
-    Room.count(function(err, roomCount) {
-    	if (roomCount === 0) {
+    Room.count(function(err, count) {
+    	if (count === 0) {
     		createDefaultRooms();
     	}
     });
-
-
-}
-
-function createDeafultTeachers() {
-    thingsLeftToSave += teacherData.length;
-
-    teacherData.forEach(function(teacher) {
-        var aTeacher = new Teacher({
-            username: teacher.username,
-            password: teacher.password,
-            firstname: teacher.firstname,
-            lastname: teacher.lastname,
-            phonenumber: teacher.phonenumber
-        });
-        aTeacher.save(function(err, teachers) {
-            thingsLeftToSave--;
-			linkCollectionsToEachother();
-        });
-    });
-}
-
-function createDeafultStudents() {
-    thingsLeftToSave += studentData.length;
-
-    studentData.forEach(function(student, indexx) {
-        var aStudent = new Student({
-            username: student.username,
-            password: student.password,
-            firstname: student.firstname,
-            lastname: student.lastname,
-            phonenumber: student.phonenumber
-        });
-        aStudent.save(function(err, students) {
-            thingsLeftToSave--;
-			linkCollectionsToEachother();
-        });
-    });
-}
-
-function createDefaultCourses() {
-
-	thingsLeftToSave += courseData.length;
-
-	courseData.forEach(function(course) {
-		var aCourse = new Course({
-			name: course.name,
-			description: course.description,
-			period: course.period
-		});
-		aCourse.save(function(err, courses) {
-			thingsLeftToSave--;
-			linkCollectionsToEachother();
-		});
-	});
-}
-
-function createDefaultRooms() {
-
-	thingsLeftToSave += roomData.length;
-
-	roomData.forEach(function(room) {
-		var aRoom = new Room({
-			name: room.name
-		});
-		aRoom.save(function(err, rooms) {
-			thingsLeftToSave--;
-		});
-	});
-}
-
-
-var thingsLeftToSave = 0; // Change this to 1 to disable the populating
-function linkCollectionsToEachother() {
-	if (thingsLeftToSave != 0)
-		return;
-
-	var courses = null;
-	var teachers = null;
-	var students = null;
-
-	Course.find('', function(err, result) {
-		courses = result;
-		doLast();
-	});
-
-	Teacher.find('', function(err, result) {
-		teachers = result;
-		console.log(result);
-		doLast();
-	});
-
-	Student.find('', function(err, result) {
-		students = result;
-		doLast();
-	});
-
-	function doLast() {
-		if (!courses || !teachers || !students)
-			return;
-
-		teachers.courses = courses;
-		students.courses = courses;
-		courses.teachers = teachers;
-		courses.students = students;
-
-		teachers.forEach((v)=>{
-			v.courses = courses;
-			v.save();
-		});
-
-		students.forEach((v)=>{
-			v.courses = courses;
-			v.save();
-		});
-
-		courses.forEach((v)=>{
-			v.students = students;
-			v.teachers = teachers;
-			v.save();
+	
+	function createDeafultAdmins() {
+		adminData.forEach(function(data) {
+			new Admin(data).save();
 		});
 	}
+
+	function createDeafultTeachers() {
+		thingsLeftToSave += teacherData.length;
+
+		teacherData.forEach(function(teacher) {
+			new Teacher(teacher).save(function(err, teachers) {
+				linkCollectionsToEachother();
+			});
+		});
+	}
+
+	function createDeafultStudents() {
+		thingsLeftToSave += studentData.length;
+
+		studentData.forEach(function(student) {
+			new Student(student).save(function(err, students) {
+				linkCollectionsToEachother();
+			});
+		});
+	}
+
+	function createDefaultCourses() {
+		thingsLeftToSave += courseData.length;
+
+		courseData.forEach(function(course) {
+			new Course(course).save(function(err, courses) {
+				linkCollectionsToEachother();
+			});
+		});
+	}
+
+	function createDefaultRooms() {
+		roomData.forEach(function(data) {
+			new Room(data).save();
+		});
+	}
+
+
+	var thingsLeftToSave = 0; // Change this to 1 to disable the populating
+	function linkCollectionsToEachother() {
+		if (--thingsLeftToSave != 0)
+			return;
+
+		var courses = null;
+		var teachers = null;
+		var students = null;
+
+		Course.find('', function(err, result) {
+			courses = result;
+			doLast();
+		});
+
+		Teacher.find('', function(err, result) {
+			teachers = result;
+			doLast();
+		});
+
+		Student.find('', function(err, result) {
+			students = result;
+			doLast();
+		});
+
+		function doLast() {
+			if (!courses || !teachers || !students)
+				return;
+
+			teachers.courses = courses;
+			students.courses = courses;
+			courses.teachers = teachers;
+			courses.students = students;
+
+			teachers.forEach((v)=>{
+				v.courses = courses;
+				v.save();
+			});
+
+			students.forEach((v)=>{
+				v.courses = courses;
+				v.save();
+			});
+
+			courses.forEach((v)=>{
+				v.students = students;
+				v.teachers = teachers;
+				v.save();
+			});
+		}
+	}
+
+
 }

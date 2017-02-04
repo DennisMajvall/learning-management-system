@@ -3,11 +3,12 @@ class AdminFrontpage {
 
 		$('body div.page-top').template('admin-frontpage', {
             categories: [
-                {name: 'Educations', url: 'education'},
+                {name: 'Admins', url: 'admin'},
                 {name: 'Courses', url: 'course'},
+                {name: 'Educations', url: 'education'},
                 {name: 'Rooms', url: 'room'},
-                {name: 'Teachers', url: 'teacher'},
-                {name: 'Students', url: 'student'}
+                {name: 'Students', url: 'student'},
+                {name: 'Teachers', url: 'teacher'}
             ]
         });
 	}

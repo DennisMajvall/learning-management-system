@@ -1,5 +1,6 @@
 function loadAdmin(callback) {
 	$.loadTemplates([
+		'edit/edit-admin',
 		'edit/edit-course',
 		'edit/edit-education',
 		'edit/edit-room',
