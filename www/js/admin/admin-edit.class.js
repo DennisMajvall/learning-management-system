@@ -28,7 +28,7 @@ class AdminEdit {
 			let item = findItemFunc($(this));
 			let key = $(this).attr('bind-key');
 
-			item[key] = $(this).val();
+			item[key] = $(this).val().trim();
 		});
 	}
 }

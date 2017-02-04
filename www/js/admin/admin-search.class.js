@@ -40,7 +40,7 @@ class AdminSearch {
 		let delayTimeout = null;
 		
 		that.container.on('keyup', 'input[type="search"]', function() {
-			let input = $(this).val();
+			let input = $(this).val().trim();
 
 			// abort if the input.length hasn't changed.
 			if (oldInputLength == input.length) return;
@@ -51,8 +51,7 @@ class AdminSearch {
 
 			// Wait a few milliseconds for more input
 			delayTimeout = setTimeout(()=>{
-				console.log(input);
-				that.findItems(new AdminFilter(input).dbType, input);
+				that.findItems(new AdminFilter(input)[that.dbType], input);
 				delayTimeout = null;
 			}, 300);
 		});
