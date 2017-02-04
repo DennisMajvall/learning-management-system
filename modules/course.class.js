@@ -19,4 +19,8 @@ module.exports = class Course {
 	populate() {
 		return 'teachers students';
 	}
+
+	limit() {
+		return 20;
+	}
 };

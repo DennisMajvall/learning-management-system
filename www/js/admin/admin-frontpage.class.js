@@ -3,18 +3,12 @@ class AdminFrontpage {
 
 		$('body div.page-top').template('admin-frontpage', {
             categories: [
-                {name: 'Educations'},
-                {name: 'Courses'},
-                {name: 'Rooms'},
-                {name: 'Teachers'},
-                {name: 'Students'}
+                {name: 'Educations', url: 'education'},
+                {name: 'Courses', url: 'course'},
+                {name: 'Rooms', url: 'room'},
+                {name: 'Teachers', url: 'teacher'},
+                {name: 'Students', url: 'student'}
             ]
         });
-
-        $('li a.category-Educations').click(()=>{ new AdminEducationList(); });
-        $('li a.category-Courses').click(()=>{ new AdminCourseList(); });
-        $('li a.category-Rooms').click(()=>{ new AdminRoomsList(); });
-        $('li a.category-Teachers').click(()=>{ new AdminTeacherList(); });
-        $('li a.category-Students').click(()=>{ new AdminStudentList(); });
 	}
 }

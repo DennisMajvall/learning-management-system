@@ -1,55 +1,67 @@
 class TeacherMessage {
 
     constructor() {
-
         // Find which courses this teacher have access to. 
         // When we have login working we won't have to 'find' Teachers
         // and instead just populate the courses of the one logged in.
+		let teacher = null;
+		let coursesToPublishTo = [];
 
         Teacher.find('', function(data, err) {
-            let teacher = data[0];
+            teacher = data[0];
             populateCourses(teacher.courses);
-            makeAnnouncement(teacher._id);
         });
 
         function populateCourses(courses) {
             let coursesIds = courses.map(course => '"' + course._id + '"');
             let queryString = 'find/{ _id: { $in: [' + coursesIds + '] } }';
-            Course.find(queryString, createTemplate);
+
+			Course.find(queryString, (courses, err) => {
+				createTemplate(courses);
+				createEventListeners();
+			});;
         }
 
-        function createTemplate(courses, err) {
+        function createTemplate(courses) {
             $('.page-top').template('teacher-message', { courses: courses });
         }
 
-        function makeAnnouncement(teacher) {
+		function createEventListeners() {
+			$('.page-top').on('click', '.send-button', makeAnnouncement);
 
-            Teacher.find('find/{_id:"' + teacher + '"}', function(teacher) {
+			$('.page-top').on('click', '.dropdown-menu a', function() {
+				let arrowIcon = '<span class="caret"></span>';
+				let courseId = $(this).attr('course-id');
 
-                $('body').on('click', '.send-button', function() {
+				// Adds or Removes the course from the array
+				let foundIndex = coursesToPublishTo.indexOf(courseId);
+				if (foundIndex > -1) {
+					coursesToPublishTo.splice(foundIndex, 1);
+				} else {
+					coursesToPublishTo.push(courseId);
+				}
+				
+				// Currently replaces the text on the button:
+				$('#dropdown-button').html($(this).text() + arrowIcon);
+			});
+		}
 
-                    // HEY!! Här kör det fast, har suttit helt för länge med samma problem. 
-                    var selCourse = $('.dropdown-menu').val($(this).html());
-                    // Det funkar som jag vill förutom detta: ->
-                    // Vill kunna få ut dropdown value. Helst att kunna plocka ut coursens id (utan find).
-                    // Announcement skapas (rad 42) - och courses id ska in som en array (rad 45). How in hell gör jag detta smidigast?
+        function makeAnnouncement() {
+			var author = teacher._id;
+			var textInput = $('.teacher-input-area').val();
+			var authorName = teacher.firstname + ' ' + teacher.lastname;
+			var displayMessage = textInput + ' - (Posted by ' + authorName + ')';
 
-                    var author = teacher[0]._id;
-                    var textInput = $('.teacher-input-area').val();
-                    var authorName = teacher[0].firstname + ' ' + teacher[0].lastname;
-                    var displayMessage = textInput + ' - (Posted by ' + authorName + ')';
+			// Vi bör ändra på layouten så att den visar alla valda kurser
+			// Kanske en dropdown där man kan (un)checka kurser 1 by 1?
 
-                    Announcement.create({
-                        author: author,
-                        message: displayMessage,
-                        courses: ["588f5e8a205b985ee4187f9b"]
-                    }, function() {
-                        console.log(displayMessage);
-                    });
-                });
-            });
+			Announcement.create({
+				author: author,
+				message: displayMessage,
+				courses: coursesToPublishTo
+			}, function() {
+				console.log(displayMessage);
+			});
         }
-
-
     }
 }

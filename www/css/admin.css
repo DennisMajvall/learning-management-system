@@ -74,8 +74,23 @@ Temp CSS, will be integrated with rest of menu classes
 
 .edit-buttons {
     background-color: #fff;
-    padding: 4px 20px;
+    padding-top: 8px;
     -webkit-transition: all ease-in-out 200ms;
       transition: all ease-in-out 200ms;
-    margin-left: 30px;
+}
+
+.edit-buttons button{
+	margin-right: 8px;
+	min-width: 50px;
+}
+
+.search-list {
+	display: block;
+    font-size: 18px;
+    list-style-type: none;
+	padding-left: 2px;
+}
+
+.search-list a {
+	cursor: pointer;
 }

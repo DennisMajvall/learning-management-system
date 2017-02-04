@@ -12,9 +12,7 @@ class AnnouncementOnFrontpage {
 			} else {
 
 				Announcement.find('find/{courses:"' + data.courses + '"}', function(announcementsToPrint, err) {
-
-					$('body div.page-top').html('');
-					$('body div.page-top').template('student-announcement', {announcements: announcementsToPrint});
+					$('body div.page-top').empty().template('student-announcement', {announcements: announcementsToPrint});
 				});
 			}
 		});

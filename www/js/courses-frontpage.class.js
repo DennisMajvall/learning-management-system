@@ -6,7 +6,7 @@ class CoursesOnFrontpage {
 		let schema = role == "Student" ? Student : Teacher;
 
 		schema.find('', function(data,err){
-			let user = data[5];
+			let user = data[0];
 
 			populateCourses(user.courses);
 		});

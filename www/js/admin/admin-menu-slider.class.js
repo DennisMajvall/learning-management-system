@@ -4,11 +4,11 @@ class AdminMenuSlider {
             header: 'Startpage',
             data: 'Database',
             categories: [
-                {name: 'Educations'},
-                {name: 'Courses'},
-                {name: 'Rooms'},
-                {name: 'Teachers'},
-                {name: 'Students'}
+                {name: 'Educations', url: 'education'},
+                {name: 'Courses', url: 'course'},
+                {name: 'Rooms', url: 'room'},
+                {name: 'Teachers', url: 'teacher'},
+                {name: 'Students', url: 'student'}
             ],
             account: 'Your Account',
             usersettings: 'Settings',

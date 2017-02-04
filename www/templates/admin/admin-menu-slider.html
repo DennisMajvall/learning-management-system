@@ -3,12 +3,12 @@
         <div class="col-xs-11">
             <div class="menu-slider">
                 <ul>
-                    <li class="head-text">${header}</li>
+                    <li class="head-text"><a href="/">${header}</a></li>
                     <img class="fake-hamb-2" src="/images/hamb.png">
                     <li class="divider"></li>
                     <li class="head-text">${data}</li>
                         [repeat categories,category]
-                            <li class="third-head-text"><a class="category-${category.name}" href="#">${category.name}</a></li>
+                            <li class="third-head-text"><a class="category-${category.name}" href="?cat=${category.url}">${category.name}</a></li>
                         [endrepeat]
                     <li class="spacer"></li>
                     <li class="divider"></li>
