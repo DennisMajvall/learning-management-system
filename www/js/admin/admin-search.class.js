@@ -35,6 +35,13 @@ class AdminSearch {
 			});
 		});
 
+		$('body').on('click', 'button.save-item', function() {
+			let item = itemHashMap[$(this).attr('item-id')];
+			dbSchema.update(item._id, () => {
+				location.reload();
+			});
+		});
+
 		function getTemplateObject(itemsDisplayed) {
 			return {
 				title: getTitleFromDbType(dbType),
@@ -70,7 +77,7 @@ class AdminSearch {
 			} else if (dbType.lastIndexOf('s') != dbType.length - 1) {
 				dbType += 's';
 			}
-			
+
 			return dbType;
 		}
 	}
