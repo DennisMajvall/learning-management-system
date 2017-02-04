@@ -1,74 +1,90 @@
 class AdminSearch {
 
 	constructor(dbType) {
-		var dbSchema = getDbSchema(dbType);
-		if (!dbSchema)
+		this.dbType = dbType;
+		this.itemHashMap = {};
+		this.container = $('.search-list');
+	}
+
+	init() {
+		this.dbSchema = this.getDbSchema();
+
+		this.findItems(new AdminFilter().defaultQuery);
+
+		// Event listeners
+		new AdminEdit (this.dbSchema, (elem) => {
+			return this.getItemIdFromElement(elem);
+		});
+		
+		let that = this;
+		that.container.on('click', '.search-list a', function() {
+			let item = that.getItemIdFromElement($(this));
+
+			$('.edit-area').empty().template('admin-edit', {
+				type: that.dbType,
+				item: item
+			});
+		});
+	}
+
+	findItems(query) {
+		if (!this.dbSchema) {
+			console.log('AdminSearch.findItems failed due to missing dbSchema.');
 			return;
+		}
 
-		let container = $('.search-list');
-		let itemHashMap = {};
-
-		new AdminEdit (dbSchema, getItemIdFromElement);
-
-		dbSchema.find('', function(data, err) {
+		this.dbSchema.find(query, (data, err) => {
 			var itemsDisplayed = data;
 
-			container.empty().template('admin-search', {
-				title: getTitleFromDbType(dbType),
-				type: dbType,
+			this.container.empty().template('admin-search', {
+				title: this.getTitleFromDbType(),
+				type: this.dbType,
 				items: itemsDisplayed,
 			});
 
 			// Make an array mapping the _id as an index for each item.
-			itemsDisplayed.forEach(function(item, index) {
-				itemHashMap[item._id] = item;
+			this.itemHashMap = {};
+			itemsDisplayed.forEach((item) => {
+				this.itemHashMap[item._id] = item;
 			});
 		});
+	}
+	
+	getItemIdFromElement(elem) {
+		let correctElem = elem.closest('[item-id]');
 
-		container.on('click', '.search-list a', function() {
-			let item = getItemIdFromElement($(this));
+		if (!correctElem)
+			console.log('getItemIdFromElement failed on', elem);
 
-			$('.edit-area').empty().template('admin-edit', {
-				type: dbType,
-				item: item
-			});
-		});
+		return this.itemHashMap[correctElem.attr('item-id')];
+	}
 
-		function getItemIdFromElement(elem) {
-			let correctElem = elem.closest('[item-id]');
+	getDbSchema() {
+		let schemas = {
+			admin: Admin,
+			course: Course,
+			education: Education,
+			room: Room,
+			student: Student,
+			teacher: Teacher
+		};
 
-			if (!correctElem)
-				console.log('getItemIdFromElement failed on', elem);
+		return schemas[this.dbType];
+	}
 
-			return itemHashMap[correctElem.attr('item-id')];
+	// Replace first letter with UpperCase. Add missing s at end. Replace -y with ies. Replace -fe with ves
+	getTitleFromDbType() {
+		let name = this.dbType;
+		name = name[0].toUpperCase() + name.substr(1);
+
+		if (name.lastIndexOf('y') == name.length - 1) {
+			name = name.substr(0, name.length - 1) + 'ies';
+		} else if (name.lastIndexOf('fe') == name.length - 2) {
+			name = name.substr(1, name.length - 2) + 'ves';
+		} else if (name.lastIndexOf('s') != name.length - 1) {
+			name += 's';
 		}
 
-		function getDbSchema(dbType) {
-			let schemas = {
-				admin: Admin,
-				course: Course,
-				education: Education,
-				room: Room,
-				student: Student,
-				teacher: Teacher
-			};
-
-			return schemas[dbType];
-		}
-
-		// Replace first letter with UpperCase. Add missing s at end. Replace -y with ies. Replace -fe with ves
-		function getTitleFromDbType(dbType) {
-			dbType = dbType[0].toUpperCase() + dbType.substr(1);
-
-			if (dbType.lastIndexOf('y') == dbType.length - 1) {
-				dbType = dbType.substr(0, dbType.length - 1) + 'ies';
-			} else if (dbType.lastIndexOf('fe') == dbType.length - 2) {
-				dbType = dbType.substr(1, dbType.length - 2) + 'ves';
-			} else if (dbType.lastIndexOf('s') != dbType.length - 1) {
-				dbType += 's';
-			}
-
-			return dbType;
-		}
+		return name;
 	}
 }

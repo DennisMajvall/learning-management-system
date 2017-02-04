@@ -18,7 +18,7 @@ function loadAdmin(callback) {
 		new AdminMenuSlider();
 
 		if (category) {
-			new AdminSearch(category);
+			new AdminSearch(category).init();;
 		} else {
 			new AdminFrontpage();
 		}
