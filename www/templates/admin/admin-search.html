@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>${title}</h3>
+			<input type="search" class="form-control" placeholder="search"></input>
+			<div class="vspace"></div>
+			<ul class="search-list">
+			    [repeat items, item]
+					<li>
+					[if type == "student" || type == "teacher" || type == "admin"]
+						<a item-id="${item._id}">${item.firstname} ${item.lastname}</a>
+					[else if type == "education" || type == "course"]
+						<a item-id="${item._id}">${item.name}</a>
+					[else if type == "room"]
+						<a item-id="${item._id}">${item.name}</a><br>
+						<p>${item.period}</p>
+					[endif]
+					
+					</li>
+			    [endrepeat]
+			</ul>
+		</div>
+	</div>
+</div>

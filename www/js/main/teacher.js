@@ -1,14 +1,13 @@
 function loadTeacher(callback) {
 	$.loadTemplates([
-		'menu-slider',
 		'frontpage/courses',
-		'course-page',
-		'frontpage/teacher-message'
+		'frontpage/teacher-message',
+		'menu-slider'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
 		new MenuSlider();
-		// new TeacherMessage();
+		new TeacherMessage();
 		new CoursesOnFrontpage("Teacher");
 		callback();
 	}

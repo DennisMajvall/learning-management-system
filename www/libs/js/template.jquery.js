@@ -51,7 +51,7 @@
 
     // Template include with scope object
     x = x.replace(
-      /\[template\s*([a-zA-Z0-9_\.\$]*)\s*,([^\]]*)\]/g,
+      /\[template\s*([a-zA-Z0-9-_.$]*)\s*,([^\]]*)\]/g,
       '${_template((t)=>{' +
       'var scope = t;' +
       'for(var i in t){eval("var " + i + "=t[i]");}' +
@@ -60,19 +60,19 @@
 
     // Template include
     x = x.replace(
-      /\[template\s*([a-zA-Z0-9_\.\$]*)\s*\]/g,
+      /\[template\s*([a-zA-Z0-9-_.$]*)\s*\]/g,
       '${_template(()=>{return eval("`" + templates["$1"] + "`")})}'
     );
 
     // Object repeat
     x = x.replace(
-      /\[repeat\s{1,}([a-zA-Z0-9_\.\$]*)\s*,\s*([a-zA-Z0-9_\.\$]*)\s*,\s*([a-zA-Z0-9_\.\$]*)\s*\]/g,
+      /\[repeat\s{1,}([a-zA-Z0-9-_.$]*)\s*,\s*([a-zA-Z0-9-_.$]*)\s*,\s*([a-zA-Z0-9-_.$]*)\s*\]/g,
       '${_repeat_obj($1,($2,$3)=>{return `'
     );
 
     // Array repeat
     x = x.replace(
-      /\[repeat\s{1,}([a-zA-Z0-9_\.\$]*)\s*,\s*([a-zA-Z0-9_\.\$]*)\s*\]/g,
+      /\[repeat\s{1,}([a-zA-Z0-9-_.$]*)\s*,\s*([a-zA-Z0-9-_.$]*)\s*\]/g,
       '${_repeat($1,($2)=>{return `'
     );
     x = x.replace(/\[endrepeat\]/g,'`})}');
@@ -155,7 +155,11 @@
       eval("var " + i + '=t[i]');
     }
     var tliteral;
-    eval('tliteral = `' + templates[templateName] + '`');
+	eval('tliteral = `' + templates[templateName] + '`');
+
+	// Run regexp again after applying a 2nd level of templates.
+	eval('tliteral = `' + replacements(tliteral) + '`');
+
     // using it for output
     $(this).append(tliteral);
     return this;

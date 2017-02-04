@@ -16,7 +16,7 @@ var announcementData = require('./data/announcementData.json');
 // Make some things global
 global.mongoose = mongoose;
 global.sha1 = sha1;
-global.userRoles = ['Kitten','Owner'];
+global.userRoles = ['Owner'];
 global.passwordSalt = "shouldBeHardToGuess132638@@@@x";
 
 // Stop mongoose from using an old promise library
@@ -31,7 +31,6 @@ var classesToLoad = {
   Restrouter: true,
   Session: 'module',
   User: 'module',
-  Kitten: 'module',
   Owner: 'module',
   Course: 'module',
   Teacher: 'module',
@@ -74,7 +73,6 @@ app.use((req, res, next)=>{
 });
 
 // Create restroutes to selected classes/mongoose models
-new Restrouter(app, Kitten);
 new Restrouter(app, Owner);
 new Restrouter(app, Teacher);
 new Restrouter(app, Student);
