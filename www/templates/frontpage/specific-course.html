@@ -3,7 +3,24 @@
 		<div class="col-xs-12">
 			<div class="panel panel-default specific-course-panel" data-id=${course._id}>
 				<div class="panel-heading">${course.name} ${course.period}</div>
-				<div class="panel-body">${course.description}</div>
+				<div class="panel-body">${course.description}
+					<div class="vspace"></div>
+					<ul class="specific-course-participants-ul">
+						[repeat course.teachers, teacher]
+							<li class="specific-course-li">
+								<a class="" href="#">${teacher.firstname} ${teacher.lastname}</a>
+							</li>
+						[endrepeat]
+					</ul>
+					<div class="vspace"></div>
+					<ul class="specific-course-participants-ul">
+						[repeat course.students, student]
+							<li class="specific-course-li">
+								<a class="" href="#">${student.firstname} ${student.lastname}</a>
+							</li>
+						[endrepeat]
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
