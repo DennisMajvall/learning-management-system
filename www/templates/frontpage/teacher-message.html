@@ -6,12 +6,12 @@
                 <textarea class="form-control teacher-input-area" rows="5"></textarea>
                 <div class="vspace"></div>
                 <div class="btn-group">
-                    <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button id="dropdown-button" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Select Course<span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
                         [repeat courses,course]
-                        <li><a href="#">${course.name}</a></li>
+                        <li><a course-id="${course._id}"href="#">${course.name}</a></li>
                         [endrepeat]
                     </ul>
                     <button class="send-button" type="button">Send</button>
