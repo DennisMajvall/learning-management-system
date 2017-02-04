@@ -5,30 +5,21 @@ class AdminFilter {
 
 		let inputArray = input.replace(/\s{2,}/g, ' ').split(' ');
 		
-		this.admin = '';
+		this.admin = `find/{ username: { $regex: /.*` + input + `.*/, $options: "i" } }`;
 		this.course = '';
 		this.edcuation = '';
 		this.room = '';
 		this.student = createNormalUser();
-		this.teacher = createNormalUser();
-
-		// this.admin = `find/{ { _id: "` + input + `" }`;
-		// this.admin = `find/{ username: { $regex: /.*` + input + `.*/, $options: "i" } }`;
-
-		// this.admin = `find/{ 
-		// 	$or: [
-		// 		{ _id: { $eq: "` + input + `" },
-		// 		{ username: { $regex: /.*` + input + `.*/, $options: "i" } }
-		// 	] 
-		// }`;
+		this.teacher = this.student;
+		
+		// { _id: '` + input + `' }, // doesn't work well inside an $or
 
 		function createNormalUser() {
 			let result = '';
 
-			if (inputArray.length == 1) {
+			if (inputArray.length == 1 && inputArray[0].length) {
 				result = `find/{ 
 					$or: [
-						{ _id: "` + input + `" },
 						{ username: { $regex: /.*` + input + `.*/, $options: "i" } },
 						{ firstname: { $regex: /.*` + input + `.*/, $options: "i" } },
 						{ lastname: { $regex: /.*` + input + `.*/, $options: "i" } },
