@@ -15,7 +15,5 @@ class AdminMenuSlider {
             password: 'change password',
             logout: 'log out'
         });
-
-        $('li a.category-Students').click(()=> { new AdminStudentData(); });
     }
 }

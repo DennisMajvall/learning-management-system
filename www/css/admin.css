@@ -43,45 +43,9 @@ Temp CSS, will be integrated with rest of menu classes
     list-style-type: none;
 }
 
-.coursepage-li {
-	display: block;
-    font-size: 18px;
-    list-style-type: none;
-    padding: 0px;
-}
-
-.coursepage-li p {
-    font-size: 13px;
-}
-
-.teacherpage-li {
-	display: block;
-    font-size: 18px;
-    list-style-type: none;
-}
-
-.student-list-li {
-	display: block;
-    font-size: 18px;
-    list-style-type: none;
-}
-
-.educationpage-li {
-	display: block;
-    font-size: 18px;
-    list-style-type: none;
-}
-
 .edit-buttons {
-    background-color: #fff;
-    padding-top: 8px;
-    -webkit-transition: all ease-in-out 200ms;
-      transition: all ease-in-out 200ms;
-}
-
-.edit-buttons button{
-	margin-right: 8px;
-	min-width: 50px;
+	margin-top: 10px;
+	margin-left: 100px;
 }
 
 .search-list {
