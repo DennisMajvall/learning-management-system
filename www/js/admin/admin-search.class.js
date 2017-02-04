@@ -28,6 +28,13 @@ class AdminSearch {
 			});
 		});
 
+		$('body').on('click', 'button.delete-item', function() {
+			let item = itemHashMap[$(this).attr('item-id')];
+			dbSchema.delete(item._id, () => {
+				location.reload();
+			});
+		});
+
 		function getTemplateObject(itemsDisplayed) {
 			return {
 				title: getTitleFromDbType(dbType),
