@@ -1,3 +1,3 @@
-<input value="${item.name}" type="text" class="form-control" placeholder="Room name" aria-describedby="sizing-addon3">
-<input value="${item.bookedTime}" type="text" class="form-control" placeholder="Booked time" aria-describedby="sizing-addon3">
-<input value="${item.bookedBy}" type="text" class="form-control" placeholder="Booked by" aria-describedby="sizing-addon3">
+<input type="text" class="form-control" bind-key="name"       placeholder="Name"        value="${item.name}">
+<input type="text" class="form-control" bind-key="bookedTime" placeholder="Booked time" value="${item.bookedTime}">
+<input type="text" class="form-control" bind-key="bookedBy"   placeholder="Booked by"   value="${item.bookedBy}">

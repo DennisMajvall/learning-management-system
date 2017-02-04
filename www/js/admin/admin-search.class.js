@@ -8,10 +8,16 @@ class AdminSearch {
 		let container = $('.search-list');
 		let itemHashMap = {};
 
+		new AdminEdit (dbSchema, getItemIdFromElement);
+
 		dbSchema.find('', function(data, err) {
 			var itemsDisplayed = data;
 
-			container.empty().template('admin-search', getTemplateObject(itemsDisplayed));
+			container.empty().template('admin-search', {
+				title: getTitleFromDbType(dbType),
+				type: dbType,
+				items: itemsDisplayed,
+			});
 
 			// Make an array mapping the _id as an index for each item.
 			itemsDisplayed.forEach(function(item, index) {
@@ -20,7 +26,7 @@ class AdminSearch {
 		});
 
 		container.on('click', '.search-list a', function() {
-			let item = itemHashMap[$(this).attr('item-id')];
+			let item = getItemIdFromElement($(this));
 
 			$('.edit-area').empty().template('admin-edit', {
 				type: dbType,
@@ -28,26 +34,13 @@ class AdminSearch {
 			});
 		});
 
-		$('body').on('click', 'button.delete-item', function() {
-			let item = itemHashMap[$(this).attr('item-id')];
-			dbSchema.delete(item._id, () => {
-				location.reload();
-			});
-		});
+		function getItemIdFromElement(elem) {
+			let correctElem = elem.closest('[item-id]');
 
-		$('body').on('click', 'button.save-item', function() {
-			let item = itemHashMap[$(this).attr('item-id')];
-			dbSchema.update(item._id, item, () => {
-				location.reload();
-			});
-		});
+			if (!correctElem)
+				console.log('getItemIdFromElement failed on', elem);
 
-		function getTemplateObject(itemsDisplayed) {
-			return {
-				title: getTitleFromDbType(dbType),
-				type: dbType,
-				items: itemsDisplayed,
-			};
+			return itemHashMap[correctElem.attr('item-id')];
 		}
 
 		function getDbSchema(dbType) {
@@ -62,12 +55,8 @@ class AdminSearch {
 			return schemas[dbType];
 		}
 
+		// Replace first letter with UpperCase. Add missing s at end. Replace -y with ies. Replace -fe with ves
 		function getTitleFromDbType(dbType) {
-			// Replace first letter with UpperCase
-			// Add missing s at end
-			// Replace -y with ies
-			// Replace -fe with ves
-
 			dbType = dbType[0].toUpperCase() + dbType.substr(1);
 
 			if (dbType.lastIndexOf('y') == dbType.length - 1) {

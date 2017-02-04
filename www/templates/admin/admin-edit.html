@@ -1,14 +1,16 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12">
-			<h3>Edit ${type}</h3>
-	        <div class="input-group input-group-sm">
-				[template edit-${type}]
-			</div>
-			<div class="edit-buttons">
-				<button type="button" class="btn btn-primary save-item" item-id="${item._id}">Save</button>
-				<button type="button" class="btn btn-danger delete-item" item-id="${item._id}">Delete</button>
-			</div>
+			<item item-id="${item._id}">
+				<h3>Edit ${type}</h3>
+				<div class="input-group input-group-sm">
+					[template edit-${type}]
+				</div>
+				<div class="edit-buttons">
+					<button type="button" class="btn btn-primary save-item">Save</button>
+					<button type="button" class="btn btn-danger delete-item">Delete</button>
+				</div>
+			</item>
 		</div>
 	</div>
 </div>

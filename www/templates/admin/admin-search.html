@@ -6,16 +6,15 @@
 			<div class="vspace"></div>
 			<ul class="search-list">
 			    [repeat items, item]
-					<li>
-					[if type == "student" || type == "teacher" || type == "admin"]
-						<a item-id="${item._id}">${item.firstname} ${item.lastname}</a>
-					[else if type == "education" || type == "course"]
-						<a item-id="${item._id}">${item.name}</a>
-					[else if type == "room"]
-						<a item-id="${item._id}">${item.name}</a><br>
-						<p>${item.period}</p>
-					[endif]
-					
+					<li item-id="${item._id}">
+						[if type == "student" || type == "teacher" || type == "admin"]
+							<a>${item.firstname} ${item.lastname}</a>
+						[else if type == "education" || type == "course"]
+							<a>${item.name}</a>
+						[else if type == "room"]
+							<a>${item.name}</a><br>
+							<p>${item.period}</p>
+						[endif]
 					</li>
 			    [endrepeat]
 			</ul>
