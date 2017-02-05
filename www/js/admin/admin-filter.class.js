@@ -6,45 +6,39 @@ class AdminFilter {
 	}
 
 	admin(input, whenDone) {
-		let result = [];
-		result.push(() => { this.queryWrapper(Admin, `find/{ username: { $regex: /.*` + input + `.*/, $options: "i" } }`, whenDone); });
-
-		return result;
+		return [
+			() => { this.queryWrapper(Admin, `find/{ username: { $regex: /.*` + input + `.*/, $options: "i" } }`, whenDone); }
+		];
 	}
 
 	course(input, whenDone) {
-		let result = [];
-		result.push(() => { this.queryWrapper(Course, '', whenDone); });
-
-		return result;
+		return [
+			() => { this.queryWrapper(Course, '', whenDone); }
+		];
 	}
 
 	education(input, whenDone) {
-		let result = [];
-		result.push(() => { this.queryWrapper(Education, '', whenDone); });
-
-		return result;
+		return [
+			() => { this.queryWrapper(Education, '', whenDone); }
+		];
 	}
 
 	room(input, whenDone) {
-		let result = [];
-		result.push(() => { this.queryWrapper(Room, '', whenDone); });
-
-		return result;
+		return [
+			() => { this.queryWrapper(Room, '', whenDone); }
+		];
 	}
 
 	student(input, whenDone) {
-		let result = [];
-		result.push(() => { this.queryWrapper(Student, this._TeacherAndStudent(input), whenDone); });
-
-		return result;
+		return [
+			() => { this.queryWrapper(Student, this._TeacherAndStudent(input), whenDone); }
+		];
 	}
 
 	teacher(input, whenDone) {
-		let result = [];
-		result.push(() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), whenDone); });
-
-		return result;
+		return [
+			() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), whenDone); }
+		];
 	}
 
 	queryWrapper(dbSchema, query, findCallback) {
