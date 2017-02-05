@@ -14,12 +14,12 @@ function loadAdmin(callback) {
 	], onTemplatesLoaded, 'templates/admin');
 
 	function onTemplatesLoaded() {
-		let category = getCategoryFromUrl('cat');
+		let category = getParameterFromUrl('cat');
 
 		new AdminMenuSlider();
 
 		if (category) {
-			new AdminSearch(category).init();;
+			new AdminSearch(category).init();
 		} else {
 			new AdminFrontpage();
 		}
@@ -27,7 +27,7 @@ function loadAdmin(callback) {
 		callback();
 	}
 
-	function getCategoryFromUrl(parameterName) {
+	function getParameterFromUrl(parameterName) {
 		let result = null;
 		let tmp = [];
 		let items = location.search.substr(1).split("&");

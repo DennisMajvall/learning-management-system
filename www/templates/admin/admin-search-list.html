@@ -1,7 +1,8 @@
-[repeat items, item]
+[repeat itemObj, key, item]
 	<li item-id="${item._id}">
 		[if type == "student" || type == "teacher"]
 			<a>${item.firstname} ${item.lastname}</a>
+			<p>${item.username}</p>
 		[else if type == "admin"]
 			<a>${item.username}</a>
 		[else if type == "education" || type == "course"]
