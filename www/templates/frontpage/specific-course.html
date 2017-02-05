@@ -5,7 +5,8 @@
 				<div class="panel-heading">${course.name} ${course.period}</div>
 				<div class="panel-body">${course.description}
 					<div class="vspace"></div>
-					<ul class="specific-course-participants-ul">
+					<h5>Teachers: </h5>
+					<ul class="specific-course-ul">
 						[repeat course.teachers, teacher]
 							<li class="specific-course-li">
 								<a class="" href="#">${teacher.firstname} ${teacher.lastname}</a>
@@ -13,7 +14,8 @@
 						[endrepeat]
 					</ul>
 					<div class="vspace"></div>
-					<ul class="specific-course-participants-ul">
+					<h5>Attending students: </h5>
+					<ul class="specific-course-ul">
 						[repeat course.students, student]
 							<li class="specific-course-li">
 								<a class="" href="#">${student.firstname} ${student.lastname}</a>
