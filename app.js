@@ -138,6 +138,12 @@ function createFakeDataFromJSON() {
     		createDefaultRooms();
     	}
     });
+
+    Announcement.count(function(err, count) {
+    	if (count === 0) {
+    		createDefaultAnnouncements();
+    	}
+    });
 	
 	function createDeafultAdmins() {
 		adminData.forEach(function(data) {
@@ -181,6 +187,15 @@ function createFakeDataFromJSON() {
 		});
 	}
 
+	function createDefaultAnnouncements() {
+		thingsLeftToSave += announcementData.length;
+
+		announcementData.forEach(function(announcement) {
+			new Announcement(announcement).save(function(err, announcements) {
+				linkCollectionsToEachother();
+			});
+		});
+	}
 
 	var thingsLeftToSave = 0; // Change this to 1 to disable the populating
 	function linkCollectionsToEachother() {
@@ -190,6 +205,7 @@ function createFakeDataFromJSON() {
 		var courses = null;
 		var teachers = null;
 		var students = null;
+		var announcements = null;
 
 		Course.find('', function(err, result) {
 			courses = result;
@@ -206,14 +222,20 @@ function createFakeDataFromJSON() {
 			doLast();
 		});
 
+		Announcement.find('', function(err, result) {
+			announcements = result;
+			doLast();
+		});
+
 		function doLast() {
-			if (!courses || !teachers || !students)
+			if (!courses || !teachers || !students || !announcements)
 				return;
 
 			teachers.courses = courses;
 			students.courses = courses;
 			courses.teachers = teachers;
 			courses.students = students;
+			announcements.courses = courses;
 
 			teachers.forEach((v)=>{
 				v.courses = courses;
@@ -228,6 +250,11 @@ function createFakeDataFromJSON() {
 			courses.forEach((v)=>{
 				v.students = students;
 				v.teachers = teachers;
+				v.save();
+			});
+
+			announcements.forEach((v)=>{
+				v.courses = courses;
 				v.save();
 			});
 		}

@@ -8,6 +8,7 @@ function loadStudent(callback) {
 
 	function onTemplatesLoaded() {
 		new MenuSlider();
+		new AnnouncementOnFrontpage();
 		new CoursesOnFrontpage("Student");
 		callback();
 	}

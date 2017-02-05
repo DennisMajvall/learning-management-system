@@ -1,0 +1,24 @@
+.announcement-list .row {
+  margin-bottom: 0px;
+}
+.announcement-list .panel .panel-heading {
+  padding: 4px 15px;
+  position: absolute;
+  border:none;
+  border-top-right-radius:0px;
+  top: 1px;
+}
+.announcement-list .panel .panel-heading.right {
+  border-right-width: 0px;
+  border-top-left-radius:0px;
+  right: 16px;
+}
+.announcement-list .panel .panel-heading .panel-body {
+  padding-top: 6px;
+}
+.announcement-list figcaption {
+  word-wrap: break-word;
+}
+.announcement-list .announcement-post {
+  margin-top: 6px;
+}

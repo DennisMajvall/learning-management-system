@@ -2,32 +2,38 @@
     <div class="row">
         <div class="col-md-8">
             <h2 class="page-header">Announcements</h2>
-            <section class="comment-list">
-            [repeat coursesForStudent, courseForStudent]
+            <section class="announcement-list">
+            [repeat announcements, announcement]
                 <article class="row">
                     <div class="col-md-2 col-sm-2 hidden-xs">
                         <figure class="thumbnail">
-                            <!-- <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" /> -->
-                            <figcaption class="text-center">Teachername</figcaption>
+                            <img class="img-responsive" src="/images/default-profile-picture.jpg" />
+                            <figcaption class="text-center">${announcement.author}</figcaption>
                         </figure>
                     </div>
                     <div class="col-md-10 col-sm-10">
-                        <div class="panel panel-default arrow left">
+                        <div class="panel panel-default">
                             <div class="panel-body">
                                 <header class="text-left">
-                                    <div class="comment-user"><i class="fa fa-graduation-cap"></i> Kemi</div>
-                                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
+                                    <div class="announcement-user">
+                                        <i class="fa fa-graduation-cap"></i>
+                                        Name On Course
+                                    </div>
+                                    <time class="announcement-date" datetime="16-12-2014 01:05">
+                                        <i class="fa fa-clock-o"></i>
+                                        Dec 16, 2014
+                                    </time>
                                 </header>
-                                <div class="comment-post">
+                                <div class="announcement-post">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        ${announcement.message}
                                     </p>
                                 </div>
-                                <!-- <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p> -->
                             </div>
                         </div>
                     </div>
                 </article>
+            [endrepeat]
             </section>
         </div>
     </div>
