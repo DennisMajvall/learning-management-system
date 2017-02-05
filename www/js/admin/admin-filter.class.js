@@ -5,47 +5,67 @@ class AdminFilter {
 		this.dbSchema = dbSchema;
 	}
 
-	admin(input, whenDone) {
+	admin(input, callback) {
 		return [
-			() => { this.queryWrapper(Admin, `find/{ username: { $regex: /.*` + input + `.*/, $options: "i" } }`, whenDone); }
+			() => { this.queryWrapper(Admin, `find/{ username: { $regex: /.*` + input + `.*/, $options: "i" } }`, callback); }
 		];
 	}
 
-	course(input, whenDone) {
+	course(input, callback) {
 		return [
-			() => { this.queryWrapper(Course, '', whenDone); }
+			() => { this.queryWrapper(Course, '', callback); }
 		];
 	}
 
-	education(input, whenDone) {
+	education(input, callback) {
 		return [
-			() => { this.queryWrapper(Education, '', whenDone); }
+			() => { this.queryWrapper(Education, '', callback); }
 		];
 	}
 
-	room(input, whenDone) {
+	room(input, callback) {
 		return [
-			() => { this.queryWrapper(Room, '', whenDone); }
+			() => { this.queryWrapper(Room, '', callback); }
 		];
 	}
 
-	student(input, whenDone) {
+	student(input, callback) {
 		return [
-			() => { this.queryWrapper(Student, this._TeacherAndStudent(input), whenDone); }
+			() => { this.queryWrapper(Student, this._TeacherAndStudent(input), callback); },
+			() => { this.queryWrapperPopulated(Course, `find/{ 'name': { $regex: /.*` + input + `.*/, $options: "i" } }`, 'students', callback); }
 		];
 	}
 
-	teacher(input, whenDone) {
+	teacher(input, callback) {
 		return [
-			() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), whenDone); }
+			() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), callback); }
 		];
 	}
 
-	queryWrapper(dbSchema, query, findCallback) {
+	queryWrapper(dbSchema, query, callback) {
 		dbSchema.find(query, (items) => {
-			this.removeDuplicateItems(items, this.itemHashMap);
-			items.map(item => this.itemHashMap[item._id] = item);
-			findCallback();
+			if (items.hasOwnProperty('_error')) {
+				console.log('error', items._error);
+			} else {
+				this.removeDuplicateItems(items, this.itemHashMap);
+				items.map(item => this.itemHashMap[item._id] = item);
+			}
+			callback();
+		});
+	}
+
+	queryWrapperPopulated(dbSchema, query, populationName, callback) {
+		dbSchema.find(query, (items) => {
+			if (items.hasOwnProperty('_error')) {
+				console.log('error', items._error);
+			} else {
+				items = items.map(item => item[populationName]);
+				items.forEach((itemArray) => {
+					this.removeDuplicateItems(itemArray, this.itemHashMap);
+					itemArray.map(item => this.itemHashMap[item._id] = item);
+				});
+			}
+			callback();
 		});
 	}
 
