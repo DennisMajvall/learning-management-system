@@ -13,32 +13,47 @@ class AdminFilter {
 
 	course(input, callback) {
 		return [
-			() => { this.queryWrapper(Course, '', callback); }
+			() => { this.queryWrapper(Course, `find/{ $or: [
+				{ name: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ description: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ period: { $regex: /.*` + input + `.*/, $options: "i" } }
+			]}`, callback); },
+			() => { this.queryWrapperPopulated(Student, this._TeacherAndStudent(input), 'courses', callback); },
+			() => { this.queryWrapperPopulated(Teacher, this._TeacherAndStudent(input), 'teachers', callback); },
+			() => { this.queryWrapperPopulated(Education, `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, 'courses', callback); }
 		];
 	}
 
 	education(input, callback) {
 		return [
-			() => { this.queryWrapper(Education, '', callback); }
+			() => { this.queryWrapper(Education, `find/{ $or: [
+				{ name: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ startYear: { $regex: /.*` + input + `.*/, $options: "i" } }
+			]}`, callback); }
 		];
 	}
 
 	room(input, callback) {
 		return [
-			() => { this.queryWrapper(Room, '', callback); }
+			() => { this.queryWrapper(Room, `find/{ $or: [
+				{ name: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ bookedTime: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ bookedBy: { $regex: /.*` + input + `.*/, $options: "i" } }
+			]}`, callback); }
 		];
 	}
 
 	student(input, callback) {
 		return [
 			() => { this.queryWrapper(Student, this._TeacherAndStudent(input), callback); },
-			() => { this.queryWrapperPopulated(Course, `find/{ 'name': { $regex: /.*` + input + `.*/, $options: "i" } }`, 'students', callback); }
+			() => { this.queryWrapperPopulated(Course, `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, 'students', callback); }
 		];
 	}
 
 	teacher(input, callback) {
 		return [
-			() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), callback); }
+			() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), callback); },
+			() => { this.queryWrapperPopulated(Course, `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, 'teachers', callback); }
 		];
 	}
 
@@ -74,21 +89,17 @@ class AdminFilter {
 		let result = '';
 
 		if (inputAsArray.length == 1 && inputAsArray[0].length) {
-			result = `find/{ 
-				$or: [
-					{ username: { $regex: /.*` + input + `.*/, $options: "i" } },
-					{ firstname: { $regex: /.*` + input + `.*/, $options: "i" } },
-					{ lastname: { $regex: /.*` + input + `.*/, $options: "i" } },
-					{ phonenumber: { $regex: /.*` + input + `.*/, $options: "i" } }
-				] 
-			}`;
+			result = `find/{ $or: [
+				{ username: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ firstname: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ lastname: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ phonenumber: { $regex: /.*` + input + `.*/, $options: "i" } }
+			] }`;
 		} else if (inputAsArray.length > 1) {
-			result = `find/{ 
-				$and: [
-					{ firstname: { $regex: /.*` + inputAsArray[0] + `.*/, $options: "i" } },
-					{ lastname: { $regex: /.*` + inputAsArray[1] + `.*/, $options: "i" } }
-				] 
-			}`;
+			result = `find/{ $and: [
+				{ firstname: { $regex: /.*` + inputAsArray[0] + `.*/, $options: "i" } },
+				{ lastname: { $regex: /.*` + inputAsArray[1] + `.*/, $options: "i" } }
+			] }`;
 		}
 
 		return result;
