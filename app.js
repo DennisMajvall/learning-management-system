@@ -17,7 +17,7 @@ var announcementData = require('./data/announcementData.json');
 // Make some things global
 global.mongoose = mongoose;
 global.sha1 = sha1;
-global.userRoles = ['Owner'];
+global.userRoles = ['Teacher', 'Student', 'Admin'];
 global.passwordSalt = "shouldBeHardToGuess132638@@@@x";
 
 // Stop mongoose from using an old promise library

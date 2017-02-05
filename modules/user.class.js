@@ -31,7 +31,7 @@ module.exports = class User {
               var error = new Error(JSON.stringify({
                 errors: {
                   username: {
-                    message: 'Path `username` is not unique',
+                    message: 'username `' + foundUser.username + '` is not unique: ',
                     name: "SaveError"
                   }
                 }

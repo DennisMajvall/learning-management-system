@@ -28,4 +28,10 @@
   "firstname": "Göran",
   "lastname": "Persson",
   "phonenumber": "020-8831676"
+},{
+  "username": "test@test.test",
+  "password": "test",
+  "firstname": "firsttest",
+  "lastname": "lasttest",
+  "phonenumber": "666-123456"
 }]

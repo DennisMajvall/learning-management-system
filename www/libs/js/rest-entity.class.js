@@ -30,11 +30,9 @@ class RestEntity {
 	}
 
 	find(idOrQuery,callback){
-
 		idOrQuery = idOrQuery || '';
 
-		// if just a callback set id or query
-		// to nothing
+		// if just a callback set idOrQuery to nothing
 		if(typeof idOrQuery == "function"){
 			callback = idOrQuery;
 			idOrQuery = '';
@@ -72,6 +70,14 @@ class RestEntity {
 	}
 
 	delete(idOrQuery,callback){
+		idOrQuery = idOrQuery || '';
+
+		// if just a callback set idOrQuery to nothing
+		if(typeof idOrQuery == "function"){
+			callback = idOrQuery;
+			idOrQuery = '';
+		}
+		
 		$.ajax({
 			url: this.baseUrl + idOrQuery,
 			type: "DELETE",
