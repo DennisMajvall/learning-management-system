@@ -6,15 +6,16 @@ class Loginpage {
 
 		$('form.login-form').on('submit', function(event) {
 			event.preventDefault();
-
+			
 			Login.find(onGet);
+
 		});
 
 		function onGet(response, err) {
-			console.log('onGet', response, 'errorMessage', err);
+			// console.log('onGet: \n', response, 'errorMessage: ', err);
 
-			let username = 'test@test.test';
-			let password = 'test'
+			var username = $('form.login-form #username').val();
+		 	var password = $('form.login-form #password').val();
 
 			Login.create({
 				username: username,
@@ -23,15 +24,17 @@ class Loginpage {
 		}
 
 		function onLogin(response, err) {
-			console.log('onLogin', response, 'errorMessage', err);
+			// console.log('onLogin', response, 'errorMessage', err);
 
 			if (response.user) {
-				Login.delete(onLogout);
+				console.log('You successfuly logged in!');
+				window.location.replace('http://localhost:3000');
+				//Login.delete(onLogout);
 			}
 		}
 
-		function onLogout(response, err) {
-			console.log('onLogout', response, 'errorMessage', err);
-		}
+		// function onLogout(response, err) {
+		// 	console.log('onLogout', response, 'errorMessage', err);
+		// }		
     }
 }
