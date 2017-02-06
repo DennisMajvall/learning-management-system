@@ -8,12 +8,13 @@ class AdminSearch {
 
 	init() {
 		this.dbSchema = this.getDbSchema();
+		this.filter = new AdminFilter(this.dbType, this.dbSchema);
 
 		this.container.empty().template('admin-search', {
 			title: this.getTitleFromDbType()
 		});
 
-		this.findItems('');
+		this.filter.run('', this.displayItems, this)
 
 		new AdminEdit (this.dbSchema, (elem) => {
 			return this.getItemIdFromElement(elem);
@@ -51,26 +52,18 @@ class AdminSearch {
 
 			// Wait a few milliseconds for more input
 			delayTimeout = setTimeout(()=>{
-				that.findItems(new AdminFilter(input)[that.dbType], input);
+				that.filter.run(input, that.displayItems, that);
 				delayTimeout = null;
 			}, 300);
 		});
 	}
 
-	findItems(query, input = '') {
-		this.dbSchema.find(query, (data, err) => {
-			var itemsDisplayed = data;
+	displayItems(itemHashMap, that) {
+		let listElement = that.container.find('.search-list').empty();
 
-			this.container.find('.search-list').empty().template('admin-search-list', {
-				items: itemsDisplayed,
-				type: this.dbType
-			});
-
-			// Make an array mapping the _id as an index for each item.
-			this.itemHashMap = {};
-			itemsDisplayed.forEach((item) => {
-				this.itemHashMap[item._id] = item;
-			});
+		listElement.template('admin-search-list', {
+			itemObj: itemHashMap,
+			type: that.dbType
 		});
 	}
 	

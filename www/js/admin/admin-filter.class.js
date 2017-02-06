@@ -1,41 +1,141 @@
 class AdminFilter {
 
-	constructor(input = '') {
-		this.defaultQuery = '';
+	constructor(dbType, dbSchema) {
+		this.dbType = dbType;
+		this.dbSchema = dbSchema;
+	}
 
-		let inputArray = input.replace(/\s{2,}/g, ' ').split(' ');
-		
-		this.admin = `find/{ username: { $regex: /.*` + input + `.*/, $options: "i" } }`;
-		this.course = '';
-		this.edcuation = '';
-		this.room = '';
-		this.student = createNormalUser();
-		this.teacher = this.student;
-		
-		// { _id: '` + input + `' }, // doesn't work well inside an $or
+	admin(input, callback) {
+		return [
+			() => { this.queryWrapper(Admin, `find/{ username: { $regex: /.*` + input + `.*/, $options: "i" } }`, callback); }
+		];
+	}
 
-		function createNormalUser() {
-			let result = '';
+	course(input, callback) {
+		return [
+			() => { this.queryWrapper(Course, `find/{ $or: [
+				{ name: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ description: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ period: { $regex: /.*` + input + `.*/, $options: "i" } }
+			]}`, callback); },
+			() => { this.queryWrapperPopulated(Student, this._TeacherAndStudent(input), 'courses', callback); },
+			() => { this.queryWrapperPopulated(Teacher, this._TeacherAndStudent(input), 'teachers', callback); },
+			() => { this.queryWrapperPopulated(Education, `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, 'courses', callback); }
+		];
+	}
 
-			if (inputArray.length == 1 && inputArray[0].length) {
-				result = `find/{ 
-					$or: [
-						{ username: { $regex: /.*` + input + `.*/, $options: "i" } },
-						{ firstname: { $regex: /.*` + input + `.*/, $options: "i" } },
-						{ lastname: { $regex: /.*` + input + `.*/, $options: "i" } },
-						{ phonenumber: { $regex: /.*` + input + `.*/, $options: "i" } }
-					] 
-				}`;
-			} else if (inputArray.length > 1) {
-				result = `find/{ 
-					$and: [
-						{ firstname: { $regex: /.*` + inputArray[0] + `.*/, $options: "i" } },
-						{ lastname: { $regex: /.*` + inputArray[1] + `.*/, $options: "i" } }
-					] 
-				}`;
+	education(input, callback) {
+		return [
+			() => { this.queryWrapper(Education, `find/{ $or: [
+				{ name: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ startYear: { $regex: /.*` + input + `.*/, $options: "i" } }
+			]}`, callback); }
+		];
+	}
+
+	room(input, callback) {
+		return [
+			() => { this.queryWrapper(Room, `find/{ $or: [
+				{ name: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ bookedTime: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ bookedBy: { $regex: /.*` + input + `.*/, $options: "i" } }
+			]}`, callback); }
+		];
+	}
+
+	student(input, callback) {
+		return [
+			() => { this.queryWrapper(Student, this._TeacherAndStudent(input), callback); },
+			() => { this.queryWrapperPopulated(Course, `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, 'students', callback); }
+		];
+	}
+
+	teacher(input, callback) {
+		return [
+			() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), callback); },
+			() => { this.queryWrapperPopulated(Course, `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, 'teachers', callback); }
+		];
+	}
+
+	queryWrapper(dbSchema, query, callback) {
+		dbSchema.find(query, (items) => {
+			if (items.hasOwnProperty('_error')) {
+				console.log('error', items._error);
+			} else {
+				this.removeDuplicateItems(items, this.itemHashMap);
+				items.map(item => this.itemHashMap[item._id] = item);
 			}
+			callback();
+		});
+	}
 
-			return result;
+	queryWrapperPopulated(dbSchema, query, populationName, callback) {
+		dbSchema.find(query, (items) => {
+			if (items.hasOwnProperty('_error')) {
+				console.log('error', items._error);
+			} else {
+				items = items.map(item => item[populationName]);
+				items.forEach((itemArray) => {
+					this.removeDuplicateItems(itemArray, this.itemHashMap);
+					itemArray.map(item => this.itemHashMap[item._id] = item);
+				});
+			}
+			callback();
+		});
+	}
+
+	_TeacherAndStudent(input) {
+		let inputAsArray = input.trim().replace(/\s{2,}/g, ' ').split(' ');
+		let result = '';
+
+		if (inputAsArray.length == 1 && inputAsArray[0].length) {
+			result = `find/{ $or: [
+				{ username: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ firstname: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ lastname: { $regex: /.*` + input + `.*/, $options: "i" } },
+				{ phonenumber: { $regex: /.*` + input + `.*/, $options: "i" } }
+			] }`;
+		} else if (inputAsArray.length > 1) {
+			result = `find/{ $and: [
+				{ firstname: { $regex: /.*` + inputAsArray[0] + `.*/, $options: "i" } },
+				{ lastname: { $regex: /.*` + inputAsArray[1] + `.*/, $options: "i" } }
+			] }`;
+		}
+
+		return result;
+	}
+
+	// Internal functions
+
+	run(input, callback, adminSearch) {
+		let that = this;
+		this.itemHashMap = {};
+		let queries = [];
+
+		if (!input.length) {
+			queries.push(() => { this.queryWrapper(this.dbSchema, '', whenDone); });
+		} else {
+			queries = this[this.dbType].call(this, input, whenDone);
+		}
+
+		let numQueries = queries.length;
+
+		queries.forEach((doQueryFunc) => {
+			doQueryFunc();
+		});
+
+		function whenDone() {
+			if (--numQueries === 0) {
+				callback(that.itemHashMap, adminSearch);
+			}
+		}
+	}
+
+	removeDuplicateItems(items, itemHashMap) {
+		for (var value in itemHashMap) {
+			if (items.hasOwnProperty(value)) {
+				delete items[value];
+			}
 		}
 	}
 }
