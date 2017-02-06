@@ -27,9 +27,9 @@ class AdminSearch {
 		let that = this;
 
 		// on item click
-		that.container.on('click', '.search-list a', function() {
+		that.container.on('click', '.search-list li', function() {
 			let item = that.getItemIdFromElement($(this));
-
+			
 			$('.edit-area').empty().template('admin-edit', {
 				type: that.dbType,
 				item: item
@@ -59,6 +59,7 @@ class AdminSearch {
 	}
 
 	displayItems(itemHashMap, that) {
+		that.itemHashMap = itemHashMap;
 		let listElement = that.container.find('.search-list').empty();
 
 		listElement.template('admin-search-list', {
@@ -69,7 +70,6 @@ class AdminSearch {
 	
 	getItemIdFromElement(elem) {
 		let correctElem = elem.closest('[item-id]');
-
 		if (!correctElem)
 			console.log('getItemIdFromElement failed on', elem);
 

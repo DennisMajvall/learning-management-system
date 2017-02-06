@@ -1,7 +1,7 @@
 function loadStudent(callback) {
 	$.loadTemplates([
 		'frontpage/courses',
-		'frontpage/specific-course',
+		'course-page',
 		'frontpage/student-announcement',
 		'menu-slider'
 	], onTemplatesLoaded);
