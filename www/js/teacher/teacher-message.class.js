@@ -29,6 +29,12 @@ class TeacherMessage {
 		function createEventListeners() {
 			$('.page-top').on('click', '.send-button', makeAnnouncement);
 
+			// Ensured that a click on the course name results as in a checked box.  
+			$('.page-top').on( "click", 'li', function(e){
+				$(this).find('input').trigger( "click" );
+				e.stopImmediatePropagation();
+			});
+
 			$('.page-top').on('click', '.dropdown-menu input', function() {
 				let courseId = $(this).attr('course-id');
 

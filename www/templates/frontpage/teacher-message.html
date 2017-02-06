@@ -11,7 +11,9 @@
                     </button>
                     <ul class="dropdown-menu">
                         [repeat courses,course]
-                        <li><a><input type="checkbox" course-id="${course._id}" href="#">&nbsp;${course.name}</li>
+                        <li>
+                            <a><input type="checkbox" course-id="${course._id}" href="#">&nbsp;${course.name}</a>
+                        </li>
                         [endrepeat]
                     </ul>
                     <button class="send-button" type="button">Send</button>
