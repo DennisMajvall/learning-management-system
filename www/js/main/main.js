@@ -21,7 +21,7 @@ var role = role || 'Admin';
 
 
 	function start() {
-		
+
 		Login.find((response, err)=>{
 			if (!response.user){
 				new Loginpage();
