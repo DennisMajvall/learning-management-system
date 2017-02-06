@@ -14,7 +14,7 @@ class AdminSearch {
 			title: this.getTitleFromDbType()
 		});
 
-		this.filter.run('', this.displayItems, this)
+		this.filter.run('', this.displayItems, this);
 
 		new AdminEdit (this.dbSchema, (elem) => {
 			return this.getItemIdFromElement(elem);

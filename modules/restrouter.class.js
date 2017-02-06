@@ -134,7 +134,14 @@ module.exports = class Restrouter {
     this.app.get(this.baseRoute + ':id/:method',(req,res)=>{
       if(!this.rights(req,res)){return;}
       this._class.findOne({_id:req.params.id},(err,result)=>{
-        this.json(res,err,{returns:result[req.params.method]()});
+        var funcResult = result[req.params.method](cb), _self = this;
+        if(funcResult !== undefined){
+          // assume non async
+          cb(funcResult);
+        }
+        function cb(r){
+          _self.json(res,err,{returns:r});
+        }
       });
     });
   }

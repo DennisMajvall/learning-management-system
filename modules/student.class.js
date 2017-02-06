@@ -24,4 +24,12 @@ module.exports = class Student extends User {
 	limit() {
 		return 20;
 	}
-}
+
+	getAnnouncements(callback){
+		Announcement.find({courses:{$in:this.courses}},function(err,announcements){
+			callback(announcements);
+		});
+	}
+
+
+};

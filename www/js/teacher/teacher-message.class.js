@@ -19,7 +19,7 @@ class TeacherMessage {
 			Course.find(queryString, (courses, err) => {
 				createTemplate(courses);
 				createEventListeners();
-			});;
+			});
         }
 
         function createTemplate(courses) {
@@ -29,8 +29,13 @@ class TeacherMessage {
 		function createEventListeners() {
 			$('.page-top').on('click', '.send-button', makeAnnouncement);
 
-			$('.page-top').on('click', '.dropdown-menu a', function() {
-				let arrowIcon = '<span class="caret"></span>';
+			// Ensured that a click on the course name results as in a checked box.  
+			$('.page-top').on( "click", 'li', function(e){
+				$(this).find('input').trigger( "click" );
+				e.stopImmediatePropagation();
+			});
+
+			$('.page-top').on('click', '.dropdown-menu input', function() {
 				let courseId = $(this).attr('course-id');
 
 				// Adds or Removes the course from the array
@@ -40,9 +45,6 @@ class TeacherMessage {
 				} else {
 					coursesToPublishTo.push(courseId);
 				}
-				
-				// Currently replaces the text on the button:
-				$('#dropdown-button').html($(this).text() + arrowIcon);
 			});
 		}
 
@@ -51,9 +53,6 @@ class TeacherMessage {
 			var textInput = $('.teacher-input-area').val();
 			var authorName = teacher.firstname + ' ' + teacher.lastname;
 			var displayMessage = textInput + ' - (Posted by ' + authorName + ')';
-
-			// Vi bör ändra på layouten så att den visar alla valda kurser
-			// Kanske en dropdown där man kan (un)checka kurser 1 by 1?
 
 			Announcement.create({
 				author: author,

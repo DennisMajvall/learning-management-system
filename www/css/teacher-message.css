@@ -29,6 +29,10 @@
     font-family: Verdana;
 }
 
+.dropdown-menu li{
+    cursor: pointer;
+}
+
 .btn-group button {
     background-color: #fff;
     padding: 4px 20px;
