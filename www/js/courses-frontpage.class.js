@@ -37,7 +37,7 @@ class CoursesOnFrontpage {
 			let course = that.courseHashMap[id];
 
 			$('.page-top').empty();
-			$('.page-content').empty().template('specific-course', { course: course });
+			$('.page-content').empty().template('course-page', { course: course });
 		});
 	}
 }
