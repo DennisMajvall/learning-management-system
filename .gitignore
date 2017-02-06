@@ -5,6 +5,7 @@ desktop.ini
 .vscode
 .eslintrc*
 .project
+.jshintrc
 *.sketch
 
 ### Node ###
