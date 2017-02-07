@@ -4,6 +4,7 @@ var bodyparser = require('body-parser');
 var cookieparser = require('cookie-parser');
 var sha1 = require('sha1');
 var mongoose = require('mongoose');
+var compression = require('compression');
 require('mongoosefromclass')(mongoose);
 
 // Fake JSON Data
@@ -64,6 +65,8 @@ app.use(bodyparser.urlencoded({ extended: false }));
 // cookies, sessions and logins
 app.use(cookieparser());
 app.use(new Sessionhandler(Session).middleware());
+
+app.use(compression());
 
 // Never cache request starting with "/rest/"
 app.use((req, res, next)=>{
