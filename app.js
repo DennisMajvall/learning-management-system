@@ -281,6 +281,17 @@ function createFakeDataFromJSON() {
 			students[16].courses = courses.slice(5,6);
 			students[22].courses = courses.slice(5,6);
 
+			//assign courses to announcements			
+			announcements[1].courses = courses.slice(2,3);
+			announcements[1].courses = courses.slice(4,5);
+			announcements[1].courses = courses.slice(0,1);
+
+			announcements[2].courses = courses.slice(3,4);
+			announcements[2].courses = courses.slice(1,2);
+
+			announcements[3].courses = courses.slice(4,5);
+			announcements[3].courses = courses.slice(0,1);
+
 			//assign courses to students
 			courses[0].students = [].concat( students.slice(0,3) , [ students[17] ] , [ students[23] ]);
 			courses[1].students = [].concat( students.slice(3,6) , [ students[18] ]);
