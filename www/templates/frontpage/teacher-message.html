@@ -10,9 +10,12 @@
                     Select Course<span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
+                    <!-- <li class="select-all"><a>
+                        &nbsp;${getall}<span class="" aria-hidden="true"></span></a>
+                    </li> -->
                         [repeat courses,course]
-                        <li>
-                            <a><input type="checkbox" course-id="${course._id}" href="#">&nbsp;${course.name}</a>
+                        <li course-id="${course._id}"><a>
+                            &nbsp;${course.name}<span class="" aria-hidden="true"></span></a>
                         </li>
                         [endrepeat]
                     </ul>

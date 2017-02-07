@@ -12,12 +12,13 @@ class AdminMenuSlider {
                 {name: 'Students', url: 'student'}
             ],
             account: 'Your Account',
+            fullname: user.username,
             usersettings: 'Settings',
             password: 'change password',
             logout: 'log out'
         });
 
-        $('.menu-slider').on('click', '.log-out', function(){
+        $('body').on('click', '.log-out', function(){
             Login.delete(onLogout);
         });
 

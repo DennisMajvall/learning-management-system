@@ -23,29 +23,35 @@ class TeacherMessage {
         }
 
         function createTemplate(courses) {
-            $('.page-top').template('teacher-message', { courses: courses });
+            $('.page-top').template('teacher-message', { getall: 'Select All', courses: courses});
         }
 
 		function createEventListeners() {
 			$('.page-top').on('click', '.send-button', makeAnnouncement);
 
-			// Ensured that a click on the course name results as in a checked box.  
 			$('.page-top').on( "click", 'li', function(e){
+
+				// Add/remove checkbox if li is selected. 
+				$(this).find('span').toggleClass('glyphicon glyphicon-ok checked-course');
+				
 				$(this).find('input').trigger( "click" );
-				e.stopImmediatePropagation();
+				changeValue($(this).closest('li').attr('course-id'));
+				e.stopPropagation();
 			});
 
-			$('.page-top').on('click', '.dropdown-menu input', function() {
-				let courseId = $(this).attr('course-id');
+			function changeValue(courseId){
 
 				// Adds or Removes the course from the array
 				let foundIndex = coursesToPublishTo.indexOf(courseId);
+
 				if (foundIndex > -1) {
 					coursesToPublishTo.splice(foundIndex, 1);
 				} else {
 					coursesToPublishTo.push(courseId);
 				}
-			});
+
+				console.log(coursesToPublishTo);
+			}
 		}
 
         function makeAnnouncement() {

@@ -9,6 +9,7 @@
     "cookie-parser": "*",
     "sha1": "*",
     "mongoose": "*",
-    "mongoosefromclass": "*"
+    "mongoosefromclass": "*",
+    "compression": "*"
   }
 }

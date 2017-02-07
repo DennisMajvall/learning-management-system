@@ -31,6 +31,7 @@
 
 .dropdown-menu li{
     cursor: pointer;
+    width: 180px;
 }
 
 .btn-group button {
@@ -44,4 +45,10 @@
 
 .caret {
     margin-left: 10px;
+}
+
+.checked-course {
+    font-size: 10px;
+    padding-left: 10px;
+    color: green;
 }
