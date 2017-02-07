@@ -51,7 +51,6 @@ class MenuSlider {
 		}
 
 		$('body').on('click', '.menu-choice-courses', function(){
-			alert('hej');
 			let id = $(this).data('id');
 			let course = that.courseHashMap[id];
 
