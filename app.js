@@ -342,7 +342,7 @@ function createFakeDataFromJSON() {
 			students[16].courses = courses.slice(5,6);
 			students[22].courses = courses.slice(5,6);
 
-			//assign courses to announcements			
+			//assign courses to announcements
 			announcements[0].courses = courses.slice(0,1);
 			announcements[1].courses = courses.slice(1,2);
 			announcements[2].courses = courses.slice(4,5);
