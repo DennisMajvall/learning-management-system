@@ -29,6 +29,14 @@
     list-style-type: none;
 }
 
+.fullname {
+    font-size: 14px;
+    color: red;
+}
+.fullname > span {
+    color: #fff;
+}
+
 .head-text {
     color: #fff;
     font-size: 18px;

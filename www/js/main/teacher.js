@@ -2,6 +2,7 @@ function loadTeacher(callback) {
 	$.loadTemplates([
 		'frontpage/courses',
 		'frontpage/teacher-message',
+		'course-page',
 		'menu-slider'
 	], onTemplatesLoaded);
 

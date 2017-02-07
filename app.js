@@ -4,6 +4,7 @@ var bodyparser = require('body-parser');
 var cookieparser = require('cookie-parser');
 var sha1 = require('sha1');
 var mongoose = require('mongoose');
+var compression = require('compression');
 require('mongoosefromclass')(mongoose);
 
 // Fake JSON Data
@@ -64,6 +65,8 @@ app.use(bodyparser.urlencoded({ extended: false }));
 // cookies, sessions and logins
 app.use(cookieparser());
 app.use(new Sessionhandler(Session).middleware());
+
+app.use(compression());
 
 // Never cache request starting with "/rest/"
 app.use((req, res, next)=>{
@@ -342,12 +345,15 @@ function createFakeDataFromJSON() {
 			students[16].courses = courses.slice(5,6);
 			students[22].courses = courses.slice(5,6);
 
-			//assign courses to announcements			
+			//assign courses to announcements
 			announcements[0].courses = courses.slice(0,1);
-
 			announcements[1].courses = courses.slice(1,2);
-
 			announcements[2].courses = courses.slice(4,5);
+
+			//assign teachers to announcements authors
+			announcements[0].author = teachers.slice(0,1);
+			announcements[1].author = teachers.slice(2,3);
+			announcements[2].author = teachers.slice(4,5);
 
 			//assign courses to students
 			courses[0].students = [].concat( students.slice(0,3) , [ students[17] ] , [ students[23] ]);
