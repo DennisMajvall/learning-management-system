@@ -17,7 +17,7 @@ class CoursesOnFrontpage {
 		function populateCourses(courses) {
 			let coursesIds = courses.map( course => '"' + course._id + '"' );
 			let queryString = 'find/{ _id: { $in: [' + coursesIds + '] } }';
-
+			console.log("fp", courses);
 			Course.find(queryString, createTemplate);
 		}
 
@@ -38,6 +38,7 @@ class CoursesOnFrontpage {
 
 			$('.page-top').empty();
 			$('.page-content').empty().template('course-page', { course: course });
+			
 		});
 	}
 }

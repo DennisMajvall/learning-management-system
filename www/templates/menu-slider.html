@@ -8,9 +8,10 @@
                     <li class="divider"></li>
                     <li class="second-head-text">${education}</li>
                     <li class="head-text">Your Courses:</li>
-                      [repeat courses,course]
-                        <li class="third-head-text"><a href="#">${course.name}</a></li>
-                      [endrepeat]
+                        [repeat courses,course]
+                            <li class="third-head-text"><a class="menu-choice-courses" 
+                            href="#" data-id=${course._id}>${course.name}</a></li>
+                        [endrepeat]
                     <li class="head-text"><a href="#">${booking}</a></li>
                     <li class="spacer"></li>
                     <li class="divider"></li>
@@ -19,7 +20,6 @@
                     <li class="head-text"><a href="#">${password}</a></li>
                     <li class="spacer"></li>
                     <li class="log-out"><button>${logout}</button></li>
-
                 </ul>
             </div>
         </div>
