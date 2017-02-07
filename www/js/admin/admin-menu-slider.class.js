@@ -12,6 +12,7 @@ class AdminMenuSlider {
                 {name: 'Students', url: 'student'}
             ],
             account: 'Your Account',
+            fullname: user.username,
             usersettings: 'Settings',
             password: 'change password',
             logout: 'log out'
