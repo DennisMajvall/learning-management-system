@@ -11,6 +11,7 @@ class MenuSlider {
 			],
 			booking: 'Book a room',
 			account: 'Your Account',
+			fullname: user.firstname + ' ' + user.lastname,
 			usersettings: 'Settings',
 			password: 'change password',
 			logout: 'log out'
