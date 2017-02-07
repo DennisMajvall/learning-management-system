@@ -15,5 +15,14 @@ class AdminMenuSlider {
             password: 'change password',
             logout: 'log out'
         });
+
+        $('.menu-slider').on('click', '.log-out', function(){
+            Login.delete(onLogout);
+        });
+
+        function onLogout(response, err) {
+            console.log('onLogout', response, 'errorMessage', err);
+            location.reload();
+        }
     }
 }

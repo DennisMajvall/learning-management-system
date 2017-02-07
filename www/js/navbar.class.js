@@ -1,6 +1,6 @@
 class Navbar {
 	constructor() {
-		
+
 		$('body').template('navbar', { });
 
 		// Wait until DOM is ready.
