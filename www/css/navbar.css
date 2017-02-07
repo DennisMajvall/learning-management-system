@@ -26,12 +26,8 @@
 	height: 30px;
 }
 
-.nav-info{
+.home-btn{
 	height: 100%;
 	color: #337ab7;
-	padding-top: 10px;
-}
-
-.nav-info p{
-	margin-bottom: 0;
+	padding-top: 4px;
 }
