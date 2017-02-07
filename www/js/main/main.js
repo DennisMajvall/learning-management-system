@@ -8,8 +8,9 @@ var Room = new RestEntity('room');
 var Student = new RestEntity('student');
 var Teacher = new RestEntity('teacher');
 
-// Edit your role here
-var role = role || 'Admin';
+// For test, set a static role with,
+// var role = role || "Admin";
+var role;
 
 (()=>{
 	// Put templates used by ALL ROLES here
@@ -21,20 +22,32 @@ var role = role || 'Admin';
 
 
 	function start() {
-		
+
 		Login.find((response, err)=>{
+
 			if (!response.user){
 				new Loginpage();
 				return;
 			} else {
 				new Navbar();
 
+				if (role){ // just for test
+					console.log("Static role is defined");
+					if (role == "Admin")
+						loadAdmin(postStart);
+					else if (role == "Student")
+						loadStudent(postStart);
+					else if (role == "Teacher")
+						loadTeacher(postStart);
+					return;
+				}
+
 				// Load and initialize role-specific templates
-				if (role == "Admin")
+				if (response.user.role == "Admin")
 					loadAdmin(postStart);
-				else if (role == "Student")
+				else if (response.user.role == "Student")
 					loadStudent(postStart);
-				else if (role == "Teacher")
+				else if (response.user.role == "Teacher")
 					loadTeacher(postStart);
 			}
 		});

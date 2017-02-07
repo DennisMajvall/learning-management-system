@@ -144,7 +144,7 @@ function createFakeDataFromJSON() {
     		createDefaultAnnouncements();
     	}
     });
-	
+
 	function createDeafultAdmins() {
 		adminData.forEach(function(data) {
 			new Admin(data).save();
@@ -231,30 +231,77 @@ function createFakeDataFromJSON() {
 			if (!courses || !teachers || !students || !announcements)
 				return;
 
-			teachers.courses = courses;
-			students.courses = courses;
-			courses.teachers = teachers;
-			courses.students = students;
-			announcements.courses = courses;
+			//assign teachers to courses
+			teachers[0].courses = courses.slice(0,2);
+			teachers[1].courses = courses.slice(0,2);
+
+			teachers[2].courses = courses.slice(2,4);
+			teachers[3].courses = courses.slice(2,4);
+
+			teachers[4].courses = courses.slice(4);
+
+			//assign coureses to teachers
+			courses[0].teachers = teachers.slice(0,2);
+			courses[1].teachers = teachers.slice(0,2);
+
+			courses[2].teachers = teachers.slice(2,4);
+			courses[3].teachers = teachers.slice(2,4);
+
+			courses[4].teachers = teachers.slice(4);
+			courses[5].teachers = teachers.slice(4);
+
+			//assign students to courses
+			students[0].courses = courses.slice(0,1);
+			students[1].courses = courses.slice(0,1);
+			students[2].courses = courses.slice(0,1);
+			students[17].courses = courses.slice(0,1);
+			students[23].courses = courses.slice(0,1);
+
+			students[3].courses = courses.slice(1,2);
+			students[4].courses = courses.slice(1,2);
+			students[5].courses = courses.slice(1,2);
+			students[18].courses = courses.slice(1,2);
+
+			students[6].courses = courses.slice(2,3);
+			students[7].courses = courses.slice(2,3);
+			students[19].courses = courses.slice(2,3);
+
+			students[8].courses = courses.slice(3,4);
+			students[9].courses = courses.slice(3,4);
+			students[10].courses = courses.slice(3,4);
+			students[20].courses = courses.slice(3,4);
+
+			students[11].courses = courses.slice(4,5);
+			students[12].courses = courses.slice(4,5);
+			students[13].courses = courses.slice(4,5);
+			students[21].courses = courses.slice(4,5);
+
+			students[14].courses = courses.slice(5,6);
+			students[15].courses = courses.slice(5,6);
+			students[16].courses = courses.slice(5,6);
+			students[22].courses = courses.slice(5,6);
+
+			//assign courses to students
+			courses[0].students = [].concat( students.slice(0,3) , [ students[17] ] , [ students[23] ]);
+			courses[1].students = [].concat( students.slice(3,6) , [ students[18] ]);
+			courses[2].students = [].concat( students.slice(6,8) , [ students[19] ]);
+			courses[3].students = [].concat( students.slice(8,11) , [ students[20] ]);
+			courses[4].students = [].concat( students.slice(11,14) , [ students[21] ]);
+			courses[5].students = [].concat( students.slice(14,17) , [ students[22] ]);
 
 			teachers.forEach((v)=>{
-				v.courses = courses;
 				v.save();
 			});
 
 			students.forEach((v)=>{
-				v.courses = courses;
 				v.save();
 			});
 
 			courses.forEach((v)=>{
-				v.students = students;
-				v.teachers = teachers;
 				v.save();
 			});
 
 			announcements.forEach((v)=>{
-				v.courses = courses;
 				v.save();
 			});
 		}
