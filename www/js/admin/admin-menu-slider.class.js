@@ -4,6 +4,7 @@ class AdminMenuSlider {
             header: 'Startpage',
             data: 'Database',
             categories: [
+                {name: 'Admins', url: 'admin'},
                 {name: 'Educations', url: 'education'},
                 {name: 'Courses', url: 'course'},
                 {name: 'Rooms', url: 'room'},
@@ -15,5 +16,14 @@ class AdminMenuSlider {
             password: 'change password',
             logout: 'log out'
         });
+
+        $('.menu-slider').on('click', '.log-out', function(){
+            Login.delete(onLogout);
+        });
+
+        function onLogout(response, err) {
+            console.log('onLogout', response, 'errorMessage', err);
+            location.reload();
+        }
     }
 }
