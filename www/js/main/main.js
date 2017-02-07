@@ -8,6 +8,9 @@ var Room = new RestEntity('room');
 var Student = new RestEntity('student');
 var Teacher = new RestEntity('teacher');
 
+// Global object to hold current user
+var user = {};
+
 // For test, set a static role with,
 // var role = role || "Admin";
 var role;
@@ -41,6 +44,10 @@ var role;
 						loadTeacher(postStart);
 					return;
 				}
+
+				// Save current logged in user
+				user = response.user;
+				console.log('Current logged in user: ', user);
 
 				// Load and initialize role-specific templates
 				if (response.user.role == "Admin")
