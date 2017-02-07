@@ -4,6 +4,7 @@ class AdminMenuSlider {
             header: 'Startpage',
             data: 'Database',
             categories: [
+                {name: 'Admins', url: 'admin'},
                 {name: 'Educations', url: 'education'},
                 {name: 'Courses', url: 'course'},
                 {name: 'Rooms', url: 'room'},
