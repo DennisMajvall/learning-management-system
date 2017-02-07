@@ -18,9 +18,9 @@ class AdminFilter {
 				{ description: { $regex: /.*` + input + `.*/, $options: "i" } },
 				{ period: { $regex: /.*` + input + `.*/, $options: "i" } }
 			]}`, callback); },
-			() => { this.queryWrapperPopulated(Student, this._TeacherAndStudent(input), 'courses', callback); },
-			() => { this.queryWrapperPopulated(Teacher, this._TeacherAndStudent(input), 'teachers', callback); },
-			() => { this.queryWrapperPopulated(Education, `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, 'courses', callback); }
+			() => { this.queryWrapperPopulated(Student, 'courses', this._TeacherAndStudent(input), callback); },
+			() => { this.queryWrapperPopulated(Teacher, 'courses', this._TeacherAndStudent(input), callback); },
+			() => { this.queryWrapperPopulated(Education, 'courses', `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, callback); }
 		];
 	}
 
@@ -46,14 +46,14 @@ class AdminFilter {
 	student(input, callback) {
 		return [
 			() => { this.queryWrapper(Student, this._TeacherAndStudent(input), callback); },
-			() => { this.queryWrapperPopulated(Course, `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, 'students', callback); }
+			() => { this.queryWrapperPopulated(Course, 'students', `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, callback); }
 		];
 	}
 
 	teacher(input, callback) {
 		return [
 			() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), callback); },
-			() => { this.queryWrapperPopulated(Course, `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, 'teachers', callback); }
+			() => { this.queryWrapperPopulated(Course, 'teachers', `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, callback); }
 		];
 	}
 
@@ -69,12 +69,16 @@ class AdminFilter {
 		});
 	}
 
-	queryWrapperPopulated(dbSchema, query, populationName, callback) {
+	queryWrapperPopulated(dbSchema, populationName, query, callback) {
 		dbSchema.find(query, (items) => {
 			if (items.hasOwnProperty('_error')) {
 				console.log('error', items._error);
 			} else {
 				items = items.map(item => item[populationName]);
+				if (items.indexOf(undefined) != -1) {
+					console.log('Error, wrong populationName has been sent to queryWrapperPopulated:', populationName);
+					items = [];
+				}
 				items.forEach((itemArray) => {
 					this.removeDuplicateItems(itemArray, this.itemHashMap);
 					itemArray.map(item => this.itemHashMap[item._id] = item);
