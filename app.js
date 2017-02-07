@@ -8,6 +8,7 @@ require('mongoosefromclass')(mongoose);
 
 // Fake JSON Data
 var adminData = require('./data/adminData.json');
+var educationData = require('./data/educationData.json');
 var teacherData = require('./data/teacherData.json');
 var studentData = require('./data/studentData.json');
 var courseData = require('./data/courseData.json');
@@ -115,6 +116,12 @@ function createFakeDataFromJSON() {
         }
     });
 
+    Education.count(function(err, count) {
+    	if (count === 0) {
+    		createDefaultEducations();
+    	}
+    });
+
     Teacher.count(function(err, count) {
         if (count === 0) {
             createDeafultTeachers();
@@ -148,6 +155,16 @@ function createFakeDataFromJSON() {
 	function createDeafultAdmins() {
 		adminData.forEach(function(data) {
 			new Admin(data).save();
+		});
+	}
+
+	function createDefaultEducations() {
+		thingsLeftToSave += educationData.length;
+
+		educationData.forEach(function(education) {
+			new Education(education).save(function(err, educations) {
+				linkCollectionsToEachother();
+			});
 		});
 	}
 
@@ -206,9 +223,15 @@ function createFakeDataFromJSON() {
 		var teachers = null;
 		var students = null;
 		var announcements = null;
+		var educations = null;
 
 		Course.find('', function(err, result) {
 			courses = result;
+			doLast();
+		});
+
+		Education.find('', function(err, result) {
+			educations = result;
 			doLast();
 		});
 
@@ -228,8 +251,47 @@ function createFakeDataFromJSON() {
 		});
 
 		function doLast() {
-			if (!courses || !teachers || !students || !announcements)
+			if (!courses || !teachers || !students || !announcements || !educations)
 				return;
+
+			//assign students to educations
+			students[0].educations = educations.slice(0,1);
+			students[1].educations = educations.slice(0,1);
+			students[2].educations = educations.slice(0,1);
+			students[17].educations = educations.slice(0,1);
+			students[23].educations = educations.slice(0,1);
+
+			students[3].educations = educations.slice(1,2);
+			students[4].educations = educations.slice(1,2);
+			students[5].educations = educations.slice(1,2);
+			students[18].educations = educations.slice(1,2);
+
+			students[6].educations = educations.slice(2,3);
+			students[7].educations = educations.slice(2,3);
+			students[19].educations = educations.slice(2,3);
+
+			students[8].educations = educations.slice(3,4);
+			students[9].educations = educations.slice(3,4);
+			students[10].educations = educations.slice(3,4);
+			students[20].educations = educations.slice(3,4);
+
+			students[11].educations = educations.slice(4,5);
+			students[12].educations = educations.slice(4,5);
+			students[13].educations = educations.slice(4,5);
+			students[21].educations = educations.slice(4,5);
+
+			students[14].educations = educations.slice(5,6);
+			students[15].educations = educations.slice(5,6);
+			students[16].educations = educations.slice(5,6);
+			students[22].educations = educations.slice(5,6);
+
+			//assign courses to students
+			educations[0].students = [].concat( students.slice(0,3) , [ students[17] ] , [ students[23] ]);
+			educations[1].students = [].concat( students.slice(3,6) , [ students[18] ]);
+			educations[2].students = [].concat( students.slice(6,8) , [ students[19] ]);
+			educations[3].students = [].concat( students.slice(8,11) , [ students[20] ]);
+			educations[4].students = [].concat( students.slice(11,14) , [ students[21] ]);
+			educations[5].students = [].concat( students.slice(14,17) , [ students[22] ]);
 
 			//assign teachers to courses
 			teachers[0].courses = courses.slice(0,2);
@@ -237,10 +299,9 @@ function createFakeDataFromJSON() {
 
 			teachers[2].courses = courses.slice(2,4);
 			teachers[3].courses = courses.slice(2,4);
-
 			teachers[4].courses = courses.slice(4);
 
-			//assign coureses to teachers
+			//assign courses to teachers
 			courses[0].teachers = teachers.slice(0,2);
 			courses[1].teachers = teachers.slice(0,2);
 
@@ -290,6 +351,10 @@ function createFakeDataFromJSON() {
 			courses[5].students = [].concat( students.slice(14,17) , [ students[22] ]);
 
 			teachers.forEach((v)=>{
+				v.save();
+			});
+
+			educations.forEach((v)=>{
 				v.save();
 			});
 
