@@ -77,7 +77,7 @@ class RestEntity {
 			callback = idOrQuery;
 			idOrQuery = '';
 		}
-		
+
 		$.ajax({
 			url: this.baseUrl + idOrQuery,
 			type: "DELETE",
