@@ -8,11 +8,17 @@ class MenuSlider {
 		let courseHashMap = {};
 		let that = this;
 
+		console.log(user.courses);
+
 		schema.find('', function(data,err){
 			let user = data[0];
 
 			populateCourses(user.courses);
 		});
+		
+		var courses = user.courses;
+
+		populateCourses(courses);
 
 		function populateCourses(courses) {
 			let coursesIds = courses.map( course => '"' + course._id + '"' );
@@ -41,7 +47,8 @@ class MenuSlider {
 			});
 		}
 
-		$('.menu-slider').on('click', '.log-out', function(){
+		$('body').on('click', '.log-out', function(){
+			alert("ut");
 			Login.delete(onLogout);
 		});
 
