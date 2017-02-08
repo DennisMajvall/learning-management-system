@@ -4,69 +4,77 @@ class TeacherMessage {
         // Find which courses this teacher have access to. 
         // When we have login working we won't have to 'find' Teachers
         // and instead just populate the courses of the one logged in.
-		let teacher = null;
-		let coursesToPublishTo = [];
+        let coursesToPublishTo = [];
 
-        Teacher.find('', function(data, err) {
-            teacher = data[0];
-            populateCourses(teacher.courses);
-        });
+        let teacher = user;
+        populateCourses(teacher.courses);
+    
 
         function populateCourses(courses) {
-            let coursesIds = courses.map(course => '"' + course._id + '"');
+            let coursesIds = courses.map(course => '"' + course + '"');
             let queryString = 'find/{ _id: { $in: [' + coursesIds + '] } }';
 
-			Course.find(queryString, (courses, err) => {
-				createTemplate(courses);
-				createEventListeners();
-			});
+            Course.find(queryString, (courses, err) => {
+                createTemplate(courses);
+                createEventListeners();
+            });
         }
 
         function createTemplate(courses) {
-            $('.page-top').template('teacher-message', { getall: 'Select All', courses: courses});
+            $('.page-top').template('teacher-message', { getall: 'Select All', courses: courses });
         }
 
-		function createEventListeners() {
-			$('.page-top').on('click', '.send-button', makeAnnouncement);
+        function createEventListeners() {
+            $('.page-top').on('click', '.send-button', makeAnnouncement);
 
-			$('.page-top').on( "click", 'li', function(e){
+            // Select a Course
+            $('.page-top').on("click", 'li', function(e) {
 
-				// Add/remove checkbox if li is selected. 
-				$(this).find('span').toggleClass('glyphicon glyphicon-ok checked-course');
-				
-				$(this).find('input').trigger( "click" );
-				changeValue($(this).closest('li').attr('course-id'));
-				e.stopPropagation();
-			});
+                $(this).find('span').toggleClass('glyphicon glyphicon-ok checked-course');
 
-			function changeValue(courseId){
+                changeValue($(this).closest('li').attr('course-id'));
+                e.stopPropagation();
+            });
 
-				// Adds or Removes the course from the array
-				let foundIndex = coursesToPublishTo.indexOf(courseId);
+            // Select All Courses
+            $('.page-top').on("click", '.select-all', function(e) {
 
-				if (foundIndex > -1) {
-					coursesToPublishTo.splice(foundIndex, 1);
-				} else {
-					coursesToPublishTo.push(courseId);
-				}
+                $('.course-list').find('span').toggleClass('glyphicon glyphicon-ok checked-course');
 
-				console.log(coursesToPublishTo);
-			}
-		}
+                $(".course-list").each(function() {
+                    changeValue($(this).attr('course-id'));
+                });
+
+                e.stopPropagation();
+            });
+
+            function changeValue(courseId) {
+
+                // Adds or Removes the course from the array
+                let foundIndex = coursesToPublishTo.indexOf(courseId);
+
+                if (foundIndex > -1) {
+                    coursesToPublishTo.splice(foundIndex, 1);
+                } else {
+                    coursesToPublishTo.push(courseId);
+                }
+                console.log(coursesToPublishTo);
+            }
+        }
 
         function makeAnnouncement() {
-			var author = teacher._id;
-			var textInput = $('.teacher-input-area').val();
-			var authorName = teacher.firstname + ' ' + teacher.lastname;
-			var displayMessage = textInput + ' - (Posted by ' + authorName + ')';
+            var author = teacher._id;
+            var textInput = $('.teacher-input-area').val();
+            var authorName = teacher.firstname + ' ' + teacher.lastname;
+            var displayMessage = textInput + ' - (Posted by ' + authorName + ')';
 
-			Announcement.create({
-				author: author,
-				message: displayMessage,
-				courses: coursesToPublishTo
-			}, function() {
-				console.log(displayMessage);
-			});
+            Announcement.create({
+                author: author,
+                message: displayMessage,
+                courses: coursesToPublishTo
+            }, function() {
+                console.log(displayMessage);
+            });
         }
     }
 }

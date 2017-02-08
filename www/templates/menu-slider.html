@@ -6,7 +6,9 @@
                     <li class="head-text"><a href="/">${header}</a></li>
                     <img class="fake-hamb-2" src="/images/hamb.png">
                     <li class="divider"></li>
-                    <li class="second-head-text">${education}</li>
+                    [if education !== 'false']
+                        <li class="second-head-text">${education}</li>
+                    [endif]
                     <li class="head-text">Your Courses:</li>
                         [repeat courses,course]
                             <li class="third-head-text"><a class="menu-choice-courses"
