@@ -356,8 +356,8 @@ function createFakeDataFromJSON() {
 			announcements[2].author = teachers.slice(4,5);
 
 			//assign courses to students
-			courses[0].students = [].concat( students.slice(0,3) , [ students[17] ] , [ students[23] ]);
-			courses[1].students = [].concat( students.slice(3,6) , [ students[18] ]);
+			courses[0].students = [].concat( students.slice(0,6) , [ students[17] ] , [ students[23] ]);
+			courses[1].students = [].concat( students.slice(3,9) , [ students[18] ]);
 			courses[2].students = [].concat( students.slice(6,8) , [ students[19] ]);
 			courses[3].students = [].concat( students.slice(8,11) , [ students[20] ]);
 			courses[4].students = [].concat( students.slice(11,14) , [ students[21] ]);
