@@ -4,6 +4,7 @@ var bodyparser = require('body-parser');
 var cookieparser = require('cookie-parser');
 var sha1 = require('sha1');
 var mongoose = require('mongoose');
+var compression = require('compression');
 require('mongoosefromclass')(mongoose);
 
 // Fake JSON Data
@@ -64,6 +65,8 @@ app.use(bodyparser.urlencoded({ extended: false }));
 // cookies, sessions and logins
 app.use(cookieparser());
 app.use(new Sessionhandler(Session).middleware());
+
+app.use(compression());
 
 // Never cache request starting with "/rest/"
 app.use((req, res, next)=>{
@@ -285,7 +288,7 @@ function createFakeDataFromJSON() {
 			students[16].educations = educations.slice(5,6);
 			students[22].educations = educations.slice(5,6);
 
-			//assign courses to students
+			//assign educations to students
 			educations[0].students = [].concat( students.slice(0,3) , [ students[17] ] , [ students[23] ]);
 			educations[1].students = [].concat( students.slice(3,6) , [ students[18] ]);
 			educations[2].students = [].concat( students.slice(6,8) , [ students[19] ]);
@@ -294,11 +297,11 @@ function createFakeDataFromJSON() {
 			educations[5].students = [].concat( students.slice(14,17) , [ students[22] ]);
 
 			//assign teachers to courses
-			teachers[0].courses = courses.slice(0,2);
-			teachers[1].courses = courses.slice(0,2);
+			teachers[0].courses = courses.slice(0,3);
+			teachers[1].courses = courses.slice(0,3);
 
-			teachers[2].courses = courses.slice(2,4);
-			teachers[3].courses = courses.slice(2,4);
+			teachers[2].courses = courses.slice(2,5);
+			teachers[3].courses = courses.slice(2,5);
 			teachers[4].courses = courses.slice(4);
 
 			//assign courses to teachers
@@ -312,11 +315,11 @@ function createFakeDataFromJSON() {
 			courses[5].teachers = teachers.slice(4);
 
 			//assign students to courses
-			students[0].courses = courses.slice(0,1);
-			students[1].courses = courses.slice(0,1);
-			students[2].courses = courses.slice(0,1);
-			students[17].courses = courses.slice(0,1);
-			students[23].courses = courses.slice(0,1);
+			students[0].courses = courses.slice(0,3);
+			students[1].courses = courses.slice(0,3);
+			students[2].courses = courses.slice(0,3);
+			students[17].courses = courses.slice(0,3);
+			students[23].courses = courses.slice(0,3);
 
 			students[3].courses = courses.slice(1,2);
 			students[4].courses = courses.slice(1,2);
