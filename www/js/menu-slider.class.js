@@ -1,22 +1,16 @@
 class MenuSlider {
 
-	constructor(role) {
+	constructor() {
 		// When we have login working we won't have to 'find' Students (or Teachers)
 		// and instead just populate the courses of the one logged in.
-		let schema = role == "Student" ? Student : Teacher;
-
 		let courseHashMap = {};
 		let that = this;
+		let currentUser = user;
 
-		console.log('logged in as');
+		populateCourses(currentUser.courses);
 
-		schema.find('', function(data,err){
-			let testUser = data[8];
-			populateCourses(testUser.courses);
-		});
-		
 		function populateCourses(courses) {
-			let coursesIds = courses.map( course => '"' + course._id + '"' );
+			let coursesIds = courses.map( course => '"' + course + '"' );
 			let queryString = 'find/{ _id: { $in: [' + coursesIds + '] } }';
 
 			Course.find(queryString, createTemplate);
@@ -37,7 +31,6 @@ class MenuSlider {
 				account: 'Your Account',
 				fullname: user.firstname + ' ' + user.lastname,
 				usersettings: 'Settings',
-				password: 'change password',
 				logout: 'log out'
 			});
 		}

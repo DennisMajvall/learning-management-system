@@ -15,31 +15,33 @@ class AnnouncementOnFrontpage {
 			announcementsToPrint.forEach(function(announcement){
 
 				let coursesNames = "";
+				let lastAnnouncement = false;
+
+				let numberOfCourses = Object.keys(announcement.courses).length;
+				let coursesDone = 0;
+
 				announcementsDone++;
 
-				Teacher.find(announcement.author, function(teacher){
-					announcement.author = teacher.firstname + " " + teacher.lastname;
+				if(numberOfAnnouncements === announcementsDone){
+					lastAnnouncement = true;
+				}
 
-					let numberOfCourses;
-					let coursesDone = 0;
-					let lastAnnouncement = false;
+				Teacher.find(announcement.author, function(teacher){
+
+					announcement.author = teacher.firstname + " " + teacher.lastname;
 
 					announcement.courses.forEach(function(courseId){
 
-						if(numberOfAnnouncements === announcementsDone){
-							numberOfCourses = Object.keys(announcement.courses).length;
-							lastAnnouncement = true;
-						}
+						Course.find(courseId, function(course){
 
-						Course.find(courseId, function(course, doLast){
-
-							coursesNames += " " + course.name;
 							coursesDone++;
+							coursesNames += course.name;
+
+							if(coursesDone === numberOfCourses){
+								announcement.courses = coursesNames;
+							}
 
 							if(lastAnnouncement === true && numberOfCourses === coursesDone){
-
-								announcement.courses = coursesNames;
-
 								$('body .page-top').template('student-announcement', {announcements: announcementsToPrint});
 							}
 						});
