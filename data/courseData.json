@@ -1,25 +1,25 @@
 [{
-	"name": "Archeology,",
+	"name": "Archeology",
 	"description": "An archeology course.",
 	"period": "Fall of 2016 - Spring of 2017"
 },{
-	"name": "Programming 1,",
+	"name": "Programming 1",
 	"description": "A programming course.",
 	"period": "Fall of 2016 - Spring of 2017"
 },{
-	"name": "Anthropology,",
+	"name": "Anthropology",
 	"description": "Human studies.",
 	"period": "Fall of 2016 - Spring of 2017"
 },{
-	"name": "Ornithology,",
+	"name": "Ornithology",
 	"description": "Study of birds.",
 	"period": "Fall of 2016 - Spring of 2017"
 },{
-	"name": "Social studies,",
+	"name": "Social studies",
 	"description": "Study of social sciences, humanities & history.",
 	"period": "Fall of 2016 - Spring of 2017"
 },{
-	"name": "Electronics,",
+	"name": "Electronics",
 	"description": "Study of... electronics.",
 	"period": "Fall of 2016 - Spring of 2017"
 }]
