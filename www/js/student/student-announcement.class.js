@@ -17,13 +17,12 @@ class AnnouncementOnFrontpage {
 				let coursesNames = "";
 				let lastAnnouncement = false;
 
-				let numberOfCourses;
+				let numberOfCourses = Object.keys(announcement.courses).length;
 				let coursesDone = 0;
 
 				announcementsDone++;
 
 				if(numberOfAnnouncements === announcementsDone) {
-					numberOfCourses = Object.keys(announcement.courses).length;
 					lastAnnouncement = true;
 				}
 
@@ -35,15 +34,16 @@ class AnnouncementOnFrontpage {
 
 					announcement.courses.forEach(function(courseId) {
 
-						Course.find(courseId, function(course, doLast) {
+						Course.find(courseId, function(course) {
 
-							coursesNames += " " + course.name;
 							coursesDone++;
+							coursesNames += course.name;
+
+							if(coursesDone === numberOfCourses) {
+								announcement.courses = coursesNames;
+							}
 
 							if(lastAnnouncement === true && numberOfCourses === coursesDone) {
-
-								announcement.courses = coursesNames;
-
 								$('body .page-top').template('student-announcement', {announcements: announcementsToPrint});
 							}
 						});
