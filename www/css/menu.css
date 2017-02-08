@@ -11,7 +11,7 @@
     margin: 0;
     padding-top: 20px;
     z-index: 3;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .fake-hamb-2 {
