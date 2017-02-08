@@ -1,25 +1,25 @@
 [{
-	"name": "Arkeologi",
-	"description": "En arkeologikurs",
-	"period": "HT2016-VT2017"
+	"name": "Archeology",
+	"description": "An archeology course.",
+	"period": "Fall of 2016 - Spring of 2017"
 },{
-	"name": "Programmering 12",
-	"description": "En programmeringskurs",
-	"period": "HT2016-VT2017"
+	"name": "Programming 1",
+	"description": "A programming course.",
+	"period": "Fall of 2016 - Spring of 2017"
 },{
-	"name": "En annan kurs",
-	"description": "",
-	"period": "HT2016-VT2017"
+	"name": "Anthropology",
+	"description": "Human studies.",
+	"period": "Fall of 2016 - Spring of 2017"
 },{
-	"name": "En helt annan kurs",
-	"description": "",
-	"period": "HT2016-VT2017"
+	"name": "Ornithology",
+	"description": "Study of birds.",
+	"period": "Fall of 2016 - Spring of 2017"
 },{
-	"name": "Den sjuka kursen",
-	"description": "",
-	"period": "HT2016-VT2017"
+	"name": "Social studies",
+	"description": "Study of social sciences, humanities & history.",
+	"period": "Fall of 2016 - Spring of 2017"
 },{
-	"name": "Galen kurs",
-	"description": "",
-	"period": "HT2016-VT2017"
+	"name": "Electronics",
+	"description": "Study of... electronics.",
+	"period": "Fall of 2016 - Spring of 2017"
 }]

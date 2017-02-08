@@ -32,30 +32,22 @@ var role;
 				new Loginpage();
 				return;
 			} else {
-				new Navbar();
-
-				if (role){ // just for test
-					console.log("Static role is defined");
-					if (role == "Admin")
-						loadAdmin(postStart);
-					else if (role == "Student")
-						loadStudent(postStart);
-					else if (role == "Teacher")
-						loadTeacher(postStart);
-					return;
-				}
 
 				// Save current logged in user
 				user = response.user;
 				console.log('Current logged in user: ', user);
 
-				// Load and initialize role-specific templates
-				if (response.user.role == "Admin")
-					loadAdmin(postStart);
-				else if (response.user.role == "Student")
-					loadStudent(postStart);
-				else if (response.user.role == "Teacher")
-					loadTeacher(postStart);
+				new Navbar();
+
+				if (user.role){ // just for test
+					if (user.role == "Admin")
+						loadAdmin(postStart);
+					else if (user.role == "Student")
+						loadStudent(postStart);
+					else if (user.role == "Teacher")
+						loadTeacher(postStart);
+					return;
+				}
 			}
 		});
 	}

@@ -1,21 +1,23 @@
 class MenuSlider {
 
-	constructor(role) {
+	constructor() {
 		// When we have login working we won't have to 'find' Students (or Teachers)
 		// and instead just populate the courses of the one logged in.
-		let schema = role == "Student" ? Student : Teacher;
-
 		let courseHashMap = {};
 		let that = this;
+		let currentUser = user;
 
-		schema.find('', function(data,err){
-			let user = data[0];
+		if(currentUser.role != 'Teacher'){
+			Student.find(currentUser._id, function(student,err){
+				console.log(student);
+				currentUser = student;
+			});
+		}
 
-			populateCourses(user.courses);
-		});
-		
+		populateCourses(currentUser.courses);
+
 		function populateCourses(courses) {
-			let coursesIds = courses.map( course => '"' + course._id + '"' );
+			let coursesIds = courses.map( course => '"' + course + '"' );
 			let queryString = 'find/{ _id: { $in: [' + coursesIds + '] } }';
 
 			Course.find(queryString, createTemplate);
@@ -28,17 +30,18 @@ class MenuSlider {
 				that.courseHashMap[course._id] = course;
 			});
 
-			$('body').template('menu-slider',{
+			var settingsObj = {
 				header: 'Startpage',
-				education: 'Education Name',
 				courses: courses,
+				education: currentUser.educations ? currentUser.educations[0].name : 'false',
 				booking: 'Book a room',
 				account: 'Your Account',
-				fullname: user.firstname + ' ' + user.lastname,
+				fullname: currentUser.firstname + ' ' + currentUser.lastname,
 				usersettings: 'Settings',
-				password: 'change password',
 				logout: 'log out'
-			});
+			};
+
+			$('body').template('menu-slider', settingsObj);
 		}
 
 		$('body').on('click', '.log-out', function(){

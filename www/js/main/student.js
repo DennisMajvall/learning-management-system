@@ -1,14 +1,16 @@
 function loadStudent(callback) {
 	$.loadTemplates([
 		'frontpage/courses',
-		'course-page',
 		'frontpage/student-announcement',
+		'course-page',
+		'listed-profile',
 		'menu-slider'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
+
 		new MenuSlider("Student");
-		//new AnnouncementOnFrontpage();
+		new AnnouncementOnFrontpage(user._id);
 		new CoursesOnFrontpage("Student");
 		callback();
 	}
