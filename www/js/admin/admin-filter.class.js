@@ -3,6 +3,11 @@ class AdminFilter {
 	constructor(dbType, dbSchema) {
 		this.dbType = dbType;
 		this.dbSchema = dbSchema;
+		this.limit = 20;
+	}
+
+	increaseLimit() {
+		this.limit += 10;
 	}
 
 	admin(input, callback) {
@@ -52,12 +57,15 @@ class AdminFilter {
 
 	teacher(input, callback) {
 		return [
-			() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), callback); },
-			() => { this.queryWrapperPopulated(Course, 'teachers', `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, callback); }
+			() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), callback); }
+			//() => { this.queryWrapperPopulated(Course, 'teachers', `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, callback); }
 		];
 	}
 
 	queryWrapper(dbSchema, query, callback) {
+		if(query)
+			query += '/limit/' + this.limit;
+
 		dbSchema.find(query, (items) => {
 			if (items.hasOwnProperty('_error')) {
 				console.log('error', items._error);
@@ -70,6 +78,8 @@ class AdminFilter {
 	}
 
 	queryWrapperPopulated(dbSchema, populationName, query, callback) {
+		if(query) query += '/limit/' + this.limit;
+
 		dbSchema.find(query, (items) => {
 			if (items.hasOwnProperty('_error')) {
 				console.log('error', items._error);

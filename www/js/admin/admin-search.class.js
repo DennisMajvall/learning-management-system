@@ -56,6 +56,11 @@ class AdminSearch {
 				delayTimeout = null;
 			}, 300);
 		});
+
+		$('body').on('click', 'a.increase-limit', function(){
+			that.filter.increaseLimit();
+			that.filter.run($('input[type="search"]').val().trim(), that.displayItems, that);
+		});
 	}
 
 	displayItems(itemHashMap, that) {

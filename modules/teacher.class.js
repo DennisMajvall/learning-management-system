@@ -7,6 +7,7 @@ module.exports = class Teacher extends User {
 			phonenumber: {type: String},
 			picture: {type: String, default: "default"},
 			role: { type: String, default: 'Teacher', set: v => 'Teacher' },
+			timeCreated: {type: Date, default: Date.now},
 			courses: [{
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Course'
@@ -21,4 +22,8 @@ module.exports = class Teacher extends User {
 	limit() {
 		return 20;
 	}
-}
+
+	sort() {
+		return '-timeCreated';
+	}
+};

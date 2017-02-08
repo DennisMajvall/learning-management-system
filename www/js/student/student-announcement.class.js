@@ -37,7 +37,12 @@ class AnnouncementOnFrontpage {
 						Course.find(courseId, function(course) {
 
 							coursesDone++;
-							coursesNames += course.name;
+							if(coursesDone === 1){
+								coursesNames += course.name;
+							} else {
+								coursesNames += ", " + course.name;
+							}
+
 
 							if(coursesDone === numberOfCourses) {
 								announcement.courses = coursesNames;
