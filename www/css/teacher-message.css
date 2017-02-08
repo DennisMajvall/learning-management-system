@@ -52,3 +52,10 @@
     padding-left: 10px;
     color: green;
 }
+
+.msg-sent {
+    display: inline-block;
+    font-style: italic;
+    color: green;
+    margin: 0;
+}

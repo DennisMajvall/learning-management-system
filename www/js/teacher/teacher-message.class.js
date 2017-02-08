@@ -75,6 +75,12 @@ class TeacherMessage {
             }, function() {
                 console.log(displayMessage);
             });
+
+            $('.teacher-input-area').val('');
+            $('.msg-sent').text("Message has been sent!");
+            setTimeout(function(){
+                $('.msg-sent').text('');
+            }, 3000);
         }
     }
 }
