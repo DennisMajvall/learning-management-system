@@ -65,15 +65,13 @@ class TeacherMessage {
         function makeAnnouncement() {
             var author = teacher._id;
             var textInput = $('.teacher-input-area').val();
-            var authorName = teacher.firstname + ' ' + teacher.lastname;
-            var displayMessage = textInput + ' - (Posted by ' + authorName + ')';
 
             Announcement.create({
                 author: author,
-                message: displayMessage,
+                message: textInput,
                 courses: coursesToPublishTo
             }, function() {
-                console.log(displayMessage);
+                console.log(textInput);
             });
 
             $('.teacher-input-area').val('');
