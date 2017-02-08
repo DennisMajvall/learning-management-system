@@ -8,10 +8,11 @@ class MenuSlider {
 		let courseHashMap = {};
 		let that = this;
 
-		schema.find('', function(data,err){
-			let user = data[0];
+		console.log('logged in as');
 
-			populateCourses(user.courses);
+		schema.find('', function(data,err){
+			let testUser = data[8];
+			populateCourses(testUser.courses);
 		});
 		
 		function populateCourses(courses) {
