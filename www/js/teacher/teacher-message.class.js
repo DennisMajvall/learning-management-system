@@ -4,16 +4,14 @@ class TeacherMessage {
         // Find which courses this teacher have access to. 
         // When we have login working we won't have to 'find' Teachers
         // and instead just populate the courses of the one logged in.
-        let teacher = null;
         let coursesToPublishTo = [];
 
-        Teacher.find('', function(data, err) {
-            teacher = data[0];
-            populateCourses(teacher.courses);
-        });
+        let teacher = user;
+        populateCourses(teacher.courses);
+    
 
         function populateCourses(courses) {
-            let coursesIds = courses.map(course => '"' + course._id + '"');
+            let coursesIds = courses.map(course => '"' + course + '"');
             let queryString = 'find/{ _id: { $in: [' + coursesIds + '] } }';
 
             Course.find(queryString, (courses, err) => {
