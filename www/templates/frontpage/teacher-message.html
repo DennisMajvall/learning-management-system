@@ -10,11 +10,11 @@
                     Select Course<span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                    <!-- <li class="select-all"><a>
-                        &nbsp;${getall}<span class="" aria-hidden="true"></span></a>
-                    </li> -->
+                    <li class="select-all"><a>
+                        &nbsp;${getall}</a>
+                    </li>
                         [repeat courses,course]
-                        <li course-id="${course._id}"><a>
+                        <li class="course-list" course-id="${course._id}"><a>
                             &nbsp;${course.name}<span class="" aria-hidden="true"></span></a>
                         </li>
                         [endrepeat]
