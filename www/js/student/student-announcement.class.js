@@ -15,21 +15,23 @@ class AnnouncementOnFrontpage {
 			announcementsToPrint.forEach(function(announcement){
 
 				let coursesNames = "";
+				let lastAnnouncement = false;
+
+				let numberOfCourses;
+				let coursesDone = 0;
+
 				announcementsDone++;
 
+				if(numberOfAnnouncements === announcementsDone){
+					numberOfCourses = Object.keys(announcement.courses).length;
+					lastAnnouncement = true;
+				}
+
 				Teacher.find(announcement.author, function(teacher){
+
 					announcement.author = teacher.firstname + " " + teacher.lastname;
 
-					let numberOfCourses;
-					let coursesDone = 0;
-					let lastAnnouncement = false;
-
 					announcement.courses.forEach(function(courseId){
-
-						if(numberOfAnnouncements === announcementsDone){
-							numberOfCourses = Object.keys(announcement.courses).length;
-							lastAnnouncement = true;
-						}
 
 						Course.find(courseId, function(course, doLast){
 
