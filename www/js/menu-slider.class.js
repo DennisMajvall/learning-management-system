@@ -9,9 +9,8 @@ class MenuSlider {
 		let that = this;
 
 		schema.find('', function(data,err){
-			let user = data[0];
-
-			populateCourses(user.courses);
+			let testUser = data[0];
+			populateCourses(testUser.courses);
 		});
 		
 		function populateCourses(courses) {
