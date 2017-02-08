@@ -3,22 +3,22 @@
 		<div class="col-xs-12">
 			<h2>${course.name} ${course.period}</h2>
 			<div class="panel panel-default">
-				<div class="panel-heading">Teachers</div>
-					<div class="panel-body">
-						[repeat course.teachers, teacher]
-							<h4>${teacher.firstname} ${teacher.lastname}</h4>
-							<p>${teacher.phonenumber}, ${teacher.username}</p>
-						[endrepeat]
-					</div>
+				<div class="panel-heading">Teachers
+				</div>
+				<div class="panel-body">
+					[repeat course.teachers, user]
+						[template listed-profile, user]
+					[endrepeat]
+				</div>
 			</div>
 			<div class="panel panel-default">
-				<div class="panel-heading">Students</div>
-					<div class="panel-body">
-						[repeat course.students, student]
-							<h4>${student.firstname}, ${student.lastname}</h4>
-							<p>${student.phonenumber}, ${student.username}</p>
-						[endrepeat]
-					</div>
+				<div class="panel-heading">Students
+				</div>
+				<div class="panel-body">
+					[repeat course.students, user]
+						[template listed-profile, user]
+					[endrepeat]
+				</div>
 			</div>
 		</div>
 	</div>

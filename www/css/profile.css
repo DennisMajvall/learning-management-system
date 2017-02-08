@@ -1,0 +1,14 @@
+profile {
+	display: flex;
+	align-items: center;
+}
+
+profile img {
+	width: 50px;
+	display: inline-block;
+	margin-right: 8px;
+}
+
+profile div.profile-info {
+	display: inline-block;
+}

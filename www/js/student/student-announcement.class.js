@@ -5,43 +5,45 @@ class AnnouncementOnFrontpage {
 		//Posting all the announcements just for testing.
 		//Working on posting only the relevant announcements for the logged in student
 		//(with help of the studentID)
-		Student.find(studentID+"/getAnnouncements", function(announcementsToPrint){
+		Student.find(studentID+"/getAnnouncements", function(announcementsToPrint) {
 
 			announcementsToPrint = announcementsToPrint.returns;
 
 			let numberOfAnnouncements = Object.keys(announcementsToPrint).length;
 			let announcementsDone = 0;
 
-			announcementsToPrint.forEach(function(announcement){
+			announcementsToPrint.forEach(function(announcement) {
 
 				let coursesNames = "";
 				let lastAnnouncement = false;
 
-				let numberOfCourses;
+				let numberOfCourses = Object.keys(announcement.courses).length;
 				let coursesDone = 0;
 
 				announcementsDone++;
 
-				if(numberOfAnnouncements === announcementsDone){
-					numberOfCourses = Object.keys(announcement.courses).length;
+				if(numberOfAnnouncements === announcementsDone) {
 					lastAnnouncement = true;
 				}
 
-				Teacher.find(announcement.author, function(teacher){
+				Teacher.find(announcement.author, function(teacher) {
+
+					announcement.picture = teacher.picture;
 
 					announcement.author = teacher.firstname + " " + teacher.lastname;
 
-					announcement.courses.forEach(function(courseId){
+					announcement.courses.forEach(function(courseId) {
 
-						Course.find(courseId, function(course, doLast){
+						Course.find(courseId, function(course) {
 
-							coursesNames += " " + course.name;
 							coursesDone++;
+							coursesNames += course.name;
 
-							if(lastAnnouncement === true && numberOfCourses === coursesDone){
-
+							if(coursesDone === numberOfCourses) {
 								announcement.courses = coursesNames;
+							}
 
+							if(lastAnnouncement === true && numberOfCourses === coursesDone) {
 								$('body .page-top').template('student-announcement', {announcements: announcementsToPrint});
 							}
 						});
