@@ -3,6 +3,7 @@ function loadTeacher(callback) {
 		'frontpage/courses',
 		'frontpage/teacher-message',
 		'course-page',
+		'listed-profile',
 		'menu-slider'
 	], onTemplatesLoaded);
 

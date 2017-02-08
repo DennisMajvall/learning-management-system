@@ -7,6 +7,13 @@ class MenuSlider {
 		let that = this;
 		let currentUser = user;
 
+		if(currentUser.role != 'Teacher'){
+			Student.find(currentUser._id, function(student,err){
+				console.log(student);
+				currentUser = student;
+			});
+		}
+
 		populateCourses(currentUser.courses);
 
 		function populateCourses(courses) {
@@ -23,16 +30,18 @@ class MenuSlider {
 				that.courseHashMap[course._id] = course;
 			});
 
-			$('body').template('menu-slider',{
+			var settingsObj = {
 				header: 'Startpage',
-				education: 'Education Name',
 				courses: courses,
+				education: currentUser.educations ? currentUser.educations[0].name : 'false',
 				booking: 'Book a room',
 				account: 'Your Account',
-				fullname: user.firstname + ' ' + user.lastname,
+				fullname: currentUser.firstname + ' ' + currentUser.lastname,
 				usersettings: 'Settings',
 				logout: 'log out'
-			});
+			};
+
+			$('body').template('menu-slider', settingsObj);
 		}
 
 		$('body').on('click', '.log-out', function(){
