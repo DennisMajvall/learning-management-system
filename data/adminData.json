@@ -1,5 +1,9 @@
 [
 	{
+		"username": "admin@gmail.com",
+		"password": "admin"
+	},
+	{
 		"username": "adminDude@bing.se",
 		"password": "goodPassword"
 	}
