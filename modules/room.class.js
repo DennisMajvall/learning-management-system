@@ -1,11 +1,10 @@
 module.exports = class Room {
 
-	schema(){
+	schema() {
 		return {
 			name: { type: String, required: true },
-			description: { type: String, required: true},
-			bookedTime: { type: String, required: true},
-			bookedBy: { type: String}
+			description: { type: String, required: true },
+			booking: {}
 		};
 	}
 
