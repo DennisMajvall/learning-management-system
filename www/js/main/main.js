@@ -7,6 +7,7 @@ var Login = new RestEntity('login');
 var Room = new RestEntity('room');
 var Student = new RestEntity('student');
 var Teacher = new RestEntity('teacher');
+var Booking = new RestEntity('booking');
 
 // Global object to hold current user
 var user = {};
