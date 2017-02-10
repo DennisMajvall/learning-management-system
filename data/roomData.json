@@ -1,6 +1,4 @@
 [{
 	"name" : "room 1",
-	"description" : "Large room",
-	"bookedTime" : "19-20",
-	"bookedBy" : ""
+	"description" : "Large room"
 }]
