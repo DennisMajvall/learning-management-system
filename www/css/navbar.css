@@ -26,6 +26,12 @@
 	height: 30px;
 }
 
+.notification-btn {
+	height: 100%;
+	color: #337ab7;
+	padding-top: 10px;
+}
+
 .home-btn{
 	height: 100%;
 	color: #337ab7;
