@@ -35,9 +35,12 @@ class AdminSearch {
 				item: item
 			});
 
-			$('.edit-area').template('attend-list', {
-				item: item
-			});
+			// only append template relation-list for courses right now !!!
+			if(that.dbType === "course"){
+				$('.edit-area').template('relation-list', {
+					item: item
+				});
+			}
 
 		});
 

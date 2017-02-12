@@ -21,7 +21,7 @@ var role;
 	$.loadTemplates([
 		'navbar',
 		'loginpage',
-		'attend-list'
+		'relation-list'
 	], start);
 
 

@@ -5,24 +5,24 @@ class AnnouncementOnFrontpage {
 		//Posting all the announcements just for testing.
 		//Working on posting only the relevant announcements for the logged in student
 		//(with help of the studentID)
-		Student.find(studentID+"/getAnnouncements", function(announcementsToPrint) {
+		Student.find(studentID+"/getAnnouncements", function(announcements) {
 
-			announcementsToPrint = announcementsToPrint.returns;
+			announcements = announcements.returns;
 
-			let numberOfAnnouncements = Object.keys(announcementsToPrint).length;
-			let announcementsDone = 0;
+			let maxAnnounce = Object.keys(announcements).length;
+			let announceCount = 0;
 
-			announcementsToPrint.forEach(function(announcement) {
+			announcements.forEach(function(announcement) {
 
 				let coursesNames = "";
 				let lastAnnouncement = false;
 
-				let numberOfCourses = Object.keys(announcement.courses).length;
-				let coursesDone = 0;
+				let maxCourses = Object.keys(announcement.courses).length;
+				let courseCount = 0;
 
-				announcementsDone++;
+				announceCount++;
 
-				if(numberOfAnnouncements === announcementsDone) {
+				if(maxAnnounce === announceCount) {
 					lastAnnouncement = true;
 				}
 
@@ -36,20 +36,20 @@ class AnnouncementOnFrontpage {
 
 						Course.find(courseId, function(course) {
 
-							coursesDone++;
-							if(coursesDone === 1){
+							courseCount++;
+							if(courseCount === 1){
 								coursesNames += course.name;
 							} else {
 								coursesNames += ", " + course.name;
 							}
 
 
-							if(coursesDone === numberOfCourses) {
+							if(courseCount === maxCourses) {
 								announcement.courses = coursesNames;
 							}
 
-							if(lastAnnouncement === true && numberOfCourses === coursesDone) {
-								$('body .page-top').template('student-announcement', {announcements: announcementsToPrint});
+							if(lastAnnouncement === true && maxCourses === courseCount) {
+								$('body .page-top').template('student-announcement', {announcements: announcements});
 							}
 						});
 					});

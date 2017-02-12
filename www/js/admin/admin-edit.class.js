@@ -30,5 +30,39 @@ class AdminEdit {
 
 			item[key] = $(this).val().trim();
 		});
+
+		// highlight items
+		$('.edit-area').on('click', 'a', function() {
+			$(this).toggleClass('active');
+		});
+
+		// remove marked items
+		$('.edit-area').on('click', 'button.remove-items', function() {
+			let itemsToRemove = $('.edit-area a.active');
+			
+			// use .edit-buttons as a referens point to get course
+			let mainItem = findItemFunc($('.edit-area .edit-buttons'));
+
+			itemsToRemove.map(function(){
+				let itemCategory = $(this).closest('[item-type]').attr('item-type');
+				let itemId = $(this).attr('list-item-id');
+
+				let objectToSave = Object.assign({}, item);
+
+				if(itemCategory === "students"){
+				
+					console.log(itemId);
+					// Course.update(mainItem._id, objectToSave, () => {
+					// 	location.reload();
+					// });
+				} else if(itemCategory === "teachers"){
+
+					console.log(itemId);
+					// Course.update(mainItem._id, objectToSave, () => {
+					// 	location.reload();
+					// });
+				}
+			});
+		});
 	}
 }
