@@ -33,7 +33,7 @@ class AdminFilter {
 		return [
 			() => { this.queryWrapper(Education, `find/{ $or: [
 				{ name: { $regex: /.*` + input + `.*/, $options: "i" } },
-				{ startYear: { $regex: /.*` + input + `.*/, $options: "i" } }
+				{ startYear: ` + input + ` }
 			]}`, callback); }
 		];
 	}
@@ -57,14 +57,13 @@ class AdminFilter {
 
 	teacher(input, callback) {
 		return [
-			() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), callback); }
-			//() => { this.queryWrapperPopulated(Course, 'teachers', `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, callback); }
+			() => { this.queryWrapper(Teacher, this._TeacherAndStudent(input), callback); },
+			() => { this.queryWrapperPopulated(Course, 'teachers', `find/{ name: { $regex: /.*` + input + `.*/, $options: "i" } }`, callback); }
 		];
 	}
 
 	queryWrapper(dbSchema, query, callback) {
-		if(query)
-			query += '/limit/' + this.limit;
+		if(query) query += '/limit/' + this.limit;
 
 		dbSchema.find(query, (items) => {
 			if (items.hasOwnProperty('_error')) {
