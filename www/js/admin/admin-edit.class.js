@@ -30,5 +30,42 @@ class AdminEdit {
 
 			item[key] = $(this).val().trim();
 		});
+
+		// highlight items
+		$('.edit-area').on('click', 'a', function() {
+			$(this).toggleClass('active');
+		});
+
+		// remove marked items
+		$('.edit-area').on('click', 'button.remove-items', function() {
+			let itemsToRemove = $('.edit-area a.active');
+
+			itemsToRemove.map(function(){
+				let itemCategory = $(this).closest('[item-type]').attr('item-type');
+				let itemId = $(this).attr('item-id');
+
+				if(itemCategory === "students"){
+					
+					Student.delete(itemId, () => {
+						location.reload();
+					});
+				} else if(itemCategory === "teachers"){
+
+					Teacher.delete(itemId, () => {
+						location.reload();
+					});
+				} else if(itemCategory === "courses"){
+
+					Course.delete(itemId, () => {
+						location.reload();
+					});
+				} else if(itemCategory === "educations"){
+
+					Education.delete(itemId, () => {
+						location.reload();
+					});
+				}
+			});
+		});
 	}
 }

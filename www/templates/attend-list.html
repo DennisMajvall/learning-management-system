@@ -1,14 +1,19 @@
 <div class="container">
-	[repeat item,keyProp,valProp]
-		[if typeof valProp == "object"]
-			<div class="col-xs-3">
-				<div class="list-group">
-					<h4>${keyProp} attending:</h4>
-					[repeat valProp, object]
-						<a href="#" class="list-group-item" item-id="${object._id}">${object.firstname} ${object.lastname}</a>
-					[endrepeat]
+	<div class="row">
+		[repeat item,keyProp,valProp]
+			[if typeof valProp == "object"]
+				<div class="col-xs-3">
+					<div class="list-group" item-type="${keyProp}">
+						<h4>${keyProp} attending:</h4>
+						[repeat valProp, object]
+							<a href="#" class="list-group-item" item-id="${object._id}">${object.firstname} ${object.lastname}</a>
+						[endrepeat]
+					</div>
 				</div>
-			</div>
-		[endif]
-	[endrepeat]
+			[endif]
+		[endrepeat]
+	</div>
+	<div class="row">
+		<button type="button" class="btn btn-danger center-block remove-items">Remove</button>
+	</div>
 </div>
