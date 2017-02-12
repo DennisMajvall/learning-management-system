@@ -21,7 +21,7 @@ class TeacherMessage {
         }
 
         function createTemplate(courses) {
-            $('.page-top').template('teacher-message', { getall: 'Select All', courses: courses });
+            $('.page-top').template('teacher-message', { courses: courses });
         }
 
         function createEventListeners() {
@@ -64,7 +64,7 @@ class TeacherMessage {
 
         function makeAnnouncement() {
             var author = teacher._id;
-            var textInput = $('.teacher-input-area').val();
+            var textInput = $('textarea').val();
 
             Announcement.create({
                 author: author,
@@ -74,7 +74,7 @@ class TeacherMessage {
                 console.log(textInput);
             });
 
-            $('.teacher-input-area').val('');
+            $('textarea').val('');
             $('.msg-sent').text("Message has been sent!");
             setTimeout(function(){
                 $('.msg-sent').text('');

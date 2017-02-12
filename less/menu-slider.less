@@ -1,0 +1,115 @@
+/* SLIDE IN MENU */
+
+.menu-slider {
+    position: fixed;
+    top: 0;
+    left: -400px;
+    width: 365px;
+    height: 100vh;
+    background-color: #262228;
+    display: block;
+    margin: 0;
+    padding-top: 20px;
+    z-index: 3;
+    overflow-y: auto;
+
+	ul {
+		list-style-type: none;
+	}
+
+	.hamburger-2 {
+		position: absolute;
+		top: 20px;
+		right: 16px;
+		height: 26px;
+		-webkit-filter: invert(100%);
+		filter: invert(100%);
+		-webkit-transform: rotate(90deg);
+		transform: rotate(90deg);
+		cursor: pointer;
+	}
+
+	.fullname {
+		font-size: 14px;
+		color: red;
+
+		& > span {
+			color: #eee;
+		}
+	}
+
+	.head-text {
+		color: #fff;
+		font-size: 18px;
+		margin: 6px 0;
+
+		a {
+			color: #fff;
+			-webkit-transition: all ease-in-out 100ms;
+					transition: all ease-in-out 100ms;
+
+			&:hover {
+				color: rgb(80, 80, 80);
+				-webkit-transition: all ease-in-out 200ms;
+						transition: all ease-in-out 200ms;
+			}
+		}
+	}
+
+	.divider {
+		margin: 20px 0;
+		width: 90%;
+		border: 1px solid #fff;
+	}
+
+	.spacer {
+		margin: 65px 0;
+	}
+
+	.second-head-text {
+		color: #c1c1c1;
+		font-size: 20px;
+		text-transform: uppercase;
+	}
+
+	.third-head-text {
+
+		a {
+			display: block;
+			font-size: 16px;
+			margin-left: 40px;
+			padding-bottom: 8px;
+			padding-top: 5px;
+			list-style-type: square;
+		}
+	}
+
+	.log-out {
+
+		button {
+			right: 0;
+			bottom: 30px;
+			left: 40px;
+			color: #fff;
+			background-color: #262228;
+			padding: 10px;
+			border: 1px solid #fff;
+			-webkit-transition: all ease-in-out 100ms;
+					transition: all ease-in-out 100ms;
+
+			&:hover {
+				color: #262228;
+				background-color: #fff;
+				-webkit-transition: all ease-in-out 200ms;
+						transition: all ease-in-out 200ms;
+			}
+		}
+	}
+}
+		
+// For the smaller devices iPhone 5 etc.
+@media screen and (max-width: 374px) {
+	.menu-slider {
+		width: 80%;
+	}
+}

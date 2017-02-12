@@ -1,24 +1,19 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-11">
-            <div class="menu-slider">
-                <ul>
-                    <li class="head-text"><a href="/">${header}</a></li>
-                    <img class="fake-hamb-2" src="/images/hamb.png">
-                    <li class="divider"></li>
-                    <li class="head-text">${data}</li>
-                        [repeat categories,category]
-                            <li class="third-head-text"><a class="category-${category.name}" href="?cat=${category.url}">${category.name}</a></li>
-                        [endrepeat]
-                    <li class="spacer"></li>
-                    <li class="fullname"><span>You are logged in as administrator: <br> </span>${fullname}</li>
-                    <li class="divider"></li>
-                    <li class="second-head-text">${account}</li>
-                    <li class="head-text"><a href="#">${usersettings}</a></li>
-                    <li class="head-text"><a href="#">${password}</a></li>
-                    <li class="spacer"></li>
-                    <li class="log-out"><button>${logout}</button></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<div class="menu-slider">
+	<ul>
+		<li class="head-text"><a href="/">${header}</a></li>
+		<img class="hamburger-2" src="/images/hamb.png">
+		<li class="divider"></li>
+		<li class="head-text">${data}</li>
+			[repeat categories,category]
+				<li class="third-head-text"><a class="category-${category.name}" href="?cat=${category.url}">${category.name}</a></li>
+			[endrepeat]
+		<li class="spacer"></li>
+		<li class="fullname"><span>You are logged in as administrator: <br> </span>${fullname}</li>
+		<li class="divider"></li>
+		<li class="second-head-text">${account}</li>
+		<li class="head-text"><a href="#">${usersettings}</a></li>
+		<li class="head-text"><a href="#">${password}</a></li>
+		<li class="spacer"></li>
+		<li class="log-out"><button>${logout}</button></li>
+	</ul>
+</div>

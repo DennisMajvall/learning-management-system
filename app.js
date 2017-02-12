@@ -31,6 +31,7 @@ var classesToLoad = {
 	Sessionhandler: true,
 	Loginhandler: true,
 	Restrouter: true,
+	Lesswatch: true,
 	Session: 'module',
 	User: 'module',
 	Owner: 'module',
@@ -95,6 +96,9 @@ app.get('/rest/user-roles',(req, res)=>{
 // Point to a folder where we have static files
 // (our frontend code)
 app.use(express.static('www'));
+
+// start LessWatch
+new Lesswatch();
 
 // Connect to mongoDB
 // and when that is done start the express server

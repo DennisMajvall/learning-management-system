@@ -10,6 +10,9 @@
     "sha1": "*",
     "mongoose": "*",
     "mongoosefromclass": "*",
+    "gulp": "*",
+    "gulp-clean-css": "*",
+    "gulp-less": "*",
     "compression": "*"
   }
 }

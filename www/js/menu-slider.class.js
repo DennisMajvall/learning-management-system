@@ -60,7 +60,7 @@ class MenuSlider {
 			$('.page-top').empty();
 			$('.page-content').empty().template('course-page', { course: course });
 			$('.menu-slider').animate({ left: '-400px' }, 200);
-			$('.fake-hamb').css({ transform: 'rotate(0deg)' });
+			$('.hamburger').css({ transform: 'rotate(0deg)' });
 		});
 	}
 }
