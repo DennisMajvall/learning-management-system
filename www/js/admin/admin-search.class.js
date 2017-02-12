@@ -29,11 +29,16 @@ class AdminSearch {
 		// on item click
 		that.container.on('click', '.search-list li', function() {
 			let item = that.getItemIdFromElement($(this));
-			
+
 			$('.edit-area').empty().template('admin-edit', {
 				type: that.dbType,
 				item: item
 			});
+
+			$('.edit-area').template('attend-list', {
+				item: item
+			});
+
 		});
 
 		// search box
