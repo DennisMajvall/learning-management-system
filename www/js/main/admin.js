@@ -6,6 +6,15 @@ function loadAdmin(callback) {
 		'edit/edit-room',
 		'edit/edit-student',
 		'edit/edit-teacher',
+
+		'create/create-admin',
+		'create/create-course',
+		'create/create-education',
+		'create/create-room',
+		'create/create-student',
+		'create/create-teacher',
+
+		'admin-create',
 		'admin-edit',
 		'admin-frontpage',
 		'admin-menu-slider',
@@ -35,7 +44,7 @@ function loadAdmin(callback) {
 			tmp = items[index].split("=");
 			if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
 		}
-		
+
 		return result;
 	}
 };

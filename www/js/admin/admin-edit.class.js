@@ -4,7 +4,7 @@ class AdminEdit {
 
 		let that = this;
 
-		$('body').on('click', 'button.delete-item', function() {
+		$('.edit-area').on('click', 'button.delete-item', function() {
 			let item = findItemFunc($(this));
 
 			dbSchema.delete(item._id, () => {
@@ -12,7 +12,7 @@ class AdminEdit {
 			});
 		});
 
-		$('body').on('click', 'button.save-item', function() {
+		$('.edit-area').on('click', 'button.save-item', function() {
 			let item = findItemFunc($(this));
 			let objectToSave = Object.assign({}, item);
 
@@ -26,7 +26,7 @@ class AdminEdit {
 			});
 		});
 
-		$('body').on('keyup', '[bind-key]', function() {
+		$('.edit-area').on('keyup', '[bind-key]', function() {
 			let item = findItemFunc($(this));
 			let key = $(this).attr('bind-key');
 
@@ -43,7 +43,7 @@ class AdminEdit {
 			let studentsToRemove = [];
 			let teachersToRemove = [];
 			let itemsToRemove = $('.edit-area a.active');
-			
+
 			// use .edit-buttons as a referens point to get course
 			let mainItem = findItemFunc($('.edit-area .delete-item'));
 
@@ -77,12 +77,10 @@ class AdminEdit {
 			let shouldKeep = studentsId.indexOf(student._id) == -1;
 
 			if(!shouldKeep){
-				console.log("Removing course from student: ", student);
 				that.removeCourseFromStudent(student, mainItem);
 			}
 			return shouldKeep;
 		});
-		console.log("Printing saving data: ", mainItem.students);
 		Course.update(mainItem._id, {students: mainItem.students});
 	}
 
