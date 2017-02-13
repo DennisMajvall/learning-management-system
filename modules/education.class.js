@@ -1,6 +1,6 @@
 module.exports = class Education{
 
-	schema(){
+	schema() {
 		return {
 			name: {type: String, required: true},
 			startYear: {type: Number, required: true},
@@ -10,9 +10,4 @@ module.exports = class Education{
 			}]
 		};
 	}
-
-	limit() {
-		return 20;
-	}
-
 }

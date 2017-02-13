@@ -18,12 +18,4 @@ module.exports = class Teacher extends User {
 	populate() {
 		return 'courses';
 	}
-
-	limit() {
-		return 20;
-	}
-
-	sort() {
-		return '-timeCreated';
-	}
 };

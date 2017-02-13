@@ -10,8 +10,4 @@ module.exports = class Room {
 			}]
 		};
 	}
-
-	limit() {
-		return 20;
-	}
 };
