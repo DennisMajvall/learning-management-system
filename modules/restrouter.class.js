@@ -206,6 +206,8 @@ module.exports = class Restrouter {
   }
 
   jsonCleaner(toClean){
+
+  	if(toClean === null){return null;}
 	// clean away or transform properties
 	return JSON.stringify(toClean._doc || toClean,(key,val)=>{
 	  // remove __v

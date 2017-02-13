@@ -1,116 +1,126 @@
-/* SLIDE IN MENU */
+.menu-background {
 
-.menu-slider {
-    position: fixed;
-    top: 0;
-    left: -400px;
-    width: 365px;
+    background-color: #212121;
     height: 100vh;
-    background-color: #262228;
-    display: block;
-    margin: 0;
-    padding-top: 20px;
-    z-index: 3;
-    overflow-y: auto;
+}
+
+
+.sidebar {
+
+	color: #fafafa;
+	font-size: 14px;
+	letter-spacing: 1px;
+
+	a {
+		color: #fafafa;
+	}
+
+	.menu-section-style { 
+
+		width: 70%;
+		margin-left: 10px;
+	}
+
+	.menu-box-style {
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 40px;
+
+	}
+
+	header {
+
+		background: #EF5350;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 60px;
+
+		a {
+
+			color: #fafafa;
+
+		}
+	}
+
+	.profile-container { 
+
+		width: 100%;
+		background: #424242;
+
+		.profile-picture {
+
+			width: 40%;
+			margin: 0 auto;
+			padding: 14px 0;
+
+		}
+	}
+
+	.settings-icon {
+
+		float: right;
+	    margin-top: 16px;
+	    width: 24px;
+	    border: 1px solid #fafafa;
+	    border-radius: 4px;
+	    padding: 4px;
+
+	}
+
+	.menu-fullname {
+
+		margin: 12px 0 0 0;
+	    font-weight: 600;
+
+	}
+
+	.menu-education {
+		letter-spacing: 1px;
+	    font-size: 12px;
+	    margin: 0 0 50px 0;
+    }
+
+
+	.menu-courses {
+		
+		background: #616161;
+	    letter-spacing: 1.4px;
+	    margin-bottom: 20px;
+	}
+
 
 	ul {
+		
 		list-style-type: none;
-	}
+		padding: 0;
 
-	.hamburger-2 {
-
-		position: absolute;
-		top: 20px;
-		right: 16px;
-		height: 26px;
-		-webkit-filter: invert(100%);
-		filter: invert(100%);
-		-webkit-transform: rotate(90deg);
-		transform: rotate(90deg);
-		cursor: pointer;
-	}
-
-	.fullname {
-		font-size: 14px;
-		color: red;
-
-		& > span {
-			color: #eee;
+		li {
+			margin-bottom: 5px;
+			font-size: 12px;
+			letter-spacing: 1px
 		}
 	}
 
-	.head-text {
-		color: #fff;
-		font-size: 18px;
-		margin: 6px 0;
+	.menu-study-rooms {
 
-		a {
-			color: #fff;
-			-webkit-transition: all ease-in-out 100ms;
-					transition: all ease-in-out 100ms;
+		background: #424242;
+	    letter-spacing: 1.4px;
+	    margin: 20px 0;
 
-			&:hover {
-				color: rgb(80, 80, 80);
-				-webkit-transition: all ease-in-out 200ms;
-						transition: all ease-in-out 200ms;
-			}
-		}
-	}
-
-	.divider {
-		margin: 20px 0;
-		width: 90%;
-		border: 1px solid #fff;
-	}
-
-	.spacer {
-		margin: 65px 0;
-	}
-
-	.second-head-text {
-		color: #c1c1c1;
-		font-size: 20px;
-		text-transform: uppercase;
-	}
-
-	.third-head-text {
-
-		a {
-			display: block;
-			font-size: 16px;
-			margin-left: 40px;
-			padding-bottom: 8px;
-			padding-top: 5px;
-			list-style-type: square;
-		}
 	}
 
 	.log-out {
 
-		button {
-			right: 0;
-			bottom: 30px;
-			left: 40px;
-			color: #fff;
-			background-color: #262228;
-			padding: 10px;
-			border: 1px solid #fff;
-			-webkit-transition: all ease-in-out 100ms;
-					transition: all ease-in-out 100ms;
+		background-color: #212121;
+	    border: 1px solid #fafafa;
+	    padding: 4px 10px;
+	    border-radius: 6px;
+	}
 
-			&:hover {
-				color: #262228;
-				background-color: #fff;
-				-webkit-transition: all ease-in-out 200ms;
-						transition: all ease-in-out 200ms;
-			}
-		}
-	}
-}
-		
-// For the smaller devices iPhone 5 etc.
-@media screen and (max-width: 374px) {
-	.menu-slider {
-		width: 80%;
-	}
+	.log-out:focus {outline:0;}
 }

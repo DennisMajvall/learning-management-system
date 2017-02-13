@@ -31,8 +31,9 @@ class MenuSlider {
 			});
 
 			var settingsObj = {
-				header: 'Startpage',
+				header: 'Learing Management System',
 				courses: courses,
+				picture: currentUser.picture,
 				education: currentUser.educations ? currentUser.educations[0].name : 'false',
 				booking: 'Book a room',
 				account: 'Your Account',
@@ -41,10 +42,10 @@ class MenuSlider {
 				logout: 'log out'
 			};
 
-			$('body').template('menu-slider', settingsObj);
+			$('.sidebar').template('menu-slider', settingsObj);
 		}
 
-		$('body').on('click', '.log-out', function(){
+		$('.sidebar').on('click', '.log-out', function(){
 			Login.delete(onLogout);
 		});
 
@@ -53,14 +54,14 @@ class MenuSlider {
 			location.reload();
 		}
 
-		$('body').on('click', '.menu-choice-courses', function(){
+		$('.sidebar').on('click', '.menu-choice-courses', function(){
 			let id = $(this).data('id');
 			let course = that.courseHashMap[id];
 
-			$('.page-top').empty();
-			$('.page-content').empty().template('course-page', { course: course });
-			$('.menu-slider').animate({ left: '-400px' }, 200);
-			$('.hamburger').css({ transform: 'rotate(0deg)' });
+			$('.front-announcements').empty();
+			$('.front-courses').empty().template('course-page', { course: course });
+			// $('.menu-slider').animate({ left: '-400px' }, 200);
+			// $('.hamburger').css({ transform: 'rotate(0deg)' });
 		});
 	}
 }

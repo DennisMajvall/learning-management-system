@@ -24,16 +24,16 @@ class CoursesOnFrontpage {
 				that.courseHashMap[course._id] = course;
 			});
 
-			$('.page-content').template('courses', { courses: courses });
+			$('.front-courses').template('courses', { courses: courses });
 		}
 
 		// wait for DOM ready
-		$('body').on('click', '.course-panel', function(){
+		$('front-courses').on('click', '.course-panel', function(){
 			let id = $(this).data('id');
 			let course = that.courseHashMap[id];
 
-			$('.page-top').empty();
-			$('.page-content').empty().template('course-page', { course: course });
+			$('.front-announcements').empty();
+			$('.front-courses').empty().template('course-page', { course: course });
 			
 		});
 	}

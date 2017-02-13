@@ -4,166 +4,166 @@
   "firstname": "Mango",
   "lastname": "Lugosson",
   "phonenumber": "070-4153456",
-  "picture" : "hund.jpg"
+  "picture" : "default.png"
 },{
   "username": "lisa@gmail.com",
   "password": "hwa1234",
   "firstname": "Lisa",
   "lastname": "Milos",
   "phonenumber": "020-4443456",
-  "picture" : "default.jpg"
+  "picture" : "profile-female.png"
 },{
   "username": "kent@gmail.com",
   "password": "lol1234",
   "firstname": "Kent",
   "lastname": "Fågel",
   "phonenumber": "040-2342545",
-  "picture" : "default.jpg"
+  "picture" : "default.png"
 },{
   "username": "erik@gmail.com",
   "password": "plo1234",
   "firstname": "Erik",
   "lastname": "Gadd",
   "phonenumber": "010-234311",
-  "picture" : "hund.jpg"
+  "picture" : "profile-male.png"
 },{
   "username": "old_minister@gmail.com",
   "password": "liq1234",
   "firstname": "Göran",
   "lastname": "Persson",
   "phonenumber": "020-8831676",
-  "picture" : "default.jpg"
+  "picture" : "default.png"
 },{
   "username": "test@test.test",
   "password": "test",
   "firstname": "firsttest",
   "lastname": "lasttest",
   "phonenumber": "666-123456",
-  "picture" : "default.jpg"
+  "picture" : "default.png"
 },{
   "username": "andersson@gmail.com",
   "password": "fdfnweif1234",
   "firstname": "Anders",
   "lastname": "Andersson",
   "phonenumber": "070-4153456",
-  "picture" : "hund.jpg"
+  "picture" : "profile-male.png"
 },{
   "username": "alfons@gmail.com",
   "password": "sdofisnd1234",
   "firstname": "Felicia",
   "lastname": "Edinovic",
   "phonenumber": "020-4443456",
-  "picture" : "default.jpg"
+  "picture" : "profile-female.png"
 },{
   "username": "Ahmed@gmail.com",
   "password": "dfndl1234",
   "firstname": "Ahmed",
   "lastname": "al-Bakr",
   "phonenumber": "040-2342545",
-  "picture" : "hund.jpg"
+  "picture" : "profile-male.png"
 },{
   "username": "jonathan@gmail.com",
   "password": "plodfds1234",
   "firstname": "Jonathan",
   "lastname": "Björnsson",
   "phonenumber": "010-234311",
-  "picture" : "default.jpg"
+  "picture" : "default.png"
 },{
   "username": "hakan@gmail.com",
   "password": "liqdsfds1234",
   "firstname": "Håkan",
   "lastname": "Stensson",
   "phonenumber": "020-8831676",
-  "picture" : "default.jpg"
+  "picture" : "default.png"
 },{
   "username": "karl@gmail.com",
   "password": "sfoinw32",
   "firstname": "Karl",
   "lastname": "Karlsson",
   "phonenumber": "666-123456",
-  "picture" : "hund.jpg"
+  "picture" : "profile-male.png"
 },{
   "username": "William@gmail.com",
   "password": "fraewfwef1234",
   "firstname": "William",
   "lastname": "Josefsson",
   "phonenumber": "070-4153456",
-  "picture" : "default.jpg"
+  "picture" : "default.png"
 },{
   "username": "Tore@gmail.com",
   "password": "hwa32r231234",
   "firstname": "Torvald",
   "lastname": "Toresson",
   "phonenumber": "020-4443456",
-  "picture" : "default.jpg"
+  "picture" : "default.png"
 },{
   "username": "Ola@gmail.com",
   "password": "lol2t41234",
   "firstname": "Ola",
   "lastname": "Salo",
   "phonenumber": "040-2342545",
-  "picture" : "default.jpg"
+  "picture" : "default.png"
 },{
   "username": "Pehr@gmail.com",
   "password": "plo1f2234",
   "firstname": "Pehr",
   "lastname": "Qvist",
   "phonenumber": "010-234311",
-  "picture" : "hund.jpg"
+  "picture" : "profile-male.png"
 },{
   "username": "Putin@gmail.com",
   "password": "lfwefewiq1234",
   "firstname": "Vladimir",
   "lastname": "Putin",
   "phonenumber": "020-8831676",
-  "picture" : "hund.jpg"
+  "picture" : "profile-male.png"
 },{
   "username": "palko@gmail.com",
   "password": "d32r23ra",
   "firstname": "Anton",
   "lastname": "Palkosson",
   "phonenumber": "666-123456",
-  "picture" : "hund.jpg"
+  "picture" : "profile-male.png"
 },{
   "username": "olof@gmail.com",
   "password": "fra1fwefe234",
   "firstname": "Olof",
   "lastname": "Batra",
   "phonenumber": "070-4153456",
-  "picture" : "default.jpg"
+  "picture" : "default.png"
 },{
   "username": "Fredrik@gmail.com",
   "password": "pifnwef2",
   "firstname": "Fredrik",
   "lastname": "Reinfeldt",
   "phonenumber": "020-4443456",
-  "picture" : "default.jpg"
+  "picture" : "default.png"
 },{
   "username": "Akesson@gmail.com",
   "password": "lol1f23r23234",
   "firstname": "Jimmie",
   "lastname": "Åkesson",
   "phonenumber": "040-2342545",
-  "picture" : "hund.jpg"
+  "picture" : "profile-male.png"
 },{
   "username": "Jossan@gmail.com",
   "password": "plof23r21234",
   "firstname": "Josefin",
   "lastname": "Birgersson",
   "phonenumber": "010-234311",
-  "picture" : "default.jpg"
+  "picture" : "default.png"
 },{
   "username": "Klara@gmail.com",
   "password": "liq1234",
   "firstname": "Klara",
   "lastname": "Klarasson",
   "phonenumber": "020-8831676",
-  "picture" : "hund.jpg"
+  "picture" : "profile-female.png"
 },{
   "username": "kanin@gmail.com",
   "password": "r2o3int23o",
   "firstname": "Kanin",
   "lastname": "Kaninsson",
   "phonenumber": "666-123456",
-  "picture" : "hund.jpg"
+  "picture" : "profile-male.png"
 }]

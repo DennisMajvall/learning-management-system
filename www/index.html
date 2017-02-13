@@ -4,7 +4,6 @@
 	<title>LMS</title>
 	<meta charset="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
 	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -38,8 +37,22 @@
 
 </head>
 <body>
-	<div class="page-top"></div>
-	<div class="page-content"></div>
+	<div class="container-fluid">
+		<div class='row'>
+			<div class='col-sm-3 menu-background'>
+				<div class="sidebar"></div>
+			</div>
+			<div class='col-sm-9'>
+				<div class='navbar'></div>
+				<div class="notifications"></div>
+				<div class='page-content'>
+					<div class="front-announcements"></div>
+					<div class="front-courses"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 	<!-- Admin specific -->
 	<div class="search-list"></div>
