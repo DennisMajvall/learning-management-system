@@ -33,7 +33,7 @@ class AdminFilter {
 		return [
 			() => { this.queryWrapper(Education, `find/{ $or: [
 				{ name: { $regex: /.*` + input + `.*/, $options: "i" } },
-				{ startYear: ` + input + ` }
+				{ startYear: "` + this.toNumber(input) + `" }
 			]}`, callback); }
 		];
 	}
@@ -62,9 +62,13 @@ class AdminFilter {
 		];
 	}
 
-	queryWrapper(dbSchema, query, callback) {
-		if(query) query += '/limit/' + this.limit;
+	toNumber(input) {
+		var result = Number.parseInt(input);
 
+		return isNaN(result) ? '' : result;
+	}
+
+	queryWrapper(dbSchema, query, callback) {
 		dbSchema.find(query, (items) => {
 			if (items.hasOwnProperty('_error')) {
 				console.log('error', items._error);
@@ -77,8 +81,6 @@ class AdminFilter {
 	}
 
 	queryWrapperPopulated(dbSchema, populationName, query, callback) {
-		if(query) query += '/limit/' + this.limit;
-
 		dbSchema.find(query, (items) => {
 			if (items.hasOwnProperty('_error')) {
 				console.log('error', items._error);
