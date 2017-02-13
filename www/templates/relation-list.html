@@ -6,11 +6,12 @@
 					<div class="list-group" item-type="${keyProp}">
 						<h4>${keyProp} attending:</h4>
 						[repeat valProp, object]
-							<a href="#" class="list-group-item" list-item-id="${object._id}">${object.firstname} ${object.lastname}</a>
+							<a class="list-group-item" list-item-id="${object._id}">${object.firstname} ${object.lastname}</a>
 						[endrepeat]
 					</div>
 				</div>
 			[endif]
 		[endrepeat]
 	</div>
+	<button type="button" class="btn btn-danger remove-item">Remove</button>
 </div>
