@@ -1,4 +1,4 @@
-class MenuSlider {
+class Sidebar {
 
 	constructor() {
 		// When we have login working we won't have to 'find' Students (or Teachers)
@@ -42,7 +42,7 @@ class MenuSlider {
 				logout: 'log out'
 			};
 
-			$('.sidebar').template('menu-slider', settingsObj);
+			$('.sidebar').template('sidebar', settingsObj);
 		}
 
 		$('.sidebar').on('click', '.log-out', function(){
@@ -62,7 +62,7 @@ class MenuSlider {
 			$('.front-courses').empty().template('course-page', { course: course });
 			// $('.menu-slider').animate({ left: '-400px' }, 200);
 			// $('.menu-slider').animate({ left: '-400px' }, 200);
-			// $('.hamburger').css({ transform: 'rotate(0deg)' });
+			// 
 		});
 	}
 }

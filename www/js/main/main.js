@@ -25,7 +25,6 @@ var role;
 	], start);
 
 
-
 	function start() {
 
 		Login.find((response, err)=>{

@@ -59,64 +59,120 @@ body {
     padding: 0;
 }
 
+
 .sidebar-wrapper {
     .ui-black-1;
     .smooth-transition-5s;
     z-index: 1000;
     position: fixed;
-    left: 300px;
+    left: 360px;
     width: 0;
     height: 100%;
-    margin-left: -300px;
+    margin-left: -360px;
     overflow-x: hidden;
 }
 
+.sidebar.open {
+    position: relative;
+    top: 0;
+}
+
+.menu-toggle {
+    display: none;  
+}
 .wrapper.toggled {
-    padding-left: 300px !important;
+    padding-left: 360px !important;
 }
 
 .wrapper.toggled .sidebar-wrapper {
-    width: 300px;
+    width: 360px;
 }
 
 
 /* ALL MEDIA QUERIES for the full project 
 note: 760px is the temporary breaking point for mobile view (sidebar toggle) 
+note2: Additional Media Queries will be needed to be added (at a later stage for iPhone 5 and smaller
 */
 
 @media(min-width:760px) {
-    //Main/Wrapper
+
+    // main.less
     .wrapper {
-        padding-left: 300px;
+        padding-left: 360px;
     }
     .wrapper.toggled {
         padding-left: 0;
     }
     .sidebar-wrapper {
-        width: 300px;
+        width: 360px;
     }
+
     .wrapper.toggled .sidebar-wrapper {
         width: 0;
     }
+
     // Navbar
     .navbar nav .nav-box .nav-hamburger, .nav-toggle, .nav-arrow {
         .hidden;
     }
+
 }
 
 @media(max-width:760px) {
-    // Navbar
-    .navbar nav .nav-search, .search-text {
-        .hidden;
+
+    // main.less 
+
+    .menu-toggle {
+        display: inline-block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 24px;
+        height: 20px;
+        cursor: pointer;
     }
+
+
+    // sidebar.less
+
+    .sidebar .menu header a {
+        color: #fafafa;
+        margin-left: -100px;
+    }
+
+    
+    // navbar.less
+
+    .navbar {
+    
+
+    nav {
+
+        margin-bottom: 200px;
+        height: 200px;
+
+        form {
+            display: block;
+            top: 0;
+            left: 0;
+            img {
+                filter: invert(100%);
+                width: 16px;
+                height: 16px;
+            }
+            input[type=text] {
+                font-size: 13px;
+                width: 250px;
+                background-color: transparent;
+                border: none;
+                margin: 8px;
+            }
+        }
+    }
+    
 }
 
-// Unsure if it's OK to delete
-// .course-panel {
-//  cursor: pointer;
-// }
-// a:hover, a:focus, a:active {
-//     text-decoration: none;
-//     -webkit-transition: all ease-in-out 200ms;
-//          transition: all ease-in-out 200ms;
-// }
+
+
+}
+

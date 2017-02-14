@@ -1,14 +1,16 @@
 .nav-background {
-	padding: 0;
+	.ui-black-2;
+	height: 60px;
+
 	// An ugly solution, until i've solved this issue: 
 	// bootstrap adds an additional +15px padding, when it should have been taken care of by the "row"...
+	// Maybe it will be solved with bootstrap in .less, instead of .css ...
 }
 
 .navbar {
 
 	nav {
-		.ui-black-2;
-		height: 60px;
+		// .ui-black-2;
 
 		.nav-box {
 			position: relative;
@@ -27,14 +29,30 @@
 				margin-left: -10px; /* Half the width */
 			}	
 		}
-	}
-	
-    .search-text {
-    	display: inline-block;
-	    position: relative;
-	    top: -24px;
-	    left: 20px;
-	    color: #fafafa;
-    }
-}
 
+	}
+	form {
+			display: inline-block;
+		    position: relative;
+		    top: -24px;
+		    left: 20px;
+		    color: #fafafa;
+
+		img {
+			width: 20px;
+			height: 20px; 
+		}
+
+		
+		input[type=text]{
+			margin-left: 10px;
+		    width: 280px;
+	        background-color: transparent;
+	        padding: -6px 73px 5px 10px;
+	        border: none;
+	        -webkit-transition: width 0.4s ease-in-out;
+	        transition: width 0.4s ease-in-out;
+			
+		}
+	}
+}
