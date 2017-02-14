@@ -13,5 +13,12 @@ function loadStudent(callback) {
 		new AnnouncementOnFrontpage(user._id);
 		new CoursesOnFrontpage("Student");
 		callback();
+
+		// alert('Järp');
+
+		$(".nav-toggle, .menu-toggle").click(function(e) {
+		    e.preventDefault();
+		    $(".wrapper").toggleClass("toggled");
+		});
 	}
 }

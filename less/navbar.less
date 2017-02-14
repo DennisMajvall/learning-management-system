@@ -1,13 +1,13 @@
-
 .nav-background {
 	padding: 0;
+	// An ugly solution, until i've solved this issue: 
+	// bootstrap adds an additional +15px padding, when it should have been taken care of by the "row"...
 }
 
 .navbar {
 
 	nav {
-
-		background: #424242;
+		.ui-black-2;
 		height: 60px;
 
 		.nav-box {
@@ -15,6 +15,7 @@
 			display: inline-block;
 			width: 60px;
 			height: 60px;
+			border-right: 1px solid #fafafa;
 
 			.nav-icon {
 				position: absolute;
@@ -24,78 +25,16 @@
 				height: 20px;
 				margin-top: -10px;/* Half the height */
 				margin-left: -10px; /* Half the width */
-			}
-
-
-			
+			}	
 		}
-
-		.nav-box:last-of-type {width: 400px;
-
-		    .nav-icon:last-of-type {left: 8%;}
-
-		    .search-text {
-		        position: absolute;
-		        top: 21px;
-		        left: 60px;
-		        color: #fafafa;
-		        font-size: 13px;
-		    }
-		}
-
-
-		.vert-line {
-			display: inline-block;
-				width: 2px;
-				height: 60px;
-				background: #fafafa;
-			}
 	}
+	
+    .search-text {
+    	display: inline-block;
+	    position: relative;
+	    top: -24px;
+	    left: 20px;
+	    color: #fafafa;
+    }
 }
 
-
-// nav {
-// 	background-color: #d1d1d1;
-// 	// position: fixed;
-// 	top: 0;
-// 	left: 0;
-// 	right: 0;
-// 	font-weight: bold;
-// 	font-size: 20px;
-// 	height: 50px;
-// 	z-index: 2;
-// 	padding: 0 15px;
-	
-// 	.hamburger {
-// 		float: left;
-// 		height: 100%;
-// 		padding-top: 8px;
-// 		cursor: pointer;
-// 		-webkit-transition-duration: 0.4s;
-// 				transition-duration: 0.4s;
-
-// 		img {
-// 			width: 30px;
-// 			height: 30px;
-// 		}
-// 	}
-
-// 	.float-right {
-// 		float: right;
-// 	}
-
-// 	.nav-button {
-// 		float: left;
-// 		height: 100%;
-// 		color: #337ab7;
-
-// 		a {
-// 			margin-left: 30px;
-
-// 			.notif-button { padding-top: 15px; }
-// 			.home-button { padding-top: 4px; }
-// 		}
-
-// 	}
-
-// }

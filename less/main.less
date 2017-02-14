@@ -1,93 +1,122 @@
-/* Wireframe Guides: 
-    
-    Fonts: roboto
-    Colors Gray-Scale: #212121 #424242 #616161 #757575 #9e9e9e #BDBDBD #e0e0e0 #eeeeee #f5f5f5 #fafafa
-    Colors Colored: #FFB74D #EF5350 #81C784 #9FA8DA #F6F5EF
-
-*/
+/* Import Google Fonts */
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i');
-
 body {
-    
     font-family: 'Roboto', sans-serif;
-
 }
 
 
-// .course-panel {
-// 	cursor: pointer;
-// }
+/*  Mix-ins for all useage through whole project */
 
+.smooth-transition-5s {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+
+/* Wireframe Color-Guide Backgrounds: */
+
+.ui-white-1 {
+    background: #FAFAFA;
+}
+
+.ui-black-1 {
+    background: #31312e;
+}
+
+.ui-black-2 {
+    background: #424242;
+}
+
+.ui-grey-1 {
+    background: #424242;
+}
+
+.ui-grey-2 {
+    background: #616161;
+}
+
+.ui-color-1 {
+    background: #EF5350;
+}
+
+.ui-color-2 {
+    background: #F6F5EF;
+}
+
+
+/* Wrapper */
+
+.wrapper {
+    .smooth-transition-5s;
+    padding: 0;
+}
+
+.sidebar-wrapper {
+    .ui-black-1;
+    .smooth-transition-5s;
+    z-index: 1000;
+    position: fixed;
+    left: 300px;
+    width: 0;
+    height: 100%;
+    margin-left: -300px;
+    overflow-x: hidden;
+}
+
+.wrapper.toggled {
+    padding-left: 300px !important;
+}
+
+.wrapper.toggled .sidebar-wrapper {
+    width: 300px;
+}
+
+
+/* ALL MEDIA QUERIES for the full project 
+note: 760px is the temporary breaking point for mobile view (sidebar toggle) 
+*/
+
+@media(min-width:760px) {
+    //Main/Wrapper
+    .wrapper {
+        padding-left: 300px;
+    }
+    .wrapper.toggled {
+        padding-left: 0;
+    }
+    .sidebar-wrapper {
+        width: 300px;
+    }
+    .wrapper.toggled .sidebar-wrapper {
+        width: 0;
+    }
+    // Navbar
+    .navbar nav .nav-box .nav-hamburger, .nav-toggle, .nav-arrow {
+        .hidden;
+    }
+}
+
+@media(max-width:760px) {
+    // Navbar
+    .navbar nav .nav-search, .search-text {
+        .hidden;
+    }
+}
+
+// Unsure if it's OK to delete
+// .course-panel {
+//  cursor: pointer;
+// }
 // a:hover, a:focus, a:active {
 //     text-decoration: none;
 //     -webkit-transition: all ease-in-out 200ms;
-//     		transition: all ease-in-out 200ms;
+//          transition: all ease-in-out 200ms;
 // }
-
-// .sidebar(){
-//     // background: red;
-//         margin: 0;
-//     padding: 0;
-
-// }
-
-/*MEDIA QUERIES*/
-/*
-@media screen and (min-width: 450px) {
-
-     TO USE LATER SPRINT 2
-
-	.menu-slider {
-		width: 365px;
-		left: 0;
-	}
-
-	.teacher-message{
-		width: 365px
-	}
-
-	.navigationbar{
-		background-color: #c1c1c1;
-		position: fixed;
-		top: 0;
-		left: 365px;
-	}
-
-	.navigationbar > .hamburger img {
-		display: none;
-	}
-
-	.hamburger-2 {
-		display: none;
-	}
-
-}
-
-@media screen and (max-width: 372px) {
-
-     // For the smaller devices iPhone 5 etc.
-    .menu-slider {
-        position: fixed;
-        left: -400px;
-        width: 80%;
-    }
-
-    .menu-slider ul {
-        width: 300px;
-    }
-
-
-    .hamburger-2 {
-        position: absolute;
-        top: 20px;
-        right: 56px;
-    }
-
-    .divider2 {
-        display: none;
-    }
-
-}
-
-*/
