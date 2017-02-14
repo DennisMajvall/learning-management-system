@@ -4,33 +4,33 @@
   "firstname": "Miles",
   "lastname": "Davis",
   "phonenumber": "070-4453456",
-  "picture" : "default.png"
+  "picture" : "teacher-1.png"
 },{
   "username": "bajen@gmail.com",
   "password": "abs1234",
   "firstname": "Benjamin",
   "lastname": "Svensson",
   "phonenumber": "020-4453456",
-  "picture" : "default.png"
+  "picture" : "teacher-2.png"
 },{
   "username": "karin@gmail.com",
   "password": "abv1234",
   "firstname": "Karin",
   "lastname": "Swahn",
   "phonenumber": "040-2341545",
-  "picture" : "profile-female.png"
+  "picture" : "teacher-3.png"
 },{
   "username": "dennis@gmail.com",
   "password": "abv1234",
   "firstname": "Dennis",
   "lastname": "Cosmos",
   "phonenumber": "010-234321",
-  "picture" : "default.png"
+  "picture" : "teacher-1.png"
 },{
   "username": "tom@gmail.com",
   "password": "abv1234",
   "firstname": "Tom",
   "lastname": "Araya",
   "phonenumber": "040-8832676",
-  "picture" : "profile-male.png"
+  "picture" : "teacher-2.png"
 }]
