@@ -14,6 +14,11 @@ class Navbar {
 			// 	$('.menu-slider').animate({ left: '-400px' }, 200);
 			// 	$('.hamburger').css({ transform: 'rotate(0deg)' });
 			// });
+
+			$(".nav-toggle, .menu-toggle").click(function(e) {
+			    e.preventDefault();
+			    $(".wrapper").toggleClass("toggled");
+			});
 		});
 	}
 }

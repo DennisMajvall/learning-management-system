@@ -15,10 +15,5 @@ function loadStudent(callback) {
 		callback();
 
 		// alert('Järp');
-
-		$(".nav-toggle, .menu-toggle").click(function(e) {
-		    e.preventDefault();
-		    $(".wrapper").toggleClass("toggled");
-		});
 	}
 }
