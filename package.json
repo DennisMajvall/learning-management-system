@@ -4,15 +4,16 @@
   "description": "First steps with Mongoose",
   "main": "app.js",
   "dependencies": {
-    "express": "*",
     "body-parser": "*",
+    "bootstrap": "*",
+    "compression": "*",
     "cookie-parser": "*",
-    "sha1": "*",
-    "mongoose": "*",
-    "mongoosefromclass": "*",
+    "express": "*",
     "gulp": "*",
     "gulp-clean-css": "*",
     "gulp-less": "*",
-    "compression": "*"
+    "mongoose": "*",
+    "mongoosefromclass": "*",
+    "sha1": "*"
   }
 }
