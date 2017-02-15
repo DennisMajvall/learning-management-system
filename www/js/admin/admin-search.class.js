@@ -37,14 +37,6 @@ class AdminSearch {
 				type: that.dbType,
 				item: item
 			});
-
-			// only append template relation-list for courses right now !!!
-			if(that.dbType === "course") {
-				$('.edit-area').template('relation-list', {
-					item: item
-				});
-			}
-
 		});
 
 		// search box
