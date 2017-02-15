@@ -7,6 +7,12 @@
 
 				<button type="button" class="btn btn-primary margin save-item">Save</button>
 				<button type="button" class="btn btn-danger margin delete-item">Delete</button>
+
+				[if type == "course"]
+					[template edit-${type}-relations]
+
+					<button type="button" class="btn btn-danger remove-item">Remove</button>
+				[endif]
 			</div>
 		</item>
 	</div>

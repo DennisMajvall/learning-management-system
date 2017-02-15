@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="col-xs-3">
+		<div class="list-group" item-type="Education">
+			<h4>Educations:</h4>
+			[repeat item.educations, education]
+				<a class="list-group-item" list-item-id="${education._id}">${education.name}</a>
+			[endrepeat]
+		</div>
+	</div>
+	<div class="col-xs-3">
+		<div class="list-group" item-type="Course">
+			<h4>Courses:</h4>
+			[repeat item.courses, course]
+				<a class="list-group-item" list-item-id="${curse._id}">${course.name}</a>
+			[endrepeat]
+		</div>
+	</div>
+</div>

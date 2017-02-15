@@ -7,6 +7,12 @@ function loadAdmin(callback) {
 		'edit/edit-student',
 		'edit/edit-teacher',
 
+		'edit/edit-course-relations',
+		'edit/edit-education-relations',
+		'edit/edit-room-relations',
+		'edit/edit-student-relations',
+		'edit/edit-teacher-relations',
+
 		'create/create-admin',
 		'create/create-course',
 		'create/create-education',

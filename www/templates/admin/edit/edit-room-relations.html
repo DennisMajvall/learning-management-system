@@ -1,0 +1,10 @@
+<div class="row">
+	<div class="col-xs-3">
+		<div class="list-group" item-type="Booking">
+			<h4>Bookings:</h4>
+			[repeat item.bookings, booking]
+				<a class="list-group-item" list-item-id="${booking._id}">${booking.name} ${booking.time}</a>
+			[endrepeat]
+		</div>
+	</div>
+</div>
