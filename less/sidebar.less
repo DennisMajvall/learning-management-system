@@ -1,14 +1,12 @@
 .sidebar {
+
+	color: @custom-color-white;
+	a { color: @custom-color-white; }
 	
 	.menu {
 		width: @sidebar-width; 
-		color: #fafafa;
 		font-size: 14px;
 		letter-spacing: 1px;
-
-		a {
-			color: #fafafa;
-		}
 
 		.menu-section-style { margin-left: 22px;}
 
@@ -21,20 +19,18 @@
 		}
 
 		header {
-			.ui-color-1;
+			background: @custom-color-red;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			width: 100%;
 			height: 60px;
-
-			a {color: #fafafa;}
 		}
 
 		.profile-container { 
 
 			width: 100%;
-			.ui-black-2;
+			background: @custom-color-grey;
 
 			.profile-picture {
 				width: 40%;
@@ -48,7 +44,7 @@
 			float: right;
 			margin: 20px 20px 0 0;
 		    width: 24px;
-		    border: 0.11em solid #fafafa;
+		    border: 0.11em solid @custom-color-white;
 		    border-radius: 4px;
 		    padding: 3px;
 		    cursor: pointer;
@@ -56,7 +52,7 @@
 		}
 
 		.settings-icon:hover {
-			opacity: 0.5;
+			.custom-hover-links;
 		}
 
 		.menu-fullname {
@@ -74,7 +70,7 @@
 
 
 		.menu-courses {
-			.ui-grey-2;
+			background: @custom-color-grey-light;
 		    letter-spacing: 1.4px;
 		    margin-bottom: 20px;
 		}
@@ -93,7 +89,7 @@
 		}
 
 		.menu-study-rooms {
-			.ui-grey-2;
+			background: @custom-color-grey;
 		    letter-spacing: 1.4px;
 		    margin: 40px 0 20px 0;
 
@@ -105,12 +101,14 @@
 
 		.log-out {
 
-			background-color: #333;
-		    border: 0.11em solid #fafafa;
+			background-color: @custom-color-black;
+		    border: 0.11em solid @custom-color-white;
 		    padding: 4px 10px;
 		    border-radius: 6px;
 		}
 
-		.log-out:focus {outline:0;}
+		.log-out:hover {
+			.custom-hover-links;
+		}
 	}
 }

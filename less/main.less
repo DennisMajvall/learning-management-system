@@ -1,17 +1,23 @@
-/* Import Google Fonts */
+// Google Fonts
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i');
-body {
-    font-family: 'Roboto', sans-serif;
-}
 
+body { font-family: 'Roboto', sans-serif; }
+
+
+//UGLY-FIX 
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
 
 // Custom Variables & Mixins for useage through whole project
 // --------------------------------------------------
 
 
 //** Screen Breakpoints
-// note: @screen-sm is our current breaking point for toggled sidebar
+//
+//## @screen-sm is our current breaking point for toggled sidebar
 
 @screen-xs: 480px;
 @screen-sm: 768px;
@@ -19,60 +25,48 @@ body {
 @screen-lg: 1200px;
 
 
-//** Sidebar Width
+//** Sidebar Widths
+
 @sidebar-width: 300px;
-@sidebar-width-toggled: 90vw;
-// @sidebar-mobile-width: 300px;
+@sidebar-width-toggled: 92vw;
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+@custom-color-white: #FAFAFA;
+@custom-color-black: #31312e;
+@custom-color-grey: #424242;
+@custom-color-grey-light: #616161;
+@custom-color-grey-lighter: #BDBDBD;
+
+@custom-color-red: #EF5350;
+@custom-color-yellow: #FFB74D;
+@custom-color-green: #81C784;
+@custom-color-purple: #9FA8DA;
+@custom-color-beige: #F6F5EF;
 
 
-.smooth-transition-5s {
+
+//** Mixins
+
+.custom-transition-5s {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
 
-.hidden {
-    display: none !important;
-    visibility: hidden;
+.custom-hover-links {
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    opacity: 0.2;
 }
-
-
-/* Wireframe Color-Guide Backgrounds: */
-
-.ui-white-1 {
-    background: #FAFAFA;
-}
-
-.ui-black-1 {
-    background: #31312e;
-}
-
-.ui-black-2 {
-    background: #424242;
-}
-
-.ui-grey-1 {
-    background: #424242;
-}
-
-.ui-grey-2 {
-    background: #616161;
-}
-
-.ui-color-1 {
-    background: #EF5350;
-}
-
-.ui-color-2 {
-    background: #F6F5EF;
-}
-
 
 
 //** ALL MEDIA QUERIES for the full project 
-// note: Additional Media Queries will be needed to be added (at a later stage for iPhone 5 and smaller
-
 
 @media(min-width: @screen-sm) {
 
@@ -117,36 +111,30 @@ body {
     .sidebar .menu { width: @sidebar-width-toggled; 
     }
     .sidebar .menu header a { margin-left: -100px; }
-    .profile-container  .profile-picture {
-            max-width: 120px;
-            margin: 0 auto;
-            padding: 14px 0;
-    }
+    .profile-container .profile-picture { max-width: 120px; }
     
 
 
     // navbar.less
+    // Ths Search Form needs work.
 
     .navbar {
+
         nav {
-            margin-bottom: 200px;
-            height: 200px;
+
             form {
+
                 display: block;
                 top: 0;
                 left: 0;
+
                 img {
                     filter: invert(100%);
                     width: 16px;
                     height: 16px;
                 }
-                input[type=text] {
-                    font-size: 13px;
-                    width: 250px;
-                    background-color: transparent;
-                    border: none;
-                    margin: 8px;
-                }
+
+                input[type=text] { }
             }
         }
     }

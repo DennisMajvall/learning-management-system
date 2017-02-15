@@ -1,23 +1,24 @@
-.nav-background {
-	.ui-black-2;
-	height: 60px;
+// .nav-background {
+// 	.ui-black-2;
+// 	height: 60px;
 
-	// An ugly solution, until i've solved this issue: 
-	// bootstrap adds an additional +15px padding, when it should have been taken care of by the "row"...
-	// Maybe it will be solved with bootstrap in .less, instead of .css ...
-}
+// 	// An ugly solution, until i've solved this issue: 
+// 	// bootstrap adds an additional +15px padding, when it should have been taken care of by the "row"...
+// 	// Maybe it will be solved with bootstrap in .less, instead of .css ...
+// }
 
 .navbar {
+	height: 60px;
+	background: @custom-color-grey;
 
 	nav {
-		// .ui-black-2;
 
 		.nav-box {
 			position: relative;
 			display: inline-block;
 			width: 60px;
 			height: 60px;
-			border-right: 1px solid #fafafa;
+			border-right: 1px solid @custom-color-white;
 
 			.nav-icon {
 				position: absolute;
@@ -31,6 +32,7 @@
 		}
 
 	}
+	
 	form {
 			display: inline-block;
 		    position: relative;
