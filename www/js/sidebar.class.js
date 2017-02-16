@@ -60,6 +60,10 @@ class Sidebar {
 
 			$('.student-announcement-container').empty();
 			$('.front-course-container').empty().template('course-page', { course: course });
+			
+			if ($(window).width() < 768) {
+				$('.menu-toggle').trigger('click');
+			}
 		});
 	}
 }
