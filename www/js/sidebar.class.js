@@ -58,11 +58,8 @@ class Sidebar {
 			let id = $(this).data('id');
 			let course = that.courseHashMap[id];
 
-			$('.front-announcements').empty();
-			$('.front-courses').empty().template('course-page', { course: course });
-			// $('.menu-slider').animate({ left: '-400px' }, 200);
-			// $('.menu-slider').animate({ left: '-400px' }, 200);
-			// 
+			$('.student-announcement-container').empty();
+			$('.front-course-container').empty().template('course-page', { course: course });
 		});
 	}
 }

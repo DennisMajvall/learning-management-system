@@ -11,10 +11,10 @@ class CoursePage{
 			// Set the nav-info in navbar to display course name
 			$('.nav-info').find('p').text(course.name);
 
-			$('.page-content').template('course-page', {
+			$('.course-page-container').template('course-page', {
 				teachers: course.teachers,
 				students: course.students
 			});
-		};
+		}
 	}
 }

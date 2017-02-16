@@ -1,6 +1,6 @@
 function loadTeacher(callback) {
 	$.loadTemplates([
-		'frontpage/courses',
+		'frontpage/front-course',
 		'frontpage/teacher-message',
 		'course-page',
 		'listed-profile',
@@ -14,4 +14,3 @@ function loadTeacher(callback) {
 		callback();
 	}
 };
-

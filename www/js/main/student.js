@@ -1,6 +1,6 @@
 function loadStudent(callback) {
 	$.loadTemplates([
-		'frontpage/courses',
+		'frontpage/front-course',
 		'frontpage/student-announcement',
 		'course-page',
 		'listed-profile',
@@ -13,7 +13,5 @@ function loadStudent(callback) {
 		new AnnouncementOnFrontpage(user._id);
 		new CoursesOnFrontpage("Student");
 		callback();
-
-		// alert('Järp');
 	}
 }

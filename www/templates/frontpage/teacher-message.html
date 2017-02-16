@@ -1,32 +1,29 @@
-<div class="container">
-	<div class="teacher-message">
-		<h3>Compose New Message</h3>
+<div class="teacher-message">
+	<h3>Compose New Message</h3>
 
-		<textarea class="form-control" rows="5"></textarea>
-		
-		<div class="btn-group">
-			<button type="button" class="btn btn-primary send-button">
-				Send
-			</button>
+	<textarea class="form-control" rows="5"></textarea>
+	
+	<div class="btn-group">
+		<button type="button" class="btn btn-primary send-button">
+			Send
+		</button>
 
-			<button id="dropdown-button" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Select Course &nbsp;<span class="caret"></span>
-			</button>
+		<button id="dropdown-button" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Select Course &nbsp;<span class="caret"></span>
+		</button>
 
-			<ul class="dropdown-menu">
-				<li class="select-all">
-					<a>Select All</a>
+		<ul class="dropdown-menu">
+			<li class="select-all">
+				<a>Select All</a>
+			</li>
+
+			[repeat courses,course]
+				<li class="course-list" course-id="${course._id}">
+					<a>${course.name}<span aria-hidden="true"></span></a>
 				</li>
+			[endrepeat]
+		</ul>
 
-				[repeat courses,course]
-					<li class="course-list" course-id="${course._id}">
-						<a>${course.name}<span aria-hidden="true"></span></a>
-					</li>
-				[endrepeat]
-			</ul>
-
-			<span class="msg-sent"></span>
-		</div>
-		
+		<span class="msg-sent"></span>
 	</div>
 </div>

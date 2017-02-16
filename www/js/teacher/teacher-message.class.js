@@ -21,14 +21,14 @@ class TeacherMessage {
         }
 
         function createTemplate(courses) {
-            $('.page-top').template('teacher-message', { courses: courses });
+            $('.teacher-messages-container').template('teacher-message', { courses: courses });
         }
 
         function createEventListeners() {
-            $('.page-top').on('click', '.send-button', makeAnnouncement);
+            $('.teacher-messages-container').on('click', '.send-button', makeAnnouncement);
 
             // Select a Course
-            $('.page-top').on("click", 'li', function(e) {
+            $('.teacher-messages-container').on("click", 'li', function(e) {
 
                 $(this).find('span').toggleClass('glyphicon glyphicon-ok checked-course');
 
@@ -37,7 +37,7 @@ class TeacherMessage {
             });
 
             // Select All Courses
-            $('.page-top').on("click", '.select-all', function(e) {
+            $('.teacher-messages-container').on("click", '.select-all', function(e) {
 
                 $('.course-list').find('span').toggleClass('glyphicon glyphicon-ok checked-course');
 
