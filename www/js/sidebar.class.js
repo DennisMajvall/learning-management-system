@@ -60,6 +60,7 @@ class Sidebar {
 
 			$('.student-announcement-container').empty();
 			$('.front-course-container').empty().template('course-page', { course: course });
+			$('.menu-toggle').trigger('click');
 		});
 	}
 }
