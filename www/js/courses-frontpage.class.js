@@ -27,14 +27,13 @@ class CoursesOnFrontpage {
 			$('.front-course-container').template('front-course', { courses: courses });
 		}
 
-		// wait for DOM ready
-		$('front-course-container').on('click', '.course-panel', function(){
+
+		$('.front-course-container').on('click', '.show-course', function(){
 			let id = $(this).data('id');
 			let course = that.courseHashMap[id];
 
 			$('.student-announcement-container').empty();
 			$('.front-course-container').empty().template('course-page', { course: course });
-			
 		});
 	}
 }

@@ -1,12 +1,45 @@
-.front-course {
+.front-course-section {
+  .page-header {
+    color: @custom-color-black;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 300;
+  }
+  .shell {
+    width: 100%;
+    max-width: 320px;
+    height: 60px;
+    background-color: @custom-color-red;
+    margin-bottom: 15px;
 
-	h3 { }
-	
-	.panel {
+    a {
+      &:hover, &:active, &:visited {
+        text-decoration: none;
+      }
+    }
 
-		.panel-heading { }
-
-		.panel-body { }
-	}
-
+    .icon-box {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-right: 1px solid white;
+      display: inline-block;
+      img {
+        margin: 0 auto;
+        max-height: 50px;
+        padding-top: 10px;
+      }
+    }
+    p {
+      position: relative;
+      top: 20px;
+      left: 80px;
+      color: @custom-color-white;
+      font-size: 14px;
+    }
+  }
 }
+
+
+
+
