@@ -42,10 +42,10 @@ class Sidebar {
 				logout: 'log out'
 			};
 
-			$('.sidebar').template('sidebar', settingsObj);
+			$('.sidebar-container').template('sidebar', settingsObj);
 		}
 
-		$('.sidebar').on('click', '.log-out', function(){
+		$('.sidebar-container').on('click', '.log-out', function(){
 			Login.delete(onLogout);
 		});
 
@@ -54,7 +54,7 @@ class Sidebar {
 			location.reload();
 		}
 
-		$('.sidebar').on('click', '.menu-choice-courses', function(){
+		$('.sidebar-container').on('click', '.menu-choice-courses', function(){
 			let id = $(this).data('id');
 			let course = that.courseHashMap[id];
 
