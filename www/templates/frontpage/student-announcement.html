@@ -2,12 +2,12 @@
     <div class="col-md-12">
         <h2 class="page-header">Announcements</h2>
         <section class="announcement-list">
-        [repeat announcements, announcement]
+            [repeat announcements, announcement]
             <article class="row">
-                <div class="col-md-2 col-sm-2 hidden-xs">
+                <div class="col-md-2 col-sm-2 hidden-sm hidden-xs">
                     <figure class="thumbnail">
-						<img class="img-responsive" src="/images/profiles/${announcement.picture}" />
-                        <figcaption class="text-center">${announcement.author}</figcaption>
+                    <img class="img-responsive" src="/images/profiles/${announcement.picture}" />
+                    <figcaption class="text-center">${announcement.author}</figcaption>
                     </figure>
                 </div>
                 <div class="col-md-10 col-sm-10">
@@ -23,14 +23,19 @@
                                     Dec 16, 2014
                                 </time>
                             </header>
-							<p>
-								${announcement.message}
-							</p>
+                            <p>
+                                ${announcement.message}
+                            </p>
+                            <div class="hidden-md hidden-lg">
+                                <p>
+                                    <h5>From: </h5> ${announcement.author}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </article>
-        [endrepeat]
+            [endrepeat]
         </section>
     </div>
 </div>
