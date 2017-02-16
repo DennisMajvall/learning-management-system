@@ -52,6 +52,13 @@ body { font-family: 'Roboto', sans-serif; }
     transition: all 0.5s ease;
 }
 
+.custom-transform-smooth {
+    -moz-transition: translate3d(10%, 0, 0);
+    -o-transition: translate3d(10%, 0, 0);
+    -webkit-transform: translate3d(10%, 0, 0);
+    transform: translate3d(10%, 0, 0);
+}
+
 .custom-hover-links {
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
@@ -66,10 +73,19 @@ body { font-family: 'Roboto', sans-serif; }
 @media(min-width: @screen-sm) {
 
     // wrapper.less
+    
     .wrapper { padding-left: @sidebar-width; }
     .wrapper.toggled { padding-left: 0; }
     .sidebar-wrapper { width: @sidebar-width; }
     .wrapper.toggled .sidebar-wrapper { width: 0; }
+    .page-content-wrapper {
+        padding: 0;
+        position: relative;
+    }
+    .wrapper.toggled .page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
 
 
     // navbar.less
@@ -103,9 +119,7 @@ body { font-family: 'Roboto', sans-serif; }
 
     // sidebar.less
 
-    .sidebar .menu { width: @sidebar-width-toggled;
-    }
-    .sidebar .menu header a { margin-left: -100px; }
+    .sidebar .menu { width: @sidebar-width-toggled; }
     .profile-container .profile-picture { max-width: 120px; }
 
 }
