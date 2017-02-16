@@ -41,7 +41,8 @@ var classesToLoad = {
 	Education: 'module',
 	Room: 'module',
 	Announcement: 'module',
-	Student: 'module'
+	Student: 'module',
+	Booking: 'module'
 };
 
 for(let className in classesToLoad) {
@@ -86,6 +87,7 @@ new Restrouter(app, Education);
 new Restrouter(app, Room);
 new Restrouter(app, Admin);
 new Restrouter(app, Announcement);
+new Restrouter(app, Booking);
 new Loginhandler(app);
 
 // A path to get user roles
