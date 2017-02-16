@@ -1,14 +1,12 @@
 class BookingPage{
 	constructor(){
-		var fakeRooms = [];
-		for(var i=0; i<5; i++){
-			fakeRooms[i]={
-				name: "Room " + (i+1),
-				type: "classroom",
-				seats: 50
-			};
+		Room.find('',function(data,err){
+			var rooms = data;
+			createTemplate(rooms);
+		});
+
+		function createTemplate(rooms){
+			$('.page-content').template('booking-page',{rooms: rooms});
 		}
-		console.log(fakeRooms);
-		$('.page-content').template('booking-page',{rooms: fakeRooms});
 	}
 }

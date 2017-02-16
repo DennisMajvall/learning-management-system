@@ -5,7 +5,8 @@ function loadTeacher(callback) {
 		'course-page',
 		'listed-profile',
 		'menu-slider',
-		'booking-page'
+		'booking-page',
+		'bookingpage/week-planner'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
