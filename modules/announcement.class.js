@@ -1,10 +1,10 @@
 module.exports = class Announcement {
 
-	schema(){
+	schema() {
 		return {
 			author: [{
 				type: mongoose.Schema.Types.ObjectId,
-				ref: 'Teacher', 
+				ref: 'Teacher',
 				required: true
 			}],
 			message: {type: String, required: true},
@@ -17,9 +17,5 @@ module.exports = class Announcement {
 
 	populate() {
 		return 'author courses';
-	}
-
-	limit() {
-		return 20;
 	}
 };

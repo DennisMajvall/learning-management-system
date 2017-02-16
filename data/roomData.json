@@ -1,4 +1,27 @@
-[{
-	"name" : "room 1",
-	"description" : "Large room"
-}]
+[
+	{
+		"name": "Rum 1",
+		"type": "classroom",
+		"seats": "50"
+	},
+	{
+		"name": "Rum 2",
+		"type": "classroom",
+		"seats": "50"
+	},
+	{
+		"name": "Rum 3",
+		"type": "classroom",
+		"seats": "50"
+	},
+	{
+		"name": "Rum 4",
+		"type": "classroom",
+		"seats": "50"
+	},
+	{
+		"name": "Rum 5",
+		"type": "classroom",
+		"seats": "50"
+	}
+]

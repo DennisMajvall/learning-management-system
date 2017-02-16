@@ -6,6 +6,21 @@ function loadAdmin(callback) {
 		'edit/edit-room',
 		'edit/edit-student',
 		'edit/edit-teacher',
+
+		'edit/edit-course-relations',
+		'edit/edit-education-relations',
+		'edit/edit-room-relations',
+		'edit/edit-student-relations',
+		'edit/edit-teacher-relations',
+
+		'create/create-admin',
+		'create/create-course',
+		'create/create-education',
+		'create/create-room',
+		'create/create-student',
+		'create/create-teacher',
+
+		'admin-create',
 		'admin-edit',
 		'admin-frontpage',
 		'admin-menu-slider',
@@ -35,7 +50,7 @@ function loadAdmin(callback) {
 			tmp = items[index].split("=");
 			if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
 		}
-		
+
 		return result;
 	}
 };

@@ -11,14 +11,17 @@ class AdminSearch {
 		this.filter = new AdminFilter(this.dbType, this.dbSchema);
 
 		this.container.empty().template('admin-search', {
-			title: this.getTitleFromDbType()
+			title: this.getTitleFromDbType(),
+			type: this.dbType
 		});
 
 		this.filter.run('', this.displayItems, this);
 
-		new AdminEdit (this.dbSchema, (elem) => {
+		new AdminEdit(this.dbSchema, (elem) => {
 			return this.getItemIdFromElement(elem);
 		});
+
+		new AdminCreate(this.dbSchema, this.dbType);
 
 		this.addEventListeners();
 	}
@@ -27,28 +30,20 @@ class AdminSearch {
 		let that = this;
 
 		// on item click
-		that.container.on('click', '.search-list li', function() {
+		this.container.on('click', '.search-list li', function() {
 			let item = that.getItemIdFromElement($(this));
 
 			$('.edit-area').empty().template('admin-edit', {
 				type: that.dbType,
 				item: item
 			});
-
-			// only append template relation-list for courses right now !!!
-			if(that.dbType === "course"){
-				$('.edit-area').template('relation-list', {
-					item: item
-				});
-			}
-
 		});
 
 		// search box
 		let oldInputLength = 0;
 		let delayTimeout = null;
-		
-		that.container.on('keyup', 'input[type="search"]', function() {
+
+		this.container.on('keyup', 'input[type="search"]', function() {
 			let input = $(this).val().trim();
 
 			// abort if the input.length hasn't changed.
@@ -65,7 +60,7 @@ class AdminSearch {
 			}, 300);
 		});
 
-		$('body').on('click', 'a.increase-limit', function(){
+		$('body').on('click', 'a.increase-limit', function() {
 			that.filter.increaseLimit();
 			that.filter.run($('input[type="search"]').val().trim(), that.displayItems, that);
 		});
@@ -80,7 +75,7 @@ class AdminSearch {
 			type: that.dbType
 		});
 	}
-	
+
 	getItemIdFromElement(elem) {
 		let correctElem = elem.closest('[item-id]');
 		if (!correctElem)

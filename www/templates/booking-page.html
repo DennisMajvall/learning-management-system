@@ -1,0 +1,52 @@
+<div class="container booking-page">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Boka rum</h3>
+		</div>
+
+		<!-- Room Selection -->
+		<div class="col-xs-12">
+			<form>
+
+				<div class="form-group">
+					<label for="roomType">Typ av rum</label>
+					<select class="form-control" id="roomType">
+						<option> Föreläsningssal </option>
+						<option> Grupprum </option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="roomSelect"> Välj rum </label>
+					<select class="form-control" id="roomSelect">
+						[repeat rooms, room]
+							<option> ${room.name} </option>
+						[endrepeat]
+					</select>
+				</div>
+
+			</form>
+		</div>
+
+		<!-- Weekplanner -->
+		[template week-planner]
+
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

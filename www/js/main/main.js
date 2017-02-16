@@ -20,8 +20,7 @@ var role;
 	// Put templates used by ALL ROLES here
 	$.loadTemplates([
 		'navbar',
-		'loginpage',
-		'relation-list'
+		'loginpage'
 	], start);
 
 

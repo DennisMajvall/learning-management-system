@@ -4,11 +4,14 @@ function loadTeacher(callback) {
 		'frontpage/teacher-message',
 		'course-page',
 		'listed-profile',
-		'sidebar'
+		'menu-slider',
+		'booking-page',
+		'bookingpage/week-planner'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
-		new Sidebar();
+		new MenuSlider();
+		//new BookingPage();
 		new TeacherMessage();
 		new CoursesOnFrontpage("Teacher");
 		callback();

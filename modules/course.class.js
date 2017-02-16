@@ -1,6 +1,6 @@
 module.exports = class Course {
 
-	schema(){
+	schema() {
 		return {
 			name: {type: String, required: true},
 			description: {type: String},
@@ -20,9 +20,5 @@ module.exports = class Course {
 
 	populate() {
 		return 'teachers students';
-	}
-
-	limit() {
-		return 20;
 	}
 };
