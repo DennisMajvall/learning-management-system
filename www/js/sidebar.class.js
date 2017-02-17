@@ -8,12 +8,13 @@ class Sidebar {
 		let currentUser = user;
 
 		if(currentUser.role != 'Teacher'){
+
 			Student.find(currentUser._id, function(student,err){
 				console.log(student);
 				currentUser = student;
 			});
 		}
-
+		
 		populateCourses(currentUser.courses);
 
 		function populateCourses(courses) {

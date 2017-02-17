@@ -50,8 +50,9 @@ class AnnouncementOnFrontpage {
 
 							if(lastAnnouncement === true && maxCourses === courseCount) {
 								announcements = announcements.slice(0, 2);
-
+								
 								$('.student-announcement-container').template('student-announcement', {announcements: announcements});
+								$('.header-sidebar').addClass('student-sidebar-color');	
 							}
 						});
 					});

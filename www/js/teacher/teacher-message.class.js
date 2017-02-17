@@ -17,6 +17,7 @@ class TeacherMessage {
             Course.find(queryString, (courses, err) => {
                 createTemplate(courses);
                 createEventListeners();
+                $('.header-sidebar').toggleClass('teacher-sidebar-color');
             });
         }
 
