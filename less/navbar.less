@@ -1,15 +1,12 @@
 // override deafult style
 @navbar-border-radius: 0;
 
-// navbar styles
-.navbar {
-	height: 60px;
 
-	// I know, this is ugly!
-	.container {
-		padding: 0;
-		margin: 0;
-	}
+.navbar {
+
+	// This is the ONLY ugly fix to deal with the extra margins from bootstrap. Letting it stay :=
+	margin-left: -16px;
+    margin-right: -16px;
 
 	nav {
 		height: 60px;

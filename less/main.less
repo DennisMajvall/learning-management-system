@@ -2,8 +2,15 @@
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:200, 300,400,400i,500,500i,700,700i');
 
-body { font-family: 'Roboto', sans-serif; }
+body { 
+    // Fix for vertical scroll (sidebar)
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif; 
+ }
 
+.no-padding {
+    padding: 0;
+}
 
 
 // Custom Variables & Mixins for useage through whole project
