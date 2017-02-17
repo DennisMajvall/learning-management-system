@@ -68,7 +68,7 @@ class AdminSearch {
 
 	displayItems(itemHashMap, that) {
 		that.itemHashMap = itemHashMap;
-		let listElement = that.container.find('.admin-result-container').empty();
+		let listElement = that.container.find('.search-list').empty();
 
 		listElement.template('admin-search-list', {
 			itemObj: itemHashMap,
