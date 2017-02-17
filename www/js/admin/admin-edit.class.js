@@ -4,7 +4,7 @@ class AdminEdit {
 
 		let that = this;
 
-		$('.edit-area').on('click', 'button.delete-item', function() {
+		$('.admin-result-container').on('click', 'button.delete-item', function() {
 			let item = findItemFunc($(this));
 
 			dbSchema.delete(item._id, () => {
@@ -12,7 +12,7 @@ class AdminEdit {
 			});
 		});
 
-		$('.edit-area').on('click', 'button.save-item', function() {
+		$('.admin-result-container').on('click', 'button.save-item', function() {
 			let item = findItemFunc($(this));
 			let objectToSave = Object.assign({}, item);
 
@@ -26,7 +26,7 @@ class AdminEdit {
 			});
 		});
 
-		$('.edit-area').on('keyup', '[bind-key]', function() {
+		$('.admin-result-container').on('keyup', '[bind-key]', function() {
 			let item = findItemFunc($(this));
 			let key = $(this).attr('bind-key');
 
@@ -34,18 +34,18 @@ class AdminEdit {
 		});
 
 		// highlight items
-		$('.edit-area').on('click', 'a', function() {
+		$('.admin-result-container').on('click', 'a', function() {
 			$(this).toggleClass('active');
 		});
 
 		// remove marked items
-		$('.edit-area').on('click', 'button.remove-item', function() {
+		$('.admin-result-container').on('click', 'button.remove-item', function() {
 			let studentsToRemove = [];
 			let teachersToRemove = [];
-			let itemsToRemove = $('.edit-area a.active');
+			let itemsToRemove = $('.admin-result-container a.active');
 
 			// use .edit-buttons as a referens point to get course
-			let mainItem = findItemFunc($('.edit-area .delete-item'));
+			let mainItem = findItemFunc($('.admin-result-container .delete-item'));
 
 			that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove);
 

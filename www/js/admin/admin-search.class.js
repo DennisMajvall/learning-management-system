@@ -3,7 +3,7 @@ class AdminSearch {
 	constructor(dbType) {
 		this.dbType = dbType;
 		this.itemHashMap = {};
-		this.container = $('.search-list');
+		this.container = $('.admin-search-container');
 	}
 
 	init() {
@@ -30,10 +30,10 @@ class AdminSearch {
 		let that = this;
 
 		// on item click
-		this.container.on('click', '.search-list li', function() {
+		this.container.on('click', 'li', function() {
 			let item = that.getItemIdFromElement($(this));
 
-			$('.edit-area').empty().template('admin-edit', {
+			$('.admin-result-container').empty().template('admin-edit', {
 				type: that.dbType,
 				item: item
 			});
@@ -68,7 +68,7 @@ class AdminSearch {
 
 	displayItems(itemHashMap, that) {
 		that.itemHashMap = itemHashMap;
-		let listElement = that.container.find('.search-list').empty();
+		let listElement = that.container.find('.admin-result-container').empty();
 
 		listElement.template('admin-search-list', {
 			itemObj: itemHashMap,

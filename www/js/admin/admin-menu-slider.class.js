@@ -18,7 +18,7 @@ class AdminMenuSlider {
             logout: 'log out'
         });
 
-        $('body').on('click', '.log-out', function(){
+        $('.sidebar-container').on('click', '.log-out', function(){
             Login.delete(onLogout);
         });
 

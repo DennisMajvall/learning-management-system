@@ -1,7 +1,7 @@
 class AdminFrontpage {
 	constructor() {
 
-		$('body div.page-top').template('admin-frontpage', {
+		$('.admin-search-container').template('admin-frontpage', {
             categories: [
                 {name: 'Admins', url: 'admin'},
                 {name: 'Courses', url: 'course'},
