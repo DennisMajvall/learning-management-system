@@ -12,8 +12,29 @@
 			<label for="password">Password</label>
 			<input type="password" class="form-control" id="password" placeholder="Password">
 		</div>
+
+		<a id="forgot-password" href="#" data-toggle="modal" data-target="#myModal">Forgot password?</a>
+		<p id="error-message"></p>
 		<div class="text-center">
 		<button type="submit" class="btn btn-default">Submit</button>
 		</div>
 	</form>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Forgot password</h4>
+			</div>
+			<div class="modal-body">
+				Do you want to send a new password to this email: <span id="modal-username"></span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary" id="send-password">Send new password</button>
+			</div>
+		</div>
+	</div>
 </div>

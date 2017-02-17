@@ -1,13 +1,7 @@
-<div class="container">
-	<div class="row">
-		<div class="col-xs-12">
-			<ul class="frontpage-marginator">
-                [repeat categories,category]
-	                <li class="frontpage-li">
-	                	<a class="a-text" href="?cat=${category.url}">${category.name}</a>
-	                </li>
-                [endrepeat]
-			</ul>
-		</div>
-	</div>
-</div>
+<ul class="frontpage-marginator">
+    [repeat categories,category]
+        <li class="frontpage-li">
+        	<a class="a-text" href="?cat=${category.url}">${category.name}</a>
+        </li>
+    [endrepeat]
+</ul>

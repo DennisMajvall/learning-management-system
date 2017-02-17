@@ -1,0 +1,105 @@
+.sidebar {
+	height: 100vh;
+	background: @custom-color-black;
+	color: @custom-color-white;
+	font-size: 14px;
+	letter-spacing: 1px;
+
+	a { color: @custom-color-white; }
+
+	
+	.menu {
+		width: @sidebar-width; 
+
+		.header-sidebar {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 60px;
+		}
+
+		.profile-container { 
+			background: @custom-color-grey;
+
+			.profile-picture {
+				width: 40%;
+				margin: 0 auto;
+				padding: 14px 0;
+			}
+		}
+
+		.settings-icon {
+			float: right;
+			margin: 20px 20px 0 0;
+		    width: 26px;
+		    border-radius: 4px;
+		    border: 0.11em solid @custom-color-white;
+		    padding: 4px;
+		    cursor: pointer;
+
+		}
+
+		.settings-icon:hover {
+			.custom-hover-links;
+		}
+
+		.menu-fullname {
+			margin: 30px 0 0 0;
+			font-size: 14px;
+		    font-weight: 600;
+
+		}
+
+		.menu-education {
+			letter-spacing: 1px;
+		    font-size: 12px;
+		    margin: 0 0 50px 0;
+	    }
+
+
+		.menu-courses {
+			background: @custom-color-grey-light;
+		    margin-bottom: 20px;
+		}
+
+
+		ul {
+			
+			list-style-type: none;
+			padding: 0;
+
+			li {
+				margin-bottom: 5px;
+				font-size: 12px;
+				letter-spacing: 1px
+			}
+		}
+
+		.menu-study-rooms {
+			background: @custom-color-grey;
+		    letter-spacing: 1.4px;
+		    margin: 40px 0 20px 0;
+
+		    p {
+		    	margin: 0;
+		    }
+
+		}
+
+		.log-out {
+			background-color: @custom-color-black;
+		    border: 0.11em solid @custom-color-white;
+		    padding: 4px 10px;
+		    border-radius: 6px;
+		}
+
+		.log-out:hover {
+			.custom-hover-links;
+		}
+
+		button:hover {
+			color: white;
+			.custom-hover-links;
+		}
+	}
+}

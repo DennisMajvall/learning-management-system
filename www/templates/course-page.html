@@ -1,4 +1,38 @@
-<div class="container">
+<section class="course-page">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="icon-box-course" style="background-color: ${course.icon_bg}">
+				<img src="../images/icons/${course.icon_image}" alt="">
+			</div>
+			<h4 class="page-header-course">${course.name} <br><span>${course.period}</span></h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="about-course"><h4>About this course</h4>
+				This is just some static text. We need to add a new db parameter in mongo for courses. Will do that later.
+			</div>
+			<div class="teacher-course">
+				<h4>Teachers</h4>
+				[repeat course.teachers, user]
+					[template listed-profile, user]
+				[endrepeat]
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="students-course">
+				<h4>Students</h4>
+				[repeat course.students, user]
+					[template listed-profile, user]
+				[endrepeat]
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<!-- <section class="course-page">
 	<div class="row">
 		<div class="col-xs-12">
 			<h2>${course.name} ${course.period}</h2>
@@ -22,4 +56,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</section> -->

@@ -1,45 +1,63 @@
-.top-nav {
-	background-color: #d1d1d1;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	font-weight: bold;
-	font-size: 20px;
-	height: 50px;
-	z-index: 2;
-	padding: 0 15px;
-	
-	.hamburger {
-		float: left;
-		height: 100%;
-		padding-top: 8px;
-		cursor: pointer;
-		-webkit-transition-duration: 0.4s;
-				transition-duration: 0.4s;
+// override deafult style
+@navbar-border-radius: 0;
+
+
+.navbar {
+
+	// This is the ONLY ugly fix to deal with the extra margins from bootstrap. Letting it stay :=
+	margin-left: -16px;
+    margin-right: -16px;
+
+	nav {
+		height: 60px;
+		background: @custom-color-grey;
+
+		.nav-box {
+			position: relative;
+			display: inline-block;
+			width: 60px;
+			height: 60px;
+			border-right: 1px solid @custom-color-white;
+
+			.nav-icon {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 20px;
+				height: 20px;
+				margin-top: -10px;/* Half the height */
+				margin-left: -10px; /* Half the width */
+			}
+			.nav-icon:hover {
+				.custom-hover-links;
+			}
+		}
+
+	}
+
+	form {
+	display: inline-block;
+    color: #fafafa;
+    margin-top: 15px;
+    margin-left: 10px;
 
 		img {
-			width: 30px;
-			height: 30px;
-		}
-	}
-
-	.float-right {
-		float: right;
-	}
-
-	.nav-button {
-		float: left;
-		height: 100%;
-		color: #337ab7;
-
-		a {
-			margin-left: 30px;
-
-			.notif-button { padding-top: 15px; }
-			.home-button { padding-top: 4px; }
+			width: 20px;
+			height: 20px;
 		}
 
-	}
+		input {
+			&:focus {
+				outline: none;
+			}
+		}
 
+		input[type=text]{
+	      border: none;
+	      background-color: transparent;
+		  width: 320px;
+		  margin: 4px 0 0 10px;
+	      padding: -4px 73px 5px 10px;
+		}
+	}
 }

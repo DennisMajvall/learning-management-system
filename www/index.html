@@ -4,9 +4,6 @@
 	<title>LMS</title>
 	<meta charset="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
-	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/all.css">
 
@@ -27,7 +24,7 @@
 	<script src="js/student/student-announcement.class.js"></script>
 	<script src="js/courses-frontpage.class.js"></script>
 	<script src="js/loginpage.class.js"></script>
-	<script src="js/menu-slider.class.js"></script>
+	<script src="js/sidebar.class.js"></script>
 	<script src="js/navbar.class.js"></script>
 	<script src="js/course-page.class.js"></script>
 	<script src="js/booking-page.class.js"></script>
@@ -41,11 +38,37 @@
 
 </head>
 <body>
-	<div class="page-top"></div>
-	<div class="page-content"></div>
 
-	<!-- Admin specific -->
-	<div class="search-list"></div>
-	<div class="edit-area"></div>
+    <div class="wrapper">
+
+        <!-- Sidebar -->
+        <div class="sidebar-wrapper">
+            <div class="sidebar-nav">
+                <div class="sidebar-container"></div>
+            </div>
+        </div>
+
+	    <!-- Main Content -->
+	    <div class='page-content-wrapper'>
+	    	<div class='navbar'></div>
+	    	<div class='notifications'></div>
+			<div class='container-fluid'>
+				<div class='row'>
+					<div class='col-xs-offset-1 col-xs-10 col-xs-offset-1'>
+						<div class='page-content'>
+							<div class='student-announcement-container'></div>
+							<div class="teacher-messages-container"></div>
+							<div class="front-course-container"></div>
+							<div class="course-page-container"></div>
+							<div class="admin-create-container"></div>
+							<div class="admin-search-container"></div>
+							<div class="admin-result-container"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	    </div>
+	</div>
 </body>
+
 </html>

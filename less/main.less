@@ -1,75 +1,167 @@
-body {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 400;
-    padding-top: 70px;
+// Google Fonts
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:200, 300,400,400i,500,500i,700,700i');
+
+body { 
+    // Fix for vertical scroll (sidebar)
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif; 
+ }
+
+.no-padding {
+    padding: 0;
 }
 
-.course-panel {
-	cursor: pointer;
+
+// Custom Variables & Mixins for useage through whole project
+// --------------------------------------------------
+
+
+//** Screen Breakpoints
+//
+//## @screen-sm is our current breaking point for toggled sidebar
+
+@screen-xs: 480px;
+@screen-sm: 768px;
+@screen-md: 992px;
+@screen-lg: 1200px;
+
+//** Sidebar Widths
+
+@sidebar-width: 300px;
+@sidebar-width-toggled: 92vw;
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+@custom-color-white: #FAFAFA;
+@custom-color-black: #31312e;
+@custom-color-grey: #424242;
+@custom-color-grey-light: #616161;
+@custom-color-grey-lighter: #BDBDBD;
+
+@custom-color-red: #EF5350;
+@custom-color-yellow: #FFB74D;
+@custom-color-green: #81C784;
+@custom-color-purple: #9FA8DA;
+@custom-color-beige: #F6F5EF;
+
+
+//** Mixins
+
+.custom-transition-5s {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
-a:hover, a:focus, a:active {
-    text-decoration: none;
-    -webkit-transition: all ease-in-out 200ms;
-    		transition: all ease-in-out 200ms;
+.custom-transform-smooth {
+    -moz-transition: translate3d(10%, 0, 0);
+    -o-transition: translate3d(10%, 0, 0);
+    -webkit-transform: translate3d(10%, 0, 0);
+    transform: translate3d(10%, 0, 0);
 }
 
-/*MEDIA QUERIES*/
-/*
-@media screen and (min-width: 450px) {
-
-     TO USE LATER SPRINT 2
-
-	.menu-slider {
-		width: 365px;
-		left: 0;
-	}
-
-	.teacher-message{
-		width: 365px
-	}
-
-	.navigationbar{
-		background-color: #c1c1c1;
-		position: fixed;
-		top: 0;
-		left: 365px;
-	}
-
-	.navigationbar > .hamburger img {
-		display: none;
-	}
-
-	.hamburger-2 {
-		display: none;
-	}
-
+.custom-hover-links {
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    opacity: 0.2;
 }
 
-@media screen and (max-width: 372px) {
+// Mixins specific for sidebar 
 
-     // For the smaller devices iPhone 5 etc.
-    .menu-slider {
-        position: fixed;
-        left: -400px;
-        width: 80%;
+.teacher-sidebar-color { background: @custom-color-green }
+.student-sidebar-color { background: @custom-color-red }
+.admin-sidebar-color { background: @custom-color-purple }
+.menu-section-style { margin-left: 22px;}
+.menu-box-style {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+}
+
+
+//** ALL MEDIA QUERIES for the full project
+
+@media(min-width: @screen-sm) {
+
+    // wrapper.less
+
+    .wrapper { padding-left: @sidebar-width; }
+    .wrapper.toggled { padding-left: 0; }
+    .sidebar-wrapper { width: @sidebar-width; }
+    .wrapper.toggled .sidebar-wrapper { width: 0; }
+    .page-content-wrapper {
+        padding: 0;
+        position: relative;
+    }
+    .wrapper.toggled .page-content-wrapper {
+        position: relative;
+        margin-right: 0;
     }
 
-    .menu-slider ul {
-        width: 300px;
+    // navbar.less
+    .navbar nav .nav-box .nav-hamburger, .nav-toggle, .nav-arrow { .hidden; }
+    .menu-toggle { display: none; }
+
+}
+
+
+
+@media(max-width: @screen-sm) {
+
+    // wrapper.less
+
+    .sidebar-wrapper {
+        left: @sidebar-width-toggled;
+        margin-left: -@sidebar-width-toggled;
     }
 
+    .wrapper.toggled .sidebar-wrapper { width: @sidebar-width-toggled; }
 
-    .hamburger-2 {
+    .menu-toggle {
+        display: inline-block;
         position: absolute;
         top: 20px;
-        right: 56px;
+        right: 20px;
+        width: 24px;
+        height: 20px;
+        cursor: pointer;
     }
 
-    .divider2 {
-        display: none;
+    // sidebar.less
+
+    .sidebar .menu { width: @sidebar-width-toggled; }
+    .profile-container .profile-picture { max-width: 120px; }
+
+    //navbar¨.less
+
+    form {
+        display: block;
+        position: relative;
+        top: 0px;
+        left: 15px;
+
+        img {
+
+            filter: invert(50%);
+            margin-left: 5px;
+        }
+
+        input[type=text] {
+            margin-left: 5px;
+            width: 280px;
+            color: @custom-color-black;
+            font-size: 14px;
+            font-weight: 200;
+        }
     }
+
 
 }
-
-*/

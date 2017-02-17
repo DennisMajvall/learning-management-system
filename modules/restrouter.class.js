@@ -230,7 +230,6 @@ module.exports = class Restrouter {
 		});
 	}
 
-
 	json(res, err, response) {
 		// set status to 403 if error
 		if(err) { res.statusCode = 403; }

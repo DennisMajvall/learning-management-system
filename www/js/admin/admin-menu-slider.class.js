@@ -1,6 +1,6 @@
 class AdminMenuSlider {
     constructor(){
-        $('body').template('admin-menu-slider',{
+        $('.sidebar-container').template('admin-menu-slider',{
             header: 'Startpage',
             data: 'Database',
             categories: [
@@ -18,8 +18,13 @@ class AdminMenuSlider {
             logout: 'log out'
         });
 
-        $('body').on('click', '.log-out', function(){
-            Login.delete(onLogout);
+        $(".nav-toggle, .menu-toggle").click(function(e) {
+            e.preventDefault();
+            $(".wrapper").toggleClass("toggled");
+        });
+
+        $('.sidebar-container').on('click', '.log-out', function(){
+            Login.delete(onLogout);   
         });
 
         function onLogout(response, err) {

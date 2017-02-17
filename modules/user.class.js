@@ -12,7 +12,8 @@ module.exports = class User {
 			// hash the password	- but only if it has been modified (or is new)
 			if (this.isModified('password')) {
 				this.password = sha1(this.password + global.passwordSalt);
-			} else if (!this.isModified('username')) {
+			}
+			if (!this.isModified('username')) {
 				next();
 				return;
 			}
