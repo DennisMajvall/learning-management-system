@@ -1,19 +1,20 @@
 {
-  "name": "first_steps_mongoose",
-  "version": "0.0.1",
-  "description": "First steps with Mongoose",
-  "main": "app.js",
-  "dependencies": {
-    "body-parser": "*",
-    "bootstrap": "*",
-    "compression": "*",
-    "cookie-parser": "*",
-    "express": "*",
-    "gulp": "*",
-    "gulp-clean-css": "*",
-    "gulp-less": "*",
-    "mongoose": "*",
-    "mongoosefromclass": "*",
-    "sha1": "*"
-  }
+	"name": "first_steps_mongoose",
+	"version": "0.0.1",
+	"description": "First steps with Mongoose",
+	"main": "app.js",
+	"dependencies": {
+    	"bootstrap": "*",
+		"body-parser": "*",
+		"compression": "*",
+		"cookie-parser": "*",
+		"express": "*",
+		"gulp": "*",
+		"gulp-clean-css": "*",
+		"gulp-less": "*",
+		"mongoose": "*",
+		"mongoosefromclass": "*",
+		"nodemailer": "^3.1.1",
+		"sha1": "*"
+	}
 }
