@@ -102,6 +102,59 @@ app.use(express.static('www'));
 // start LessWatch
 new Lesswatch();
 
+var sendForgotPassword = require('./modules/forgot-password');
+
+function makeRandomPassword() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 8; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
+// A path to get user roles
+app.get('/forgot-password/:username',(req, res)=>{
+	var username = req.params.username;
+	var pw = makeRandomPassword();
+
+	findInCollection(Student, function(didSucceed) {
+		if (didSucceed) {
+			res.json('student username found');
+		} else {
+			findInCollection(Teacher, function(didSucceed) {
+				if (didSucceed) {
+					res.json('teacher username found');
+				} else {
+					findInCollection(Admin, function(didSucceed) {
+						if (didSucceed) {
+							res.json('admin username found');
+						} else {
+							res.json('username not found');
+						}
+					});
+				}
+			});
+		}
+	});
+
+
+    function findInCollection(schema, callback) {
+		schema.findOne({ username: username }, function(err, result) {
+	    	if (result) {
+	    		succeeded = true;
+	    		result.password = pw;
+	    		result.save();
+				sendForgotPassword(username, pw);
+				callback(true);
+			} else
+				callback(false);
+	    });
+    }
+
+});
+
 // Connect to mongoDB
 // and when that is done start the express server
 mongoose.connect('mongodb://127.0.0.1/lms');
