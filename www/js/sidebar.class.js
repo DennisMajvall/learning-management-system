@@ -44,6 +44,11 @@ class Sidebar {
 			};
 
 			$('.sidebar-container').template('sidebar', settingsObj);
+
+			$(".nav-toggle, .menu-toggle").click(function(e) {
+			    e.preventDefault();
+			    $(".wrapper").toggleClass("toggled");
+			});
 		}
 
 		$('.sidebar-container').on('click', '.log-out', function(){
