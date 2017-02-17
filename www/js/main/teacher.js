@@ -1,6 +1,5 @@
 function loadTeacher(callback) {
 	$.loadTemplates([
-		'navbar',
 		'sidebar',
 		'frontpage/front-course',
 		'frontpage/teacher-message',
@@ -11,7 +10,6 @@ function loadTeacher(callback) {
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
-		new Navbar();
 		new Sidebar();
 		new TeacherMessage();
 		new CoursesOnFrontpage("Teacher");
