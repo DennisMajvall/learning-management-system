@@ -15,6 +15,11 @@ class Loginpage {
 		});
 
 		$('#send-password').on('click', function(event) {
+			$('#myModal').modal('hide');
+
+			if (!$('#username').val()) {
+				return;
+			}
 			$.ajax({
 				url: '/forgot-password/' + $('#username').val(),
 				type: "GET",
