@@ -19,6 +19,7 @@ var role;
 (()=>{
 	// Put templates used by ALL ROLES here
 	$.loadTemplates([
+		'navbar',
 		'loginpage'
 	], start);
 
@@ -36,7 +37,7 @@ var role;
 				user = response.user;
 				console.log('Current logged in user: ', user);
 
-				
+				new Navbar();
 
 				if (user.role){ // just for test
 					if (user.role == "Admin")
