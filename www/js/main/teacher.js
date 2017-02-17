@@ -11,6 +11,7 @@ function loadTeacher(callback) {
 
 	function onTemplatesLoaded() {
 		new MenuSlider();
+		//new WeekPlanner();
 		//new BookingPage();
 		new TeacherMessage();
 		new CoursesOnFrontpage("Teacher");

@@ -1,29 +1,56 @@
 class WeekPlanner{
 	constructor(){
 		// return an array of date objects for start (monday)
-		// and end (sunday) of week based on supplied 
-		// date object or current date
-		function startAndEndOfWeek(date) {
-		  	// If no date object supplied, use current date
-		  	var now = date? new Date(date) : new Date();
+		// and end (friday) of the current week
 
-		  	// set time to some convenient value
+		createTemplate( createThisWeek() );
+		createEventListeners();
+
+		function createThisWeek(){
+		  	var thisWeek = [];
+		  	var dayArr = ['.','M', 'T', 'O', 'T', 'F'];
+		  	var now = new Date();
+
 		  	now.setHours(0,0,0,0);
 
 		 	// Get the previous Monday
 		 	var monday = new Date(now);
 		  	monday.setDate(monday.getDate() - monday.getDay() + 1);
 
-		  	// Get next Sunday
-		  	var sunday = new Date(now);
-		  	sunday.setDate(sunday.getDate() - sunday.getDay() + 7);
+		  	// Get the current week counting from previous monday
+		  	for(let i = 0; i < 5; i++){
+		  		var date = new Date();
+		  		date.setDate(monday.getDate() + i);
+		  		date.setHours(0,0,0,0);
+		  		thisWeek.push({
+		  			dateObj: date,
+		  			date: date.getDate(),
+		  			day: dayArr[date.getDay()]
+		  		});
+		  	}
 
-		  	// Return array of date objects
-		  	return [monday, sunday];
+		  	return thisWeek;
 		}
 
-		function CreateTemplate(week){
-			$('.page-content').template('week-planner',{week});
+	  	function createTemplate(thisWeek){
+			$('.page-content').template('week-planner',{
+				week : thisWeek
+			});
 		}
+
+		function createEventListeners(){
+
+	  		$('.page-content').on('click', '#prev', function(e){
+	  			e.preventDefault();
+	  			e.stopPropagation();
+	  			alert('prev');
+	  		});
+
+	  		$('.page-content').on('click', '#next', function(e){
+	  			e.preventDefault();
+	  			e.stopPropagation();
+	  			alert('next');
+	  		});
+	  	}
 	}
 }

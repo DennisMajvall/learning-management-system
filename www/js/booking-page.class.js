@@ -6,7 +6,7 @@ class BookingPage{
 		});
 
 		function createTemplate(rooms){
-			$('.page-content').template('booking-page',{rooms: rooms});
+			$('.page-top').template('booking-page',{rooms: rooms});
 		}
 	}
 }

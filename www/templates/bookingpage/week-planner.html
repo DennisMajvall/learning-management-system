@@ -1,12 +1,12 @@
 <!-- Weekpager -->
-<div class="container-fluid">
+<div class="container-fluid week-planner">
 	<div class="row">
 		<div class="col-xs-12">
 			<nav aria-label="...">
 				<ul class="pager">
-					<li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Föreg.</a></li>
-					<li><h3 class="fill-space"> Vecka 3 </h3></li>
-					<li class="next"><a href="#">Nästa <span aria-hidden="true">&rarr;</span></a></li>
+					<li class="previous"><a href="#" id="prev"><span aria-hidden="true">&larr;</span> Föreg.</a></li>
+					<li><h3 class="fill-space"> Schema </h3></li>
+					<li class="next"><a href="#" id="next">Nästa <span aria-hidden="true">&rarr;</span></a></li>
 				</ul>
 			</nav>	
 		</div>
@@ -26,76 +26,20 @@
 		<div class="col-xs-1"> 16 </div>
 		<div class="col-xs-1"> 17 </div>
 	</div>
-		
-	<div class="row week-schedule-row">
-
-		<div class="col-xs-2">
-			<div class="day-col">
-			<p>M</p>
-			<p class="date">21</p> 
+	
+	[repeat week, day]	
+		<div class="row week-schedule-row">
+			<div class="col-xs-2">
+				<div class="day-col">
+				<p> ${day.day} </p>
+				<p class="date"> ${day.date} </p> 
+				</div>
+			</div>
+			<div class="bookings">
+				
 			</div>
 		</div>
-		<div class="bookings">
-			<div class="col-xs-4 booking">
-				<p> 08:00 - 12:00 </p>
-				<p> SUW16 </p>
-			</div>
-		</div>
-	</div>
+		<div class="vspace"></div>
+	[endrepeat]
 
-	<div class="vspace"></div>
-
-	<div class="row week-schedule-row">
-		<div class="col-xs-2">
-			<div class="day-col">
-				<p>T</p>
-				<p class="date">22</p> 
-			</div>
-		</div>
-		<div class="bookings">
-
-		</div>
-	</div>
-	<div class="vspace"></div>
-
-	<div class="row week-schedule-row">
-		<div class="col-xs-2">
-			<div class="day-col">
-			<p>W</p>
-			<p class="date">23</p> 
-			</div>
-		</div>
-		<div class="bookings">
-			<div class="col-xs-offset-5 col-xs-4 booking">
-				<p> 13:00 - 17:00 </p>
-				<p> HSA15 </p>
-			</div>
-		</div>
-	</div>
-	<div class="vspace"></div>
-
-	<div class="row week-schedule-row">
-		<div class="col-xs-2">
-			<div class="day-col">
-			<p>T</p>
-			<p class="date">24</p> 
-			</div>
-		</div>
-		<div class="bookings">
-
-		</div>
-	</div>
-	<div class="vspace"></div>
-
-	<div class="row week-schedule-row">
-		<div class="col-xs-2">
-			<div class="day-col">
-			<p>F</p>
-			<p class="date">25</p> 
-			</div>
-		</div>
-		<div class="bookings">
-
-		</div>
-	</div>
 </div>
