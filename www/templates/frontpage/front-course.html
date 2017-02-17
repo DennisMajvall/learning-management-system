@@ -1,0 +1,19 @@
+<section class="front-course-section">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3 class="page-header">Courses</h3>
+		</div>
+	</div>
+	<div class="row">
+		[repeat courses, course]
+		<div class="col-xs-12">
+			<div class="shell" style="background-color: ${course.icon_bg}">
+				<a href="#" data-id="${course._id}" class="show-course">
+					<div class="icon-box"><img src="/images/icons/${course.icon_image}" class="img-responsive" /></div>
+					<p>${course.name}</p>
+				</a>
+			</div>
+		</div>
+		[endrepeat]
+	</div>
+</section>

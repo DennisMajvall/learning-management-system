@@ -1,16 +1,29 @@
-@import 'admin';
+// Initial Load
+@import '../node_modules/bootstrap/less/bootstrap.less';
 @import 'loginpage';
-@import 'menu-slider';
 @import 'modal';
+@import 'validation-forms';
+@import 'variables';
+
+// Navigation
+@import 'wrapper';
+@import 'sidebar';
 @import 'navbar';
+
+// Student & Teacher
 @import 'profile';
+@import 'front-course';
+@import 'course-page';
 @import 'student-announcement';
 @import 'teacher-message';
 @import 'validation-forms';
 @import 'booking-page';
 
 
-// Ola: load main last
+// Admin
+@import 'admin';
+
+// load main last
 @import 'main';
 
 // NOTE: To load .css files you must specify: filename.extension

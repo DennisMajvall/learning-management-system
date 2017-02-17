@@ -49,7 +49,10 @@ class AnnouncementOnFrontpage {
 							}
 
 							if(lastAnnouncement === true && maxCourses === courseCount) {
-								$('body .page-top').template('student-announcement', {announcements: announcements});
+								announcements = announcements.slice(0, 2);
+								
+								$('.student-announcement-container').template('student-announcement', {announcements: announcements});
+								$('.header-sidebar').addClass('student-sidebar-color');	
 							}
 						});
 					});

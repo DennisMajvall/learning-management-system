@@ -1,19 +1,22 @@
-<div class="menu-slider">
-	<ul>
-		<li class="head-text"><a href="/">${header}</a></li>
-		<img class="hamburger-2" src="/images/hamb.png">
-		<li class="divider"></li>
-		<li class="head-text">${data}</li>
+<section class="sidebar">
+	<img class="menu-toggle admin-menu-toggle" src="/images/icons/hamburger-icon@2x.png">
+	<div class='admin-menu'>
+		<header class="header-sidebar">
+			<a href="/">${header}</a>
+		</header>
+		<div class="menu-section-style">
+			<p class="menu-fullname">ADMIN</p>
+		</div>
+		<ul>
 			[repeat categories,category]
 				<li class="third-head-text"><a class="category-${category.name}" href="?cat=${category.url}">${category.name}</a></li>
 			[endrepeat]
-		<li class="spacer"></li>
-		<li class="fullname"><span>You are logged in as administrator: <br> </span>${fullname}</li>
-		<li class="divider"></li>
-		<li class="second-head-text">${account}</li>
-		<li class="head-text"><a href="#">${usersettings}</a></li>
-		<li class="head-text"><a href="#">${password}</a></li>
-		<li class="spacer"></li>
-		<li class="log-out"><button>${logout}</button></li>
-	</ul>
-</div>
+			<li class="spacer"></li>
+			<li class="fullname"><span>You are logged in as administrator: <br> </span>${fullname}</li>
+			<li class="divider"></li>
+		</ul>
+		<div class='menu-section-style'>
+			<button class="btn log-out">${logout}</button>
+		</div>
+	</div>
+</section>

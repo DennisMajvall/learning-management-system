@@ -1,38 +1,41 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <h2 class="page-header">Announcements</h2>
-            <section class="announcement-list">
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="page-header">Announcements</h2>
+        <section class="announcement-list">
             [repeat announcements, announcement]
-                <article class="row">
-                    <div class="col-md-2 col-sm-2 hidden-xs">
-                        <figure class="thumbnail">
-							<img class="img-responsive" src="/images/profiles/${announcement.picture}" />
-                            <figcaption class="text-center">${announcement.author}</figcaption>
-                        </figure>
-                    </div>
-                    <div class="col-md-10 col-sm-10">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <header>
-                                    <div class="announcement-user">
-                                        <i class="fa fa-graduation-cap"></i>
-                                        ${announcement.courses}
-                                    </div>
-                                    <time class="announcement-date" datetime="16-12-2014 01:05">
-                                        <i class="fa fa-clock-o"></i>
-                                        Dec 16, 2014
-                                    </time>
-                                </header>
-								<p>
-									${announcement.message}
-								</p>
+            <article class="row">
+                <div class="col-md-2 col-sm-2 hidden-sm hidden-xs">
+                    <figure class="thumbnail">
+                    <img class="img-responsive" src="/images/profiles/${announcement.picture}" />
+                    <figcaption class="text-center">${announcement.author}</figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <header>
+                                <div class="announcement-user">
+                                    <i class="fa fa-graduation-cap"></i>
+                                    ${announcement.courses}
+                                </div>
+                                <time class="announcement-date" datetime="16-12-2014 01:05">
+                                    <i class="fa fa-clock-o"></i>
+                                    Dec 16, 2014
+                                </time>
+                            </header>
+                            <p>
+                                ${announcement.message}
+                            </p>
+                            <div class="hidden-md hidden-lg">
+                                <p>
+                                    <h5>From: </h5> ${announcement.author}
+                                </p>
                             </div>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
             [endrepeat]
-            </section>
-        </div>
+        </section>
     </div>
 </div>

@@ -53,4 +53,4 @@ function loadAdmin(callback) {
 
 		return result;
 	}
-};
+}

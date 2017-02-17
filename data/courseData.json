@@ -1,25 +1,37 @@
 [{
 	"name": "Archeology",
 	"description": "An archeology course.",
+	"icon_image": "temple-icon@2x.png",
+	"icon_bg": "#616161",
 	"period": "Fall of 2016 - Spring of 2017"
 },{
 	"name": "Programming 1",
 	"description": "A programming course.",
+	"icon_image": "calc-icon@2x.png",
+	"icon_bg": "#EF5350",
 	"period": "Fall of 2016 - Spring of 2017"
 },{
 	"name": "Anthropology",
 	"description": "Human studies.",
+	"icon_image": "character-icon@2x.png",
+	"icon_bg": "#BDBDBD",
 	"period": "Fall of 2016 - Spring of 2017"
 },{
 	"name": "Ornithology",
 	"description": "Study of birds.",
+	"icon_image": "temple-icon@2x.png",
+	"icon_bg": "#BDBDBD",
 	"period": "Fall of 2016 - Spring of 2017"
 },{
 	"name": "Social studies",
 	"description": "Study of social sciences, humanities & history.",
+	"icon_image": "temple-icon@2x.png",
+	"icon_bg": "#EF5350",
 	"period": "Fall of 2016 - Spring of 2017"
 },{
 	"name": "Electronics",
 	"description": "Study of... electronics.",
+	"icon_image": "temple-icon@2x.png",
+	"icon_bg": "#BDBDBD",
 	"period": "Fall of 2016 - Spring of 2017"
 }]

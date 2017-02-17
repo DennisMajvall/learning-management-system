@@ -24,17 +24,17 @@ class CoursesOnFrontpage {
 				that.courseHashMap[course._id] = course;
 			});
 
-			$('.page-content').template('courses', { courses: courses });
+			$('.front-course-container').template('front-course', { courses: courses });
 		}
 
-		// wait for DOM ready
-		$('body').on('click', '.course-panel', function(){
+
+		$('.front-course-container').on('click', '.show-course', function(){
 			let id = $(this).data('id');
 			let course = that.courseHashMap[id];
 
-			$('.page-top').empty();
-			$('.page-content').empty().template('course-page', { course: course });
-			
+			$('.student-announcement-container').empty();
+			$('.teacher-messages-container').empty();
+			$('.front-course-container').empty().template('course-page', { course: course });
 		});
 	}
 }

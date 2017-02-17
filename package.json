@@ -4,6 +4,7 @@
 	"description": "First steps with Mongoose",
 	"main": "app.js",
 	"dependencies": {
+    	"bootstrap": "*",
 		"body-parser": "*",
 		"compression": "*",
 		"cookie-parser": "*",

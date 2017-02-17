@@ -1,32 +1,41 @@
-<div class="container">
-	<div class="teacher-message">
-		<h3>Compose New Message</h3>
-
-		<textarea class="form-control" rows="5"></textarea>
-		
-		<div class="btn-group">
-			<button type="button" class="btn btn-primary send-button">
-				Send
-			</button>
-
-			<button id="dropdown-button" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Select Course &nbsp;<span class="caret"></span>
-			</button>
-
-			<ul class="dropdown-menu">
-				<li class="select-all">
-					<a>Select All</a>
-				</li>
-
-				[repeat courses,course]
-					<li class="course-list" course-id="${course._id}">
-						<a>${course.name}<span aria-hidden="true"></span></a>
-					</li>
-				[endrepeat]
-			</ul>
-
-			<span class="msg-sent"></span>
-		</div>
-		
+<div class="teacher-message">
+	<div class="row">
+	    <div class="col-xs-12">
+			<h2 class="page-header">ADD NEW ANNOUNCEMENT</h2>
+	    </div>
 	</div>
+
+<div class="row">
+    <div class="col-md-6 ">
+		<h4>Subject</h4>
+		<textarea class="form-control" rows="5"></textarea>
+			<br>
+		        <div class="btn-group">
+		            <button type="button" class="btn send-button">
+		                Send
+		            </button>
+		            <button id="dropdown-button" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                Select Course &nbsp;<span class="caret"></span>
+		            </button>
+		            <ul class="dropdown-menu">
+		                <li class="select-all">
+		                    <a>Select All</a>
+		                </li>
+		                [repeat courses,course]
+		                <li class="course-list" course-id="${course._id}">
+		                    <a>${course.name}<span aria-hidden="true"></span></a>
+		                </li>
+		                [endrepeat]
+		            </ul>
+		            <!-- NOT USED -->
+		            <span class="msg-sent"></span>
+		        </div>
+    </div>
+</div>
+
+
+
+
+	
+
 </div>
