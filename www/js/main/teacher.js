@@ -10,7 +10,6 @@ function loadTeacher(callback) {
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
-		new MenuSlider();
 		//new WeekPlanner();
 		//new BookingPage();
 		new Sidebar();
