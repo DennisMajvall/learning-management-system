@@ -19,7 +19,6 @@ body { font-family: 'Roboto', sans-serif; }
 @screen-md: 992px;
 @screen-lg: 1200px;
 
-
 //** Sidebar Widths
 
 @sidebar-width: 300px;
@@ -40,7 +39,6 @@ body { font-family: 'Roboto', sans-serif; }
 @custom-color-green: #81C784;
 @custom-color-purple: #9FA8DA;
 @custom-color-beige: #F6F5EF;
-
 
 
 //** Mixins
@@ -67,6 +65,20 @@ body { font-family: 'Roboto', sans-serif; }
     opacity: 0.2;
 }
 
+// Mixins specific for sidebar 
+
+.teacher-sidebar-color { background: @custom-color-green }
+.student-sidebar-color { background: @custom-color-red }
+.admin-sidebar-color { background: @custom-color-purple }
+.menu-section-style { margin-left: 22px;}
+.menu-box-style {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+}
+
 
 //** ALL MEDIA QUERIES for the full project
 
@@ -87,9 +99,9 @@ body { font-family: 'Roboto', sans-serif; }
         margin-right: 0;
     }
 
-
     // navbar.less
     .navbar nav .nav-box .nav-hamburger, .nav-toggle, .nav-arrow { .hidden; }
+    .menu-toggle { display: none; }
 
 }
 
@@ -103,7 +115,7 @@ body { font-family: 'Roboto', sans-serif; }
         left: @sidebar-width-toggled;
         margin-left: -@sidebar-width-toggled;
     }
-    .wrapper.toggled { padding-left: @sidebar-width-toggled ; }
+
     .wrapper.toggled .sidebar-wrapper { width: @sidebar-width-toggled; }
 
     .menu-toggle {
@@ -116,11 +128,33 @@ body { font-family: 'Roboto', sans-serif; }
         cursor: pointer;
     }
 
-
     // sidebar.less
 
     .sidebar .menu { width: @sidebar-width-toggled; }
     .profile-container .profile-picture { max-width: 120px; }
 
-}
+    //navbar¨.less
 
+    form {
+        display: block;
+        position: relative;
+        top: 0px;
+        left: 15px;
+
+        img {
+
+            filter: invert(50%);
+            margin-left: 5px;
+        }
+
+        input[type=text] {
+            margin-left: 5px;
+            width: 280px;
+            color: @custom-color-black;
+            font-size: 14px;
+            font-weight: 200;
+        }
+    }
+
+
+}

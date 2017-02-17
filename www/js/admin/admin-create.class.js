@@ -1,7 +1,7 @@
 class AdminCreate {
 
 	constructor(dbSchema, dbType) {
-		let container = $('.create-area');
+		let container = $('.admin-create-container');
 
 		$('#toggle-create').on('click', (e) => {
 			$(e.target).hide();
