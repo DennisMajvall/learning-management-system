@@ -1,6 +1,6 @@
 class AdminMenuSlider {
     constructor(){
-        $('body').template('admin-menu-slider',{
+        $('.sidebar-container').template('admin-menu-slider',{
             header: 'Startpage',
             data: 'Database',
             categories: [
