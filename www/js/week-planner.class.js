@@ -33,7 +33,7 @@ class WeekPlanner{
 		}
 
 	  	function createTemplate(thisWeek){
-			$('.page-content').template('week-planner',{
+			$('.week-planner-container').template('week-planner',{
 				week : thisWeek
 			});
 		}
