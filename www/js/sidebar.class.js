@@ -72,5 +72,14 @@ class Sidebar {
 				$('.menu-toggle').trigger('click');
 			}
 		});
+
+		$('.front-course-container').on('click', 'button.remove-item', function(){
+			let id = $(this).attr('list-item-id');
+			let courseId = $(this).closest('section.course-page').attr('list-item-id');
+			let course = that.courseHashMap[id];
+
+			removeStudents(id, course);
+
+		});
 	}
 }
