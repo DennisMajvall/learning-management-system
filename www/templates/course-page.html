@@ -24,6 +24,7 @@
 				<h4>Students</h4>
 				[repeat course.students, user]
 					[template listed-profile, user]
+					<button class="btn-xs btn-danger remove-item" list-item-id="${user._id}">X</button>
 				[endrepeat]
 			</div>
 		</div>
