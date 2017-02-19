@@ -1,7 +1,7 @@
 class AdminMenuSlider {
     constructor(){
-        $('.sidebar-container').template('admin-menu-slider',{
-            header: 'Startpage',
+        $('.sidebar-container').template('admin-sidebar',{
+            header: 'Learning Management System',
             data: 'Database',
             categories: [
                 {name: 'Admins', url: 'admin'},
@@ -20,11 +20,11 @@ class AdminMenuSlider {
 
         $(".nav-toggle, .menu-toggle").click(function(e) {
             e.preventDefault();
-            $(".wrapper").toggleClass("toggled");
+			$(".sidebar-slide").toggleClass("visible");
         });
 
         $('.sidebar-container').on('click', '.log-out', function(){
-            Login.delete(onLogout);   
+            Login.delete(onLogout);
         });
 
         function onLogout(response, err) {

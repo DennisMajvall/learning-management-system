@@ -17,7 +17,7 @@
 	<script src="js/admin/admin-create.class.js"></script>
 	<script src="js/admin/admin-edit.class.js"></script>
 	<script src="js/admin/admin-filter.class.js"></script>
-	<script src="js/admin/admin-menu-slider.class.js"></script>
+	<script src="js/admin/admin-sidebar.class.js"></script>
 	<script src="js/admin/admin-frontpage.class.js"></script>
 	<script src="js/admin/admin-search.class.js"></script>
 	<script src="js/teacher/teacher-message.class.js"></script>
@@ -37,38 +37,45 @@
 	<script src="js/main/teacher.js"></script>
 
 </head>
+
 <body>
+	<!-- Sidebar background on desktop -->
+	<div class='hidden-xs sidebar-background'></div>
 
-    <div class="wrapper">
+	<div class='container-fluid'>
+		<div class='row'>
+			<!-- Sidebar on desktop -->
+			<div class='hidden-xs col-sm-3 sidebar'>
+				<div class="sidebar-container"></div>
+			</div>
 
-        <!-- Sidebar -->
-        <div class="sidebar-wrapper">
-            <div class="sidebar-nav">
-                <div class="sidebar-container"></div>
-            </div>
-        </div>
+			<!-- Main Content -->
+			<div class='col-xs-12 col-sm-9'>
+				<div class='navbar'></div>
+				<div class='notifications'></div>
+				<div class='page-content'>
+					<!-- Student & Teacher -->
+					<div class='student-announcement-container'></div>
+					<div class="teacher-messages-container"></div>
+					<div class="front-course-container"></div>
+					<div class="course-page-container"></div>
 
-	    <!-- Main Content -->
-	    <div class='page-content-wrapper'>
-	    	<div class='navbar'></div>
-	    	<div class='notifications'></div>
-			<div class='container-fluid'>
-				<div class='row'>
-					<div class='col-xs-offset-1 col-xs-10 col-xs-offset-1'>
-						<div class='page-content'>
-							<div class='student-announcement-container'></div>
-							<div class="teacher-messages-container"></div>
-							<div class="front-course-container"></div>
-							<div class="course-page-container"></div>
-							<div class="admin-create-container"></div>
-							<div class="admin-search-container"></div>
-							<div class="admin-result-container"></div>
-						</div>
-					</div>
+					<!-- Admin -->
+					<div class="admin-create-container"></div>
+					<div class="admin-search-container"></div>
+					<div class="admin-result-container"></div>
 				</div>
 			</div>
-	    </div>
+		</div>
+	</div>
+
+	<!-- Sidebar on phones -->
+	<div class='wrapper-sidebar'>
+		<div class='sidebar-slide sidebar'>
+			<div class='container-fluid'>
+				<div class="sidebar-container"></div>
+			</div>
+		</div>
 	</div>
 </body>
-
 </html>

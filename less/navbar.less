@@ -1,63 +1,48 @@
-// override deafult style
-@navbar-border-radius: 0;
-
-
 .navbar {
-
-	// This is the ONLY ugly fix to deal with the extra margins from bootstrap. Letting it stay :=
-	margin-left: -16px;
-    margin-right: -16px;
-
+	border: none;
 	nav {
 		height: 60px;
 		background: @custom-color-grey;
 
 		.nav-box {
-			position: relative;
-			display: inline-block;
-			width: 60px;
 			height: 60px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
 			border-right: 1px solid @custom-color-white;
 
-			.nav-icon {
-				position: absolute;
-				top: 50%;
-				left: 50%;
+			padding-right: 20px;
+			padding-left: 20px;
+			&:first-child { padding-left: 5px; }
+			@media(min-width: 768px) { &.first-child-desktop { padding-left: 5px; } }
+
+
+			&:before {
+				content: " ";
+			}
+
+			.hover-dark:hover { .custom-hover-links; }
+			img { width: 22px; }
+		}
+
+		.search-bar {
+			color: #fafafa;
+
+			img {
 				width: 20px;
 				height: 20px;
-				margin-top: -10px;/* Half the height */
-				margin-left: -10px; /* Half the width */
 			}
-			.nav-icon:hover {
-				.custom-hover-links;
-			}
-		}
 
-	}
-
-	form {
-	display: inline-block;
-    color: #fafafa;
-    margin-top: 15px;
-    margin-left: 10px;
-
-		img {
-			width: 20px;
-			height: 20px;
-		}
-
-		input {
-			&:focus {
+			input {
 				outline: none;
-			}
-		}
+				border: none;
+				background-color: transparent;
+				margin-left: 8px;
 
-		input[type=text]{
-	      border: none;
-	      background-color: transparent;
-		  width: 320px;
-		  margin: 4px 0 0 10px;
-	      padding: -4px 73px 5px 10px;
+				width: 300px;
+				@media(max-width: 600px) { width: 90px; }
+				@media(max-width: 374px) { display: none; }
+			}
 		}
 	}
 }

@@ -2,15 +2,9 @@
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:200, 300,400,400i,500,500i,700,700i');
 
-body { 
-    // Fix for vertical scroll (sidebar)
-    overflow-x: hidden;
-    font-family: 'Roboto', sans-serif; 
+body {
+	font-family: 'Roboto', sans-serif;
  }
-
-.no-padding {
-    padding: 0;
-}
 
 
 // Custom Variables & Mixins for useage through whole project
@@ -25,6 +19,10 @@ body {
 @screen-sm: 768px;
 @screen-md: 992px;
 @screen-lg: 1200px;
+
+@screen-xs-max: (@screen-sm - 1);
+@screen-sm-max: (@screen-md - 1);
+@screen-md-max: (@screen-lg - 1);
 
 //** Sidebar Widths
 
@@ -51,117 +49,57 @@ body {
 //** Mixins
 
 .custom-transition-5s {
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-.custom-transform-smooth {
-    -moz-transition: translate3d(10%, 0, 0);
-    -o-transition: translate3d(10%, 0, 0);
-    -webkit-transform: translate3d(10%, 0, 0);
-    transform: translate3d(10%, 0, 0);
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
 }
 
 .custom-hover-links {
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-    opacity: 0.2;
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+	opacity: 0.2;
 }
 
-// Mixins specific for sidebar 
+// Mixins specific for sidebar
 
 .teacher-sidebar-color { background: @custom-color-green }
 .student-sidebar-color { background: @custom-color-red }
 .admin-sidebar-color { background: @custom-color-purple }
-.menu-section-style { margin-left: 22px;}
-.menu-box-style {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 40px;
-}
 
+.menu-margin-left { margin-left: 22px;}
+.menu-box-style {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 40px;
+}
 
 //** ALL MEDIA QUERIES for the full project
 
 @media(min-width: @screen-sm) {
-
-    // wrapper.less
-
-    .wrapper { padding-left: @sidebar-width; }
-    .wrapper.toggled { padding-left: 0; }
-    .sidebar-wrapper { width: @sidebar-width; }
-    .wrapper.toggled .sidebar-wrapper { width: 0; }
-    .page-content-wrapper {
-        padding: 0;
-        position: relative;
-    }
-    .wrapper.toggled .page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
-
-    // navbar.less
-    .navbar nav .nav-box .nav-hamburger, .nav-toggle, .nav-arrow { .hidden; }
-    .menu-toggle { display: none; }
-
+	// navbar.less
+	.navbar nav .nav-box .nav-hamburger, .nav-toggle, .nav-arrow { .hidden; }
+	.menu-toggle { display: none; }
 }
 
+@media(max-width: @screen-xs-max) {
 
+	.menu-toggle {
+		display: inline-block;
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		width: 24px;
+		height: 20px;
+		cursor: pointer;
+		z-index: 1;
+	}
 
-@media(max-width: @screen-sm) {
+	// sidebar.less
 
-    // wrapper.less
-
-    .sidebar-wrapper {
-        left: @sidebar-width-toggled;
-        margin-left: -@sidebar-width-toggled;
-    }
-
-    .wrapper.toggled .sidebar-wrapper { width: @sidebar-width-toggled; }
-
-    .menu-toggle {
-        display: inline-block;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 24px;
-        height: 20px;
-        cursor: pointer;
-    }
-
-    // sidebar.less
-
-    .sidebar .menu { width: @sidebar-width-toggled; }
-    .profile-container .profile-picture { max-width: 120px; }
-
-    //navbar¨.less
-
-    form {
-        display: block;
-        position: relative;
-        top: 0px;
-        left: 15px;
-
-        img {
-
-            filter: invert(50%);
-            margin-left: 5px;
-        }
-
-        input[type=text] {
-            margin-left: 5px;
-            width: 280px;
-            color: @custom-color-black;
-            font-size: 14px;
-            font-weight: 200;
-        }
-    }
-
-
+	.sidebar .menu { width: @sidebar-width-toggled; }
+	.profile-container .profile-picture { max-width: 120px; }
 }

@@ -23,7 +23,7 @@ function loadAdmin(callback) {
 		'admin-create',
 		'admin-edit',
 		'admin-frontpage',
-		'admin-menu-slider',
+		'admin-sidebar',
 		'admin-search',
 		'admin-search-list'
 	], onTemplatesLoaded, 'templates/admin');

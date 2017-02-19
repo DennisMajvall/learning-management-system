@@ -1,30 +1,40 @@
-<section class="sidebar">
-	<img class="menu-toggle" src="/images/icons/hamburger-icon@2x.png">
-	<div class='menu'>
-		<header class="header-sidebar">
-			<a href="/">${header}</a>
-		</header>
-		<div class='profile-container'>
-			<img class="img-responsive profile-picture" src="/images/profiles/${picture}" />
-		</div>
-		<img class="settings-icon" src="/images/icons/settings-icon@2x.png" />
-		<div class="menu-section-style">
-			<p class="menu-fullname">${fullname}</p>
-			<p class="menu-education">${education}</p>
-		</div>
-		<div class="menu-courses menu-box-style">Courses</div>
-		<ul class="menu-section-style">
-			[repeat courses,course]
-			<li class="third-head-text">
-				<a class="menu-choice-courses" href="#" data-id=${course._id}>${course.name}</a>
-			</li>
-			[endrepeat]
-		</ul>
-		<div class="menu-study-rooms menu-box-style">
-			<p>Group Study Rooms</p>
-		</div>
-		<div class='menu-section-style'>
-			<button class="btn log-out">${logout}</button>
+<div>
+	<img class="menu-toggle" src="/images/icons/hamburger-icon@2x.png" />
+	<div class='row'>
+		<div class='col-xs-12 menu'>
+
+			<header class='row ${role}-sidebar-color header-sidebar'>
+				<a href="/">${header}</a>
+			</header>
+
+			<div class='row profile-container'>
+				<img class="img-responsive profile-picture" src="/images/profiles/${picture}" />
+			</div>
+
+			<img class="settings-icon" src="/images/icons/settings-icon@2x.png" />
+
+			<div class="menu-margin-left">
+				<p class="menu-fullname">${fullname}</p>
+				<p class="menu-education">${education}</p>
+			</div>
+
+			<div class='row menu-box-style menu-courses'>
+				<h4>Courses</h4>
+			</div>
+
+			<ul class="menu-margin-left">
+				[repeat courses,course]
+					<li><a class="menu-choice-courses" href="#" data-id=${course._id}>${course.name}</a></li>
+				[endrepeat]
+			</ul>
+
+			<div class="row menu-box-style menu-study-rooms">
+				<p>Group Study Rooms</p>
+			</div>
+
+			<div class='menu-margin-left'>
+				<button class="btn log-out">${logout}</button>
+			</div>
 		</div>
 	</div>
-</section>
+</div>
