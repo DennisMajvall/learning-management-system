@@ -15,7 +15,9 @@
 			<div class="teacher-course">
 				<h4>Teachers</h4>
 				[repeat course.teachers, user]
-					[template listed-profile, user]
+					<profile>
+						[template listed-profile, user]
+					</profile>
 				[endrepeat]
 			</div>
 		</div>
@@ -23,8 +25,12 @@
 			<div class="students-course">
 				<h4>Students</h4>
 				[repeat course.students, user]
-					[template listed-profile, user]
-					<button class="btn-xs btn-danger remove-item" list-item-id="${user._id}">X</button>
+					<profile>
+						[template listed-profile, user]
+						<button class="btn-xs btn-danger remove-item" list-item-id="${user._id}">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</profile>
 				[endrepeat]
 			</div>
 		</div>
