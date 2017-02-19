@@ -75,11 +75,33 @@ class Sidebar {
 
 		$('.front-course-container').on('click', 'button.remove-item', function(){
 			let id = $(this).attr('list-item-id');
-			let courseId = $(this).closest('section.course-page').attr('list-item-id');
-			let course = that.courseHashMap[id];
+			let courseId = $(this).closest('section.course-page').attr('course-id');
+			let course = that.courseHashMap[courseId];
 
-			removeStudents(id, course);
-
+			that.removeById(id, course, that);
 		});
 	}
+
+	removeById(id, mainItem, that){
+		mainItem.students = mainItem.students.filter(function(item){
+			let shouldKeep = id !== item._id;
+			
+			if(!shouldKeep){
+				that.removeCourseFromEntity(item, mainItem);
+			}
+			return shouldKeep;
+		});
+		var updateObj = {};
+		updateObj.students = mainItem.students;
+		Course.update(mainItem._id, updateObj);
+	}
+
+	removeCourseFromEntity(obj, mainItem){
+		obj.courses = obj.courses.filter(function(course){
+			return mainItem._id.indexOf(course) == -1;
+		});
+
+		Student.update(obj._id, {courses: obj.courses});
+	}
 }
+
