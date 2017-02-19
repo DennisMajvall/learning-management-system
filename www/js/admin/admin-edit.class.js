@@ -55,7 +55,8 @@ class AdminEdit {
 
 				if(studentsToRemove.length > 0){
 					that.removeById("Student", studentsToRemove, mainItem, that);
-				}else if(teachersToRemove.length > 0){
+				}
+				if(teachersToRemove.length > 0){
 					that.removeById("Teacher", teachersToRemove, mainItem, that);
 				}
 			});
@@ -81,7 +82,7 @@ class AdminEdit {
 		mainItem[plEntity] = mainItem[plEntity].filter(function(item){
 			let shouldKeep = ids.indexOf(item._id) == -1;
 			if(!shouldKeep){
-				that.removeCourseFromEntity(entity,item, mainItem);
+				that.removeCourseFromEntity(entity, item, mainItem);
 			}
 			return shouldKeep;
 		});
@@ -94,8 +95,6 @@ class AdminEdit {
 		obj.courses = obj.courses.filter(function(course){
 			return mainItem._id.indexOf(course) == -1;
 		});
-		if(entity == "Student"){
-			window[entity].update(obj._id, {courses: obj.courses});
-		}
+		window[entity].update(obj._id, {courses: obj.courses});
 	}
 }
