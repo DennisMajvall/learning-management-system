@@ -64,7 +64,7 @@ class Sidebar {
 
 			$('.student-announcement-container').empty();
 			$('.teacher-messages-container').empty();
-			$('.front-course-container').empty().template('course-page', { course: course });
+			$('.front-course-container').empty().template('course-page', { course: course, role: user.role });
 
 			if ($(window).width() < 768) {
 				$('.menu-toggle').trigger('click');

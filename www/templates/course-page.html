@@ -27,9 +27,11 @@
 				[repeat course.students, user]
 					<profile>
 						[template listed-profile, user]
-						<button class="btn-xs btn-danger remove-item" list-item-id="${user._id}">
-							<span class="glyphicon glyphicon-remove"></span>
-						</button>
+						[if role === "Teacher"]
+							<button class="btn-xs btn-danger remove-item" list-item-id="${user._id}">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+						[endif]
 					</profile>
 				[endrepeat]
 			</div>
