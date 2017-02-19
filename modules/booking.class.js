@@ -7,9 +7,10 @@ module.exports = class Booking {
 				ref: 'Room',
 				required: true
 			},
+			date: {type: Date, required: true},
 			timeFrom: {type: Date, required: true},
 			timeTo: {type: Date, required: true},
-			bookedBy: [{type: String, required: true}]
+			bookedBy: {type: String, required: true}
 		}
 	}
 };

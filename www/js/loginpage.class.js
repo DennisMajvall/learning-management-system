@@ -1,6 +1,6 @@
 class Loginpage {
     constructor() {
-        $('body').template('loginpage',{
+        $('body').empty().template('loginpage',{
             "text": "The login page!"
         });
 
