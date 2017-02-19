@@ -1,14 +1,9 @@
 class TeacherMessage {
 
     constructor() {
-        // Find which courses this teacher have access to. 
-        // When we have login working we won't have to 'find' Teachers
-        // and instead just populate the courses of the one logged in.
         let coursesToPublishTo = [];
 
-        let teacher = user;
-        populateCourses(teacher.courses);
-    
+        populateCourses(user.courses);
 
         function populateCourses(courses) {
             let coursesIds = courses.map(course => '"' + course + '"');
@@ -17,7 +12,6 @@ class TeacherMessage {
             Course.find(queryString, (courses, err) => {
                 createTemplate(courses);
                 createEventListeners();
-                $('.header-sidebar').toggleClass('teacher-sidebar-color');
             });
         }
 
@@ -64,7 +58,7 @@ class TeacherMessage {
         }
 
         function makeAnnouncement() {
-            var author = teacher._id;
+            var author = user._id;
             var textInput = $('textarea').val();
 
             Announcement.create({

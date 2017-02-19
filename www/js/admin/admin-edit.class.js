@@ -47,15 +47,18 @@ class AdminEdit {
 			// use .edit-buttons as a referens point to get course
 			let mainItem = findItemFunc($('.admin-result-container .delete-item'));
 
-			that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove);
+			itemsToRemove.each(function(){
+				let itemCategory = $(this).closest('[item-type]').attr('item-type');
+				let itemId = $(this).attr('list-item-id');
 
-			if(studentsToRemove.length > 0){
-				that.removeStudents(studentsToRemove, mainItem, that);
-			}
+				that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove);
 
-			if(teachersToRemove.length > 0){
-				that.removeTeachers(teachersToRemove, mainItem, that);
-			}
+				if(studentsToRemove.length > 0){
+					that.removeById("Student", studentsToRemove, mainItem, that);
+				}else if(teachersToRemove.length > 0){
+					that.removeById("Teacher", teachersToRemove, mainItem, that);
+				}
+			});
 		});
 	}
 
@@ -72,43 +75,27 @@ class AdminEdit {
 		});
 	}
 
-	removeStudents(studentsId, mainItem, that){
-		mainItem.students = mainItem.students.filter(function(student){
-			let shouldKeep = studentsId.indexOf(student._id) == -1;
-
+	removeById(entity, ids, mainItem, that){
+		// note entity should be Student or Teacher
+		var plEntity = entity.toLowerCase() + 's';
+		mainItem[plEntity] = mainItem[plEntity].filter(function(item){
+			let shouldKeep = ids.indexOf(item._id) == -1;
 			if(!shouldKeep){
-				that.removeCourseFromStudent(student, mainItem);
+				that.removeCourseFromEntity(entity,item, mainItem);
 			}
 			return shouldKeep;
 		});
-		Course.update(mainItem._id, {students: mainItem.students});
+		var updateObj = {};
+		updateObj[plEntity] = mainItem[plEntity];
+		Course.update(mainItem._id, updateObj);
 	}
 
-	removeTeachers(teachersId, mainItem, that){
-		mainItem.teachers = mainItem.teachers.filter(function(teacher){
-			let shouldKeep = teachersId.indexOf(teacher._id) == -1;
-
-			if(!shouldKeep){
-				that.removeCourseFromTeacher(teacher, mainItem);
-			}
-			return shouldKeep;
-		});
-		Course.update(mainItem._id, {teachers: mainItem.teachers});
-	}
-
-	removeCourseFromStudent(student, mainItem){
-		student.courses = student.courses.filter(function(course){
+	removeCourseFromEntity(entity, obj, mainItem){
+		obj.courses = obj.courses.filter(function(course){
 			return mainItem._id.indexOf(course) == -1;
 		});
-
-		Student.update(student._id, {courses: student.courses});
-	}
-
-	removeCourseFromTeacher(teacher, mainItem){
-		teacher.courses = teacher.courses.filter(function(course){
-			return mainItem._id.indexOf(course) == -1;
-		});
-
-		Teacher.update(teacher._id, {courses: teacher.courses});
+		if(entity == "Student"){
+			window[entity].update(obj._id, {courses: obj.courses});
+		}
 	}
 }

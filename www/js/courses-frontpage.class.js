@@ -6,9 +6,8 @@ class CoursesOnFrontpage {
 
 		let courseHashMap = {};
 		let that = this;
-		let currentUser = user;
 
-		populateCourses(currentUser.courses);
+		populateCourses(user.courses);
 
 		function populateCourses(courses) {
 			let coursesIds = courses.map( course => '"' + course + '"' );

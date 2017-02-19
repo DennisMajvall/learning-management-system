@@ -25,17 +25,13 @@ var role;
 
 
 	function start() {
-
 		Login.find((response, err)=>{
-
 			if (!response.user){
 				new Loginpage();
 				return;
 			} else {
-
-				// Save current logged in user
+				// Save currently logged in user
 				user = response.user;
-				console.log('Current logged in user: ', user);
 
 				new Navbar();
 

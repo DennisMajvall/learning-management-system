@@ -40,6 +40,11 @@ class RestEntity {
 
 		$.ajax({
 			url: this.baseUrl + idOrQuery,
+			beforeSend: function(xhr) {
+				// Fix a bug( console error) in some versions of firefox
+				if (xhr.overrideMimeType)
+					xhr.overrideMimeType("application/json");
+			},
 			type: "GET",
 			dataType: "json",
 			success: callback,

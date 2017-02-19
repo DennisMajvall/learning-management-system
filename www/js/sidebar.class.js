@@ -1,21 +1,19 @@
 class Sidebar {
 
 	constructor() {
-		// When we have login working we won't have to 'find' Students (or Teachers)
-		// and instead just populate the courses of the one logged in.
 		let courseHashMap = {};
 		let that = this;
 		let currentUser = user;
 
-		if(currentUser.role != 'Teacher'){
-
+		if (currentUser.role != 'Teacher') {
 			Student.find(currentUser._id, function(student,err){
-				console.log(student);
 				currentUser = student;
+				populateCourses(user.courses);
 			});
+		} else {
+			populateCourses(user.courses);
 		}
-		
-		populateCourses(currentUser.courses);
+
 
 		function populateCourses(courses) {
 			let coursesIds = courses.map( course => '"' + course + '"' );
@@ -32,10 +30,11 @@ class Sidebar {
 			});
 
 			var settingsObj = {
-				header: 'Learing Management System',
 				courses: courses,
+				header: 'Learning Management System',
+				role: currentUser.role.toLowerCase(),
 				picture: currentUser.picture,
-				education: currentUser.educations ? currentUser.educations[0].name : 'false',
+				education: currentUser.educations ? currentUser.educations[0].name : '',
 				booking: 'Book a room',
 				account: 'Your Account',
 				fullname: currentUser.firstname + ' ' + currentUser.lastname,
@@ -46,8 +45,8 @@ class Sidebar {
 			$('.sidebar-container').template('sidebar', settingsObj);
 
 			$(".nav-toggle, .menu-toggle").click(function(e) {
-			    e.preventDefault();
-			    $(".wrapper").toggleClass("toggled");
+				e.preventDefault();
+				$(".sidebar-slide").toggleClass("visible");
 			});
 		}
 
@@ -56,7 +55,6 @@ class Sidebar {
 		});
 
 		function onLogout(response, err) {
-			console.log('onLogout', response, 'errorMessage', err);
 			location.reload();
 		}
 
@@ -67,10 +65,19 @@ class Sidebar {
 			$('.student-announcement-container').empty();
 			$('.teacher-messages-container').empty();
 			$('.front-course-container').empty().template('course-page', { course: course });
-			
+
 			if ($(window).width() < 768) {
 				$('.menu-toggle').trigger('click');
 			}
+		});
+
+		$('.front-course-container').on('click', 'button.remove-item', function(){
+			let id = $(this).attr('list-item-id');
+			let courseId = $(this).closest('section.course-page').attr('list-item-id');
+			let course = that.courseHashMap[id];
+
+			removeStudents(id, course);
+
 		});
 	}
 }
