@@ -1,4 +1,4 @@
-class AdminMenuSlider {
+class AdminSidebar {
     constructor(){
         $('.sidebar-container').template('admin-sidebar',{
             header: 'Learning Management System',

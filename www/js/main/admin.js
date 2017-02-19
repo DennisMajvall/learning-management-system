@@ -30,8 +30,7 @@ function loadAdmin(callback) {
 
 	function onTemplatesLoaded() {
 		let category = getParameterFromUrl('cat');
-
-		new AdminMenuSlider();
+		new AdminSidebar();
 
 		if (category) {
 			new AdminSearch(category).init();
