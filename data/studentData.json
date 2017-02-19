@@ -1,4 +1,12 @@
 [{
+  "username": "martin.lennervald@gmail.com",
+  "password": "martin123",
+  "firstname": "Martin",
+  "lastname": "Lennervald",
+  "phonenumber": "070-4153456",
+  "picture" : "student-4.png"
+},
+  {
   "username": "student@gmail.com",
   "password": "student",
   "firstname": "Mango",

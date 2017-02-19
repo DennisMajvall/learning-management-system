@@ -1,7 +1,8 @@
 <profile>
-	<img src="/images/profiles/${user.picture}" alt="${user.firstname} ${user.lastname}" title="${user.firstname} ${user.lastname}" />
+	<img src="/images/profiles/${user.picture}" alt="${user.firstname} ${user.lastname}" title="${user.firstname} ${user.lastname}"/>
 	<div class="profile-info">
 		<h4>${user.firstname} ${user.lastname}</h4>
 		<p>${user.phonenumber}, ${user.username}</p>
+		<button class="btn-xs btn-danger remove-item" list-item-id="${user._id}">X</button>
 	</div>
 </profile>
