@@ -95,27 +95,27 @@ class AdminEdit {
 		updateObj[plEntity] = mainItem[plEntity];
 		if(entity === "Student" || entity === "Teacher") {
 			Course.update(mainItem._id, updateObj, function() {
-				$('.admin-search-container').empty().template('admin-edit', {
+				$('.admin-search-container item').empty().template('admin-edit', {
 					type: "course",
 					item: mainItem
 				});
 			});
 		} else if(entity === "Course") {
 			Student.update(mainItem._id, updateObj, function() {
-				$('.admin-search-container').empty().template('admin-edit', {
+				$('.admin-search-container item').empty().template('admin-edit', {
 					type: "student",
 					item: mainItem
 				});
 			});
 			Teacher.update(mainItem._id, updateObj, function() {
-				$('.admin-search-container').empty().template('admin-edit', {
+				$('.admin-search-container item').empty().template('admin-edit', {
 					type: "teacher",
 					item: mainItem
 				});
 			});
 		} else if(entity === "Education") {
 			Course.update(mainItem._id, updateObj, function() {
-				$('.admin-search-container').empty().template('admin-edit', {
+				$('.admin-search-container item').empty().template('admin-edit', {
 					type: "course",
 					item: mainItem
 				});
