@@ -27,13 +27,18 @@ class CoursesOnFrontpage {
 		}
 
 
-		$('.front-course-container').on('click', '.show-course', function(){
+		$('.front-course-container').on('click', '.show-course', function() {
+			e.preventDefault();
 			let id = $(this).data('id');
 			let course = that.courseHashMap[id];
 
 			$('.student-announcement-container').empty();
 			$('.teacher-messages-container').empty();
-			$('.front-course-container').empty().template('course-page', { course: course });
+			$(".sidebar-slide").removeClass("visible");
+			$('.front-course-container').empty().template('course-page', {
+				course: course,
+				role: user.role.toLowerCase()
+			});
 		});
 	}
 }

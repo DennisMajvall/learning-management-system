@@ -34,8 +34,7 @@ class AdminSearch {
 		let that = this;
 
 		// on item click
-		this.container.on('click', '.search-list li', onItemClick);
-		function onItemClick(e) {
+		this.container.on('click', '.search-list li', function(e) {
     		if(e.target != $(this).children('a')[0])
 				return;
 
@@ -47,14 +46,13 @@ class AdminSearch {
 				type: that.dbType,
 				item: item
 			});
-		}
+		});
 
 		// search box
 		let oldInputLength = 0;
 		let delayTimeout = null;
 
-		this.container.on('keyup', 'input[type="search"]', onKeyUp);
-		function onKeyUp() {
+		this.container.on('keyup', 'input[type="search"]', function() {
 			let input = $(this).val().trim();
 
 			// abort if the input.length hasn't changed.
@@ -69,13 +67,12 @@ class AdminSearch {
 				that.filter.run(input, that.displayItems, that);
 				delayTimeout = null;
 			}, 300);
-		}
+		});
 
-		$('body').on('click', 'a.increase-limit', onIncreaseLimit);
-		function onIncreaseLimit() {
+		$('body').on('click', 'a.increase-limit', function() {
 			that.filter.increaseLimit();
 			that.filter.run($('input[type="search"]').val().trim(), that.displayItems, that);
-		}
+		});
 	}
 
 	displayItems(that) {
