@@ -35,14 +35,14 @@
 				</div>
 			</div>
 			[if day.bookings != 'none']
-				[repeat day.bookings, booking]
-					<div class="bookings">
+				<div class="bookings">
+					[repeat day.bookings, booking]
 						<div class="booking col-xs-${booking.hours}">
 							<p>Bokad av: <span class="info-text">${booking.bookedBy}</span></p>
 							<p>Klass: <span class="info-text">${booking.course.name}</span></p>
 						</div>
-					</div>
-				[endrepeat]
+					[endrepeat]
+				</div>
 			[endif]
 		</div>
 		<div class="vspace"></div>

@@ -32,7 +32,6 @@ class WeekPlanner{
 		  		date.setHours(0,0,0,0);
 
 		  		findBookings(date, function(returnObj){
-		  			console.log(returnObj.course);
 			  		thisWeek.push({
 			  			timestamp: returnObj.date.getTime(),
 			  			date: returnObj.date.getDate(),
@@ -102,6 +101,11 @@ class WeekPlanner{
 	  		});
 
 	  		$('.page-content').on('click', '.week-schedule-row', function(){
+	  			// If the day already have a booking, prevent user from booking on the day
+	  			if($(this).find('.bookings').children().length){
+	  				console.log('quitting');
+	  				return;
+	  			}
 	  			var clickedDate = ($(this).data('timestamp'));
 
   				var date = new Date(clickedDate);
