@@ -1,26 +1,31 @@
 [
 	{
 		"name": "Rum 1",
+		"description": "Bla",
 		"type": "classroom",
 		"seats": "50"
 	},
 	{
 		"name": "Rum 2",
+		"description": "Bla",
 		"type": "classroom",
 		"seats": "50"
 	},
 	{
 		"name": "Rum 3",
+		"description": "Bla",
 		"type": "classroom",
 		"seats": "50"
 	},
 	{
 		"name": "Rum 4",
+		"description": "Bla",
 		"type": "classroom",
 		"seats": "50"
 	},
 	{
 		"name": "Rum 5",
+		"description": "Bla",
 		"type": "classroom",
 		"seats": "50"
 	}
