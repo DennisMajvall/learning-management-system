@@ -13,8 +13,8 @@ function loadTeacher(callback) {
 		new WeekPlanner();
 		new BookingPage();
 		new Sidebar();
-		// new TeacherMessage();
-		// new CoursesOnFrontpage("Teacher");
+		new TeacherMessage();
+		new CoursesOnFrontpage("Teacher");
 		callback();
 	}
 }

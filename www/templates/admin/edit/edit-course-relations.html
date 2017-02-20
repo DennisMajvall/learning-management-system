@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-3">
-		<div class="list-group" item-type="teachers">
+		<div class="list-group" item-type="Teacher">
 			<h4>Teachers:</h4>
 			[repeat item.teachers, teacher]
 				<a class="list-group-item" list-item-id="${teacher._id}">${teacher.firstname} ${teacher.lastname}</a>
@@ -8,7 +8,7 @@
 		</div>
 	</div>
 	<div class="col-xs-3">
-		<div class="list-group" item-type="students">
+		<div class="list-group" item-type="Student">
 			<h4>Students:</h4>
 			[repeat item.students, student]
 				<a class="list-group-item" list-item-id="${student._id}">${student.firstname} ${student.lastname}</a>
