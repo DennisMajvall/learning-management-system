@@ -73,8 +73,8 @@ class AdminFilter {
 			if (items.hasOwnProperty('_error')) {
 				console.log('error', items._error);
 			} else {
-				this.removeDuplicateItems(items, this.itemHashMap);
-				items.map(item => this.itemHashMap[item._id] = item);
+				this.removeDuplicateItems(items, adminSearchHashMap);
+				items.map(item => adminSearchHashMap[item._id] = item);
 			}
 			callback();
 		});
@@ -91,8 +91,8 @@ class AdminFilter {
 					items = [];
 				}
 				items.forEach((itemArray) => {
-					this.removeDuplicateItems(itemArray, this.itemHashMap);
-					itemArray.map(item => this.itemHashMap[item._id] = item);
+					this.removeDuplicateItems(itemArray, adminSearchHashMap);
+					itemArray.map(item => adminSearchHashMap[item._id] = item);
 				});
 			}
 			callback();
@@ -124,7 +124,6 @@ class AdminFilter {
 
 	run(input, callback, adminSearch) {
 		let that = this;
-		this.itemHashMap = {};
 		let queries = [];
 
 		if (!input.length) {
@@ -141,13 +140,13 @@ class AdminFilter {
 
 		function whenDone() {
 			if (--numQueries === 0) {
-				callback(that.itemHashMap, adminSearch);
+				callback(adminSearch);
 			}
 		}
 	}
 
-	removeDuplicateItems(items, itemHashMap) {
-		for (var value in itemHashMap) {
+	removeDuplicateItems(items) {
+		for (var value in adminSearchHashMap) {
 			if (items.hasOwnProperty(value)) {
 				delete items[value];
 			}

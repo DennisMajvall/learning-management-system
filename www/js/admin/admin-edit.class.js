@@ -1,10 +1,9 @@
 class AdminEdit {
 
 	constructor(dbSchema, findItemFunc) {
-
 		let that = this;
 
-		$('.admin-result-container').on('click', 'button.delete-item', function() {
+		$('.admin-search-container').on('click', 'button.delete-item', function() {
 			let item = findItemFunc($(this));
 
 			dbSchema.delete(item._id, () => {
@@ -12,7 +11,7 @@ class AdminEdit {
 			});
 		});
 
-		$('.admin-result-container').on('click', 'button.save-item', function() {
+		$('.admin-search-container').on('click', 'button.save-item', function() {
 			let item = findItemFunc($(this));
 			let objectToSave = Object.assign({}, item);
 
@@ -26,7 +25,7 @@ class AdminEdit {
 			});
 		});
 
-		$('.admin-result-container').on('keyup', '[bind-key]', function() {
+		$('.admin-search-container').on('keyup', '[bind-key]', function() {
 			let item = findItemFunc($(this));
 			let key = $(this).attr('bind-key');
 
@@ -34,89 +33,89 @@ class AdminEdit {
 		});
 
 		// highlight items
-		$('.admin-result-container').on('click', 'a', function() {
+		$('.admin-search-container').on('click', '.list-group a', function() {
 			$(this).toggleClass('active');
 		});
 
 		// remove marked items
-		$('.admin-result-container').on('click', 'button.remove-item', function() {
+		$('.admin-search-container').on('click', 'button.remove-item', function() {
 			let studentsToRemove = [];
 			let teachersToRemove = [];
 			let coursesToRemove = [];
 			let educationsToRemove = [];
-			let itemsToRemove = $('.admin-result-container a.active');
+			let itemsToRemove = $('.admin-search-container a.active');
 
 			// use .edit-buttons as a referens point to get course
-			let mainItem = findItemFunc($('.admin-result-container .delete-item'));
+			let mainItem = findItemFunc($('.admin-search-container .delete-item'));
 
 			that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove, educationsToRemove);
 
-			if(studentsToRemove.length > 0){
+			if(studentsToRemove.length > 0) {
 				that.removeById("Student", studentsToRemove, mainItem, that);
 			}
-			if(teachersToRemove.length > 0){
+			if(teachersToRemove.length > 0) {
 				that.removeById("Teacher", teachersToRemove, mainItem, that);
 			}
-			if(educationsToRemove.length > 0){
+			if(educationsToRemove.length > 0) {
 				that.removeById("Education", educationsToRemove, mainItem, that);
 			}
-			if(coursesToRemove.length > 0){
+			if(coursesToRemove.length > 0) {
 				that.removeById("Course", coursesToRemove, mainItem, that);
 			}
 		});
 	}
 
-	sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove, educationsToRemove){
-		itemsToRemove.each(function(){
+	sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove, educationsToRemove) {
+		itemsToRemove.each(function() {
 			let itemCategory = $(this).closest('[item-type]').attr('item-type');
 			let itemId = $(this).attr('list-item-id');
 
-			if(itemCategory === "Student"){
+			if(itemCategory === "Student") {
 				studentsToRemove.push(itemId);
-			} else if(itemCategory === "Teacher"){
+			} else if(itemCategory === "Teacher") {
 				teachersToRemove.push(itemId);
-			} else if(itemCategory === "Education"){
+			} else if(itemCategory === "Education") {
 				educationsToRemove.push(itemId);
-			} else if(itemCategory === "Course"){
+			} else if(itemCategory === "Course") {
 				coursesToRemove.push(itemId);
 			}
 		});
 	}
 
-	removeById(entity, ids, mainItem, that){
+	removeById(entity, ids, mainItem, that) {
 		var plEntity = entity.toLowerCase() + 's';
-		mainItem[plEntity] = mainItem[plEntity].filter(function(item){
+		mainItem[plEntity] = mainItem[plEntity].filter(function(item) {
 			let shouldKeep = ids.indexOf(item._id) == -1;
-			if(!shouldKeep){
+			if(!shouldKeep) {
 				that.removeFromEntity(entity, item, mainItem);
 			}
 			return shouldKeep;
 		});
 		var updateObj = {};
 		updateObj[plEntity] = mainItem[plEntity];
-		if(entity === "Student" || entity === "Teacher"){
-			Course.update(mainItem._id, updateObj, function(){
-				$('.admin-result-container').empty().template('admin-edit', {
+		if(entity === "Student" || entity === "Teacher") {
+			Course.update(mainItem._id, updateObj, function() {
+				$('.admin-search-container').empty().template('admin-edit', {
 					type: "course",
 					item: mainItem
 				});
 			});
-		} else if(entity === "Course"){
-			Student.update(mainItem._id, updateObj, function(){
-				$('.admin-result-container').empty().template('admin-edit', {
+		} else if(entity === "Course") {
+			Student.update(mainItem._id, updateObj, function() {
+				$('.admin-search-container').empty().template('admin-edit', {
 					type: "student",
 					item: mainItem
 				});
 			});
-			Teacher.update(mainItem._id, updateObj, function(){
-				$('.admin-result-container').empty().template('admin-edit', {
+			Teacher.update(mainItem._id, updateObj, function() {
+				$('.admin-search-container').empty().template('admin-edit', {
 					type: "teacher",
 					item: mainItem
-				});				
+				});
 			});
-		} else if(entity === "Education"){
-			Course.update(mainItem._id, updateObj, function(){
-				$('.admin-result-container').empty().template('admin-edit', {
+		} else if(entity === "Education") {
+			Course.update(mainItem._id, updateObj, function() {
+				$('.admin-search-container').empty().template('admin-edit', {
 					type: "course",
 					item: mainItem
 				});
@@ -124,27 +123,27 @@ class AdminEdit {
 		}
 	}
 
-	removeFromEntity(entity, obj, mainItem){
-		if(entity === "Student" || entity === "Teacher"){
-			obj.courses = obj.courses.filter(function(course){
+	removeFromEntity(entity, obj, mainItem) {
+		if(entity === "Student" || entity === "Teacher") {
+			obj.courses = obj.courses.filter(function(course) {
 				return mainItem._id.indexOf(course) == -1;
 			});
 			window[entity].update(obj._id, {courses: obj.courses});
 		}
 
-		if(entity === "Course"){
-			obj.students = obj.students.filter(function(student){
+		if(entity === "Course") {
+			obj.students = obj.students.filter(function(student) {
 				return mainItem._id.indexOf(student) == -1;
 			});
-			obj.teachers = obj.teachers.filter(function(teacher){
+			obj.teachers = obj.teachers.filter(function(teacher) {
 				return mainItem._id.indexOf(teacher) == -1;
 			});
 			window[entity].update(obj._id, {students: obj.students});
 			window[entity].update(obj._id, {teachers: obj.teachers});
 		}
 
-		if(entity === "Education"){
-			obj.courses = obj.courses.filter(function(course){
+		if(entity === "Education") {
+			obj.courses = obj.courses.filter(function(course) {
 				return mainItem._id.indexOf(course) == -1;
 			});
 			window[entity].update(obj._id, {courses: obj.courses});

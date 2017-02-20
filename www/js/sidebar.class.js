@@ -6,7 +6,7 @@ class Sidebar {
 		let currentUser = user;
 
 		if (currentUser.role != 'Teacher') {
-			Student.find(currentUser._id, function(student,err){
+			Student.find(currentUser._id, function(student, err) {
 				currentUser = student;
 				populateCourses(user.courses);
 			});
@@ -50,28 +50,25 @@ class Sidebar {
 			});
 		}
 
-		$('.sidebar-container').on('click', '.log-out', function(){
+		$('.sidebar-container').on('click', '.log-out', function() {
 			Login.delete(onLogout);
 		});
 
 		function onLogout(response, err) {
-			location.reload();
+			location.href = '/';
 		}
 
-		$('.sidebar-container').on('click', '.menu-choice-courses', function(){
+		$('.sidebar-container').on('click', '.menu-choice-courses', function() {
 			let id = $(this).data('id');
 			let course = that.courseHashMap[id];
 
 			$('.student-announcement-container').empty();
 			$('.teacher-messages-container').empty();
 			$('.front-course-container').empty().template('course-page', { course: course, role: user.role });
-
-			if ($(window).width() < 768) {
-				$('.menu-toggle').trigger('click');
-			}
+			$(".sidebar-slide").removeClass("visible");
 		});
 
-		$('.front-course-container').on('click', 'button.remove-item', function(){
+		$('.front-course-container').on('click', 'button.remove-item', function() {
 			let id = $(this).attr('list-item-id');
 			let courseId = $(this).closest('section.course-page').attr('course-id');
 			let course = that.courseHashMap[courseId];
@@ -80,11 +77,11 @@ class Sidebar {
 		});
 	}
 
-	removeById(id, mainItem, that){
-		mainItem.students = mainItem.students.filter(function(item){
+	removeById(id, mainItem, that) {
+		mainItem.students = mainItem.students.filter(function(item) {
 			let shouldKeep = id !== item._id;
-			
-			if(!shouldKeep){
+
+			if(!shouldKeep) {
 				that.removeCourseFromEntity(item, mainItem);
 			}
 			return shouldKeep;
@@ -94,8 +91,8 @@ class Sidebar {
 		Course.update(mainItem._id, updateObj);
 	}
 
-	removeCourseFromEntity(obj, mainItem){
-		obj.courses = obj.courses.filter(function(course){
+	removeCourseFromEntity(obj, mainItem) {
+		obj.courses = obj.courses.filter(function(course) {
 			return mainItem._id.indexOf(course) == -1;
 		});
 
