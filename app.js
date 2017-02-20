@@ -155,6 +155,11 @@ app.get('/forgot-password/:username',(req, res)=>{
 
 });
 
+// A path to get user roles
+app.get('*',(req, res)=>{
+	res.sendFile(__dirname + '/www/index.html');
+});
+
 // Connect to mongoDB
 // and when that is done start the express server
 mongoose.connect('mongodb://127.0.0.1/lms');

@@ -1,4 +1,3 @@
-var Router = new Router();
 // List ALL RestEntity classes here
 var Admin = new RestEntity('admin');
 var Announcement = new RestEntity('announcement');
@@ -22,7 +21,7 @@ var routes = {};
 	], start);
 
 	function start() {
-		Login.find((response, err)=>{
+		Login.find((response, err) => {
 			if (!response.user){
 				new Loginpage();
 				return;
@@ -48,6 +47,6 @@ var routes = {};
 	}
 
 	function postStart() {
-
+		new Router();
 	}
 })();

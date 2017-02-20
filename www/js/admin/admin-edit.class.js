@@ -1,18 +1,20 @@
 class AdminEdit {
 
 	constructor(dbSchema, findItemFunc) {
-
 		let that = this;
+		this.container = $('.admin-search-container');
 
-		$('.admin-result-container').on('click', 'button.delete-item', function() {
+		this.container.on('click', 'button.delete-item', onDelete);
+		function onDelete() {
 			let item = findItemFunc($(this));
 
 			dbSchema.delete(item._id, () => {
 				location.reload();
 			});
-		});
+		}
 
-		$('.admin-result-container').on('click', 'button.save-item', function() {
+		this.container.on('click', 'button.save-item', onSave);
+		function onSave() {
 			let item = findItemFunc($(this));
 			let objectToSave = Object.assign({}, item);
 
@@ -24,22 +26,25 @@ class AdminEdit {
 			dbSchema.update(item._id, objectToSave, () => {
 				location.reload();
 			});
-		});
+		}
 
-		$('.admin-result-container').on('keyup', '[bind-key]', function() {
+		this.container.on('keyup', '[bind-key]', onKeyUp);
+		function onKeyUp(){
 			let item = findItemFunc($(this));
 			let key = $(this).attr('bind-key');
 
 			item[key] = $(this).val().trim();
-		});
+		}
 
 		// highlight items
-		$('.admin-result-container').on('click', 'a', function() {
+		this.container.on('click', '.list-group a', onHighlightItem);
+		function onHighlightItem() {
 			$(this).toggleClass('active');
-		});
+		}
 
 		// remove marked items
-		$('.admin-result-container').on('click', 'button.remove-item', function() {
+		this.container.on('click', 'button.remove-item', onRemoveItem);
+		function onRemoveItem() {
 			let studentsToRemove = [];
 			let teachersToRemove = [];
 			let itemsToRemove = $('.admin-result-container a.active');
@@ -60,7 +65,7 @@ class AdminEdit {
 					that.removeById("Teacher", teachersToRemove, mainItem, that);
 				}
 			});
-		});
+		}
 	}
 
 	sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove){
