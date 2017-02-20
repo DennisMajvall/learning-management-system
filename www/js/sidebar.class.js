@@ -65,7 +65,7 @@ class Sidebar {
 			$('.student-announcement-container').empty();
 			$('.teacher-messages-container').empty();
 			$('.front-course-container').empty().template('course-page', { course: course, role: user.role });
-			$(".sidebar-slide").removeClass("visible");
+			$('.sidebar-slide').removeClass('visible');
 		});
 
 		$('.front-course-container').on('click', 'button.remove-item', function() {
@@ -73,11 +73,11 @@ class Sidebar {
 			let courseId = $(this).closest('section.course-page').attr('course-id');
 			let course = that.courseHashMap[courseId];
 
-			that.removeById(id, course, that);
+			that.removeById(id, course, that, this);
 		});
 	}
 
-	removeById(id, mainItem, that) {
+	removeById(id, mainItem, that, domThis) {
 		mainItem.students = mainItem.students.filter(function(item) {
 			let shouldKeep = id !== item._id;
 
@@ -88,7 +88,9 @@ class Sidebar {
 		});
 		var updateObj = {};
 		updateObj.students = mainItem.students;
-		Course.update(mainItem._id, updateObj);
+		Course.update(mainItem._id, updateObj, function(){
+			$(domThis).closest('profile').remove();
+		});
 	}
 
 	removeCourseFromEntity(obj, mainItem) {
