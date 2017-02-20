@@ -9,12 +9,9 @@ var Student = new RestEntity('student');
 var Teacher = new RestEntity('teacher');
 var Booking = new RestEntity('booking');
 
-// Global object to hold current user
+// Global objects
 var user = {};
-
-// For test, set a static role with,
-// var role = role || "Admin";
-var role;
+var routes = {};
 
 (()=>{
 	// Put templates used by ALL ROLES here
@@ -22,7 +19,6 @@ var role;
 		'navbar',
 		'loginpage'
 	], start);
-
 
 	function start() {
 		Login.find((response, err)=>{
@@ -35,14 +31,16 @@ var role;
 
 				new Navbar();
 
-				if (user.role){ // just for test
-					if (user.role == "Admin")
+				switch (user.role) {
+					case "Admin":
 						loadAdmin(postStart);
-					else if (user.role == "Student")
+						break;
+					case "Student":
 						loadStudent(postStart);
-					else if (user.role == "Teacher")
+						break;
+					case "Teacher":
 						loadTeacher(postStart);
-					return;
+						break;
 				}
 			}
 		});
