@@ -1,4 +1,3 @@
-var Router = new Router();
 // List ALL RestEntity classes here
 var Admin = new RestEntity('admin');
 var Announcement = new RestEntity('announcement');
