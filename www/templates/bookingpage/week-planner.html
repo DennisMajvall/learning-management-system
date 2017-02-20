@@ -26,7 +26,6 @@
 		<div class="col-xs-1"> 16 </div>
 		<div class="col-xs-1"> 17 </div>
 	</div>
-	
 	[repeat week, day]	
 		<div class="row week-schedule-row" data-timestamp='${day.timestamp}'>
 			<div class="col-xs-2">
@@ -35,9 +34,16 @@
 				<p class="date"> ${day.date} </p> 
 				</div>
 			</div>
-			<div class="bookings">
-				
-			</div>
+			[if day.bookings != 'none']
+				[repeat day.bookings, booking]
+					<div class="bookings">
+						<div class="booking col-xs-${booking.hours}">
+							<p>Bokad av: <span class="info-text">${booking.bookedBy}</span></p>
+							<p>Klass: <span class="info-text">${booking.course.name}</span></p>
+						</div>
+					</div>
+				[endrepeat]
+			[endif]
 		</div>
 		<div class="vspace"></div>
 	[endrepeat]
