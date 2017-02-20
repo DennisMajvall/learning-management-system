@@ -42,59 +42,112 @@ class AdminEdit {
 		$('.admin-result-container').on('click', 'button.remove-item', function() {
 			let studentsToRemove = [];
 			let teachersToRemove = [];
+			let coursesToRemove = [];
+			let educationsToRemove = [];
 			let itemsToRemove = $('.admin-result-container a.active');
 
 			// use .edit-buttons as a referens point to get course
 			let mainItem = findItemFunc($('.admin-result-container .delete-item'));
 
-			itemsToRemove.each(function(){
-				let itemCategory = $(this).closest('[item-type]').attr('item-type');
-				let itemId = $(this).attr('list-item-id');
+			that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove, educationsToRemove);
 
-				that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove);
-
-				if(studentsToRemove.length > 0){
-					that.removeById("Student", studentsToRemove, mainItem, that);
-				}
-				if(teachersToRemove.length > 0){
-					that.removeById("Teacher", teachersToRemove, mainItem, that);
-				}
-			});
+			if(studentsToRemove.length > 0){
+				that.removeById("Student", studentsToRemove, mainItem, that);
+			}
+			if(teachersToRemove.length > 0){
+				that.removeById("Teacher", teachersToRemove, mainItem, that);
+			}
+			if(educationsToRemove.length > 0){
+				that.removeById("Education", educationsToRemove, mainItem, that);
+			}
+			if(coursesToRemove.length > 0){
+				that.removeById("Course", coursesToRemove, mainItem, that);
+			}
 		});
 	}
 
-	sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove){
+	sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove, educationsToRemove){
 		itemsToRemove.each(function(){
 			let itemCategory = $(this).closest('[item-type]').attr('item-type');
 			let itemId = $(this).attr('list-item-id');
 
-			if(itemCategory === "students"){
+			if(itemCategory === "Student"){
 				studentsToRemove.push(itemId);
-			} else if(itemCategory === "teachers"){
+			} else if(itemCategory === "Teacher"){
 				teachersToRemove.push(itemId);
+			} else if(itemCategory === "Education"){
+				educationsToRemove.push(itemId);
+			} else if(itemCategory === "Course"){
+				coursesToRemove.push(itemId);
 			}
 		});
 	}
 
 	removeById(entity, ids, mainItem, that){
-		// note entity should be Student or Teacher
 		var plEntity = entity.toLowerCase() + 's';
 		mainItem[plEntity] = mainItem[plEntity].filter(function(item){
 			let shouldKeep = ids.indexOf(item._id) == -1;
 			if(!shouldKeep){
-				that.removeCourseFromEntity(entity, item, mainItem);
+				that.removeFromEntity(entity, item, mainItem);
 			}
 			return shouldKeep;
 		});
 		var updateObj = {};
 		updateObj[plEntity] = mainItem[plEntity];
-		Course.update(mainItem._id, updateObj);
+		if(entity === "Student" || entity === "Teacher"){
+			Course.update(mainItem._id, updateObj, function(){
+				$('.admin-result-container').empty().template('admin-edit', {
+					type: "course",
+					item: mainItem
+				});
+			});
+		} else if(entity === "Course"){
+			Student.update(mainItem._id, updateObj, function(){
+				$('.admin-result-container').empty().template('admin-edit', {
+					type: "student",
+					item: mainItem
+				});
+			});
+			Teacher.update(mainItem._id, updateObj, function(){
+				$('.admin-result-container').empty().template('admin-edit', {
+					type: "teacher",
+					item: mainItem
+				});				
+			});
+		} else if(entity === "Education"){
+			Course.update(mainItem._id, updateObj, function(){
+				$('.admin-result-container').empty().template('admin-edit', {
+					type: "course",
+					item: mainItem
+				});
+			});
+		}
 	}
 
-	removeCourseFromEntity(entity, obj, mainItem){
-		obj.courses = obj.courses.filter(function(course){
-			return mainItem._id.indexOf(course) == -1;
-		});
-		window[entity].update(obj._id, {courses: obj.courses});
+	removeFromEntity(entity, obj, mainItem){
+		if(entity === "Student" || entity === "Teacher"){
+			obj.courses = obj.courses.filter(function(course){
+				return mainItem._id.indexOf(course) == -1;
+			});
+			window[entity].update(obj._id, {courses: obj.courses});
+		}
+
+		if(entity === "Course"){
+			obj.students = obj.students.filter(function(student){
+				return mainItem._id.indexOf(student) == -1;
+			});
+			obj.teachers = obj.teachers.filter(function(teacher){
+				return mainItem._id.indexOf(teacher) == -1;
+			});
+			window[entity].update(obj._id, {students: obj.students});
+			window[entity].update(obj._id, {teachers: obj.teachers});
+		}
+
+		if(entity === "Education"){
+			obj.courses = obj.courses.filter(function(course){
+				return mainItem._id.indexOf(course) == -1;
+			});
+			window[entity].update(obj._id, {courses: obj.courses});
+		}
 	}
 }
