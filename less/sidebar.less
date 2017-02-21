@@ -5,6 +5,8 @@
 	width: 25%; // col-sm-3
 }
 
+
+
 .sidebar {
 	overflow-y: auto;
 	background: @custom-color-black;
@@ -12,7 +14,14 @@
 	font-size: 16px;
 	letter-spacing: 1px;
 
-	a { color: @custom-color-white; }
+	header a {
+		color: @custom-color-white;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	a {color: @custom-color-white;}
 
 
 	.menu {
