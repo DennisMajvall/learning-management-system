@@ -6,7 +6,8 @@ function loadTeacher(callback) {
 		'listed-profile',
 		'booking-page',
 		'bookingpage/week-planner',
-		'sidebar'
+		'sidebar',
+		'profile'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {

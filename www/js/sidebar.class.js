@@ -14,7 +14,6 @@ class Sidebar {
 			populateCourses(user.courses);
 		}
 
-
 		function populateCourses(courses) {
 			let coursesIds = courses.map( course => '"' + course + '"' );
 			let queryString = 'find/{ _id: { $in: [' + coursesIds + '] } }';
@@ -50,7 +49,22 @@ class Sidebar {
 			});
 		}
 
-		$('.sidebar-container').on('click', '.log-out', function() {
+
+		// Open the user profile page
+		$('.sidebar-container').on('click', '.settings-icon', function(){
+			// Clear the page
+			$('.page-content').children().empty();
+			// Add html template for profile
+			$('.page-content').template('profile', {
+				firstname: currentUser.firstname,
+				lastname: currentUser.lastname,
+				picture: settingsObj[picture]
+			})
+		});
+
+		// Log out
+		$('.sidebar-container').on('click', '.log-out', function(){
+
 			Login.delete(onLogout);
 		});
 
@@ -82,6 +96,7 @@ class Sidebar {
 			let shouldKeep = id !== item._id;
 
 			if(!shouldKeep) {
+
 				that.removeCourseFromEntity(item, mainItem);
 			}
 			return shouldKeep;
