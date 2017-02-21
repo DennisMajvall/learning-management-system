@@ -1,11 +1,7 @@
 class WeekPlanner{
 	constructor(){
-		// return an array of date objects for start (monday)
-		// and end (friday) of the current week
 		var selectedRoom;
-		var now = new Date();
-		var monday = new Date(now);
-		monday.setDate(monday.getDate() - monday.getDay() + 1);
+		var week = getWeekDates(moment().startOf('isoweek'));
 
 		loadRoom();
 		createEventListeners();
@@ -18,42 +14,67 @@ class WeekPlanner{
 		}
 
 		function loadWeek(){
-			createWeek(monday);
+			createWeek();
 		}
 
-		function createWeek(mondayDate){
-			var thisWeek = [];
+		function createWeek(){
+			var thisWeek = week;
+			var resultWeek = [];
 		  	var dayArr = ['.','M', 'T', 'O', 'T', 'F'];
+		  	var monthArr = ['Jan', 'Feb', 'Mar', 'Apr', 
+		  					'Maj', 'Jun', 'Jul', 'Aug', 
+		  					'Sep', 'Okt', 'Nov', 'Dec'];
 
 		  	// Get the current week counting from previous monday
 		  	for(let i = 0; i < 5; i++){
-		  		var date = new Date();
-		  		date.setDate(mondayDate.getDate() + i);
-		  		date.setHours(0,0,0,0);
-
+		  		var date = thisWeek[i];
 		  		findBookings(date, function(returnObj){
-			  		thisWeek.push({
-			  			timestamp: returnObj.date.getTime(),
-			  			date: returnObj.date.getDate(),
-			  			day: dayArr[returnObj.date.getDay()],
+			  		resultWeek.push({
+			  			timestamp: returnObj.date.format('x'),
+			  			date: returnObj.date.date(),
+			  			day: dayArr[returnObj.date.day()],
+			  			weekNum: returnObj.date.week(),
+			  			month: monthArr[returnObj.date.month()],
 			  			bookings: returnObj.bookings
 			  		});
-			  		if(thisWeek.length === 5){
-			  			thisWeek.sort(function(a,b){
+			  		if(resultWeek.length === 5){
+			  			resultWeek.sort(function(a,b){
 			  				return a.timestamp- b.timestamp;
 			  			});
-			  			createTemplate(thisWeek);
+			  			createTemplate(resultWeek);
 			  		}
 		  		});
 		  	}
-		  	return thisWeek;
+		}
+
+		function getWeekDates(start){
+			let returnWeek = [];
+
+			for(let i = 0; i < 5; i++){
+				returnWeek.push(start.clone().add(i,'day'));
+			}
+			return returnWeek;
+		}
+
+		function changeWeek(direction){
+
+			if(direction === 'next'){
+				let start = week[0].add(1, 'weeks');
+				console.log('next', week);
+				week = getWeekDates(start);
+			}
+			else{
+				let start = week[0].subtract(1, 'weeks');
+				console.log('prev', week);
+				week = getWeekDates(start);
+			}
 		}
 
 		function findBookings(date, callback){
 			Booking.find(`find/{ $and: [
 				{ room: "` + selectedRoom._id + `" },
-				{ date: ` + date.getTime() +  ` }
-			]}`, function(data,err){
+				{ date: ` + date.format('x') +  ` }]}`
+				,function(data,err){
 				var returnObj = {
 					date: date,
 					bookings: data
@@ -82,22 +103,22 @@ class WeekPlanner{
 	  			e.preventDefault();
 	  			e.stopPropagation();
 	  			
-	  			monday.setDate(monday.getDate() - 7);
-	  			createWeek(monday);
+	  			changeWeek('prev');
+	  			createWeek();
 	  		});
 
 	  		$('.page-content').on('click', '#next', function(e){
 	  			e.preventDefault();
 	  			e.stopPropagation();
 	  			
-	  			monday.setDate(monday.getDate() + 7);
-	  			createWeek(monday);
+	  			changeWeek('next');
+	  			createWeek();
 	  		});
 
 	  		$('.page-content').on('change', '#roomSelect', function(){
 	  			var roomName = $(this).val();
 	  			setSelectedRoom(roomName, loadWeek);
-	  			createWeek(monday);
+	  			createWeek();
 	  		});
 
 	  		$('.page-content').on('click', '.week-schedule-row', function(){
@@ -108,15 +129,13 @@ class WeekPlanner{
 	  			}
 	  			var clickedDate = ($(this).data('timestamp'));
 
-  				var date = new Date(clickedDate);
-  				var timeFrom = new Date(date.setHours(8)); 
-  				var timeTo = new Date(date.setHours(17)); 
-  				var hours = (timeTo.getHours() - timeFrom.getHours()) + 1;
-  				date.setHours(0,0,0,0);
+  				var date = moment(clickedDate);
+  				var timeFrom = date.clone().hour(8); 
+  				var timeTo = date.clone().hour(17);  
+  				var hours = 10;
 
   				Course.find('', function(data,err){
   					var course = data[0];
-  					console.log('kurs: ', course);
   					createBooking(selectedRoom, course, date,timeFrom,timeTo, hours);
   				});
 
@@ -124,16 +143,18 @@ class WeekPlanner{
 		            Booking.create({
 		                room: room._id,
 		                course: course,
-		                date: date.getTime(),
-		                timeFrom: timeFrom.getTime(),
-		                timeTo: timeTo.getTime(),
+		                date: date.format('x'),
+		                timeFrom: timeFrom.format('x'),
+		                timeTo: timeTo.format('x'),
 		                bookedBy: user.username,
 		                hours: hours
 		            }, function() {
-		                console.log('Bokade ' + selectedRoom.name + ' för ' + course.name + ' från ' + timeFrom + ' ' + 'till ' + '' + timeTo);
+		                console.log('Bokade ' + selectedRoom.name + 
+		                ' för ' + course.name + ' från ' + timeFrom + ' ' + 
+		                'till ' + '' + timeTo);
 		            });
 		        }
-		        createWeek(monday);
+		        createWeek();
 	  		});
 	  	}
 	}

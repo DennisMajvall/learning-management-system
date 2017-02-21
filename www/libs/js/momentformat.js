@@ -1,0 +1,2 @@
+// format moment
+moment().format();
