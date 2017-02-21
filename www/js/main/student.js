@@ -5,7 +5,8 @@ function loadStudent(callback) {
 		'frontpage/student-alert',
 		'course-page',
 		'listed-profile',
-		'sidebar'
+		'sidebar',
+		'profile'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
