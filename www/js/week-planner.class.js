@@ -128,16 +128,41 @@ class WeekPlanner{
 	  				return;
 	  			}
 	  			var clickedDate = ($(this).data('timestamp'));
+	  			presentModal(clickedDate);
 
-  				var date = moment(clickedDate);
-  				var timeFrom = date.clone().hour(8); 
-  				var timeTo = date.clone().hour(17);  
-  				var hours = 10;
+	  			function presentModal(date){
+	  				let thisDate = moment(date),
+	  					timeFrom = thisDate.clone().hours(8), 
+  						timeTo = thisDate.clone().hours(17),
+  						hours = (timeTo.hours() - timeFrom.hours()) + 1;
 
-  				Course.find('', function(data,err){
-  					var course = data[0];
-  					createBooking(selectedRoom, course, date,timeFrom,timeTo, hours);
-  				});
+	  				$('#bookingModal').find('.modal-title').text('Boka ' + selectedRoom.name);
+
+	  				$('#bookingModal').find('.modal-body').empty().append(
+	  					'<p> Datum: ' + thisDate.format('LL') + ' </p>' + 
+	  					'<p> Från klockan: ' + timeFrom.format('LT') + '</p>' + 
+	  					'<p> Till klockan: ' + timeTo.format('LT') + '</p>'
+	  				);
+	  				$('#bookingModal').modal('show');
+
+	  				$('.page-content').on('click', '.book-button', function(){
+	  					Course.find('', function(data,err){
+  							var course = data[0];
+  							createBooking(selectedRoom, course, thisDate,timeFrom,timeTo, hours);
+  							$('#bookingModal').modal('hide');
+  						});
+	  				});
+	  			}
+
+  				// var date = moment(clickedDate);
+  				// var timeFrom = date.clone().hour(8); 
+  				// var timeTo = date.clone().hour(17);  
+  				// var hours = (timeTo.hours() - timeFrom.hours()) + 1;
+
+  				// Course.find('', function(data,err){
+  				// 	var course = data[0];
+  				// 	createBooking(selectedRoom, course, date,timeFrom,timeTo, hours);
+  				// });
 
 	  			function createBooking(room, course, date, timeFrom, timeTo, hours) {
 		            Booking.create({
@@ -153,8 +178,8 @@ class WeekPlanner{
 		                ' för ' + course.name + ' från ' + timeFrom + ' ' + 
 		                'till ' + '' + timeTo);
 		            });
+		            loadWeek();
 		        }
-		        createWeek();
 	  		});
 	  	}
 	}
