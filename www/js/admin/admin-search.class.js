@@ -1,15 +1,19 @@
+var adminSearchHashMap =  {};
+
 class AdminSearch {
 
 	constructor(dbType) {
 		this.dbType = dbType;
-		this.itemHashMap = {};
 		this.container = $('.admin-search-container');
 	}
 
 	init() {
+		this.container.off();
 		this.dbSchema = this.getDbSchema();
+		adminSearchHashMap = {};
 		this.filter = new AdminFilter(this.dbType, this.dbSchema);
 
+		$('.admin-result-container').empty();
 		this.container.empty().template('admin-search', {
 			title: this.getTitleFromDbType(),
 			type: this.dbType
@@ -30,10 +34,15 @@ class AdminSearch {
 		let that = this;
 
 		// on item click
-		this.container.on('click', 'li', function() {
+		this.container.on('click', '.search-list li', function(e) {
+    		if(e.target != $(this).children('a')[0])
+				return;
+
 			let item = that.getItemIdFromElement($(this));
 
-			$('.admin-result-container').empty().template('admin-edit', {
+			$('.admin-search-container item').remove();
+
+			$(this).template('admin-edit', {
 				type: that.dbType,
 				item: item
 			});
@@ -66,12 +75,11 @@ class AdminSearch {
 		});
 	}
 
-	displayItems(itemHashMap, that) {
-		that.itemHashMap = itemHashMap;
-		let listElement = that.container.find('.search-list').empty();
+	displayItems(that) {
+		let listElement = that.container.find('.search-list');
 
-		listElement.template('admin-search-list', {
-			itemObj: itemHashMap,
+		listElement.empty().template('admin-search-list', {
+			itemObj: adminSearchHashMap,
 			type: that.dbType
 		});
 	}
@@ -81,7 +89,7 @@ class AdminSearch {
 		if (!correctElem)
 			console.log('getItemIdFromElement failed on', elem);
 
-		return this.itemHashMap[correctElem.attr('item-id')];
+		return adminSearchHashMap[correctElem.attr('item-id')];
 	}
 
 	getDbSchema() {

@@ -21,7 +21,7 @@ var routes = {};
 	], start);
 
 	function start() {
-		Login.find((response, err)=>{
+		Login.find((response, err) => {
 			if (!response.user){
 				new Loginpage();
 				return;
@@ -47,6 +47,6 @@ var routes = {};
 	}
 
 	function postStart() {
-
+		new Router();
 	}
 })();

@@ -9,15 +9,11 @@ class AnnouncementOnFrontpage {
 
 			announcements.forEach(function(announcement) {
 				let coursesNames = "";
-				let lastAnnouncement = false;
 				let maxCourses = Object.keys(announcement.courses).length;
 				let courseCount = 0;
 
 				announceCount++;
-
-				if(maxAnnounce === announceCount) {
-					lastAnnouncement = true;
-				}
+				let lastAnnouncement = maxAnnounce == announceCount;
 
 				Teacher.find(announcement.author, function(teacher) {
 					announcement.picture = teacher.picture;
@@ -33,13 +29,10 @@ class AnnouncementOnFrontpage {
 								coursesNames += ", " + course.name;
 							}
 
-							if(courseCount === maxCourses) {
-								announcement.courses = coursesNames;
-							}
-
 							if(lastAnnouncement === true && maxCourses === courseCount) {
+								announcement.courses = coursesNames;
+								console.log(announcements);
 								announcements = announcements.slice(0, 2);
-
 								$('.student-announcement-container').template('student-announcement', {announcements: announcements});
 							}
 						});

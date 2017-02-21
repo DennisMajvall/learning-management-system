@@ -1,4 +1,19 @@
 function loadAdmin(callback) {
+	// Set up routes
+	[
+		"admin",
+		"course",
+		"education",
+		"room",
+		"student",
+		"teacher"
+	].forEach((category) => {
+		delete routes['/' + category];
+		routes['/' + category] = () => {
+			new AdminSearch(category).init();
+		};
+	});
+
 	$.loadTemplates([
 		'edit/edit-admin',
 		'edit/edit-course',
@@ -29,14 +44,8 @@ function loadAdmin(callback) {
 	], onTemplatesLoaded, 'templates/admin');
 
 	function onTemplatesLoaded() {
-		let category = getParameterFromUrl('cat');
 		new AdminSidebar();
-
-		if (category) {
-			new AdminSearch(category).init();
-		} else {
-			new AdminFrontpage();
-		}
+		new AdminFrontpage();
 
 		callback();
 	}

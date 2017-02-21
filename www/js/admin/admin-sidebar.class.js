@@ -1,6 +1,6 @@
 class AdminSidebar {
-    constructor(){
-        $('.sidebar-container').template('admin-sidebar',{
+    constructor() {
+        $('.sidebar-container').template('admin-sidebar', {
             header: 'Learning Management System',
             data: 'Database',
             categories: [
@@ -23,9 +23,13 @@ class AdminSidebar {
 			$(".sidebar-slide").toggleClass("visible");
         });
 
-        $('.sidebar-container').on('click', '.log-out', function(){
+        $('.sidebar-container').on('click', '.log-out', function() {
             Login.delete(onLogout);
         });
+
+		$('.sidebar-container').on('click', '.menu-choice-courses', function() {
+			$(".sidebar-slide").removeClass("visible");
+		});
 
         function onLogout(response, err) {
             console.log('onLogout', response, 'errorMessage', err);
