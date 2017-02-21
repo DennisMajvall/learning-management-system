@@ -60,12 +60,10 @@ class WeekPlanner{
 
 			if(direction === 'next'){
 				let start = week[0].add(1, 'weeks');
-				console.log('next', week);
 				week = getWeekDates(start);
 			}
 			else{
 				let start = week[0].subtract(1, 'weeks');
-				console.log('prev', week);
 				week = getWeekDates(start);
 			}
 		}
@@ -97,6 +95,46 @@ class WeekPlanner{
 			});
 		}
 
+		function createBooking(room, course, date, timeFrom, timeTo, hours) {
+            Booking.create({
+                room: room._id,
+                course: course,
+                date: date.format('x'),
+                timeFrom: timeFrom.format('x'),
+                timeTo: timeTo.format('x'),
+                bookedBy: user.username,
+                hours: hours
+            }, function() {
+                console.log('Bokade ' + selectedRoom.name + 
+                ' för ' + course.name + ' från ' + timeFrom + ' ' + 
+                'till ' + '' + timeTo);
+            });
+            loadWeek();
+        }
+
+        function presentModal(date){
+			let thisDate = moment(date),
+				timeFrom = thisDate.clone().hours(8), 
+				timeTo = thisDate.clone().hours(17);
+
+			let dateCollection = {
+				date: thisDate,
+				from: timeFrom,
+				to: timeTo
+			}
+
+			$('#bookingModal').find('.modal-title').text('Boka ' + selectedRoom.name);
+
+			$('#bookingModal').find('.modal-body').empty().append(
+				'<p class="date"> Datum: ' + thisDate.format('LL') + ' </p>' + 
+				'<p> Från klockan: ' + timeFrom.format('LT') + '</p>' + 
+				'<p> Till klockan: ' + timeTo.format('LT') + '</p>'
+			);
+			$('#bookingModal').find('.modal-body').find('.date').data('dateObj', dateCollection);
+
+			$('#bookingModal').modal('show');
+		}
+
 		function createEventListeners(){
 
 	  		$('.page-content').on('click', '#prev', function(e){
@@ -121,65 +159,30 @@ class WeekPlanner{
 	  			createWeek();
 	  		});
 
+	  		$('.page-content').on('click', '.book-button', function(){
+				Course.find('', function(data,err){
+					let course = data[0];
+					let dateCollection = $('#bookingModal').find('.modal-body').find('.date').data('dateObj');
+					let hours = (dateCollection.to.hours() - dateCollection.from.hours()) + 1;
+					createBooking(selectedRoom,
+								 course, 
+								 dateCollection.date,
+								 dateCollection.from,
+								 dateCollection.to, 
+								 hours);
+				});
+				$('body').removeClass('modal-open');
+				$('.modal-backdrop').hide();
+			});
+
 	  		$('.page-content').on('click', '.week-schedule-row', function(){
 	  			// If the day already have a booking, prevent user from booking on the day
 	  			if($(this).find('.bookings').children().length){
-	  				console.log('quitting');
 	  				return;
 	  			}
+
 	  			var clickedDate = ($(this).data('timestamp'));
 	  			presentModal(clickedDate);
-
-	  			function presentModal(date){
-	  				let thisDate = moment(date),
-	  					timeFrom = thisDate.clone().hours(8), 
-  						timeTo = thisDate.clone().hours(17),
-  						hours = (timeTo.hours() - timeFrom.hours()) + 1;
-
-	  				$('#bookingModal').find('.modal-title').text('Boka ' + selectedRoom.name);
-
-	  				$('#bookingModal').find('.modal-body').empty().append(
-	  					'<p> Datum: ' + thisDate.format('LL') + ' </p>' + 
-	  					'<p> Från klockan: ' + timeFrom.format('LT') + '</p>' + 
-	  					'<p> Till klockan: ' + timeTo.format('LT') + '</p>'
-	  				);
-	  				$('#bookingModal').modal('show');
-
-	  				$('.page-content').on('click', '.book-button', function(){
-	  					Course.find('', function(data,err){
-  							var course = data[0];
-  							createBooking(selectedRoom, course, thisDate,timeFrom,timeTo, hours);
-  							$('#bookingModal').modal('hide');
-  						});
-	  				});
-	  			}
-
-  				// var date = moment(clickedDate);
-  				// var timeFrom = date.clone().hour(8); 
-  				// var timeTo = date.clone().hour(17);  
-  				// var hours = (timeTo.hours() - timeFrom.hours()) + 1;
-
-  				// Course.find('', function(data,err){
-  				// 	var course = data[0];
-  				// 	createBooking(selectedRoom, course, date,timeFrom,timeTo, hours);
-  				// });
-
-	  			function createBooking(room, course, date, timeFrom, timeTo, hours) {
-		            Booking.create({
-		                room: room._id,
-		                course: course,
-		                date: date.format('x'),
-		                timeFrom: timeFrom.format('x'),
-		                timeTo: timeTo.format('x'),
-		                bookedBy: user.username,
-		                hours: hours
-		            }, function() {
-		                console.log('Bokade ' + selectedRoom.name + 
-		                ' för ' + course.name + ' från ' + timeFrom + ' ' + 
-		                'till ' + '' + timeTo);
-		            });
-		            loadWeek();
-		        }
 	  		});
 	  	}
 	}
