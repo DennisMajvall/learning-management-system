@@ -193,8 +193,12 @@ class WeekPlanner{
 	  		});
 
 	  		$('.page-content').on('click', '.book-button', function(){
-				Course.find('', function(data,err){
-					let course = data[0];
+
+	  			let selectedCourseId = $('#courseSelect option:selected').attr('data-course-id');
+	  			console.log(selectedCourseId);
+
+				Course.find(selectedCourseId, function(data,err){
+					let course = data;
 					let dateInfo = $('#bookingModal').find('.modal-body').find('.date').data('dateObj');
 					let hours = (dateInfo.to.hours() - dateInfo.from.hours()) + 1;
 					createBooking(selectedRoom,

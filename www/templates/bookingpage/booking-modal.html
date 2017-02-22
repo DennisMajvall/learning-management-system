@@ -15,7 +15,7 @@
                 <label for="courseSelect" class="control-label">Välj kurs</label>
                 <select class="form-control" id="courseSelect">
                   [repeat courses, course]
-                    <option data-course-id=""> ${course.name} </option>
+                    <option data-course-id='${course._id}'> ${course.name} </option>
                   [endrepeat]
                 </select>
             </div>
