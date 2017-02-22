@@ -28,22 +28,25 @@
 	</div>
 	[repeat week, day]	
 		<div class="row week-schedule-row" data-timestamp='${day.timestamp}'>
+
 			<div class="col-xs-2">
 				<div class="day-col">
 				<p> ${day.month}</p>
 				<p class="date"> ${day.day} ${day.date} </p> 
 				</div>
 			</div>
-			[if day.bookings != 'none']
-				<div class="bookings">
-					[repeat day.bookings, booking]
-						<div class="booking col-xs-${booking.hours}">
-							<p>Bokad av: <span class="info-text">${booking.bookedBy}</span></p>
-							<p>Klass: <span class="info-text">${booking.course.name}</span></p>
-						</div>
-					[endrepeat]
-				</div>
-			[endif]
+
+			<div class="bookings">
+				[repeat day.bookings, booking]
+					<div class="booking col-xs-${booking.hours} 
+						[if booking.offset > 0] col-xs-offset-${booking.offset}[endif]
+						" data-time-from="${booking.timeFrom}" data-time-to="${booking.timeTo}">
+						<p>Bokad av: <span class="info-text">${booking.bookedBy}</span></p>
+						<p>Klass: <span class="info-text">${booking.course.name}</span></p>
+					</div>
+				[endrepeat]
+			</div>
+
 		</div>
 		<div class="vspace"></div>
 	[endrepeat]

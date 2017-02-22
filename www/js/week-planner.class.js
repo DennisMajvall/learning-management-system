@@ -36,6 +36,36 @@ class WeekPlanner{
 		  	for(let i = 0; i < 5; i++){
 		  		var date = thisWeek[i];
 		  		findBookings(date, function(returnObj){
+		  			// Prepare the found bookings with some additional
+		  			// props not stored in database
+		  			returnObj.bookings.forEach(function(booking){
+		  				let timeFromHour = moment(booking.timeFrom).hours(),
+		  					timeToHour = moment(booking.timeTo).hours();
+
+		  				// Calc the hour length of the booking
+		  				booking.hours = (timeToHour - timeFromHour) + 1;
+
+		  				// If only one booking, we may need to add an offset
+		  				if(returnObj.bookings.length < 2){
+		  					booking.offset = timeFromHour > 12 ? 5 : 0;
+		  				}
+		  			});
+
+		  			// Sort the bookings with earliest in the day first
+		  			returnObj.bookings.sort(function(a,b){
+		  				let aTime = moment(a.timeFrom);
+		  				let bTime = moment(b.timeFrom);
+
+		  				if (aTime < bTime) {
+							return -1;
+						}
+						if (aTime > bTime) {
+						    return 1;
+						}
+						return 0;
+		  			});
+
+		  			// Push one date with all its info to the resultWeek array
 			  		resultWeek.push({
 			  			timestamp: returnObj.date.format('x'),
 			  			date: returnObj.date.date(),
@@ -46,7 +76,7 @@ class WeekPlanner{
 			  		});
 			  		if(resultWeek.length === 5){
 			  			resultWeek.sort(function(a,b){
-			  				return a.timestamp- b.timestamp;
+			  				return a.timestamp - b.timestamp;
 			  			});
 			  			createTemplate(resultWeek);
 			  		}
@@ -81,16 +111,19 @@ class WeekPlanner{
 		// executes callback passing a returnObj containing the results and the passed
 		// date
 		function findBookings(date, callback){
+
 			Booking.find(`find/{ $and: [
 				{ room: "` + selectedRoom._id + `" },
 				{ date: ` + date.format('x') +  ` }]}`
 				,function(data,err){
-				var returnObj = {
-					date: date,
-					bookings: data
-				};
-				callback(returnObj);
-			});
+
+					var returnObj = {
+						date: date,
+						bookings: data
+					};
+
+					callback(returnObj);
+				});
 		}
 
 		// Set the variable selectedRoom
@@ -116,10 +149,9 @@ class WeekPlanner{
                 room: room._id,
                 course: course,
                 date: date.format('x'),
-                timeFrom: timeFrom.format('x'),
-                timeTo: timeTo.format('x'),
-                bookedBy: user.username,
-                hours: hours
+                timeFrom: timeFrom,
+                timeTo: timeTo,
+                bookedBy: user.username
             }, function() {
                 console.log('Bokade ' + selectedRoom.name + 
                 ' för ' + course.name + ' från ' + timeFrom + ' ' + 
@@ -129,41 +161,57 @@ class WeekPlanner{
         }
 
         // Set up the booking modal and 
-        function prepareModal(date){
+        function prepareModal(date, clickedRow){
 			let thisDate = moment(date),
-				timeFrom = thisDate.clone().hours(8), 
-				timeTo = thisDate.clone().hours(17);
-
-			let dateInfo = {
-				date: thisDate,
-				from: timeFrom,
-				to: timeTo
-			};
-
-			let dateInfoFormatted = {
-				date: thisDate.format('LL'),
-				from: timeFrom.format('LT'),
-				to: timeTo.format('LT')
-			};
+				thisDateFormatted = thisDate.format('LL');
 
 			// Populate courses and the callback createModal
-			populateCourses(user.courses, dateInfo, dateInfoFormatted, createModal);
+			populateCourses(user.courses, thisDate, clickedRow,thisDateFormatted, createModal);
+
 		}
 
 		// Create the bookingModal with given data and show it
-		function createModal(dateInfo, dateInfoFormatted, courses){
-			new BookingModal(selectedRoom, dateInfoFormatted, courses);
-			$('#bookingModal').find('.modal-body').find('.date').data('dateObj', dateInfo);
+		function createModal(thisDate, clickedRow, thisDateFormatted, courses){
+
+			new BookingModal(selectedRoom, thisDateFormatted, courses);
+			let bookings = clickedRow.find('.booking');
+
+			// If any bookings already exist, disable wholeday
+			if(bookings.length > 0){
+				$('#timeSelect').find('option[value="wholeday"]').prop('disabled', true);
+			}
+
+			// Further possible disables
+			bookings.each(function(booking){
+				let timeFrom = moment($(this).data('time-from')),
+					timeTo = moment($(this).data('time-to')),
+					hours = timeTo.hours() - timeFrom.hours();
+
+				// if any booking is for a whole day, disable the all choices
+				if(hours > 4){
+					$('#timeSelect').find('option[value="morning"]').prop('disabled', true);
+					$('#timeSelect').find('option[value="afternoon"]').prop('disabled', true);
+				}
+
+				if(timeFrom.hours() === 8){
+					$('#timeSelect').find('option[value="morning"]').prop('disabled', true);
+				}
+				else{
+					$('#timeSelect').find('option[value="afternoon"]').prop('disabled', true);
+				}
+			});
+
+			$('#bookingModal').find('.modal-body').find('.date').data('dateObj', thisDate);
 			$('#bookingModal').modal('show');
 		}
 
 		// Populate courses
-		function populateCourses(courses, dateInfo, dateInfoFormatted, callback) {
+		function populateCourses(courses, thisDate, clickedRow, thisDateFormatted, callback) {
             let coursesIds = courses.map(course => '"' + course + '"');
             let queryString = 'find/{ _id: { $in: [' + coursesIds + '] } }';
 
             Course.find(queryString, (courses, err) => {
-                 callback(dateInfo, dateInfoFormatted, courses);
+                 callback(thisDate, clickedRow,thisDateFormatted, courses);
             });
         }
 
@@ -195,31 +243,55 @@ class WeekPlanner{
 	  		$('.page-content').on('click', '.book-button', function(){
 
 	  			let selectedCourseId = $('#courseSelect option:selected').attr('data-course-id');
-	  			console.log(selectedCourseId);
+
+	  			if( $('#courseSelect option:selected').is(':disabled')){
+					$('#courseSelect').closest('.form-group').toggleClass('has-error');
+					return;
+				}
+
+				if( $('#timeSelect option:selected').is(':disabled')){
+					$('#timeSelect').closest('.form-group').toggleClass('has-error');
+					return;
+				}
 
 				Course.find(selectedCourseId, function(data,err){
-					let course = data;
-					let dateInfo = $('#bookingModal').find('.modal-body').find('.date').data('dateObj');
-					let hours = (dateInfo.to.hours() - dateInfo.from.hours()) + 1;
+					let course = data,
+						date = $('#bookingModal').find('.modal-body').find('.date').data('dateObj'),
+						timeSpan = $('#timeSelect').val(),
+						timeFrom,
+						timeTo;
+
+					// Set the timespan according to users choice
+					if(timeSpan === 'morning'){
+						timeFrom = date.clone().hours(8);
+						timeTo = date.clone().hours(12);
+					}
+					else if(timeSpan === 'afternoon'){
+						timeFrom = date.clone().hours(13);
+						timeTo = date.clone().hours(17);
+					}
+					else{
+						timeFrom = date.clone().hours(8);
+						timeTo = date.clone().hours(17);
+					}
+
 					createBooking(selectedRoom,
 								 course, 
-								 dateInfo.date,
-								 dateInfo.from,
-								 dateInfo.to, 
-								 hours);
+								 date,
+								 timeFrom,
+								 timeTo);
 				});
+				$('#bookingModal').hide();
 				$('body').removeClass('modal-open');
-				$('.modal-backdrop').hide();
+				$('.modal-backdrop').remove();
 			});
 
+	  		// Bring up the booking modal when clicking a row
 	  		$('.page-content').on('click', '.week-schedule-row', function(){
-	  			// If the day already have a booking, prevent user from booking on the day
-	  			if($(this).find('.bookings').children().length){
-	  				return;
-	  			}
+	  			let clickedRow = $(this),
+	  				clickedDate = clickedRow.data('timestamp');
 
-	  			var clickedDate = ($(this).data('timestamp'));
-	  			prepareModal(clickedDate);
+	  			prepareModal(clickedDate, clickedRow);
 	  		});
 	  	}
 	}
