@@ -124,12 +124,12 @@ class WeekPlanner{
                 console.log('Bokade ' + selectedRoom.name + 
                 ' för ' + course.name + ' från ' + timeFrom + ' ' + 
                 'till ' + '' + timeTo);
+                loadWeek();
             });
-            loadWeek();
         }
 
-        // Set up the booking modal and show it.
-        function presentModal(date){
+        // Set up the booking modal and 
+        function prepareModal(date){
 			let thisDate = moment(date),
 				timeFrom = thisDate.clone().hours(8), 
 				timeTo = thisDate.clone().hours(17);
@@ -146,11 +146,26 @@ class WeekPlanner{
 				to: timeTo.format('LT')
 			};
 
-			// Create a new booking modal and show it
-			new BookingModal(selectedRoom, dateInfoFormatted);
+			// Populate courses and the callback createModal
+			populateCourses(user.courses, dateInfo, dateInfoFormatted, createModal);
+		}
+
+		// Create the bookingModal with given data and show it
+		function createModal(dateInfo, dateInfoFormatted, courses){
+			new BookingModal(selectedRoom, dateInfoFormatted, courses);
 			$('#bookingModal').find('.modal-body').find('.date').data('dateObj', dateInfo);
 			$('#bookingModal').modal('show');
 		}
+
+		// Populate courses
+		function populateCourses(courses, dateInfo, dateInfoFormatted, callback) {
+            let coursesIds = courses.map(course => '"' + course + '"');
+            let queryString = 'find/{ _id: { $in: [' + coursesIds + '] } }';
+
+            Course.find(queryString, (courses, err) => {
+                 callback(dateInfo, dateInfoFormatted, courses);
+            });
+        }
 
 		// Set up all the eventlisteners for the page. 
 		function createEventListeners(){
@@ -200,7 +215,7 @@ class WeekPlanner{
 	  			}
 
 	  			var clickedDate = ($(this).data('timestamp'));
-	  			presentModal(clickedDate);
+	  			prepareModal(clickedDate);
 	  		});
 	  	}
 	}
