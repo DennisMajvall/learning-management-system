@@ -7,9 +7,26 @@
         <h4 class="modal-title"> Boka ${room.name}</h4>
       </div>
       <div class="modal-body">
-    	<p class="date"> Datum: ${dateInfo.date}</p>
-		<p> Från klockan: ${dateInfo.from}</p>
-		<p> Till klockan: ${dateInfo.to}</p>
+        	<form>
+
+            <p class="date"> <strong>Datum:</strong> ${dateInfo.date} </p>
+
+            <div class="form-group">
+                <label for="courseSelect" class="control-label">Välj kurs</label>
+                <select class="form-control" id="courseSelect">
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="timeSelect" class="control-label">Välj kurs</label>
+                <select class="form-control" id="timeSelect">
+                  <option> Förmiddag </option>
+                  <option> Eftermiddag </option>
+                  <option> Heldag </option>
+                </select>
+            </div>
+
+          </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
