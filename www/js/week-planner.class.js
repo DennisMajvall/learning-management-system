@@ -1,12 +1,17 @@
 class WeekPlanner{
 	constructor(){
+		// A variable to store the currently selected room
 		var selectedRoom;
-		var week = getWeekDates(moment().startOf('isoweek'));
+		// The currently selected/shown week
+		var week = getWorkWeekDates(moment().startOf('isoweek'));
 
+		// Start loadingprocess by loading the room
 		loadRoom();
+		// Call function that places all eventlisteners for week-planner
 		createEventListeners();
 
 		function loadRoom(roomName){
+			// Default to Rum 1
 			if(!roomName){
 				roomName = 'Rum 1';
 			}
@@ -17,6 +22,9 @@ class WeekPlanner{
 			createWeek();
 		}
 
+		// createWeek uses the currently selected week and creates an
+		// array of objects containing information we want to pass on
+		// to the template.  
 		function createWeek(){
 			var thisWeek = week;
 			var resultWeek = [];
@@ -25,7 +33,6 @@ class WeekPlanner{
 		  					'Maj', 'Jun', 'Jul', 'Aug', 
 		  					'Sep', 'Okt', 'Nov', 'Dec'];
 
-		  	// Get the current week counting from previous monday
 		  	for(let i = 0; i < 5; i++){
 		  		var date = thisWeek[i];
 		  		findBookings(date, function(returnObj){
@@ -47,7 +54,8 @@ class WeekPlanner{
 		  	}
 		}
 
-		function getWeekDates(start){
+		// Get the next workingweek dates from a given weekstart. 
+		function getWorkWeekDates(start){
 			let returnWeek = [];
 
 			for(let i = 0; i < 5; i++){
@@ -56,18 +64,22 @@ class WeekPlanner{
 			return returnWeek;
 		}
 
+		// Adds or subtracts 1 week to the variable week.
 		function changeWeek(direction){
 
 			if(direction === 'next'){
 				let start = week[0].add(1, 'weeks');
-				week = getWeekDates(start);
+				week = getWorkWeekDates(start);
 			}
 			else{
 				let start = week[0].subtract(1, 'weeks');
-				week = getWeekDates(start);
+				week = getWorkWeekDates(start);
 			}
 		}
 
+		// Finds all bookings made for the currently selected room on a given date
+		// executes callback passing a returnObj containing the results and the passed
+		// date
 		function findBookings(date, callback){
 			Booking.find(`find/{ $and: [
 				{ room: "` + selectedRoom._id + `" },
@@ -81,6 +93,7 @@ class WeekPlanner{
 			});
 		}
 
+		// Set the variable selectedRoom
 		function setSelectedRoom(roomName, callback){
 			Room.find('find/{name:"' + roomName + '"}', function(data,err){
   				selectedRoom = data[0];
@@ -88,6 +101,8 @@ class WeekPlanner{
   			});
 		}
 
+		// Create a week-planner template passing thisWeek, which contains information
+		// about the weeks days and their bookings. 
 	  	function createTemplate(thisWeek){
 	  		$('.week-planner-container').empty();
 			$('.week-planner-container').template('week-planner',{
@@ -95,6 +110,7 @@ class WeekPlanner{
 			});
 		}
 
+		// Create a new booking with the arguments passed. 
 		function createBooking(room, course, date, timeFrom, timeTo, hours) {
             Booking.create({
                 room: room._id,
@@ -112,29 +128,31 @@ class WeekPlanner{
             loadWeek();
         }
 
+        // Set up the booking modal and show it.
         function presentModal(date){
 			let thisDate = moment(date),
 				timeFrom = thisDate.clone().hours(8), 
 				timeTo = thisDate.clone().hours(17);
 
-			let dateCollection = {
+			let dateInfo = {
 				date: thisDate,
 				from: timeFrom,
 				to: timeTo
-			}
+			};
 
-			$('#bookingModal').find('.modal-title').text('Boka ' + selectedRoom.name);
+			let dateInfoFormatted = {
+				date: thisDate.format('LL'),
+				from: timeFrom.format('LT'),
+				to: timeTo.format('LT')
+			};
 
-			$('#bookingModal').find('.modal-body').empty().append(
-				'<p class="date"> Datum: ' + thisDate.format('LL') + ' </p>' + 
-				'<p> Från klockan: ' + timeFrom.format('LT') + '</p>' + 
-				'<p> Till klockan: ' + timeTo.format('LT') + '</p>'
-			);
-			$('#bookingModal').find('.modal-body').find('.date').data('dateObj', dateCollection);
-
+			// Create a new booking modal and show it
+			new BookingModal(selectedRoom, dateInfoFormatted);
+			$('#bookingModal').find('.modal-body').find('.date').data('dateObj', dateInfo);
 			$('#bookingModal').modal('show');
 		}
 
+		// Set up all the eventlisteners for the page. 
 		function createEventListeners(){
 
 	  		$('.page-content').on('click', '#prev', function(e){
@@ -162,13 +180,13 @@ class WeekPlanner{
 	  		$('.page-content').on('click', '.book-button', function(){
 				Course.find('', function(data,err){
 					let course = data[0];
-					let dateCollection = $('#bookingModal').find('.modal-body').find('.date').data('dateObj');
-					let hours = (dateCollection.to.hours() - dateCollection.from.hours()) + 1;
+					let dateInfo = $('#bookingModal').find('.modal-body').find('.date').data('dateObj');
+					let hours = (dateInfo.to.hours() - dateInfo.from.hours()) + 1;
 					createBooking(selectedRoom,
 								 course, 
-								 dateCollection.date,
-								 dateCollection.from,
-								 dateCollection.to, 
+								 dateInfo.date,
+								 dateInfo.from,
+								 dateInfo.to, 
 								 hours);
 				});
 				$('body').removeClass('modal-open');
