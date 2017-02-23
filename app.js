@@ -1,4 +1,5 @@
 // Npm modules
+var fs = require('fs');
 var express = require('express');
 var bodyparser = require('body-parser');
 var cookieparser = require('cookie-parser');
@@ -59,8 +60,8 @@ for(let className in classesToLoad) {
 // Create a new express server, store in the variable app
 var app = express();
 
-// Make the express server able to read the body of requests
-app.use(bodyparser.json());
+// Make the express server abl.e to read the body of requests
+app.use(bodyparser.json({ limit: '5mb' }));
 app.use(bodyparser.urlencoded({ extended: false }));
 
 // Make the express server able to handle
@@ -152,6 +153,35 @@ app.get('/forgot-password/:username',(req, res)=>{
 				callback(false);
 	    });
     }
+
+});
+
+app.post('/upload-file',(req, res)=>{
+	var data = req.body.imgData;
+	var filename = sha1(req.session.content.user.username) + '.jpg';
+
+	var filePath = __dirname + '/www/images/profiles/' + filename;
+
+
+	function decodeBase64Image(dataString) {
+		var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+		response = {};
+
+		if (matches.length !== 3) {
+			return new Error('Invalid input string');
+		}
+
+		response.type = matches[1];
+		response.data = new Buffer(matches[2], 'base64');
+
+		return response;
+	}
+
+	var imageBuffer = decodeBase64Image(data);
+
+	fs.writeFile(filePath, imageBuffer.data, ()=> {
+		res.json(filename);
+	});
 
 });
 

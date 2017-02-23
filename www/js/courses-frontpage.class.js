@@ -24,6 +24,10 @@ class CoursesOnFrontpage {
 			});
 
 			$('.front-course-container').template('front-course', { courses: courses });
+
+			document.getElementById('upload-file').onchange = function() {
+				handleFileSelect();
+			};
 		}
 
 
@@ -42,3 +46,61 @@ class CoursesOnFrontpage {
 		});
 	}
 }
+
+var fr = new FileReader();
+
+function handleFileSelect() {
+	if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+	  alert('The File APIs are not fully supported in this browser.');
+	  return;
+	}
+
+	input = $("#upload-file")[0];
+
+	if (!input.files) {
+	  alert("This browser doesn't seem to support the `files` property of file inputs.");
+	}
+	else if (!input.files[0]) {
+	  alert("Please select a file before clicking 'Load'");
+	}
+	else {
+	  file = input.files[0];
+	  fr.onload = receivedText;
+	  //fr.readAsText(file);
+	  fr.readAsDataURL(file);
+	}
+}
+
+
+function receivedText() {
+	input = $("#upload-file")[0];
+	var filename = input.value.substr(input.value.lastIndexOf('\\') + 1);
+
+	$.ajax({
+		url: '/upload-file',
+		type: "POST",
+		dataType: "json",
+		// don't process the request body
+		processData: false,
+		// and tell Node that it is raw json
+		headers: {"Content-Type": "application/json"},
+		// the request body
+		data: JSON.stringify({
+			imgData: fr.result
+		}),
+		// callback functions
+		success: (result, err) => {
+			console.log(result, err)
+			if (err == "success") {
+				Student.update(user._id, { picture: result }, () => {
+					location.reload();
+				});
+			}
+		},
+		error: function(error){
+			console.log(error.responseJSON)
+		}
+	});
+
+}
+
