@@ -1,10 +1,10 @@
 class AdminEdit {
 
-	constructor(dbSchema, findItemFunc) {
+	constructor(dbSchema, getItemIdFromElement) {
 		let that = this;
 
 		$('.admin-search-container').on('click', 'button.delete-item', function() {
-			let item = findItemFunc($(this));
+			let item = getItemIdFromElement($(this));
 
 			dbSchema.delete(item._id, () => {
 				location.reload();
@@ -12,7 +12,7 @@ class AdminEdit {
 		});
 
 		$('.admin-search-container').on('click', 'button.save-item', function() {
-			let item = findItemFunc($(this));
+			let item = getItemIdFromElement($(this));
 			let objectToSave = Object.assign({}, item);
 
 			delete objectToSave._id;
@@ -26,7 +26,7 @@ class AdminEdit {
 		});
 
 		$('.admin-search-container').on('keyup', '[bind-key]', function() {
-			let item = findItemFunc($(this));
+			let item = getItemIdFromElement($(this));
 			let key = $(this).attr('bind-key');
 
 			item[key] = $(this).val().trim();
@@ -35,6 +35,43 @@ class AdminEdit {
 		// highlight items
 		$('.admin-search-container').on('click', '.list-group a', function() {
 			$(this).toggleClass('active');
+		});
+
+
+		// 
+
+		$('.admin-search-container').on('click', '.add-course-to-item', function(e) {
+
+			var courseToAdd = $('.selectpicker').find(':selected');
+
+			if (courseToAdd.length === 0) {
+				return;
+			}
+
+			var courseId = courseToAdd.attr('course-id');
+
+			let item = getItemIdFromElement($(this));
+			item.courses.push(courseId);
+
+			dbSchema.update(item._id, { courses: item.courses }, function(result, err) {
+				if (!result._error){
+					$('[item-type="Course"]').append('<a class="list-group-item" list-item-id="' + courseToAdd + '">' + courseToAdd.val() +'</a');
+					courseToAdd.remove();
+
+					Course.find(courseId, function(course, err) {
+						if (!course._error){
+							if(item.role == 'Student'){
+								course.students.push(item._id);
+								Course.update(courseId, { students: course.students });
+							} else {
+								course.teachers.push(item._id);
+								Course.update(courseId, { teachers: course.teachers });
+							}
+						}
+					});
+
+				}
+			});
 		});
 
 		// remove marked items
@@ -46,7 +83,7 @@ class AdminEdit {
 			let itemsToRemove = $('.admin-search-container a.active');
 
 			// use .edit-buttons as a referens point to get course
-			let mainItem = findItemFunc($('.admin-search-container .delete-item'));
+			let mainItem = getItemIdFromElement($('.admin-search-container .delete-item'));
 
 			that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove, educationsToRemove);
 
@@ -101,7 +138,7 @@ class AdminEdit {
 				});
 			});
 		} else if(entity === "Course") {
-			Student.update(mainItem._id, updateObj, function() {
+			item.update(mainItem._id, updateObj, function() {
 				$('.admin-search-container item').empty().template('admin-edit', {
 					type: "student",
 					item: mainItem
