@@ -49,7 +49,6 @@ class WeekPlanner{
 
 		  				// If booking is for afternoon, add a large or small offset
 		  				// depending on if a morning booking exists
-		  				console.log(timeFromHour);
 		  				if(timeFromHour > 12){
 		  					if(returnObj.bookings.length < 2){
 		  						booking.offset = 6;
@@ -162,9 +161,6 @@ class WeekPlanner{
                 timeTo: timeTo,
                 bookedBy: user.username
             }, function() {
-                console.log('Bokade ' + selectedRoom.name + 
-                ' för ' + course.name + ' från ' + timeFrom + ' ' + 
-                'till ' + '' + timeTo);
                 loadWeek();
             });
         }
@@ -176,7 +172,6 @@ class WeekPlanner{
 
 			// Populate courses and the callback createModal
 			populateCourses(user.courses, thisDate, clickedRow,thisDateFormatted, createModal);
-
 		}
 
 		// Create the bookingModal with given data and show it
@@ -249,6 +244,25 @@ class WeekPlanner{
 	  			createWeek();
 	  		});
 
+	  		$('.page-content').on('click', '.booking', function(e){
+	  			e.stopPropagation();
+
+	  			let clickedBookingId = $(this).attr('data-booking-id');
+	  			new BookingInfoModal(clickedBookingId, waitForIt);
+	  		});
+
+	  		function waitForIt(){
+	  			$('#bookingInfoModal').modal('show');
+	  		}
+
+	  		$('.page-content').on('click', '#bookingInfoModal' , function(e){
+	  			e.stopPropagation();
+	  			alert('hej');
+	  			$('#bookingInfoModal').hide();
+				$('body').removeClass('modal-open');
+				$('.modal-backdrop').remove();
+	  		});
+
 	  		$('.page-content').on('click', '.book-button', function(){
 
 	  			let selectedCourseId = $('#courseSelect option:selected').attr('data-course-id');
@@ -296,7 +310,8 @@ class WeekPlanner{
 			});
 
 	  		// Bring up the booking modal when clicking a row
-	  		$('.page-content').on('click', '.week-schedule-row', function(){
+	  		$('.page-content').on('click', '.week-schedule-row', function(e){
+
 	  			let clickedRow = $(this),
 	  				clickedDate = clickedRow.data('timestamp'),
 	  				error;

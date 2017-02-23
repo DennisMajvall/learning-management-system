@@ -41,7 +41,8 @@
 				[repeat day.bookings, booking]
 					<div class="booking col-xs-${booking.hours} 
 						[if booking.offset > 0] col-xs-offset-${booking.offset}[endif]
-						" data-time-from="${booking.timeFrom}" data-time-to="${booking.timeTo}">
+						" data-time-from="${booking.timeFrom}" data-time-to="${booking.timeTo}"
+						data-booking-id="${booking._id}">
 						<p>Bokad av: <span class="info-text">${booking.bookedBy}</span></p>
 						<p>Klass: <span class="info-text">${booking.course.name}</span></p>
 					</div>

@@ -7,13 +7,14 @@ function loadTeacher(callback) {
 		'booking-page',
 		'bookingpage/week-planner',
 		'bookingpage/booking-modal',
+		'bookingpage/booking-info-modal',
 		'sidebar',
 		'profile'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
-		//new WeekPlanner();
-		//new BookingPage();
+		new WeekPlanner();
+		new BookingPage();
 		new Sidebar();
 		new TeacherMessage();
 		new CoursesOnFrontpage("Teacher");

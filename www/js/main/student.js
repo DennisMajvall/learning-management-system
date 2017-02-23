@@ -9,7 +9,8 @@ function loadStudent(callback) {
 		'profile',
 		'booking-page',
 		'bookingpage/week-planner',
-		'bookingpage/booking-modal'
+		'bookingpage/booking-modal',
+		'bookingpage/booking-info-modal'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
