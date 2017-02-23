@@ -4,17 +4,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"> Boka ${room.name}</h4>
+        <h4 class="modal-title"> Reserve a time in ${room.name}</h4>
       </div>
       <div class="modal-body">
         	<form>
 
-            <p class="date"> <strong>Datum:</strong> ${dateInfo} </p>
+            <p class="date"> <strong>Date:</strong> ${dateInfo} </p>
 
             <div class="form-group">
-                <label for="courseSelect" class="control-label">Välj kurs</label>
+                <label for="courseSelect" class="control-label">Course</label>
                 <select class="form-control" id="courseSelect">
-                  <option selected disabled> Vilken kurs bokar du för?</option>
+                  <option selected disabled> Choose a course</option>
                   [repeat courses, course]
                     <option data-course-id='${course._id}'> ${course.name} </option>
                   [endrepeat]
@@ -22,20 +22,20 @@
             </div>
 
             <div class="form-group">
-                <label for="timeSelect" class="control-label">Välj Tid</label>
+                <label for="timeSelect" class="control-label">Time</label>
                 <select class="form-control" id="timeSelect">
-                  <option selected disabled> Välj en ledig tid</option>
-                  <option value="morning"> Förmiddag </option>
-                  <option value="afternoon"> Eftermiddag </option>
-                  <option value="wholeday"> Heldag </option>
+                  <option selected disabled> Choose a time</option>
+                  <option value="morning"> Morning </option>
+                  <option value="afternoon"> Afternoon </option>
+                  <option value="wholeday"> Whole day </option>
                 </select>
             </div>
 
           </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
-        <button type="button" class="btn btn-primary book-button">Boka!</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary book-button">Book!</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
