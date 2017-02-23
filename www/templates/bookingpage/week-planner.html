@@ -29,14 +29,15 @@
 	[repeat week, day]	
 		<div class="row week-schedule-row" data-timestamp='${day.timestamp}'>
 
-			<div class="col-xs-2">
+			<div class="col-xs-2 day">
 				<div class="day-col">
 				<p> ${day.month}</p>
 				<p class="date"> ${day.day} ${day.date} </p> 
 				</div>
 			</div>
 
-			<div class="bookings">
+			<div class="bookings col-xs-10">
+				<div class="row">
 				[repeat day.bookings, booking]
 					<div class="booking col-xs-${booking.hours} 
 						[if booking.offset > 0] col-xs-offset-${booking.offset}[endif]
@@ -45,6 +46,7 @@
 						<p>Klass: <span class="info-text">${booking.course.name}</span></p>
 					</div>
 				[endrepeat]
+				</div>
 			</div>
 
 		</div>
