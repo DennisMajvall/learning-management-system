@@ -80,7 +80,7 @@ class Sidebar {
 
 		// Register clicks on profile settings page
 		$('.sidebar-container').on('click', '.settings-icon', function(){
-			new Profile();
+			new Profile().init();
 		});
 	}
 
