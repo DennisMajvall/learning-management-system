@@ -58,17 +58,22 @@ class AdminEdit {
 					$('[item-type="Course"]').append('<a class="list-group-item" list-item-id="' + courseToAdd + '">' + courseToAdd.val() +'</a');
 					courseToAdd.remove();
 
-					Course.find(courseId, function(course, err) {
-						if (!course._error){
-							if(item.role == 'Student'){
-								course.students.push(item._id);
-								Course.update(courseId, { students: course.students });
-							} else {
-								course.teachers.push(item._id);
-								Course.update(courseId, { teachers: course.teachers });
+					if(item.role !== 'Eduction'){
+						Course.find(courseId, function(course, err) {
+							if (!course._error){
+								if(item.role == 'Student'){
+									course.students.push(item._id);
+									Course.update(courseId, { students: course.students });
+								} else if (item.role == 'Teacher'){
+									course.teachers.push(item._id);
+									Course.update(courseId, { teachers: course.teachers });
+								} else {
+									return;
+								}
 							}
-						}
-					});
+						});
+					}
+
 
 				}
 			});

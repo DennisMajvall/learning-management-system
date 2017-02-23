@@ -7,4 +7,17 @@
 			[endrepeat]
 		</div>
 	</div>
+
+	<div class="col-xs-4">
+
+		<div class="dropdown">
+			<h4>Add another course:</h4>
+			<select class="list-group dropdown-toggle selectpicker" data-style="btn btn-default">
+				[repeat dropdowncourses, dropdowncourse]
+						<option course-id="${dropdowncourse._id}">${dropdowncourse.name}</option>
+				[endrepeat]
+			</select>
+		</div>
+		<button class="btn btn-info add-course-to-item">Add Course</button>
+	</div>
 </div>
