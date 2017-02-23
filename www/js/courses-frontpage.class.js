@@ -32,13 +32,12 @@ class CoursesOnFrontpage {
 
 
 		$('.front-course-container').on('click', '.show-course', function() {
-			e.preventDefault();
-			let id = $(this).data('id');
+			let id = $(this).find('a').data('id');
 			let course = that.courseHashMap[id];
 
 			$('.student-announcement-container').empty();
 			$('.teacher-messages-container').empty();
-			$(".sidebar-slide").removeClass("visible");
+			$('.sidebar-slide').removeClass('visible');
 			$('.front-course-container').empty().template('course-page', {
 				course: course,
 				role: user.role.toLowerCase()

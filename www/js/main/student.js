@@ -6,12 +6,17 @@ function loadStudent(callback) {
 		'course-page',
 		'listed-profile',
 		'sidebar',
-		'profile'
+		'profile',
+		'booking-page',
+		'bookingpage/week-planner',
+		'bookingpage/booking-modal'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
 		new Sidebar("Student");
 		new AnnouncementOnFrontpage(user._id);
+		//new BookingPage();
+		//new WeekPlanner();
 		new CoursesOnFrontpage("Student");
 		new StudentAlert();
 		callback();

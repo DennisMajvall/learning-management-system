@@ -50,18 +50,6 @@ class Sidebar {
 		}
 
 
-		// Open the user profile page
-		$('.sidebar-container').on('click', '.settings-icon', function(){
-			// Clear the page
-			$('.page-content').children().empty();
-			// Add html template for profile
-			$('.page-content').template('profile', {
-				firstname: currentUser.firstname,
-				lastname: currentUser.lastname,
-				picture: settingsObj[picture]
-			})
-		});
-
 		// Log out
 		$('.sidebar-container').on('click', '.log-out', function(){
 
@@ -88,6 +76,11 @@ class Sidebar {
 			let course = that.courseHashMap[courseId];
 
 			that.removeById(id, course, that, this);
+		});
+
+		// Register clicks on profile settings page
+		$('.sidebar-container').on('click', '.settings-icon', function(){
+			new Profile();
 		});
 	}
 

@@ -13,7 +13,7 @@ class WeekPlanner{
 		function loadRoom(roomName){
 			// Default to Rum 1
 			if(!roomName){
-				roomName = 'Rum 1';
+				roomName = 'Auditorium 1';
 			}
 			setSelectedRoom(roomName, loadWeek);
 		}
@@ -42,12 +42,21 @@ class WeekPlanner{
 		  				let timeFromHour = moment(booking.timeFrom).hours(),
 		  					timeToHour = moment(booking.timeTo).hours();
 
-		  				// Calc the hour length of the booking
-		  				booking.hours = (timeToHour - timeFromHour) + 1;
+		  				// Calc the col length of the booking and then
+		  				// add a value to convert it to columns length for use with bootstrap grid
+		  				booking.hours = (timeToHour - timeFromHour);
+		  				booking.hours = booking.hours > 4 ? booking.hours = booking.hours + 2 : booking.hours + 1; 
 
-		  				// If only one booking, we may need to add an offset
-		  				if(returnObj.bookings.length < 2){
-		  					booking.offset = timeFromHour > 12 ? 5 : 0;
+		  				// If booking is for afternoon, add a large or small offset
+		  				// depending on if a morning booking exists
+		  				console.log(timeFromHour);
+		  				if(timeFromHour > 12){
+		  					if(returnObj.bookings.length < 2){
+		  						booking.offset = 6;
+		  					}
+		  					else{
+		  						booking.offset = 1;
+		  					}
 		  				}
 		  			});
 
@@ -289,9 +298,21 @@ class WeekPlanner{
 	  		// Bring up the booking modal when clicking a row
 	  		$('.page-content').on('click', '.week-schedule-row', function(){
 	  			let clickedRow = $(this),
-	  				clickedDate = clickedRow.data('timestamp');
+	  				clickedDate = clickedRow.data('timestamp'),
+	  				error;
 
-	  			prepareModal(clickedDate, clickedRow);
+	  			if ( selectedRoom.type === 'classroom' && user.role === 'Student'){
+	  				$('.alert').remove();
+	  				$('.week-planner').append(
+	  				'<div class="alert alert-danger alert-dismissible" role="alert">' + 
+						'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+						'Students are only authorized to book group rooms' +
+					'</div>'
+					);
+	  			}
+	  			else{
+	  				prepareModal(clickedDate, clickedRow);
+	  			}
 	  		});
 	  	}
 	}

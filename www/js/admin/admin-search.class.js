@@ -21,9 +21,7 @@ class AdminSearch {
 
 		this.filter.run('', this.displayItems, this);
 
-		new AdminEdit(this.dbSchema, (elem) => {
-			return this.getItemIdFromElement(elem);
-		});
+		new AdminEdit(this.dbSchema, this.getItemIdFromElement);
 
 		new AdminCreate(this.dbSchema, this.dbType);
 
@@ -42,11 +40,31 @@ class AdminSearch {
 
 			$('.admin-search-container item').remove();
 
-			$(this).template('admin-edit', {
-				type: that.dbType,
-				item: item
-			});
+
+			if (item.courses) {
+				let courseIds = item.courses.map( course => '"' + course._id + '"' );
+				let queryString = 'find/{ _id: { $nin: [' + courseIds + '] } }';
+
+				Course.find(queryString, (courses, err) => {
+
+					$(this).template('admin-edit', {
+						type: that.dbType,
+						item: item,
+						dropdowncourses: courses
+					});
+
+				});
+			} else {
+				$(this).template('admin-edit', {
+					type: that.dbType,
+					item: item,
+					dropdowncourses: []
+				});
+			}
+
 		});
+
+		
 
 		// search box
 		let oldInputLength = 0;
