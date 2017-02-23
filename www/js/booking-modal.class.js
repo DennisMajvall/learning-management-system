@@ -1,11 +1,11 @@
 class BookingModal{
-	constructor(room,dateInfo){
-		console.log(room);
-		console.log(dateInfo);
+	constructor(room,dateInfo,courses){
+
 		$('.booking-modal-container').empty();
 		$('.booking-modal-container').template('booking-modal',{
 			room: room,
-			dateInfo: dateInfo
+			dateInfo: dateInfo,
+			courses: courses
 		});
 	}
 }

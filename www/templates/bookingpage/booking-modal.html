@@ -7,13 +7,35 @@
         <h4 class="modal-title"> Boka ${room.name}</h4>
       </div>
       <div class="modal-body">
-    	<p class="date"> Datum: ${dateInfo.date}</p>
-		<p> Från klockan: ${dateInfo.from}</p>
-		<p> Till klockan: ${dateInfo.to}</p>
+        	<form>
+
+            <p class="date"> <strong>Datum:</strong> ${dateInfo} </p>
+
+            <div class="form-group">
+                <label for="courseSelect" class="control-label">Välj kurs</label>
+                <select class="form-control" id="courseSelect">
+                  <option selected disabled> Vilken kurs bokar du för?</option>
+                  [repeat courses, course]
+                    <option data-course-id='${course._id}'> ${course.name} </option>
+                  [endrepeat]
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="timeSelect" class="control-label">Välj Tid</label>
+                <select class="form-control" id="timeSelect">
+                  <option selected disabled> Välj en ledig tid</option>
+                  <option value="morning"> Förmiddag </option>
+                  <option value="afternoon"> Eftermiddag </option>
+                  <option value="wholeday"> Heldag </option>
+                </select>
+            </div>
+
+          </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
-        <button type="button" class="btn btn-primary book-button" data-dismiss="modal">Boka!</button>
+        <button type="button" class="btn btn-primary book-button">Boka!</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
