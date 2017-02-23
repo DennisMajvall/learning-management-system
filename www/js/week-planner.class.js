@@ -42,12 +42,21 @@ class WeekPlanner{
 		  				let timeFromHour = moment(booking.timeFrom).hours(),
 		  					timeToHour = moment(booking.timeTo).hours();
 
-		  				// Calc the hour length of the booking
-		  				booking.hours = (timeToHour - timeFromHour) + 1;
+		  				// Calc the col length of the booking and then
+		  				// add a value to convert it to columns length for use with bootstrap grid
+		  				booking.hours = (timeToHour - timeFromHour);
+		  				booking.hours = booking.hours > 4 ? booking.hours = booking.hours + 2 : booking.hours + 1; 
 
-		  				// If only one booking, we may need to add an offset
-		  				if(returnObj.bookings.length < 2){
-		  					booking.offset = timeFromHour > 12 ? 5 : 0;
+		  				// If booking is for afternoon, add a large or small offset
+		  				// depending on if a morning booking exists
+		  				console.log(timeFromHour);
+		  				if(timeFromHour > 12){
+		  					if(returnObj.bookings.length < 2){
+		  						booking.offset = 6;
+		  					}
+		  					else{
+		  						booking.offset = 1;
+		  					}
 		  				}
 		  			});
 
