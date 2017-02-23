@@ -1,12 +1,12 @@
 <h1>profile page</h1>
 <div><strong>Username: </strong>${currentUser.username}</div>
 <form>
-  <input type="text" class="form-control" bind-key="firstname"   placeholder="Firstname"   value="${currentUser.firstname}">
-  <input type="text" class="form-control" bind-key="lastname"    placeholder="Lastname"    value="${currentUser.lastname}">
-  <input type="text" class="form-control" bind-key="phonenumber" placeholder="Phonenumber" value="${currentUser.phonenumber}">
-  <input type="text" class="form-control" bind-key="picture"    placeholder="Picture"      value="${currentUser.picture}">
+  <input type="text" class="form-control" name="firstname"   placeholder="Firstname"   value="${currentUser.firstname}">
+  <input type="text" class="form-control" name="lastname"    placeholder="Lastname"    value="${currentUser.lastname}">
+  <input type="text" class="form-control" name="phonenumber" placeholder="Phonenumber" value="${currentUser.phonenumber}">
+  <input type="text" class="form-control" name="picture"    placeholder="Picture"      value="${currentUser.picture}">
   <h3>New password</h3>
-  <input type="text" class="form-control" bind-key="password"    placeholder="Password"    value="">
-  <input type="text" class="form-control" bind-key="password-verify"    placeholder="Password again"    value="">
+  <input type="text" class="form-control" name="password"    placeholder="Password"    value="">
+  <input type="text" class="form-control" name="password-verify"    placeholder="Password again"    value="">
   <button type="button" class="btn btn-primary save-profile">Save changes</button>
 </form>
