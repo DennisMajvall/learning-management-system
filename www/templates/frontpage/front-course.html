@@ -7,8 +7,8 @@
 	<div class="row">
 		[repeat courses, course]
 		<div class="col-xs-12">
-			<div class="shell" style="background-color: ${course.icon_bg}">
-				<a href="#" data-id="${course._id}" class="show-course">
+			<div class="shell show-course" style="background-color: ${course.icon_bg}">
+				<a data-id="${course._id}">
 					<div class="icon-box"><img src="/images/icons/${course.icon_image}" class="img-responsive" /></div>
 					<p>${course.name}</p>
 				</a>
