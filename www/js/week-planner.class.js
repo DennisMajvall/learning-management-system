@@ -13,7 +13,7 @@ class WeekPlanner{
 		function loadRoom(roomName){
 			// Default to Rum 1
 			if(!roomName){
-				roomName = 'Rum 1';
+				roomName = 'Auditorium 1';
 			}
 			setSelectedRoom(roomName, loadWeek);
 		}
@@ -298,9 +298,21 @@ class WeekPlanner{
 	  		// Bring up the booking modal when clicking a row
 	  		$('.page-content').on('click', '.week-schedule-row', function(){
 	  			let clickedRow = $(this),
-	  				clickedDate = clickedRow.data('timestamp');
+	  				clickedDate = clickedRow.data('timestamp'),
+	  				error;
 
-	  			prepareModal(clickedDate, clickedRow);
+	  			if ( selectedRoom.type === 'classroom' && user.role === 'Student'){
+	  				$('.alert').remove();
+	  				$('.week-planner').append(
+	  				'<div class="alert alert-danger alert-dismissible" role="alert">' + 
+						'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+						'Students are only authorized to book group rooms' +
+					'</div>'
+					);
+	  			}
+	  			else{
+	  				prepareModal(clickedDate, clickedRow);
+	  			}
 	  		});
 	  	}
 	}

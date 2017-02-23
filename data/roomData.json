@@ -1,32 +1,62 @@
 [
 	{
-		"name": "Rum 1",
+		"name": "Auditorium 1",
+		"description": "Bla",
+		"type": "classroom",
+		"seats": "150"
+	},
+	{
+		"name": "Auditorium 2",
+		"description": "Bla",
+		"type": "classroom",
+		"seats": "150"
+	},
+	{
+		"name": "Classroom 3",
 		"description": "Bla",
 		"type": "classroom",
 		"seats": "50"
 	},
 	{
-		"name": "Rum 2",
+		"name": "Classroom 4",
 		"description": "Bla",
 		"type": "classroom",
 		"seats": "50"
 	},
 	{
-		"name": "Rum 3",
+		"name": "Classroom 5",
 		"description": "Bla",
 		"type": "classroom",
 		"seats": "50"
 	},
-	{
-		"name": "Rum 4",
+		{
+		"name": "Grouproom 1",
 		"description": "Bla",
-		"type": "classroom",
-		"seats": "50"
+		"type": "grouproom",
+		"seats": "10"
 	},
 	{
-		"name": "Rum 5",
+		"name": "Grouproom 2",
 		"description": "Bla",
-		"type": "classroom",
-		"seats": "50"
+		"type": "grouproom",
+		"seats": "8"
+	},
+	{
+		"name": "Grouproom 3",
+		"description": "Bla",
+		"type": "grouproom",
+		"seats": "6"
+	},
+	{
+		"name": "Grouproom 4",
+		"description": "Bla",
+		"type": "grouproom",
+		"seats": "6"
+	},
+	{
+		"name": "Grouproom 5",
+		"description": "Bla",
+		"type": "grouproom",
+		"seats": "6"
 	}
 ]
