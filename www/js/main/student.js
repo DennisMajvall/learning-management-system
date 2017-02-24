@@ -16,9 +16,9 @@ function loadStudent(callback) {
 	function onTemplatesLoaded() {
 		new Sidebar("Student");
 		new AnnouncementOnFrontpage(user._id);
+		new CoursesOnFrontpage("Student");
 		//new BookingPage();
 		//new WeekPlanner();
-		new CoursesOnFrontpage("Student");
 		new StudentAlert();
 		callback();
 	}

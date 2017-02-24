@@ -1,7 +1,6 @@
-<!-- Book a room modal-->
 <div class="modal fade" id="bookingInfoModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content" data-booking-id="${booking._id}">
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -9,15 +8,40 @@
       </div>
 
       <div class="modal-body">
-        <p> ${booking._id} </p>
-        <p> ${booking.course.name} </p>
+        <p>
+          <strong> Date: </strong>
+          ${dateFormatObj.date}
+        </p>
+        <p>
+          <strong> From: </strong>
+          ${dateFormatObj.timeFrom}
+        </p>
+        <p>
+          <strong> To: </strong>
+          ${dateFormatObj.timeTo}
+        </p>
+        <p>
+          <strong> Booked by: </strong>
+          ${booking.bookedBy}
+        </p>
+        <p>
+          <strong> For course: </strong>
+          ${booking.course.name}
+        </p>
+        
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-default close-button" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary ok-button" data-dismiss="modal">Ok</button>
+        [if deleteRights == true]
+          <button type="button" class="btn btn-danger delete-button pull-left" data-dismiss="modal">
+            Delete booking
+          </button>
+        [endif]
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          Ok
+        </button>
       </div>
 
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>

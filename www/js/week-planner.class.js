@@ -248,10 +248,18 @@ class WeekPlanner{
 	  			e.stopPropagation();
 
 	  			let clickedBookingId = $(this).attr('data-booking-id');
-	  			new BookingInfoModal(clickedBookingId, waitForIt);
+	  			new BookingInfoModal(clickedBookingId, waitForModalLoad);
 	  		});
 
-	  		function waitForIt(){
+	  		$('body').on('click', '.delete-button', function(){
+	  			let clickedBookingId = $(this).closest('.modal-content').attr('data-booking-id');
+	  			console.log('x:' ,clickedBookingId);
+	  			Booking.delete(clickedBookingId, function(){
+	  				loadWeek();
+	  			});
+	  		});
+
+	  		function waitForModalLoad(){
 	  			$('#bookingInfoModal').modal('show');
 	  		}
 
