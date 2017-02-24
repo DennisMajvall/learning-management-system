@@ -123,15 +123,15 @@ class WeekPlanner{
 			Booking.find(`find/{ $and: [
 				{ room: "` + selectedRoom._id + `" },
 				{ date: ` + date.format('x') +  ` }]}`
-				,function(data,err){
+			,function(data,err){
 
-					var returnObj = {
-						date: date,
-						bookings: data
-					};
+				var returnObj = {
+					date: date,
+					bookings: data
+				};
 
-					callback(returnObj);
-				});
+				callback(returnObj);
+			});
 		}
 
 		// Set the variable selectedRoom

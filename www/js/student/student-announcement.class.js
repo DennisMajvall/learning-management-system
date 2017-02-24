@@ -31,7 +31,6 @@ class AnnouncementOnFrontpage {
 
 							if(lastAnnouncement === true && maxCourses === courseCount) {
 								announcement.courses = coursesNames;
-								console.log(announcements);
 								announcements = announcements.slice(0, 2);
 								$('.student-announcement-container').template('student-announcement', {announcements: announcements});
 							}
