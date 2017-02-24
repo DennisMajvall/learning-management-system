@@ -6,6 +6,7 @@ module.exports = class Room {
 			description: { type: String },
 			type: { type: String, required: true },
 			seats: Number,
+			projector: String,
 			bookings: [{
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Booking'

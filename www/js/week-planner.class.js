@@ -19,6 +19,8 @@ class WeekPlanner{
 		}
 
 		function loadWeek(){
+			$('.seats').text(selectedRoom.seats);
+  			$('.projector').text(selectedRoom.projector);
 			createWeek();
 		}
 
