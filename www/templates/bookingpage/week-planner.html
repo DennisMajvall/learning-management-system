@@ -43,8 +43,8 @@
 						[if booking.offset > 0] col-xs-offset-${booking.offset}[endif]
 						" data-time-from="${booking.timeFrom}" data-time-to="${booking.timeTo}"
 						data-booking-id="${booking._id}">
-						<p>Bokad av: <span class="info-text">${booking.bookedBy}</span></p>
-						<p>Klass: <span class="info-text">${booking.course.name}</span></p>
+						<p>Course: <span class="info-text">${booking.course.name}</span></p>
+						<p>Type: <span class="info-text">${booking.type}</span></p>
 					</div>
 				[endrepeat]
 				</div>

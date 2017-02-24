@@ -152,14 +152,15 @@ class WeekPlanner{
 		}
 
 		// Create a new booking with the arguments passed. 
-		function createBooking(room, course, date, timeFrom, timeTo, hours) {
+		function createBooking(room, course, date, timeFrom, timeTo, type) {
             Booking.create({
                 room: room._id,
                 course: course,
                 date: date.format('x'),
                 timeFrom: timeFrom,
                 timeTo: timeTo,
-                bookedBy: user.username
+                bookedBy: user.username,
+                type: type
             }, function() {
                 loadWeek();
             });
@@ -289,8 +290,11 @@ class WeekPlanner{
 					let course = data,
 						date = $('#bookingModal').find('.modal-body').find('.date').data('dateObj'),
 						timeSpan = $('#timeSelect').val(),
+						type = $('#typeSelect').val(),
 						timeFrom,
 						timeTo;
+
+					console.log(type);
 
 					// Set the timespan according to users choice
 					if(timeSpan === 'morning'){
@@ -310,7 +314,8 @@ class WeekPlanner{
 								 course, 
 								 date,
 								 timeFrom,
-								 timeTo);
+								 timeTo,
+								 type);
 				});
 				$('#bookingModal').hide();
 				$('body').removeClass('modal-open');

@@ -5,12 +5,12 @@
 		</div>
 		[if booking != 'false']
 			<div class="text-box">
-				<h4>Next class, ${booking.course.name} in ${booking.room.name}</h4>
+				<h4>${booking.course.name}, ${booking.type} in ${booking.room.name}</h4>
 				<h4>${dateFormatObj.date}, ${dateFormatObj.timeFrom}</h4>
 			</div>
 		[else]
 			<div class="text-box">
-				<h4> No classes are scheduled for you at the moment</h4>
+				<h4> You have no scheduled times at the moment</h4>
 				<h4></h4>
 			</div>
 		[endif]
