@@ -1,42 +1,44 @@
 class Profile {
 	constructor () {
-		this.currentUser = user;
-		this.dbSchema = this.currentUser.role === "Student" ? Student : Teacher;
+		this.init();
 	}
 
 	renderTemplate () {
-		let currentUser = this.currentUser;
+		window[user.role].find(user._id, (foundUser, err) => {
+			// Clear the page
+			$('section.course-page').empty();
+			$('.student-alert-container').empty();
+			$('.student-announcement-container').empty();
+			$('.teacher-messages-container').empty();
+			$('.front-course-container').empty();
 
-		// Clear the page
-	$('section.course-page').empty();
-		$('.student-alert-container').empty();
-		$('.student-announcement-container').empty();
-		$('.teacher-messages-container').empty();
-		$('.front-course-container').empty();
-
-		// Add html template for profile
-		$('.profile-page-container').empty().template('profile', {currentUser})
+			// Add html template for profile
+			$('.profile-page-container').empty().template('profile', { currentUser: foundUser });
+			new UploadPicture();
+		});
 	}
 
 	init () {
-		let that = this;
 		// Load template for profile page
 		this.renderTemplate();
 
+		let container = $('.profile-page-container');
+
 		// Save changes to db
-		$('.profile-page-container').on('click', '.save-profile', function() {
+		container.on('click', '.save-profile', () => {
+			let tempUser = {};
+
 			// get values from form
-			that.currentUser.firstname = $('.profile-page-container').find('input[name="firstname"]').val();
-			that.currentUser.lastname = $('.profile-page-container').find('input[name="lastname"]').val();
-			that.currentUser.phonenumber = $('.profile-page-container').find('input[name="phonenumber"]').val();
-			that.currentUser.picture = $('.profile-page-container').find('input[name="picture"]').val();
+			tempUser.firstname = 	container.find('input[name="firstname"]').val();
+			tempUser.lastname = 	container.find('input[name="lastname"]').val();
+			tempUser.phonenumber =	container.find('input[name="phonenumber"]').val();
+			tempUser.picture = 		container.find('input[name="picture"]').val();
 
 			// update global user object
-			// we should also update the session object
-			user = Object.assign({}, that.currentUser);
+			user = Object.assign({}, user, tempUser);
 
 			// update the db and reload page
-			that.dbSchema.update(user._id, that.currentUser, function() {
+			window[user.role].update(user._id, tempUser, () => {
 				location.reload();
 			});
 		});

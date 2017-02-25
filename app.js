@@ -158,7 +158,7 @@ app.get('/forgot-password/:username',(req, res)=>{
 
 app.post('/upload-file',(req, res)=>{
 	var data = req.body.imgData;
-	var filename = sha1(req.session.content.user.username) + '.jpg';
+	var filename = sha1(req.session.content.user.username) + req.body.imgExtension;
 
 	var filePath = __dirname + '/www/images/profiles/' + filename;
 
@@ -352,110 +352,110 @@ function createFakeDataFromJSON() {
 				return;
 
 			//assign students to educations
-			students[0].educations = educations.slice(0,1);
-			students[1].educations = educations.slice(0,1);
-			students[2].educations = educations.slice(0,1);
-			students[17].educations = educations.slice(0,1);
-			students[23].educations = educations.slice(0,1);
+			students[0].educations = educations.slice(0, 1);
+			students[1].educations = educations.slice(0, 1);
+			students[2].educations = educations.slice(0, 1);
+			students[17].educations = educations.slice(0, 1);
+			students[23].educations = educations.slice(0, 1);
 
-			students[3].educations = educations.slice(1,2);
-			students[4].educations = educations.slice(1,2);
-			students[5].educations = educations.slice(1,2);
-			students[18].educations = educations.slice(1,2);
+			students[3].educations = educations.slice(1, 2);
+			students[4].educations = educations.slice(1, 2);
+			students[5].educations = educations.slice(1, 2);
+			students[18].educations = educations.slice(1, 2);
 
-			students[6].educations = educations.slice(2,3);
-			students[7].educations = educations.slice(2,3);
-			students[19].educations = educations.slice(2,3);
+			students[6].educations = educations.slice(2, 3);
+			students[7].educations = educations.slice(2, 3);
+			students[19].educations = educations.slice(2, 3);
 
-			students[8].educations = educations.slice(3,4);
-			students[9].educations = educations.slice(3,4);
-			students[10].educations = educations.slice(3,4);
-			students[20].educations = educations.slice(3,4);
+			students[8].educations = educations.slice(3, 4);
+			students[9].educations = educations.slice(3, 4);
+			students[10].educations = educations.slice(3, 4);
+			students[20].educations = educations.slice(3, 4);
 
-			students[11].educations = educations.slice(4,5);
-			students[12].educations = educations.slice(4,5);
-			students[13].educations = educations.slice(4,5);
-			students[21].educations = educations.slice(4,5);
+			students[11].educations = educations.slice(4, 5);
+			students[12].educations = educations.slice(4, 5);
+			students[13].educations = educations.slice(4, 5);
+			students[21].educations = educations.slice(4, 5);
 
-			students[14].educations = educations.slice(5,6);
-			students[15].educations = educations.slice(5,6);
-			students[16].educations = educations.slice(5,6);
-			students[22].educations = educations.slice(5,6);
+			students[14].educations = educations.slice(5, 6);
+			students[15].educations = educations.slice(5, 6);
+			students[16].educations = educations.slice(5, 6);
+			students[22].educations = educations.slice(5, 6);
 
 			//assign educations to students
-			educations[0].students = [].concat( students.slice(0,3) , [ students[17] ] , [ students[23] ]);
-			educations[1].students = [].concat( students.slice(3,6) , [ students[18] ]);
-			educations[2].students = [].concat( students.slice(6,8) , [ students[19] ]);
-			educations[3].students = [].concat( students.slice(8,11) , [ students[20] ]);
-			educations[4].students = [].concat( students.slice(11,14) , [ students[21] ]);
-			educations[5].students = [].concat( students.slice(14,17) , [ students[22] ]);
+			educations[0].students = [].concat( students.slice(0, 3) , [ students[17] ] , [ students[23] ]);
+			educations[1].students = [].concat( students.slice(3, 6) , [ students[18] ]);
+			educations[2].students = [].concat( students.slice(6, 8) , [ students[19] ]);
+			educations[3].students = [].concat( students.slice(8, 11) , [ students[20] ]);
+			educations[4].students = [].concat( students.slice(11, 14) , [ students[21] ]);
+			educations[5].students = [].concat( students.slice(14, 17) , [ students[22] ]);
 
 			//assign teachers to courses
-			teachers[0].courses = courses.slice(0,3);
-			teachers[1].courses = courses.slice(0,3);
+			teachers[0].courses = courses.slice(0, 3);
+			teachers[1].courses = courses.slice(0, 3);
 
-			teachers[2].courses = courses.slice(2,5);
-			teachers[3].courses = courses.slice(2,5);
+			teachers[2].courses = courses.slice(2, 5);
+			teachers[3].courses = courses.slice(2, 5);
 			teachers[4].courses = courses.slice(4);
 
 			//assign courses to teachers
-			courses[0].teachers = teachers.slice(0,2);
-			courses[1].teachers = teachers.slice(0,2);
+			courses[0].teachers = teachers.slice(0, 2);
+			courses[1].teachers = teachers.slice(0, 2);
 
-			courses[2].teachers = teachers.slice(2,4);
-			courses[3].teachers = teachers.slice(2,4);
+			courses[2].teachers = teachers.slice(2, 4);
+			courses[3].teachers = teachers.slice(2, 4);
 
 			courses[4].teachers = teachers.slice(4);
 			courses[5].teachers = teachers.slice(4);
 
 			//assign students to courses
-			students[0].courses = courses.slice(0,3);
-			students[1].courses = courses.slice(0,3);
-			students[2].courses = courses.slice(0,3);
-			students[17].courses = courses.slice(0,3);
-			students[23].courses = courses.slice(0,3);
+			students[0].courses = courses.slice(0, 3);
+			students[1].courses = courses.slice(0, 3);
+			students[2].courses = courses.slice(0, 3);
+			students[17].courses = courses.slice(0, 3);
+			students[23].courses = courses.slice(0, 3);
 
-			students[3].courses = courses.slice(1,2);
-			students[4].courses = courses.slice(1,2);
-			students[5].courses = courses.slice(1,2);
-			students[18].courses = courses.slice(1,2);
+			students[3].courses = courses.slice(1, 2);
+			students[4].courses = courses.slice(1, 2);
+			students[5].courses = courses.slice(1, 2);
+			students[18].courses = courses.slice(1, 2);
 
-			students[6].courses = courses.slice(2,3);
-			students[7].courses = courses.slice(2,3);
-			students[19].courses = courses.slice(2,3);
+			students[6].courses = courses.slice(2, 3);
+			students[7].courses = courses.slice(2, 3);
+			students[19].courses = courses.slice(2, 3);
 
-			students[8].courses = courses.slice(3,4);
-			students[9].courses = courses.slice(3,4);
-			students[10].courses = courses.slice(3,4);
-			students[20].courses = courses.slice(3,4);
+			students[8].courses = courses.slice(3, 4);
+			students[9].courses = courses.slice(3, 4);
+			students[10].courses = courses.slice(3, 4);
+			students[20].courses = courses.slice(3, 4);
 
-			students[11].courses = courses.slice(4,5);
-			students[12].courses = courses.slice(4,5);
-			students[13].courses = courses.slice(4,5);
-			students[21].courses = courses.slice(4,5);
+			students[11].courses = courses.slice(4, 5);
+			students[12].courses = courses.slice(4, 5);
+			students[13].courses = courses.slice(4, 5);
+			students[21].courses = courses.slice(4, 5);
 
-			students[14].courses = courses.slice(5,6);
-			students[15].courses = courses.slice(5,6);
-			students[16].courses = courses.slice(5,6);
-			students[22].courses = courses.slice(5,6);
+			students[14].courses = courses.slice(5, 6);
+			students[15].courses = courses.slice(5, 6);
+			students[16].courses = courses.slice(5, 6);
+			students[22].courses = courses.slice(5, 6);
 
 			//assign courses to announcements
-			announcements[0].courses = courses.slice(0,1);
-			announcements[1].courses = courses.slice(1,2);
-			announcements[2].courses = courses.slice(4,5);
+			announcements[0].courses = courses.slice(0, 1);
+			announcements[1].courses = courses.slice(1, 2);
+			announcements[2].courses = courses.slice(4, 5);
 
 			//assign teacher to announcements authors
-			announcements[0].author = teachers.slice(0,1);
-			announcements[1].author = teachers.slice(2,3);
-			announcements[2].author = teachers.slice(4,5);
+			announcements[0].author = teachers.slice(0, 1);
+			announcements[1].author = teachers.slice(2, 3);
+			announcements[2].author = teachers.slice(4, 5);
 
 			//assign courses to students
-			courses[0].students = [].concat( students.slice(0,6) , [ students[17] ] , [ students[23] ]);
-			courses[1].students = [].concat( students.slice(3,6) , [ students[18] ]);
-			courses[2].students = [].concat( students.slice(6,8) , [ students[19] ]);
-			courses[3].students = [].concat( students.slice(8,11) , [ students[20] ]);
-			courses[4].students = [].concat( students.slice(11,14) , [ students[21] ]);
-			courses[5].students = [].concat( students.slice(14,17) , [ students[22] ]);
+			courses[0].students = [].concat( students.slice(0, 6) , [ students[17] ] , [ students[23] ]);
+			courses[1].students = [].concat( students.slice(3, 6) , [ students[18] ]);
+			courses[2].students = [].concat( students.slice(6, 8) , [ students[19] ]);
+			courses[3].students = [].concat( students.slice(8, 11) , [ students[20] ]);
+			courses[4].students = [].concat( students.slice(11, 14) , [ students[21] ]);
+			courses[5].students = [].concat( students.slice(14, 17) , [ students[22] ]);
 
 			teachers.forEach((v)=>{
 				v.save();

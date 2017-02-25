@@ -1,12 +1,18 @@
 <h1>Profile page</h1>
 <div><strong>Username: </strong>${currentUser.username}</div>
 <form>
-  <input type="text" class="form-control" name="firstname"   placeholder="Firstname"   value="${currentUser.firstname}">
-  <input type="text" class="form-control" name="lastname"    placeholder="Lastname"    value="${currentUser.lastname}">
-  <input type="text" class="form-control" name="phonenumber" placeholder="Phonenumber" value="${currentUser.phonenumber}">
-  <input type="text" class="form-control" name="picture"    placeholder="Picture"      value="${currentUser.picture}">
-  <h3>New password</h3>
-  <input type="text" class="form-control" name="password"    placeholder="Password"    value="">
-  <input type="text" class="form-control" name="password-verify"    placeholder="Password again"    value="">
-  <button type="button" class="btn btn-primary save-profile">Save changes</button>
+	<input type="text" class="form-control" name="firstname"   placeholder="Firstname"   value="${currentUser.firstname}">
+	<input type="text" class="form-control" name="lastname"    placeholder="Lastname"    value="${currentUser.lastname}">
+	<input type="text" class="form-control" name="phonenumber" placeholder="Phonenumber" value="${currentUser.phonenumber}">
+	<input type="text" class="form-control" name="picture"    placeholder="Picture"      value="${currentUser.picture}">
+	<h3>New password</h3>
+	<input type="text" class="form-control" name="password"    placeholder="Password"    value="">
+	<input type="text" class="form-control" name="password-verify"    placeholder="Password again"    value="">
+	<br />
+	<button type="button" class="btn btn-primary save-profile">Save changes</button>
+
+	<button type="button" class="btn btn-info btn-file">Upload image</button>
+	<input type="file" id="upload-file" accept="image/*" style="display: none;" />
 </form>
+
+

@@ -3,6 +3,7 @@ function loadStudent(callback) {
 	routes['/'] = () => {
 		$('.sidebar-slide').removeClass('visible');
 		$('section.course-page').empty();
+		$('.profile-page-container').empty();
 		new AnnouncementOnFrontpage(user._id);
 		new CoursesOnFrontpage();
 		new StudentAlert();
@@ -13,10 +14,12 @@ function loadStudent(callback) {
 	};
 
 	routes['/bookings'] = () => {
+		$('.sidebar-slide').removeClass('visible');
 		$('section.course-page').empty();
 		$('.teacher-messages-container').empty();
 		$('.student-announcement-container').empty();
 		$('.front-course-container').empty();
+		$('.profile-page-container').empty();
 		new WeekPlanner();
 		new BookingPage();
 	};
@@ -24,6 +27,7 @@ function loadStudent(callback) {
 	user.courses.forEach((val) => {
 		routes['/course-page-' + val] = () => {
 			$('.sidebar-slide').removeClass('visible');
+			$('.profile-page-container').empty();
 			new CoursePage(val);
 		};
 	});
@@ -43,8 +47,6 @@ function loadStudent(callback) {
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
-		//new BookingPage();
-		//new WeekPlanner();
 		new Sidebar();
 		callback();
 	}

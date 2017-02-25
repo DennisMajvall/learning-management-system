@@ -54,7 +54,7 @@ class StudentAlert {
 		}
 
 		function createTemplate(booking, dateFormatObj) {
-			$('.student-alert-container').template('student-alert', {
+			$('.student-alert-container').empty().template('student-alert', {
 				booking: booking ? booking : 'false',
 				dateFormatObj: dateFormatObj ? dateFormatObj : 'false'
 			});
