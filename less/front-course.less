@@ -1,42 +1,39 @@
 .front-course-section {
 
-  .show-course {
-      cursor: pointer;
-  }
+	a {
+		&:hover, &:active, &:visited {
+			text-decoration: none;
+		}
 
-  .shell {
-    width: 100%;
-    max-width: 320px;
-    height: 60px;
-    background-color: @custom-color-red;
-    margin-bottom: 15px;
+		.shell {
+			max-width: 320px;
+			height: 60px;
+			background-color: @custom-color-red;
+			margin-bottom: 15px;
 
-    a {
-      &:hover, &:active, &:visited {
-        text-decoration: none;
-      }
-    }
 
-    .icon-box {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      border-right: 1px solid white;
-      display: inline-block;
-      img {
-        margin: 0 auto;
-        max-height: 50px;
-        padding-top: 10px;
-      }
-    }
-    p {
-      position: relative;
-      top: 20px;
-      left: 80px;
-      color: @custom-color-white;
-      font-size: 14px;
-    }
-  }
+			.icon-box {
+				position: absolute;
+				width: 60px;
+				height: 60px;
+				border-right: 1px solid white;
+				display: inline-block;
+				img {
+					margin: 0 auto;
+					max-height: 50px;
+					padding-top: 10px;
+				}
+			}
+
+			span {
+				position: absolute;
+				top: 20px;
+				left: 80px;
+				color: @custom-color-white;
+				font-size: 14px;
+			}
+		}
+	}
 }
 
 .btn-file {

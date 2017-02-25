@@ -4,10 +4,11 @@ class Sidebar {
 		let courseHashMap = {};
 		let that = this;
 		let currentUser = user;
+		let educationName = '';
 
-		if (currentUser.role != 'Teacher') {
+		if (currentUser.role == 'Student') {
 			Student.find(currentUser._id, function(student, err) {
-				currentUser = student;
+				educationName = student.educations[0].name;
 				populateCourses(user.courses);
 			});
 		} else {
@@ -31,17 +32,17 @@ class Sidebar {
 			var settingsObj = {
 				courses: courses,
 				header: 'Learning Management System',
-				role: currentUser.role.toLowerCase(),
-				picture: currentUser.picture,
-				education: currentUser.educations ? currentUser.educations[0].name : '',
+				role: user.role.toLowerCase(),
+				picture: user.picture,
+				education: educationName,
 				booking: 'Book a room',
 				account: 'Your Account',
-				fullname: currentUser.firstname + ' ' + currentUser.lastname,
+				fullname: user.firstname + ' ' + user.lastname,
 				usersettings: 'Settings',
 				logout: 'log out'
 			};
 
-			$('.sidebar-container').template('sidebar', settingsObj);
+			$('.sidebar-container').empty().template('sidebar', settingsObj);
 
 			$(".nav-toggle, .menu-toggle").click(function(e) {
 				e.preventDefault();
@@ -50,9 +51,20 @@ class Sidebar {
 		}
 
 
-		// Log out
-		$('.sidebar-container').on('click', '.log-out', function(){
+		// Open the user profile page
+		$('.sidebar-container').on('click', '.settings-icon', function() {
+			// Clear the page
+			$('.page-content').children().empty();
+			// Add html template for profile
+			$('.page-content').empty().template('profile', {
+				firstname: user.firstname,
+				lastname: user.lastname,
+				picture: settingsObj[picture]
+			})
+		});
 
+		// Log out
+		$('.sidebar-container').on('click', '.log-out', function() {
 			Login.delete(onLogout);
 		});
 
@@ -60,27 +72,12 @@ class Sidebar {
 			location.href = '/';
 		}
 
-		$('.sidebar-container').on('click', '.menu-choice-courses', function() {
-			let id = $(this).data('id');
-			let course = that.courseHashMap[id];
-
-			$('.student-announcement-container').empty();
-			$('.teacher-messages-container').empty();
-			$('.front-course-container').empty().template('course-page', { course: course, role: user.role });
-			$('.sidebar-slide').removeClass('visible');
-		});
-
 		$('.front-course-container').on('click', 'button.remove-item', function() {
 			let id = $(this).attr('list-item-id');
 			let courseId = $(this).closest('section.course-page').attr('course-id');
 			let course = that.courseHashMap[courseId];
 
 			that.removeById(id, course, that, this);
-		});
-
-		// Register clicks on profile settings page
-		$('.sidebar-container').on('click', '.settings-icon', function(){
-			new Profile();
 		});
 	}
 
@@ -96,7 +93,7 @@ class Sidebar {
 		});
 		var updateObj = {};
 		updateObj.students = mainItem.students;
-		Course.update(mainItem._id, updateObj, function(){
+		Course.update(mainItem._id, updateObj, function() {
 			$(domThis).closest('profile').remove();
 		});
 	}

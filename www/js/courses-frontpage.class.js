@@ -23,26 +23,12 @@ class CoursesOnFrontpage {
 				that.courseHashMap[course._id] = course;
 			});
 
-			$('.front-course-container').template('front-course', { courses: courses });
+			$('.front-course-container').empty().template('front-course', { courses: courses });
 
 			document.getElementById('upload-file').onchange = function() {
 				handleFileSelect();
 			};
 		}
-
-
-		$('.front-course-container').on('click', '.show-course', function() {
-			let id = $(this).find('a').data('id');
-			let course = that.courseHashMap[id];
-
-			$('.student-announcement-container').empty();
-			$('.teacher-messages-container').empty();
-			$('.sidebar-slide').removeClass('visible');
-			$('.front-course-container').empty().template('course-page', {
-				course: course,
-				role: user.role.toLowerCase()
-			});
-		});
 	}
 }
 
@@ -96,7 +82,7 @@ function receivedText() {
 				});
 			}
 		},
-		error: function(error){
+		error: function(error) {
 			console.log(error.responseJSON)
 		}
 	});

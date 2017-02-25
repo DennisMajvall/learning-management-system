@@ -3,7 +3,7 @@ class Router {
 		var self = this;
 
 		// when clicking a link run the click handler
-		$(document).on('click','a',function(e){
+		$(document).on('click','a', function(e) {
 			var aTag = $(this);
 			self.clickHandler(aTag, e);
 		});
@@ -41,7 +41,7 @@ class Router {
 
 	actOnRoute(route) {
 		// find the function corresponding to the route
-		var func = routes[route];
+		var func = routes[route] || routes['/'];
 
 		if (func)
 			func();

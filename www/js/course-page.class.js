@@ -1,20 +1,14 @@
 class CoursePage{
 	constructor(courseId) {
+		$('.teacher-messages-container').empty();
+		$('.student-announcement-container').empty();
+		$('.front-course-container').empty();
 
-		Course.find(courseId, function(data, err) {
-			// get the first course in collection for testing purposes
-			let course = data;
-			createTemplate(course);
-		});
-
-		function createTemplate(course) {
-			// Set the nav-info in navbar to display course name
-			$('.nav-info').find('p').text(course.name);
-
-			$('.course-page-container').template('course-page', {
-				teachers: course.teachers,
-				students: course.students
+		Course.find(courseId, (course) => {
+			$('.front-course-container').empty().template('course-page', {
+				course: course,
+				role: user.role.toLowerCase()
 			});
-		}
+		});
 	}
 }

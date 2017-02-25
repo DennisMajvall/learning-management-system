@@ -1,4 +1,20 @@
 function loadStudent(callback) {
+	// Set up routes
+	routes['/'] = () => {
+		$('.sidebar-slide').removeClass('visible');
+		$('section.course-page').empty();
+		new AnnouncementOnFrontpage(user._id);
+		new CoursesOnFrontpage();
+		new StudentAlert();
+	};
+
+	user.courses.forEach((val) => {
+		routes['/course-page-' + val] = () => {
+			$('.sidebar-slide').removeClass('visible');
+			new CoursePage(val);
+		};
+	});
+
 	$.loadTemplates([
 		'frontpage/front-course',
 		'frontpage/student-announcement',
@@ -13,12 +29,9 @@ function loadStudent(callback) {
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
-		new Sidebar("Student");
-		new AnnouncementOnFrontpage(user._id);
 		//new BookingPage();
 		//new WeekPlanner();
-		new CoursesOnFrontpage("Student");
-		new StudentAlert();
+		new Sidebar();
 		callback();
 	}
 }

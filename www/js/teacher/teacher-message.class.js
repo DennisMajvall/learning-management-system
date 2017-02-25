@@ -16,7 +16,7 @@ class TeacherMessage {
         }
 
         function createTemplate(courses) {
-            $('.teacher-messages-container').template('teacher-message', { courses: courses });
+            $('.teacher-messages-container').empty().template('teacher-message', { courses: courses });
         }
 
         function createEventListeners() {
@@ -71,7 +71,7 @@ class TeacherMessage {
 
             $('textarea').val('');
             $('.msg-sent').text("Message has been sent!");
-            setTimeout(function(){
+            setTimeout(function() {
                 $('.msg-sent').text('');
             }, 3000);
         }
