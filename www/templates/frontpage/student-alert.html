@@ -3,11 +3,16 @@
 		<div class='icon-box'>
 			<img src="/images/icons/next-course-icon@2x.png">
 		</div>
-
-		<div class="text-box">
-			<h4>Next course, Archeology in room B15</h4>
-			<h4>Dec 10, 08.00</h4>
-		</div>
-		
+		[if booking != 'false']
+			<div class="text-box">
+				<h4>${booking.course.name}, ${booking.type} in ${booking.room.name}</h4>
+				<h4>${dateFormatObj.date}, ${dateFormatObj.timeFrom}</h4>
+			</div>
+		[else]
+			<div class="text-box">
+				<h4> You have no scheduled times at the moment</h4>
+				<h4></h4>
+			</div>
+		[endif]
 	</div>
 </section>

@@ -19,6 +19,8 @@ class WeekPlanner{
 		}
 
 		function loadWeek(){
+			$('.seats').text(selectedRoom.seats);
+  			$('.projector').text(selectedRoom.projector);
 			createWeek();
 		}
 
@@ -49,7 +51,6 @@ class WeekPlanner{
 
 		  				// If booking is for afternoon, add a large or small offset
 		  				// depending on if a morning booking exists
-		  				console.log(timeFromHour);
 		  				if(timeFromHour > 12){
 		  					if(returnObj.bookings.length < 2){
 		  						booking.offset = 6;
@@ -124,15 +125,15 @@ class WeekPlanner{
 			Booking.find(`find/{ $and: [
 				{ room: "` + selectedRoom._id + `" },
 				{ date: ` + date.format('x') +  ` }]}`
-				,function(data,err){
+			,function(data,err){
 
-					var returnObj = {
-						date: date,
-						bookings: data
-					};
+				var returnObj = {
+					date: date,
+					bookings: data
+				};
 
-					callback(returnObj);
-				});
+				callback(returnObj);
+			});
 		}
 
 		// Set the variable selectedRoom
@@ -153,18 +154,16 @@ class WeekPlanner{
 		}
 
 		// Create a new booking with the arguments passed. 
-		function createBooking(room, course, date, timeFrom, timeTo, hours) {
+		function createBooking(room, course, date, timeFrom, timeTo, type) {
             Booking.create({
                 room: room._id,
                 course: course,
                 date: date.format('x'),
                 timeFrom: timeFrom,
                 timeTo: timeTo,
-                bookedBy: user.username
+                bookedBy: user.username,
+                type: type
             }, function() {
-                console.log('Bokade ' + selectedRoom.name + 
-                ' för ' + course.name + ' från ' + timeFrom + ' ' + 
-                'till ' + '' + timeTo);
                 loadWeek();
             });
         }
@@ -176,7 +175,6 @@ class WeekPlanner{
 
 			// Populate courses and the callback createModal
 			populateCourses(user.courses, thisDate, clickedRow,thisDateFormatted, createModal);
-
 		}
 
 		// Create the bookingModal with given data and show it
@@ -249,6 +247,33 @@ class WeekPlanner{
 	  			createWeek();
 	  		});
 
+	  		$('.page-content').on('click', '.booking', function(e){
+	  			e.stopPropagation();
+
+	  			let clickedBookingId = $(this).attr('data-booking-id');
+	  			new BookingInfoModal(clickedBookingId, waitForModalLoad);
+	  		});
+
+	  		$('body').on('click', '.delete-button', function(){
+	  			let clickedBookingId = $(this).closest('.modal-content').attr('data-booking-id');
+	  			console.log('x:' ,clickedBookingId);
+	  			Booking.delete(clickedBookingId, function(){
+	  				loadWeek();
+	  			});
+	  		});
+
+	  		function waitForModalLoad(){
+	  			$('#bookingInfoModal').modal('show');
+	  		}
+
+	  		$('.page-content').on('click', '#bookingInfoModal' , function(e){
+	  			e.stopPropagation();
+	  			alert('hej');
+	  			$('#bookingInfoModal').hide();
+				$('body').removeClass('modal-open');
+				$('.modal-backdrop').remove();
+	  		});
+
 	  		$('.page-content').on('click', '.book-button', function(){
 
 	  			let selectedCourseId = $('#courseSelect option:selected').attr('data-course-id');
@@ -267,8 +292,11 @@ class WeekPlanner{
 					let course = data,
 						date = $('#bookingModal').find('.modal-body').find('.date').data('dateObj'),
 						timeSpan = $('#timeSelect').val(),
+						type = $('#typeSelect').val(),
 						timeFrom,
 						timeTo;
+
+					console.log(type);
 
 					// Set the timespan according to users choice
 					if(timeSpan === 'morning'){
@@ -288,7 +316,8 @@ class WeekPlanner{
 								 course, 
 								 date,
 								 timeFrom,
-								 timeTo);
+								 timeTo,
+								 type);
 				});
 				$('#bookingModal').hide();
 				$('body').removeClass('modal-open');
@@ -296,7 +325,8 @@ class WeekPlanner{
 			});
 
 	  		// Bring up the booking modal when clicking a row
-	  		$('.page-content').on('click', '.week-schedule-row', function(){
+	  		$('.page-content').on('click', '.week-schedule-row', function(e){
+
 	  			let clickedRow = $(this),
 	  				clickedDate = clickedRow.data('timestamp'),
 	  				error;

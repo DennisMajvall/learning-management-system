@@ -6,6 +6,19 @@ function loadTeacher(callback) {
 		new CoursesOnFrontpage();
 	};
 
+	routes['/profile'] = () => {
+		new Profile().init();
+	};
+
+	routes['/bookings'] = () => {
+		$('section.course-page').empty();
+		$('.teacher-messages-container').empty();
+		$('.student-announcement-container').empty();
+		$('.front-course-container').empty();
+		new WeekPlanner();
+		new BookingPage();
+	};
+
 	user.courses.forEach((val) => {
 		routes['/course-page-' + val] = () => {
 			new CoursePage(val);
@@ -20,13 +33,12 @@ function loadTeacher(callback) {
 		'booking-page',
 		'bookingpage/week-planner',
 		'bookingpage/booking-modal',
+		'bookingpage/booking-info-modal',
 		'sidebar',
 		'profile'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
-		//new WeekPlanner();
-		//new BookingPage();
 		new Sidebar();
 		callback();
 	}

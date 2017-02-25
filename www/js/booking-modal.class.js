@@ -5,7 +5,8 @@ class BookingModal{
 		$('.booking-modal-container').template('booking-modal',{
 			room: room,
 			dateInfo: dateInfo,
-			courses: courses
+			courses: courses,
+			userRole: user.role
 		});
 	}
 }

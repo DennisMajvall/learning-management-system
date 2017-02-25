@@ -3,60 +3,70 @@
 		"name": "Auditorium 1",
 		"description": "Bla",
 		"type": "classroom",
-		"seats": "150"
+		"seats": "150",
+		"projector": "Yes"
 	},
 	{
 		"name": "Auditorium 2",
 		"description": "Bla",
 		"type": "classroom",
-		"seats": "150"
+		"seats": "150",
+		"projector": "Yes"
 	},
 	{
 		"name": "Classroom 3",
 		"description": "Bla",
 		"type": "classroom",
-		"seats": "50"
+		"seats": "50",
+		"projector": "Yes"
 	},
 	{
 		"name": "Classroom 4",
 		"description": "Bla",
 		"type": "classroom",
-		"seats": "50"
+		"seats": "50",
+		"projector": "Yes"
 	},
 	{
 		"name": "Classroom 5",
 		"description": "Bla",
 		"type": "classroom",
-		"seats": "50"
+		"seats": "50",
+		"projector": "Yes"
 	},
 		{
 		"name": "Grouproom 1",
 		"description": "Bla",
 		"type": "grouproom",
-		"seats": "10"
+		"seats": "10",
+		"projector": "No"
 	},
 	{
 		"name": "Grouproom 2",
 		"description": "Bla",
 		"type": "grouproom",
-		"seats": "8"
+		"seats": "8",
+		"projector": "No"
 	},
 	{
 		"name": "Grouproom 3",
 		"description": "Bla",
 		"type": "grouproom",
-		"seats": "6"
+		"seats": "6",
+		"projector": "No"
 	},
 	{
 		"name": "Grouproom 4",
 		"description": "Bla",
 		"type": "grouproom",
-		"seats": "6"
+		"seats": "6",
+		"projector": "No"
 	},
 	{
 		"name": "Grouproom 5",
 		"description": "Bla",
 		"type": "grouproom",
-		"seats": "6"
+		"seats": "6",
+		"projector": "No"
 	}
 ]
