@@ -125,6 +125,7 @@ class AdminFilter {
 	run(input, callback, adminSearch) {
 		let that = this;
 		let queries = [];
+		adminSearchHashMap = [];
 
 		if (!input.length) {
 			queries.push(() => { this.queryWrapper(this.dbSchema, '', whenDone); });

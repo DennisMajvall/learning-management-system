@@ -2,6 +2,12 @@
 // that creates wrappers for REST requests
 // to a specific REST entity
 
+// Magical find fields
+// _fields => which fields to include
+// _sort => the sort order
+// _skip => where to start
+// _limit => how many items to return
+
 class RestEntity {
 
 	constructor(entityName){
