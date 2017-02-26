@@ -11,6 +11,8 @@ class Profile {
 			$('.student-announcement-container').empty();
 			$('.teacher-messages-container').empty();
 			$('.front-course-container').empty();
+			$('.booking-page-container').empty();
+			$('.week-planner-container').empty();
 
 			// Add html template for profile
 			$('.profile-page-container').empty().template('profile', { currentUser: foundUser });

@@ -27,13 +27,8 @@ class AdminSidebar {
             Login.delete(onLogout);
         });
 
-		$('.sidebar-container').on('click', '.menu-choice-courses', function() {
-			$(".sidebar-slide").removeClass("visible");
-		});
-
         function onLogout(response, err) {
-            console.log('onLogout', response, 'errorMessage', err);
-            location.reload();
+			location.href = '/';
         }
     }
 }

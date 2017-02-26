@@ -2,12 +2,13 @@ module.exports = class Announcement {
 
 	schema() {
 		return {
-			author: [{
+			message: {type: String, required: true},
+			timeCreated: {type: Date, default: Date.now},
+			author: {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Teacher',
 				required: true
-			}],
-			message: {type: String, required: true},
+			},
 			courses: [{
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Course'

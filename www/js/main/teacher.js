@@ -4,11 +4,14 @@ function loadTeacher(callback) {
 		$('.sidebar-slide').removeClass('visible');
 		$('section.course-page').empty();
 		$('.profile-page-container').empty();
+		$('.booking-page-container').empty();
+		$('.week-planner-container').empty();
 		new TeacherMessage();
 		new CoursesOnFrontpage();
 	};
 
 	routes['/profile'] = () => {
+		$('.sidebar-slide').removeClass('visible');
 		new Profile();
 	};
 
@@ -26,7 +29,6 @@ function loadTeacher(callback) {
 	user.courses.forEach((val) => {
 		routes['/course-page-' + val] = () => {
 			$('.sidebar-slide').removeClass('visible');
-			$('.profile-page-container').empty();
 			new CoursePage(val);
 		};
 	});

@@ -11,7 +11,6 @@ class UploadPicture {
 			return;
 		}
 
-
 		// Set up file reader
 		let fr = new FileReader();
 		fr.onload = sendToServer;

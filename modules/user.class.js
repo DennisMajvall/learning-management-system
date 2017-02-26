@@ -3,7 +3,8 @@ module.exports = class User {
 	schema() {
 		return {
 			username: {type: String, required: true},
-			password: {type: String, required: true}
+			password: {type: String, required: true},
+			timeCreated: {type: Date, default: Date.now}
 		};
 	}
 

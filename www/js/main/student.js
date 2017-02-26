@@ -4,13 +4,16 @@ function loadStudent(callback) {
 		$('.sidebar-slide').removeClass('visible');
 		$('section.course-page').empty();
 		$('.profile-page-container').empty();
-		new AnnouncementOnFrontpage(user._id);
+		$('.booking-page-container').empty();
+		$('.week-planner-container').empty();
+		new AnnouncementOnFrontpage();
 		new CoursesOnFrontpage();
 		new StudentAlert();
 	};
 
 	routes['/profile'] = () => {
-		new Profile().init();
+		$('.sidebar-slide').removeClass('visible');
+		new Profile();
 	};
 
 	routes['/bookings'] = () => {
@@ -27,7 +30,6 @@ function loadStudent(callback) {
 	user.courses.forEach((val) => {
 		routes['/course-page-' + val] = () => {
 			$('.sidebar-slide').removeClass('visible');
-			$('.profile-page-container').empty();
 			new CoursePage(val);
 		};
 	});

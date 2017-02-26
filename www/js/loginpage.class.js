@@ -24,8 +24,8 @@ class Loginpage {
 				url: '/forgot-password/' + $('#username').val(),
 				type: "GET",
 				dataType: "json",
-				success: function(error){
-					console.log(error);
+				success: function(response){
+					console.log(response);
 				},
 				error: function(error){
 					console.log(error);
@@ -34,8 +34,6 @@ class Loginpage {
 		});
 
 		function onGet(response, err) {
-			// console.log('onGet: \n', response, 'errorMessage: ', err);
-
 			var username = $('form.login-form #username').val();
 		 	var password = $('form.login-form #password').val();
 
@@ -46,8 +44,6 @@ class Loginpage {
 		}
 
 		function onLogin(response, err) {
-			// console.log('onLogin', response, 'errorMessage', err);
-
 			if (response.user) {
 				location.reload();
 			} else {

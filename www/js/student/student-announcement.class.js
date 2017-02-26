@@ -1,42 +1,45 @@
 class AnnouncementOnFrontpage {
 
-	constructor(studentID) {
-		Student.find(studentID+"/getAnnouncements", function(announcements) {
-			announcements = announcements.returns;
-			let maxAnnounce = Object.keys(announcements).length;
-			let announceCount = 0;
+	constructor() {
+		let courseIds = user.courses.map( course => '"' + course + '"' );
+		let announcementQuery = 'find/{ courses: { $in: [' + courseIds + '] } }';
 
-			announcements.forEach(function(announcement) {
-				let coursesNames = "";
-				let maxCourses = Object.keys(announcement.courses).length;
-				let courseCount = 0;
+		Announcement.find(announcementQuery, announcementsFound);
 
-				announceCount++;
-				let lastAnnouncement = maxAnnounce == announceCount;
+		function announcementsFound(announcements) {
+			prepareCourseNames(announcements);
+			prepareDate(announcements);
 
-				Teacher.find(announcement.author, function(teacher) {
-					announcement.picture = teacher.picture;
-					announcement.author = teacher.firstname + " " + teacher.lastname;
-					announcement.courses.forEach(function(courseId) {
+			$('.student-announcement-container')
+				.empty()
+				.template('student-announcement', { announcements: announcements });
+		}
 
-						Course.find(courseId, function(course) {
+		function prepareCourseNames(announcements) {
+			announcements.forEach((announcement) => {
+				let courseNames = '';
+				let lastIndex = announcement.courses.length - 1;
 
-							courseCount++;
-							if(courseCount === 1) {
-								coursesNames += course.name;
-							} else {
-								coursesNames += ", " + course.name;
-							}
-
-							if(lastAnnouncement === true && maxCourses === courseCount) {
-								announcement.courses = coursesNames;
-								announcements = announcements.slice(0, 2);
-								$('.student-announcement-container').empty().template('student-announcement', {announcements: announcements});
-							}
-						});
-					});
+				announcement.courses.forEach((course, index) => {
+					courseNames += course.name;
+					if (index < lastIndex)
+						courseNames += ', ';
 				});
+
+				announcement.courseNames = courseNames;
 			});
-		});
+		}
+
+		function prepareDate(announcements) {
+			var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+				"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+			];
+
+			announcements.forEach((announcement) => {
+				let date = new Date(announcement.timeCreated);
+				announcement.dateString = date.getDate() + ' ' + monthNames[date.getMonth()];
+			});
+		}
+
 	}
 }

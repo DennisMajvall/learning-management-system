@@ -44,6 +44,8 @@ class TeacherMessage {
             });
 
             function changeValue(courseId) {
+				if (!courseId)
+					return;
 
                 // Adds or Removes the course from the array
                 let foundIndex = coursesToPublishTo.indexOf(courseId);

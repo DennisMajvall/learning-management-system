@@ -6,8 +6,10 @@
             <article class="row">
                 <div class="col-md-2 col-sm-2 hidden-sm hidden-xs">
                     <figure class="thumbnail">
-                    <img class="img-responsive" src="/images/profiles/${announcement.picture}" />
-                    <figcaption class="text-center">${announcement.author}</figcaption>
+						<img class="img-responsive" src="/images/profiles/${announcement.author.picture}" />
+						<figcaption class="text-center">
+							<span>${announcement.author.firstname} ${announcement.author.lastname}<span>
+						</figcaption>
                     </figure>
                 </div>
                 <div class="col-md-10 col-sm-10">
@@ -15,11 +17,11 @@
                         <div class="panel-body">
                             <header>
                                 <div class="announcement-user">
-                                    <h3><i class="fa fa-graduation-cap"></i> ${announcement.courses}</h3>
+                                    <h3><i class="fa fa-graduation-cap"></i>${announcement.courseNames}</h3>
                                 </div>
                                 <time class="announcement-date" datetime="16-12-2014 01:05">
                                     <i class="fa fa-clock-o"></i>
-                                    Dec 16, 2014
+                                    ${announcement.dateString}
                                 </time>
                             </header>
                             <p>
@@ -27,7 +29,9 @@
                             </p>
                             <div class="hidden-md hidden-lg">
                                 <p>
-                                    <h5>From: </h5> ${announcement.author}
+                                    <h5>From: </h5>
+									<span>${announcement.author.firstname}<span>
+									<span>${announcement.author.lastname}<span>
                                 </p>
                             </div>
                         </div>
