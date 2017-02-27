@@ -7,7 +7,7 @@ module.exports = class Announcement {
 			author: {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Teacher',
-				required: true
+				required: false
 			},
 			courses: [{
 				type: mongoose.Schema.Types.ObjectId,
