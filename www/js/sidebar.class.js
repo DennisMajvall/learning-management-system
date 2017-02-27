@@ -7,7 +7,7 @@ class Sidebar {
 			let user = foundUser;
 			let educationName = '';
 			if (user.role == 'Student') {
-				educationName = user.educations[0].name;
+				educationName = user.educations[0] ? user.educations[0].name : 'No ongoing education';
 			}
 
 			createTemplate();
@@ -34,11 +34,11 @@ class Sidebar {
 
 				$('.sidebar-container').empty().template('sidebar', settingsObj);
 
-				$(".nav-toggle, .menu-toggle").click(function(e) {
+				$('.nav-toggle, .menu-toggle').click(function(e) {
 					e.preventDefault();
-					$(".sidebar-slide").toggleClass("visible");
+					$('.sidebar-slide').toggleClass('visible');
 				});
-			};
+			}
 		});
 
 		// Log out
@@ -49,40 +49,6 @@ class Sidebar {
 		function onLogout(response, err) {
 			location.href = '/';
 		}
-
-		$('.front-course-container').on('click', 'button.remove-item', function() {
-			let id = $(this).attr('list-item-id');
-			let courseId = $(this).closest('section.course-page').attr('course-id');
-			let course = that.courseHashMap[courseId];
-
-			that.removeById(id, course, that, this);
-		});
-	}
-
-	removeById(id, mainItem, that, domThis) {
-		mainItem.students = mainItem.students.filter(function(item) {
-			let shouldKeep = id !== item._id;
-
-			if(!shouldKeep) {
-				that.removeCourseFromEntity(item, mainItem);
-			}
-
-			return shouldKeep;
-		});
-
-		var updateObj = { students: mainItem.students };
-
-		Course.update(mainItem._id, updateObj, function() {
-			$(domThis).closest('profile').remove();
-		});
-	}
-
-	removeCourseFromEntity(obj, mainItem) {
-		obj.courses = obj.courses.filter(function(course) {
-			return mainItem._id.indexOf(course) == -1;
-		});
-
-		Student.update(obj._id, {courses: obj.courses});
 	}
 }
 
