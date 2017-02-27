@@ -37,9 +37,6 @@ class AdminEdit {
 			$(this).toggleClass('active');
 		});
 
-
-		// 
-
 		$('.admin-search-container').on('click', '.add-course-to-item', function(e) {
 
 			var courseToAdd = $('.selectpicker').find(':selected');
@@ -51,32 +48,37 @@ class AdminEdit {
 			var courseId = courseToAdd.attr('course-id');
 
 			let item = getItemIdFromElement($(this));
-			item.courses.push(courseId);
-
-			dbSchema.update(item._id, { courses: item.courses }, function(result, err) {
-				if (!result._error){
-					$('[item-type="Course"]').append('<a class="list-group-item" list-item-id="' + courseToAdd + '">' + courseToAdd.val() +'</a');
-					courseToAdd.remove();
-
-					if(item.role !== 'Eduction'){
-						Course.find(courseId, function(course, err) {
-							if (!course._error){
-								if(item.role == 'Student'){
-									course.students.push(item._id);
-									Course.update(courseId, { students: course.students });
-								} else if (item.role == 'Teacher'){
-									course.teachers.push(item._id);
-									Course.update(courseId, { teachers: course.teachers });
-								} else {
-									return;
-								}
-							}
-						});
-					}
-
-
-				}
+			
+			Course.find(courseId,function(result,err){
+              	item.courses.push(result);
+              	updateItem();
 			});
+			
+			function updateItem(){
+		     	dbSchema.update(item._id, { courses: item.courses }, function(result, err) {
+					if (!result._error){
+						$('[item-type="Course"]').append('<a class="list-group-item" list-item-id="' + courseId + '">' + courseToAdd.val() +'</a');
+						courseToAdd.remove();
+						if(item.role !== 'Eduction'){
+							Course.find(courseId, function(course, err) {
+								if (!course._error){
+									if(item.role == 'Student'){
+										course.students.push(item._id);
+										Course.update(courseId, { students: course.students });
+									} else if (item.role == 'Teacher'){
+										course.teachers.push(item._id);
+										Course.update(courseId, { teachers: course.teachers });
+									} else {
+										return;
+									}
+								}
+							});
+						}
+
+
+					}
+				});
+			}
 		});
 
 		// remove marked items
@@ -88,21 +90,22 @@ class AdminEdit {
 			let itemsToRemove = $('.admin-search-container a.active');
 
 			// use .edit-buttons as a referens point to get course
-			let mainItem = getItemIdFromElement($('.admin-search-container .delete-item'));
+			let mainItem = getItemIdFromElement($(this));
+			let mainItemType = $('.admin-search-container h2').text().slice(0, - 1);
 
 			that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove, educationsToRemove);
 
 			if(studentsToRemove.length > 0) {
-				that.removeById("Student", studentsToRemove, mainItem, that);
+				that.removeById("Student", studentsToRemove, mainItem, mainItemType, that);
 			}
 			if(teachersToRemove.length > 0) {
-				that.removeById("Teacher", teachersToRemove, mainItem, that);
+				that.removeById("Teacher", teachersToRemove, mainItem, mainItemType, that);
 			}
 			if(educationsToRemove.length > 0) {
-				that.removeById("Education", educationsToRemove, mainItem, that);
+				that.removeById("Education", educationsToRemove, mainItem, mainItemType, that);
 			}
 			if(coursesToRemove.length > 0) {
-				that.removeById("Course", coursesToRemove, mainItem, that);
+				that.removeById("Course", coursesToRemove, mainItem, mainItemType, that);
 			}
 		});
 	}
@@ -124,48 +127,31 @@ class AdminEdit {
 		});
 	}
 
-	removeById(entity, ids, mainItem, that) {
+	removeById(entity, ids, mainItem, mainItemType, that) {
 		var plEntity = entity.toLowerCase() + 's';
 		mainItem[plEntity] = mainItem[plEntity].filter(function(item) {
 			let shouldKeep = ids.indexOf(item._id) == -1;
-			if(!shouldKeep) {
-				that.removeFromEntity(entity, item, mainItem);
+			if(!shouldKeep && mainItemType !== "Education") {
+				that.removeFromEntity(entity, item, mainItem, mainItemType);
 			}
 			return shouldKeep;
 		});
 		var updateObj = {};
 		updateObj[plEntity] = mainItem[plEntity];
-		if(entity === "Student" || entity === "Teacher") {
-			Course.update(mainItem._id, updateObj, function() {
-				$('.admin-search-container item').empty().template('admin-edit', {
-					type: "course",
-					item: mainItem
-				});
+
+		window[mainItemType].update(mainItem._id, updateObj, function() {
+			$('.admin-search-container item').empty().template('admin-edit', {
+				type: mainItemType.toLowerCase(),
+				item: mainItem,
+				dropdowncourses: []
 			});
-		} else if(entity === "Course") {
-			item.update(mainItem._id, updateObj, function() {
-				$('.admin-search-container item').empty().template('admin-edit', {
-					type: "student",
-					item: mainItem
-				});
-			});
-			Teacher.update(mainItem._id, updateObj, function() {
-				$('.admin-search-container item').empty().template('admin-edit', {
-					type: "teacher",
-					item: mainItem
-				});
-			});
-		} else if(entity === "Education") {
-			Course.update(mainItem._id, updateObj, function() {
-				$('.admin-search-container item').empty().template('admin-edit', {
-					type: "course",
-					item: mainItem
-				});
-			});
-		}
+		});
 	}
 
-	removeFromEntity(entity, obj, mainItem) {
+	removeFromEntity(entity, obj, mainItem, mainItemType) {
+		// var upperMainItemType = mainItemType.charAt(0).toUpperCase() + mainItemType.slice(1);
+		// console.log(upperMainItemType);
+		// var plEntity = entity.toLowerCase() + 's';
 		if(entity === "Student" || entity === "Teacher") {
 			obj.courses = obj.courses.filter(function(course) {
 				return mainItem._id.indexOf(course) == -1;
@@ -174,6 +160,7 @@ class AdminEdit {
 		}
 
 		if(entity === "Course") {
+			console.log(mainItem);
 			obj.students = obj.students.filter(function(student) {
 				return mainItem._id.indexOf(student) == -1;
 			});
@@ -182,13 +169,6 @@ class AdminEdit {
 			});
 			window[entity].update(obj._id, {students: obj.students});
 			window[entity].update(obj._id, {teachers: obj.teachers});
-		}
-
-		if(entity === "Education") {
-			obj.courses = obj.courses.filter(function(course) {
-				return mainItem._id.indexOf(course) == -1;
-			});
-			window[entity].update(obj._id, {courses: obj.courses});
 		}
 	}
 }
