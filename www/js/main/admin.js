@@ -9,7 +9,6 @@ function loadAdmin(callback) {
 		"teacher",
 		"booking"
 	].forEach((category) => {
-		delete routes['/' + category];
 		routes['/' + category] = () => {
 			$('.admin-create-container').empty();
 			$('.admin-search-container').empty();
