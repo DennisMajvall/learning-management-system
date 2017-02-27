@@ -30,10 +30,10 @@ class WeekPlanner{
 		function createWeek(){
 			var thisWeek = week;
 			var resultWeek = [];
-		  	var dayArr = ['.','M', 'T', 'O', 'T', 'F'];
+		  	var dayArr = ['.','Mo', 'Tu', 'We', 'Th', 'Fr'];
 		  	var monthArr = ['Jan', 'Feb', 'Mar', 'Apr', 
-		  					'Maj', 'Jun', 'Jul', 'Aug', 
-		  					'Sep', 'Okt', 'Nov', 'Dec'];
+		  					'May', 'Jun', 'Jul', 'Aug', 
+		  					'Sep', 'Oct', 'Nov', 'Dec'];
 
 		  	for(let i = 0; i < 5; i++){
 		  		var date = thisWeek[i];
