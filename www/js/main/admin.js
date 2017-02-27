@@ -6,7 +6,8 @@ function loadAdmin(callback) {
 		"education",
 		"room",
 		"student",
-		"teacher"
+		"teacher",
+		"booking"
 	].forEach((category) => {
 		delete routes['/' + category];
 		routes['/' + category] = () => {
@@ -21,6 +22,7 @@ function loadAdmin(callback) {
 		'edit/edit-room',
 		'edit/edit-student',
 		'edit/edit-teacher',
+		'edit/edit-booking',
 
 		'edit/edit-course-relations',
 		'edit/edit-education-relations',
@@ -34,13 +36,19 @@ function loadAdmin(callback) {
 		'create/create-room',
 		'create/create-student',
 		'create/create-teacher',
+		'create/create-booking',
 
 		'admin-create',
 		'admin-edit',
 		'admin-frontpage',
 		'admin-sidebar',
 		'admin-search',
-		'admin-search-list'
+		'admin-search-list',
+
+		'booking-page',
+		'bookingpage/week-planner',
+		'bookingpage/booking-modal',
+		'bookingpage/booking-info-modal'
 	], onTemplatesLoaded, 'templates/admin');
 
 	function onTemplatesLoaded() {
