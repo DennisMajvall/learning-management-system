@@ -10,4 +10,8 @@ module.exports = class Education{
 			}]
 		};
 	}
+
+	populate() {
+		return 'courses';
+	}
 };
