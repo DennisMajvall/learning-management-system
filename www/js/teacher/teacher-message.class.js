@@ -72,10 +72,13 @@ class TeacherMessage {
             });
 
             $('textarea').val('');
-            $('.msg-sent').text("Message has been sent!");
-            setTimeout(function() {
-                $('.msg-sent').text('');
-            }, 3000);
+            $('.msg-sent').html(
+                '<div class="alert alert-success alert-dismissible" role="alert">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                'You successfully sent the message: "' + textInput + '"" to your students.' + 
+                '</div>')
+            .fadeOut(3000);
+
         }
     }
 }
