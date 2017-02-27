@@ -8,11 +8,9 @@
     list-style-type: none;
 }
 
-button {
-		.margin {
-		margin-right: 10px;
-		margin-top: 10px;
-	}
+button.margin {
+	margin-top: 4px;
+	margin-right: 4px;
 }
 
 .margin-bottom {
@@ -28,4 +26,60 @@ button {
 	a {
 		cursor: pointer;
 	}
+
+	h3 {
+		border-bottom: 1px solid #ddf;
+		color: #337ab7;
+		font-size: 2.5rem;
+
+		small {
+			 text-transform: initial;
+		}
+	}
+
+	button {
+		margin-right: 4px;
+	}
+}
+
+.increase-limit {
+	cursor: pointer;
+}
+
+help-button {
+	border: 5px solid #337ab7;
+	border-radius: 100px;
+	background-color: #337ab7;
+	color: #fefefe;
+	padding: 0 5px;
+	font-size: 12px;
+	position: relative;
+
+	span {
+		background-color: #fafaf0;
+		border: 1px solid #aaa;
+		border-radius: 5px;
+		padding: 8px;
+		padding-top: 12px;
+
+		color: black;
+		min-width: 310px;
+		position: absolute;
+		display: none;
+		left: -15px;
+		top: 20px;
+
+		&:after {
+			position: absolute;
+			content: "\2716";
+			top: 0px;
+			right: 5px;
+			font-weight: 700;
+			font-size: 14px;
+		}
+	}
+}
+
+input[type=search] {
+	margin-top: 10px;
 }

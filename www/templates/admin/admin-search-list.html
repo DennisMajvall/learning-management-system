@@ -1,15 +1,33 @@
-[repeat itemObj, key, item]
+<h3>${mainType}</h3>
+[repeat mainItems, key, item]
+
 	<li item-id="${item._id}">
 		[if type == "student" || type == "teacher"]
-			<a>${item.firstname} ${item.lastname}</a>
-			<p>${item.username}</p>
+			<a>${item.firstname} ${item.lastname}</a> ${item.username}
 		[else if type == "admin"]
 			<a>${item.username}</a>
 		[else if type == "education" || type == "course"]
 			<a>${item.name}</a>
 		[else if type == "room"]
-			<a>${item.name}</a><br>
-			<p>${item.description}</p>
+			<a>${item.name}</a> ${item.description}
 		[endif]
 	</li>
+[endrepeat]
+
+[repeat populatedItems, listType, itemArray]
+	<h3>${listType} <small>matched: ${itemArray.name} etc</small></h3>
+
+	[repeat itemArray.items, key, item]
+		<li item-id="${item._id}">
+			[if type == "student" || type == "teacher"]
+				<a>${item.firstname} ${item.lastname}</a> ${item.username}
+			[else if type == "admin"]
+				<a>${item.username}</a>
+			[else if type == "education" || type == "course"]
+				<a>${item.name}</a>
+			[else if type == "room"]
+				<a>${item.name}</a> ${item.description}
+			[endif]
+		</li>
+	[endrepeat]
 [endrepeat]

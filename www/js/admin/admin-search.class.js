@@ -1,21 +1,22 @@
 var adminSearchHashMap =  {};
+var adminSearchHashMapPopulated =  {};
 
 class AdminSearch {
 
 	constructor(dbType) {
 		this.dbType = dbType;
 		this.container = $('.admin-search-container');
+		this.previousInput = '';
 	}
 
 	init() {
 		this.container.off();
 		this.dbSchema = this.getDbSchema();
 		adminSearchHashMap = {};
-		this.filter = new AdminFilter(this.dbType, this.dbSchema);
+		this.filter = new AdminFilter(this.dbType);
 
-		$('.admin-result-container').empty();
 		this.container.empty().template('admin-search', {
-			title: this.getTitleFromDbType(),
+			title: getDbTypeAsPlural(this.dbType),
 			type: this.dbType
 		});
 
@@ -36,7 +37,9 @@ class AdminSearch {
     		if(e.target != $(this).children('a')[0])
 				return;
 
+			console.log('a', $(this));
 			let item = that.getItemIdFromElement($(this));
+			console.log('b', item);
 
 			$('.admin-search-container item').remove();
 
@@ -64,7 +67,7 @@ class AdminSearch {
 
 		});
 
-		
+
 
 		// search box
 		let oldInputLength = 0;
@@ -73,15 +76,16 @@ class AdminSearch {
 		this.container.on('keyup', 'input[type="search"]', function() {
 			let input = $(this).val().trim();
 
-			// abort if the input.length hasn't changed.
-			if (oldInputLength == input.length) return;
-			oldInputLength = input.length;
+			// abort if the input hasn't changed.
+			if (that.previousInput == input) return;
+			that.previousInput = input;
 
 			// Abort the old Timeout if there's one active.
 			if (delayTimeout !== null) clearTimeout(delayTimeout);
 
 			// Wait a few milliseconds for more input
 			delayTimeout = setTimeout(()=>{
+				that.filter.resetLimit();
 				that.filter.run(input, that.displayItems, that);
 				delayTimeout = null;
 			}, 300);
@@ -91,14 +95,27 @@ class AdminSearch {
 			that.filter.increaseLimit();
 			that.filter.run($('input[type="search"]').val().trim(), that.displayItems, that);
 		});
+
+		$('body').on('click', 'help-button', function(e) {
+			e.stopPropagation();
+			$(this).children().toggle();
+		});
+
+		$('body').on('click', function(e) {
+			e.stopPropagation();
+			$('help-button span').hide();
+		});
 	}
 
 	displayItems(that) {
 		let listElement = that.container.find('.search-list');
 
+		console.log(adminSearchHashMapPopulated);
 		listElement.empty().template('admin-search-list', {
-			itemObj: adminSearchHashMap,
-			type: that.dbType
+			mainItems: adminSearchHashMap,
+			populatedItems: adminSearchHashMapPopulated,
+			mainType: getDbTypeAsPlural(that.dbType),
+			type: that.dbType,
 		});
 	}
 
@@ -122,20 +139,22 @@ class AdminSearch {
 
 		return schemas[this.dbType];
 	}
+}
 
-	// Replace first letter with UpperCase. Add missing s at end. Replace -y with ies. Replace -fe with ves
-	getTitleFromDbType() {
-		let name = this.dbType;
-		name = name[0].toUpperCase() + name.substr(1);
 
-		if (name.lastIndexOf('y') == name.length - 1) {
-			name = name.substr(0, name.length - 1) + 'ies';
-		} else if (name.lastIndexOf('fe') == name.length - 2) {
-			name = name.substr(1, name.length - 2) + 'ves';
-		} else if (name.lastIndexOf('s') != name.length - 1) {
-			name += 's';
-		}
+// Replace first letter with UpperCase. Add missing s at end. Replace -y with ies. Replace -fe with ves
+function getDbTypeAsPlural(name) {
+	name = name.toLowerCase();
 
-		return name;
+	if (name.lastIndexOf('y') == name.length - 1) {
+		name = name.substr(0, name.length - 1) + 'ies';
+	} else if (name.lastIndexOf('fe') == name.length - 2) {
+		name = name.substr(1, name.length - 2) + 'ves';
+	} else if (name.lastIndexOf('s') != name.length - 1) {
+		name += 's';
 	}
+
+	name = name[0].toUpperCase() + name.substr(1);
+
+	return name;
 }

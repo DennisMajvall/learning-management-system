@@ -25,6 +25,10 @@ class AdminEdit {
 			});
 		});
 
+		$('.admin-search-container').on('click', 'button.cancel-item', function() {
+			$(this).closest('item').remove();
+		});
+
 		$('.admin-search-container').on('keyup', '[bind-key]', function() {
 			let item = getItemIdFromElement($(this));
 			let key = $(this).attr('bind-key');
@@ -36,9 +40,6 @@ class AdminEdit {
 		$('.admin-search-container').on('click', '.list-group a', function() {
 			$(this).toggleClass('active');
 		});
-
-
-		// 
 
 		$('.admin-search-container').on('click', '.add-course-to-item', function(e) {
 
