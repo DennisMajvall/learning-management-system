@@ -62,6 +62,25 @@ class AdminFilter {
 		];
 	}
 
+	booking(input, callback) {
+	
+		return [
+			() => { 
+				Room.find('find/{ name:"' + input + '"}', (data,err)=>{
+					let room = data[0];
+					let roomSearch = room ? `,{ room: "${room._id}"}` : '';
+					this.queryWrapper(Booking, `find/{ $or: [
+						{ bookedBy: { $regex: /.*` + input + `.*/, $options: "i" } },
+						{ type: { $regex: /.*` + (input.charAt(0).toUpperCase() + input.slice(1) ) + `.*/, $options: "i" } }
+						${roomSearch}
+					]}`, callback); 
+				});
+
+			}
+		];
+
+	}
+
 	toNumber(input) {
 		var result = Number.parseInt(input);
 

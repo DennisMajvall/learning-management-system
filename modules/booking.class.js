@@ -23,4 +23,5 @@ module.exports = class Booking {
 	populate() {
 		return 'room course';
 	}
+
 };

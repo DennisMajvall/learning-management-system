@@ -57,8 +57,7 @@ class AdminSearch {
 			} else {
 				$(this).template('admin-edit', {
 					type: that.dbType,
-					item: item,
-					dropdowncourses: []
+					item: item
 				});
 			}
 
@@ -95,7 +94,6 @@ class AdminSearch {
 
 	displayItems(that) {
 		let listElement = that.container.find('.search-list');
-
 		listElement.empty().template('admin-search-list', {
 			itemObj: adminSearchHashMap,
 			type: that.dbType
@@ -117,7 +115,8 @@ class AdminSearch {
 			education: Education,
 			room: Room,
 			student: Student,
-			teacher: Teacher
+			teacher: Teacher,
+			booking: Booking
 		};
 
 		return schemas[this.dbType];

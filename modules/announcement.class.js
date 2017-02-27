@@ -2,7 +2,7 @@ module.exports = class Announcement {
 
 	schema() {
 		return {
-			message: {type: String, required: true},
+			message: {type: String, required: false},
 			timeCreated: {type: Date, default: Date.now},
 			author: {
 				type: mongoose.Schema.Types.ObjectId,

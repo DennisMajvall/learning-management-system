@@ -11,9 +11,6 @@ class BookingInfoModal{
 				timeTo: moment(booking.timeTo).format('LT')
 			}
 
-			console.log('1', user.username);
-			console.log('2', booking.bookedBy);
-
 			if(user.username === booking.bookedBy || user.role === "Admin"){
 				console.log('Du har makten');
 				deleteRights = true;
