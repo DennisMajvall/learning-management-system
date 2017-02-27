@@ -8,7 +8,8 @@ class AdminFrontpage {
                 {name: 'Educations', url: 'education'},
                 {name: 'Rooms', url: 'room'},
                 {name: 'Students', url: 'student'},
-                {name: 'Teachers', url: 'teacher'}
+                {name: 'Teachers', url: 'teacher'},
+                {name: 'Bookings', url: 'booking'}
             ]
         });
 	}

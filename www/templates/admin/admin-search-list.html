@@ -10,6 +10,9 @@
 		[else if type == "room"]
 			<a>${item.name}</a><br>
 			<p>${item.description}</p>
+		[else if type == "booking"]
+			<a>${item.room.name}</a>
+			<p>${item.date.substring(0,10)} From: ${(item.timeFrom.substring(11,16))} To ${item.timeTo.substring(11,16)}</p>
 		[endif]
 	</li>
 [endrepeat]
