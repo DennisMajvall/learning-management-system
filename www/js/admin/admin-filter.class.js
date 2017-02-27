@@ -59,11 +59,20 @@ class AdminFilter {
 
 	booking(input, callback) {
 		return [
+			// 	Menade du kanske att göra detta? // Dennis
+			// söker i bookings med bookedBy & type
+			// söker i rooms med rum-namn som har bookings
+			// () => { this.queryWrapper('Booking', `find/{ _limit: ` + this.limit + `, $or: [
+			// 	{ bookedBy: { $regex: /.*` + input + `.*/, $options: "i" } },
+			// 	{ type: { $regex: /.*` + input + `.*/, $options: "i" } }
+			// ]}`, callback); },
+			// () => { this.queryWrapperPopulated('Room', 'bookings', `find/{ _limit: ` + this.limit + `, name: { $regex: /.*` + input + `.*/, $options: "i" } }`, callback); }
+
 			() => {
 				Room.find('find/{ name:"' + input + '"}', (data,err)=>{
 					let room = data[0];
 					let roomSearch = room ? `,{ room: "${room._id}"}` : '';
-					this.queryWrapper(Booking, `find/{ $or: [
+					this.queryWrapper('Booking', `find/{ $or: [
 						{ bookedBy: { $regex: /.*` + input + `.*/, $options: "i" } },
 						{ type: { $regex: /.*` + input + `.*/, $options: "i" } }
 						${roomSearch}
