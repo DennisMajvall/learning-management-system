@@ -6,23 +6,30 @@ class StudentAlert {
 		function createSearchString (callback) {
 			let searchString = '[';
 
-			user.courses.forEach((id, index, array)=>{
-				searchString += '{ course: "' + id +'"}';
+			if(user.courses){
+				user.courses.forEach((id, index, array)=>{
+					searchString += '{ course: "' + id +'"}';
 
-				if(array[index+1]) {
-					searchString += ',';
-				}
-			});
+					if(array[index+1]) {
+						searchString += ',';
+					}
+				});
 
-			searchString += ']';
+				searchString += ']';
+			}
 			callback(searchString);
 		}
 
 		function findBookingsForStudent(searchString) {
-			Booking.find(`find/{ $or: ` + searchString + `}`
-			,(data, err)=>{
-				findNextBooking(data);
-			});
+			if(searchString.length > 2){
+				Booking.find(`find/{ $or: ` + searchString + `}`
+				,(data, err)=>{
+					findNextBooking(data);
+				});
+			}
+			else{
+				findNextBooking([]);
+			}
 		}
 
 		function findNextBooking(bookings) {

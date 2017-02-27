@@ -7,7 +7,7 @@ class Sidebar {
 			let user = foundUser;
 			let educationName = '';
 			if (user.role == 'Student') {
-				educationName = user.educations[0].name;
+				educationName = user.educations[0] ? user.educations[0].name : 'No ongoing education';
 			}
 
 			createTemplate();
