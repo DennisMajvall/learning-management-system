@@ -140,11 +140,25 @@ class AdminEdit {
 		updateObj[plEntity] = mainItem[plEntity];
 
 		window[mainItemType].update(mainItem._id, updateObj, function() {
-			$('.admin-search-container item').empty().template('admin-edit', {
-				type: mainItemType.toLowerCase(),
-				item: mainItem,
-				dropdowncourses: []
-			});
+			if (mainItem.courses) {
+				let courseIds = mainItem.courses.map( course => '"' + course._id + '"' );
+				let queryString = 'find/{ _id: { $nin: [' + courseIds + '] } }';
+
+				Course.find(queryString, (courses, err) => {
+
+					$('.admin-search-container item').empty().template('admin-edit', {
+						type: mainItemType.toLowerCase(),
+						item: mainItem,
+						dropdowncourses: courses
+					});
+
+				});
+			} else {
+				$('.admin-search-container item').empty().template('admin-edit', {
+					type: mainItemType.toLowerCase(),
+					item: mainItem
+				});
+			}
 		});
 	}
 
@@ -160,7 +174,6 @@ class AdminEdit {
 		}
 
 		if(entity === "Course") {
-			console.log(mainItem);
 			obj.students = obj.students.filter(function(student) {
 				return mainItem._id.indexOf(student) == -1;
 			});

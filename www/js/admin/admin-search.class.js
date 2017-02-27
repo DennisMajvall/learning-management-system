@@ -57,8 +57,7 @@ class AdminSearch {
 			} else {
 				$(this).template('admin-edit', {
 					type: that.dbType,
-					item: item,
-					dropdowncourses: []
+					item: item
 				});
 			}
 
