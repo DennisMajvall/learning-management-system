@@ -3,6 +3,7 @@ class CoursePage{
 	constructor(courseId) {
 		let that = this;
 		let courseObj;
+		let announcementQuery;
 
 		$('.teacher-messages-container').empty();
 		$('.student-announcement-container').empty();
@@ -18,7 +19,32 @@ class CoursePage{
 			});
 
 			courseObj = course;
+			
+			announcementQuery = 'find/{ courses: { $in: ["' + courseObj._id + '"] } }';
+
+			Announcement.find(announcementQuery, announcementsFound);
+
+			function announcementsFound(announcements) {
+				prepareDate(announcements);
+
+				$('.course-page-container')
+					.empty()
+					.template('course-announcement', { announcements: announcements, course: courseObj });
+			}
+
+			function prepareDate(announcements) {
+				var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+					"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+				];
+
+				announcements.forEach((announcement) => {
+					let date = new Date(announcement.timeCreated);
+					announcement.dateString = date.getDate() + ' ' + monthNames[date.getMonth()];
+				});
+			}
+
 		});
+
 
 		$('.front-course-container').on('click', 'button.remove-item', function() {
 			let id = $(this).attr('list-item-id');

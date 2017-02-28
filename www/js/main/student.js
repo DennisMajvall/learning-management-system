@@ -38,6 +38,7 @@ function loadStudent(callback) {
 		'frontpage/front-course',
 		'frontpage/student-announcement',
 		'frontpage/student-alert',
+		'course-announcement',
 		'course-page',
 		'listed-profile',
 		'sidebar',
