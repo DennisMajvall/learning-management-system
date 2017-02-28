@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="page-header">Announcements</h1>
+        <section class="announcement-list">
+            [repeat announcements, announcement]
+            <article class="row">
+                <div class="col-md-2 col-sm-2 hidden-sm hidden-xs">
+                    <figure class="thumbnail">
+						<img class="img-responsive" src="/images/profiles/${announcement.author.picture}" />
+						<figcaption class="text-center">
+							<span>${announcement.author.firstname} ${announcement.author.lastname}<span>
+						</figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <header>
+                                <div class="announcement-user">
+                                    <h3><i class="fa fa-graduation-cap"></i>${course.name}</h3>
+                                </div>
+                                <time class="announcement-date" datetime="16-12-2014 01:05">
+                                    <i class="fa fa-clock-o"></i>
+                                    ${announcement.dateString}
+                                </time>
+                            </header>
+                            <p>
+                                ${announcement.message}
+                            </p>
+                            <div class="hidden-md hidden-lg">
+                                <p>
+                                    <h5>From: </h5>
+									<span>${announcement.author.firstname}<span>
+									<span>${announcement.author.lastname}<span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            [endrepeat]
+        </section>
+    </div>
+</div>

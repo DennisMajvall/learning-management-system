@@ -36,6 +36,7 @@ function loadTeacher(callback) {
 	$.loadTemplates([
 		'frontpage/front-course',
 		'frontpage/teacher-message',
+		'course-announcement',
 		'course-page',
 		'listed-profile',
 		'booking-page',
