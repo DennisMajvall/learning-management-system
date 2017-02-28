@@ -11,6 +11,7 @@ class Profile {
 			$('.student-announcement-container').empty();
 			$('.teacher-messages-container').empty();
 			$('.front-course-container').empty();
+			$('.course-page-container').empty();
 			$('.booking-page-container').empty();
 			$('.week-planner-container').empty();
 
