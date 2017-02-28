@@ -2,7 +2,6 @@ class TeacherMessage {
 
     constructor() {
         let coursesToPublishTo = [];
-
         populateCourses(user.courses);
 
         function populateCourses(courses) {
@@ -55,7 +54,6 @@ class TeacherMessage {
                 } else {
                     coursesToPublishTo.push(courseId);
                 }
-                console.log(coursesToPublishTo);
             }
         }
 
@@ -68,7 +66,6 @@ class TeacherMessage {
                 message: textInput,
                 courses: coursesToPublishTo
             }, function() {
-                console.log(textInput);
             });
 
             $('textarea').val('');

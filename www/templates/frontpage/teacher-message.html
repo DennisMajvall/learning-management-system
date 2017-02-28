@@ -9,29 +9,29 @@
 	    <div class="col-xs-10 col-md-6">
 			<label>Subject</label>
 			<textarea class="form-control" rows="5"></textarea>
-				<br>
-			        <div class="btn-group">
-			            <button type="button" class="btn send-button">
-			                Send
-			            </button>
-			            <button id="dropdown-button" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			                Select Course &nbsp;<span class="caret"></span>
-			            </button>
-			            <ul class="dropdown-menu">
-			                <li class="select-all">
-			                    <a>Select All</a>
-			                </li>
-			                [repeat courses,course]
-			                <li class="course-list" course-id="${course._id}">
-			                    <a>${course.name}<span aria-hidden="true"></span></a>
-			                </li>
-			                [endrepeat]
-			            </ul>
-			            <!-- NOT USED -->
-			        </div>
-			        <br>
-			            <span class="msg-sent"></span>
-
+			<br>
+	        <div class="btn-group">
+	            <button type="button" class="btn send-button">
+	                Send
+	            </button>
+	            <button id="dropdown-button" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                Select Course &nbsp;<span class="caret"></span>
+	            </button>
+	            <ul class="dropdown-menu">
+	                <li class="select-all">
+	                    <a>Select All</a>
+	                </li>
+	                [repeat courses,course]
+	                <li class="course-list" course-id="${course._id}">
+	                    <a>${course.name}<span aria-hidden="true"></span></a>
+	                </li>
+	                [endrepeat]
+	            </ul>
+	            <div class="courses-selected"><h3></h3></div>
+	            <!-- NOT USED -->
+	        </div>
+	        <br>
+            <span class="msg-sent"></span>
 	    </div>
 	</div>
 </div>
