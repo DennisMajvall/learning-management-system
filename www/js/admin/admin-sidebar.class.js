@@ -10,7 +10,8 @@ class AdminSidebar {
                 {name: 'Rooms', url: 'room'},
                 {name: 'Teachers', url: 'teacher'},
                 {name: 'Students', url: 'student'},
-                {name: 'Bookings', url: 'booking'}
+                {name: 'Bookings', url: 'booking'},
+                {name: 'Announcements', url: 'announcement'}
             ],
             account: 'Your Account',
             fullname: user.username,

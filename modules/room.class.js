@@ -13,4 +13,8 @@ module.exports = class Room {
 			}]
 		};
 	}
+
+	populate() {
+		return 'bookings';
+	}
 };
