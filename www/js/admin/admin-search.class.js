@@ -37,9 +37,7 @@ class AdminSearch {
     		if(e.target != $(this).children('a')[0])
 				return;
 
-			console.log('a', $(this));
 			let item = that.getItemIdFromElement($(this));
-			console.log('b', item);
 
 			$('.admin-search-container item').remove();
 

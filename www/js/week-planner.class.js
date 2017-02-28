@@ -163,7 +163,14 @@ class WeekPlanner{
                 timeTo: timeTo,
                 bookedBy: user.username,
                 type: type
-            }, function() {
+            }, (booking)=> {
+            	// Add the new booking to the rooms bookings array
+            	selectedRoom.bookings.push(booking._id);
+            	// Then save
+            	Room.update(selectedRoom._id, {
+            		bookings: selectedRoom.bookings
+            	});
+            	// reload the week display
                 loadWeek();
             });
         }
@@ -295,8 +302,6 @@ class WeekPlanner{
 						type = $('#typeSelect').val(),
 						timeFrom,
 						timeTo;
-
-					console.log(type);
 
 					// Set the timespan according to users choice
 					if(timeSpan === 'morning'){

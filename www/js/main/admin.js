@@ -7,7 +7,8 @@ function loadAdmin(callback) {
 		"room",
 		"student",
 		"teacher",
-		"booking"
+		"booking",
+		"announcement"
 	].forEach((category) => {
 		routes['/' + category] = () => {
 			$('.admin-create-container').empty();
@@ -31,6 +32,7 @@ function loadAdmin(callback) {
 		'edit/edit-student',
 		'edit/edit-teacher',
 		'edit/edit-booking',
+		'edit/edit-announcement',
 
 		'edit/edit-course-relations',
 		'edit/edit-education-relations',
@@ -45,18 +47,15 @@ function loadAdmin(callback) {
 		'create/create-student',
 		'create/create-teacher',
 		'create/create-booking',
+		'create/create-announcement',
 
 		'admin-create',
 		'admin-edit',
 		'admin-frontpage',
 		'admin-sidebar',
 		'admin-search',
-		'admin-search-list',
+		'admin-search-list'
 
-		'booking-page',
-		'bookingpage/week-planner',
-		'bookingpage/booking-modal',
-		'bookingpage/booking-info-modal'
 	], onTemplatesLoaded, 'templates/admin');
 
 	function onTemplatesLoaded() {
