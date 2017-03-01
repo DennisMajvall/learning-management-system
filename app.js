@@ -443,11 +443,15 @@ function createFakeDataFromJSON() {
 			announcements[0].courses = courses.slice(0, 2);
 			announcements[1].courses = courses.slice(1, 3);
 			announcements[2].courses = courses.slice(3, 5);
+			announcements[3].courses = courses.slice(2, 4);
+			announcements[4].courses = courses.slice(4, 5);
 
 			//assign teacher to announcements authors
 			announcements[0].author = teachers[0];
 			announcements[1].author = teachers[2];
-			announcements[2].author = teachers[3];
+			announcements[2].author = teachers[1];
+			announcements[3].author = teachers[4];
+			announcements[4].author = teachers[3];
 
 			//assign courses to students
 			courses[0].students = [].concat( students.slice(0, 6) , [ students[17] ] , [ students[23] ]);

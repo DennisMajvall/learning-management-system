@@ -8,35 +8,10 @@ class TeacherPostedMessage {
         Announcement.find(announcementQuery, announcementsFound);
         
         function announcementsFound(announcements) {
-
-            announcements.forEach((announcement) => {                
-                checkForThisUserPost(announcement);
-                console.log(announcement);
-            });
-
             prepareCourseNames(announcements);
-            prepareDate(announcements);
+            prepareTime(announcements);
             createPosts(announcements);
         }
-
-        function checkForThisUserPost(announcement){
-
-            for(var props in announcement.author){
-
-                    let postAuthor = announcement.author._id,
-                        currentUser = user._id;
-
-                        if(postAuthor === currentUser){
-                            console.log('matched');
-                        } else {
-                            console.log('not matched');
-                        }   
-
-        // I'm Stuck! How do I get only the currentUsers posts!
-
-                }
-        }
-
 
         function prepareCourseNames(announcements) {
 
@@ -46,7 +21,6 @@ class TeacherPostedMessage {
                 let lastIndex = announcement.courses.length - 1;
 
                 announcement.courses.forEach((course, index) => {
-                    // console.log(announcement);
                     courseNames += course.name;
                     if (index < lastIndex)
                         courseNames += ' & ';
@@ -56,7 +30,7 @@ class TeacherPostedMessage {
             });
         }
 
-        function prepareDate(announcements) {
+        function prepareTime(announcements) {
             var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
             ];
@@ -64,14 +38,30 @@ class TeacherPostedMessage {
 
             announcements.forEach((announcement) => {
                 let date = new Date(announcement.timeCreated);
-                announcement.dateString = 'Posted: ' + date.getHours() + ':' + date.getMinutes() + ' ' + dayArr[date.getDay()] + ' ' + date.getDate() + ' ' + monthNames[date.getMonth()];
+                let mins = date.getMinutes();
+
+                if(mins < 10){
+                    mins = '0' + mins;
+                }
+                announcement.dateString = 'Posted: ' + date.getHours() + ':' + mins + ' ' + dayArr[date.getDay()] + ' ' + date.getDate() + ' ' + monthNames[date.getMonth()];
             });
         }
 
         function createPosts(announcements){
             $('.posted-msg-content').template('teacher-posted-message', { announcements: announcements });
-
+            removeMessage();
         }
 
+        function removeMessage(){
+
+            $('.teacher-messages-container').on('click', '.remove-button', function(){
+                let postToDelete = $(this).closest('.posted-msg').attr('post-id');
+
+                Announcement.delete(postToDelete, function() {
+                    location.reload();
+                });
+
+            });
+        }
     }
 }

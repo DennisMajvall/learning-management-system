@@ -9,9 +9,7 @@ function loadTeacher(callback) {
 		$('.course-page-container').empty();
 		new TeacherMessage();
 		new CoursesOnFrontpage();
-		
-		// Leave for now: 
-		// new TeacherPostedMessage();
+		new TeacherPostedMessage();
 	};
 
 	routes['/profile'] = () => {
