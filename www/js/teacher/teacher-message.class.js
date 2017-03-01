@@ -66,6 +66,7 @@ class TeacherMessage {
                 message: textInput,
                 courses: coursesToPublishTo
             }, function() {
+                location.reload();
             });
 
             $('textarea').val('');

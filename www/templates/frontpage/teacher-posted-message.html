@@ -1,11 +1,13 @@
-<label>Posted Messages</label>
+<label>Posted Messages (in your courses)</label>
  [repeat announcements, announcement]
-<div class="posted-msg">
+
+<div class="posted-msg" post-id="${announcement._id}">
     <time class="announcement-date">
-        <p>${announcement.dateString} for: <strong>${announcement.courseNames}</strong>
-        <br>by Teacher: <span>${announcement.author.firstname} ${announcement.author.lastname}</span></p>
+        <p><strong>${announcement.author.firstname} ${announcement.author.lastname}</strong> ${announcement.dateString} 
+        <br>in: <strong>${announcement.courseNames}</strong></p>
     </time>
     <p>${announcement.message}</p> 
     <button type="button" class="btn remove-button"><span class="glyphicon glyphicon-remove" aria-hidden="true"> </span> Remove Message</button>
 </div>
+
 [endrepeat]
