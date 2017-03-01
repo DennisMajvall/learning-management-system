@@ -7,8 +7,10 @@ function loadTeacher(callback) {
 		$('.booking-page-container').empty();
 		$('.week-planner-container').empty();
 		new TeacherMessage();
-		new TeacherPostedMessage();
 		new CoursesOnFrontpage();
+		
+		// Leave for now: 
+		// new TeacherPostedMessage();
 	};
 
 	routes['/profile'] = () => {
