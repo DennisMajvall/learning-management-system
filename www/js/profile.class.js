@@ -30,12 +30,22 @@ class Profile {
 		// Save changes to db
 		container.on('click', '.save-profile', () => {
 			let tempUser = {};
+			// save password temporarely if they excist
+			let password = [];
 
 			// get values from form
-			tempUser.firstname = 	container.find('input[name="firstname"]').val();
-			tempUser.lastname = 	container.find('input[name="lastname"]').val();
-			tempUser.phonenumber =	container.find('input[name="phonenumber"]').val();
-			tempUser.picture = 		container.find('input[name="picture"]').val();
+			tempUser.firstname =  container.find('input[name="firstname"]').val();
+			tempUser.lastname = container.find('input[name="lastname"]').val();
+			tempUser.phonenumber = container.find('input[name="phonenumber"]').val();
+			tempUser.picture = container.find('input[name="picture"]').val();
+
+			// handle new password
+			password[0] = container.find('input[name="password"]').val();
+			password[1] = container.find('input[name="verify"]').val();
+
+			if (password[0] === password[1] && password[0].length >= 4){
+				tempUser.password = password[0];
+			}
 
 			// update global user object
 			user = Object.assign({}, user, tempUser);
