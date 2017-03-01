@@ -352,35 +352,35 @@ function createFakeDataFromJSON() {
 				return;
 
 			//assign students to educations
-			students[0].educations = educations.slice(0, 1);
-			students[1].educations = educations.slice(0, 1);
-			students[2].educations = educations.slice(0, 1);
-			students[17].educations = educations.slice(0, 1);
-			students[23].educations = educations.slice(0, 1);
+			students[0].education = educations[0];
+			students[1].education = educations[0];
+			students[2].education = educations[0];
+			students[17].education = educations[0];
+			students[23].education = educations[0];
 
-			students[3].educations = educations.slice(1, 2);
-			students[4].educations = educations.slice(1, 2);
-			students[5].educations = educations.slice(1, 2);
-			students[18].educations = educations.slice(1, 2);
+			students[3].education = educations[1];
+			students[4].education = educations[1];
+			students[5].education = educations[1];
+			students[18].education = educations[1];
 
-			students[6].educations = educations.slice(2, 3);
-			students[7].educations = educations.slice(2, 3);
-			students[19].educations = educations.slice(2, 3);
+			students[6].education = educations[2];
+			students[7].education = educations[2];
+			students[19].education = educations[2];
 
-			students[8].educations = educations.slice(3, 4);
-			students[9].educations = educations.slice(3, 4);
-			students[10].educations = educations.slice(3, 4);
-			students[20].educations = educations.slice(3, 4);
+			students[8].education = educations[3];
+			students[9].education = educations[3];
+			students[10].education = educations[3];
+			students[20].education = educations[3];
 
-			students[11].educations = educations.slice(4, 5);
-			students[12].educations = educations.slice(4, 5);
-			students[13].educations = educations.slice(4, 5);
-			students[21].educations = educations.slice(4, 5);
+			students[11].education = educations[4];
+			students[12].education = educations[4];
+			students[13].education = educations[4];
+			students[21].education = educations[4];
 
-			students[14].educations = educations.slice(5, 6);
-			students[15].educations = educations.slice(5, 6);
-			students[16].educations = educations.slice(5, 6);
-			students[22].educations = educations.slice(5, 6);
+			students[14].education = educations[5];
+			students[15].education = educations[5];
+			students[16].education = educations[5];
+			students[22].education = educations[5];
 
 			//assign educations to students
 			educations[0].students = [].concat( students.slice(0, 3) , [ students[17] ] , [ students[23] ]);

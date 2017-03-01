@@ -11,15 +11,15 @@ module.exports = class Student extends User {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Course'
 			}],
-			educations: [{
+			education: {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Education'
-			}]
+			}
     	});
 	}
 
 	populate() {
-		return 'courses educations';
+		return 'courses education';
 	}
 
 	getAnnouncements(callback) {
