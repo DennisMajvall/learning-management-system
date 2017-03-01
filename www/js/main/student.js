@@ -6,6 +6,7 @@ function loadStudent(callback) {
 		$('.profile-page-container').empty();
 		$('.booking-page-container').empty();
 		$('.week-planner-container').empty();
+		$('.course-page-container').empty();
 		new AnnouncementOnFrontpage();
 		new CoursesOnFrontpage();
 		new StudentAlert();
@@ -23,6 +24,7 @@ function loadStudent(callback) {
 		$('.student-announcement-container').empty();
 		$('.front-course-container').empty();
 		$('.profile-page-container').empty();
+		$('.course-page-container').empty();
 		new WeekPlanner();
 		new BookingPage();
 	};
