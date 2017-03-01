@@ -1,10 +1,18 @@
 <div class="row">
 	<div class="col-xs-4">
-		<div class="list-group" item-type="Education">
-			<h4>Educations:</h4>
-			[repeat item.educations, education]
-				<a class="list-group-item" list-item-id="${education._id}">${education.name}</a>
-			[endrepeat]
+		<div class="dropdown-educations">
+			<h4>Education:</h4>
+			<select class="list-group dropdown-toggle" data-style="btn btn-default">
+				[if item.education]
+					<option education-id="no-education">No Education</option>
+					<option education-id="${item.education._id}" selected>${item.education.name}</option>
+				[else]
+					<option education-id="no-education" selected>No Education</option>
+				[endif]
+				[repeat dropdowneducations, dropdowneducation]
+					<option education-id="${dropdowneducation._id}">${dropdowneducation.name}</option>
+				[endrepeat]
+			</select>
 		</div>
 	</div>
 
@@ -18,12 +26,11 @@
 	</div>
 
 	<div class="col-xs-4">
-
-		<div class="dropdown">
+		<div class="dropdown-courses">
 			<h4>Add another course:</h4>
 			<select class="list-group dropdown-toggle selectpicker" data-style="btn btn-default">
 				[repeat dropdowncourses, dropdowncourse]
-						<option course-id="${dropdowncourse._id}">${dropdowncourse.name}</option>
+					<option course-id="${dropdowncourse._id}">${dropdowncourse.name}</option>
 				[endrepeat]
 			</select>
 		</div>
