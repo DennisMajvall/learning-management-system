@@ -41,9 +41,26 @@ class AdminEdit {
 			$(this).toggleClass('active');
 		});
 
+		// if new education is selected in dropdown
+		$('.admin-search-container').on('change', '.dropdown-educations', function() {
+			let selectedEducation = $(this).find(':selected').attr('education-id');
+			let item = getItemIdFromElement($(this));
+
+			if(selectedEducation === 'no-education') {
+				delete item.education;
+				Student.update(item._id, {$unset: {education: ""}});	
+			} else {
+				Education.find(selectedEducation, (education) => {
+					item.education = education;
+					Student.update(item._id, {education: item.education});		
+				});
+			}
+		});
+		
+
 		$('.admin-search-container').on('click', '.add-course-to-item', function(e) {
 
-			var courseToAdd = $('.selectpicker').find(':selected');
+			var courseToAdd = $('.dropdown-courses').find(':selected');
 
 			if (courseToAdd.length === 0) {
 				return;
@@ -78,8 +95,6 @@ class AdminEdit {
 								}
 							});
 						}
-
-
 					}
 				});
 			}
@@ -90,14 +105,13 @@ class AdminEdit {
 			let studentsToRemove = [];
 			let teachersToRemove = [];
 			let coursesToRemove = [];
-			let educationsToRemove = [];
 			let itemsToRemove = $('.admin-search-container a.active');
 
 			// use .edit-buttons as a referens point to get course
 			let mainItem = getItemIdFromElement($(this));
 			let mainItemType = $('.admin-search-container h2').text().slice(0, - 1);
 
-			that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove, educationsToRemove);
+			that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove);
 
 			if(studentsToRemove.length > 0) {
 				that.removeById("Student", studentsToRemove, mainItem, mainItemType, that);
@@ -105,16 +119,13 @@ class AdminEdit {
 			if(teachersToRemove.length > 0) {
 				that.removeById("Teacher", teachersToRemove, mainItem, mainItemType, that);
 			}
-			if(educationsToRemove.length > 0) {
-				that.removeById("Education", educationsToRemove, mainItem, mainItemType, that);
-			}
 			if(coursesToRemove.length > 0) {
 				that.removeById("Course", coursesToRemove, mainItem, mainItemType, that);
 			}
 		});
 	}
 
-	sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove, educationsToRemove) {
+	sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove) {
 		itemsToRemove.each(function() {
 			let itemCategory = $(this).closest('[item-type]').attr('item-type');
 			let itemId = $(this).attr('list-item-id');
@@ -123,8 +134,6 @@ class AdminEdit {
 				studentsToRemove.push(itemId);
 			} else if(itemCategory === "Teacher") {
 				teachersToRemove.push(itemId);
-			} else if(itemCategory === "Education") {
-				educationsToRemove.push(itemId);
 			} else if(itemCategory === "Course") {
 				coursesToRemove.push(itemId);
 			}
@@ -144,25 +153,7 @@ class AdminEdit {
 		updateObj[plEntity] = mainItem[plEntity];
 
 		window[mainItemType].update(mainItem._id, updateObj, function() {
-			if (mainItem.courses) {
-				let courseIds = mainItem.courses.map( course => '"' + course._id + '"' );
-				let queryString = 'find/{ _id: { $nin: [' + courseIds + '] } }';
-
-				Course.find(queryString, (courses, err) => {
-
-					$('.admin-search-container item').empty().template('admin-edit', {
-						type: mainItemType.toLowerCase(),
-						item: mainItem,
-						dropdowncourses: courses
-					});
-
-				});
-			} else {
-				$('.admin-search-container item').empty().template('admin-edit', {
-					type: mainItemType.toLowerCase(),
-					item: mainItem
-				});
-			}
+			that.reprintTemplate(mainItem, mainItemType);
 		});
 	}
 
@@ -186,6 +177,48 @@ class AdminEdit {
 			});
 			window[entity].update(obj._id, {students: obj.students});
 			window[entity].update(obj._id, {teachers: obj.teachers});
+		}
+	}
+
+	reprintTemplate(item, itemType) {
+		// dropdown and courselist creater
+		let haveCourses = (item.courses ? true : false);
+		let haveEducation = (item.education ? true : false);
+
+		if(haveCourses) {
+			let courseIds, queryStringCourses;
+
+			courseIds = item.courses.map( course => '"' + course._id + '"' );
+			queryStringCourses = 'find/{ _id: { $nin: [' + courseIds + '] } }';
+			
+			if(haveEducation) {
+				let educationId = item.education._id;
+				let queryStringEducations = 'find/{ _id: { $ne: "' + educationId + '" } }';
+
+				Course.find(queryStringCourses, (courses, err) => {
+					Education.find(queryStringEducations, (educations, err) => {
+						$('.admin-search-container item').remove().template('admin-edit', {
+							type: itemType,
+							item: item,
+							dropdowncourses: courses,
+							dropdowneducations: educations
+						});
+					});
+				});
+			} else {
+				Course.find(queryStringCourses, (courses, err) => {
+					$('.admin-search-container item').remove().template('admin-edit', {
+						type: itemType,
+						item: item,
+						dropdowncourses: courses
+					});
+				});
+			}
+		} else {				
+			$('.admin-search-container item').remove().template('admin-edit', {
+				type: itemType,
+				item: item
+			});
 		}
 	}
 }

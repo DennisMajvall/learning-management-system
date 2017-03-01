@@ -41,27 +41,51 @@ class AdminSearch {
 
 			$('.admin-search-container item').remove();
 
+			// dropdown and courselist creater
+			let haveCourses = (item.courses ? true : false);
+			let haveEducation = (item.education ? true : false);
 
-			if (item.courses) {
-				let courseIds = item.courses.map( course => '"' + course._id + '"' );
-				let queryString = 'find/{ _id: { $nin: [' + courseIds + '] } }';
+			if(haveCourses) {
 
-				Course.find(queryString, (courses, err) => {
+				let courseIds, queryStringCourses;
 
-					$(this).template('admin-edit', {
-						type: that.dbType,
-						item: item,
-						dropdowncourses: courses
+				courseIds = item.courses.map( course => '"' + course._id + '"' );
+				queryStringCourses = 'find/{ _id: { $nin: [' + courseIds + '] } }';
+				
+				if(item.role === "Student") {
+					let queryStringEducations;
+
+					if(haveEducation) {
+						queryStringEducations = 'find/{ _id: { $ne: "' + item.education._id + '" } }';
+					} else {
+						queryStringEducations = '';
+					}
+
+					Course.find(queryStringCourses, (courses, err) => {
+						Education.find(queryStringEducations, (educations, err) => {
+							$(this).template('admin-edit', {
+								type: that.dbType,
+								item: item,
+								dropdowncourses: courses,
+								dropdowneducations: educations
+							});
+						});
 					});
-
-				});
-			} else {
+				} else {
+					Course.find(queryStringCourses, (courses, err) => {
+						$(this).template('admin-edit', {
+							type: that.dbType,
+							item: item,
+							dropdowncourses: courses
+						});
+					});
+				}
+			} else {				
 				$(this).template('admin-edit', {
 					type: that.dbType,
 					item: item
 				});
 			}
-
 		});
 
 
