@@ -11,6 +11,7 @@ class CoursePage{
 		$('.profile-page-container').empty();
 		$('.booking-page-container').empty();
 		$('.week-planner-container').empty();
+		$('.course-page-container').empty();
 
 		Course.find(courseId, (course) => {
 			$('.front-course-container').empty().template('course-page', {
