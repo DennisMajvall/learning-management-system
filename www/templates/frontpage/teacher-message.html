@@ -1,37 +1,39 @@
 <div class="teacher-message">
-	<div class="row">
-	    <div class="col-xs-12">
-			<h1 class="page-header">ADD NEW ANNOUNCEMENT</h1>
-	    </div>
-	</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="page-header">ADD NEW ANNOUNCEMENT</h1>
+        </div>
+    </div>
 
-	<div class="row">
-	    <div class="col-xs-10 col-md-6">
-			<label>Subject</label>
-			<textarea class="form-control" rows="5"></textarea>
-			<br>
-	        <div class="btn-group">
-	            <button type="button" class="btn send-button">
-	                Send
-	            </button>
-	            <button id="dropdown-button" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                Select Course &nbsp;<span class="caret"></span>
-	            </button>
-	            <ul class="dropdown-menu">
-	                <li class="select-all">
-	                    <a>Select All</a>
-	                </li>
-	                [repeat courses,course]
-	                <li class="course-list" course-id="${course._id}">
-	                    <a>${course.name}<span aria-hidden="true"></span></a>
-	                </li>
-	                [endrepeat]
-	            </ul>
-	            <div class="courses-selected"><h3></h3></div>
-	            <!-- NOT USED -->
-	        </div>
-	        <br>
+    <div class="row">
+        <div class="col-xs-12 col-md-5">
+        	<div class="add-msg">
+	            <label>Subject</label>
+	            <textarea class="form-control" rows="5"></textarea>
+	            <br>
+	            <div class="btn-group">
+	                <button type="button" class="btn send-button">
+	                    Send
+	                </button>
+	                <button id="dropdown-button" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                    Select Course &nbsp;<span class="caret"></span>
+	                </button>
+	                <ul class="dropdown-menu">
+	                    <li class="select-all">
+	                        <a>Select All</a>
+	                    </li>
+	                    [repeat courses,course]
+	                    <li class="course-list" course-id="${course._id}">
+	                        <a>${course.name}<span aria-hidden="true"></span></a>
+	                    </li>
+	                    [endrepeat]
+	                </ul>
+	            </div>
+            </div>
+            <br>
             <span class="msg-sent"></span>
-	    </div>
-	</div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+        	<div class="posted-msg-content"></div>
+    </div>
 </div>

@@ -1,28 +1,61 @@
 // /* Teacher Message */
 
+.add-msg {
+	.form-control {
+		border: 1px solid @custom-color-black;
+		border-radius: 0;
+	}
 
-.form-control {
-	border: 1px solid @custom-color-black;
-	border-radius: 0;
+	.send-button {
+		background-color: @custom-color-grey;
+	    border: 0.11em solid @custom-color-grey;
+	    color: @custom-color-white;
+	    border-radius: 0;
+	}
+
+	.dropdown-toggle {
+		left: 7px;
+		background-color: #fafafa;
+		border: .11em solid #424242;
+		color: #31312e;
+		border-radius: 0;
+	}
+
+	.checked-course {
+		font-size: 10px;
+		padding-left: 10px;
+		color: green;
+	}
 }
 
-.send-button {
-	background-color: @custom-color-grey;
-    border: 0.11em solid @custom-color-grey;
-    color: @custom-color-white;
-    border-radius: 0;
-}
+.posted-msg {
+	background: @custom-color-green;
+	padding: 20px;
+	margin-bottom: 10px;
 
-.dropdown-toggle {
-	left: 7px;
-	background-color: #fafafa;
-	border: .11em solid #424242;
-	color: #31312e;
-	border-radius: 0;
-}
+	.announcement-date {
+		
+		p {
+			font-style: italic;
+			padding-bottom: 10px;
+			border-bottom: 1px solid @custom-color-black;
+		}
 
-.checked-course {
-	font-size: 10px;
-	padding-left: 10px;
-	color: green;
+	}
+
+	.remove-button {
+		display: block;
+		background-color: @custom-color-green;
+	    color: @custom-color-grey;
+	    border-radius: 0;
+	    padding: 0;
+
+	    &:hover {
+	    	.custom-hover-links;
+	    }
+
+	    span {
+	    	font-size: 12px;
+	    }
+	}
 }

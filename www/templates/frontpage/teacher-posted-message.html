@@ -1,0 +1,11 @@
+<label>Posted Messages</label>
+ [repeat announcements, announcement]
+<div class="posted-msg">
+    <time class="announcement-date">
+        <p>${announcement.dateString} for: <strong>${announcement.courseNames}</strong>
+        <br>by Teacher: <span>${announcement.author.firstname} ${announcement.author.lastname}</span></p>
+    </time>
+    <p>${announcement.message}</p> 
+    <button type="button" class="btn remove-button"><span class="glyphicon glyphicon-remove" aria-hidden="true"> </span> Remove Message</button>
+</div>
+[endrepeat]

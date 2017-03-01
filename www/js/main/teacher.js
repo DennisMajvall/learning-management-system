@@ -7,6 +7,7 @@ function loadTeacher(callback) {
 		$('.booking-page-container').empty();
 		$('.week-planner-container').empty();
 		new TeacherMessage();
+		new TeacherPostedMessage();
 		new CoursesOnFrontpage();
 	};
 
@@ -37,6 +38,7 @@ function loadTeacher(callback) {
 		'frontpage/front-course',
 		'frontpage/teacher-message',
 		'course-announcement',
+		'frontpage/teacher-posted-message',
 		'course-page',
 		'listed-profile',
 		'booking-page',
