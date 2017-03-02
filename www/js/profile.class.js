@@ -37,7 +37,7 @@ class Profile {
 			tempUser.firstname =  container.find('input[name="firstname"]').val();
 			tempUser.lastname = container.find('input[name="lastname"]').val();
 			tempUser.phonenumber = container.find('input[name="phonenumber"]').val();
-			tempUser.picture = container.find('input[name="picture"]').val();
+			//tempUser.picture = container.find('input[name="picture"]').val();
 
 			// handle new password
 			password[0] = container.find('input[name="password"]').val();
