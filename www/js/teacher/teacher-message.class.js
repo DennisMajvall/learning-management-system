@@ -33,7 +33,7 @@ class TeacherMessage {
             // Select All Courses
             $('.teacher-messages-container').on('click', '.select-all', function(e) {
 
-                $('.course-list').find('span').toggleClass('glyphicon glyphicon-ok checked-course');
+                $('.course-list').find('span').addClass('glyphicon glyphicon-ok checked-course');
 
                 $('.course-list').each(function() {
                     changeValue($(this).attr('course-id'));
@@ -73,7 +73,7 @@ class TeacherMessage {
             $('.msg-sent').html(
                 '<div class="alert alert-success alert-dismissible" role="alert">' +
                 '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                'You successfully sent the message: "' + textInput + '" to your students.' + 
+                'You successfully sent the message: "' + textInput + '" to your students.' +
                 '</div>')
             .fadeOut(3000);
 

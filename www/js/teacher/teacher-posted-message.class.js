@@ -8,7 +8,25 @@ class TeacherPostedMessage {
         Announcement.find(announcementQuery, announcementsFound);
         
         function announcementsFound(announcements) {
-            prepareCourseNames(announcements);
+
+            announcements = announcements.filter((announcement) => {                
+                return announcement.author._id == user._id;
+            });
+
+            announcements.forEach((announcement) => {
+
+                let courseNames = '';
+                let lastIndex = announcement.courses.length - 1;
+
+                announcement.courses.forEach((course, index) => {
+                    courseNames += course.name;
+                    if (index < lastIndex)
+                        courseNames += ' & ';
+                });
+
+                announcement.courseNames = courseNames;
+            });
+
             prepareTime(announcements);
             createPosts(announcements);
         }
@@ -31,6 +49,7 @@ class TeacherPostedMessage {
         }
 
         function prepareTime(announcements) {
+            
             var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
             ];
