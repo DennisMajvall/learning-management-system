@@ -7,6 +7,7 @@ function loadTeacher(callback) {
 		$('.booking-page-container').empty();
 		$('.week-planner-container').empty();
 		$('.course-page-container').empty();
+		$('.message-container').empty();
 		$('.history-container').empty();
 		new TeacherMessage();
 		new TeacherPostedMessage('.posted-msg-content');
@@ -18,6 +19,12 @@ function loadTeacher(callback) {
 		new Profile();
 	};
 
+	routes['/message'] = () => {
+		console.log('test');
+		$('.sidebar-slide').removeClass('visible');
+		new Message();
+	};
+
 	routes['/bookings'] = () => {
 		$('.sidebar-slide').removeClass('visible');
 		$('section.course-page').empty();
@@ -26,6 +33,7 @@ function loadTeacher(callback) {
 		$('.front-course-container').empty();
 		$('.profile-page-container').empty();
 		$('.course-page-container').empty();
+		$('.message-container').empty();
 		new WeekPlanner();
 		new BookingPage();
 	};
@@ -62,7 +70,8 @@ function loadTeacher(callback) {
 		'bookingpage/booking-modal',
 		'bookingpage/booking-info-modal',
 		'sidebar',
-		'profile'
+		'profile',
+		'message'
 	], onTemplatesLoaded);
 
 	function onTemplatesLoaded() {
