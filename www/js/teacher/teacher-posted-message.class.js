@@ -1,6 +1,6 @@
 class TeacherPostedMessage {
 
-    constructor() {
+    constructor(placeOpt) {
 
         let userCourses = user.courses.map( course => '"' + course + '"' );
         let announcementQuery = 'find/{ courses: { $in: [' + userCourses + '] } }';
@@ -8,9 +8,24 @@ class TeacherPostedMessage {
         Announcement.find(announcementQuery, announcementsFound);
         
         function announcementsFound(announcements) {
+
+            announcements = announcements.filter((announcement) => {                
+                return announcement.author._id == user._id;
+            });
+
+            sortByTime(announcements);
             prepareCourseNames(announcements);
             prepareTime(announcements);
             createPosts(announcements);
+        }
+
+        function sortByTime(announcements) {
+
+            announcements.sort(function(a, b) {
+                var timeA = moment(a.timeCreated);
+                var timeB = moment(b.timeCreated);
+                return timeB - timeA;
+            });
         }
 
         function prepareCourseNames(announcements) {
@@ -31,6 +46,7 @@ class TeacherPostedMessage {
         }
 
         function prepareTime(announcements) {
+            
             var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
             ];
@@ -48,7 +64,7 @@ class TeacherPostedMessage {
         }
 
         function createPosts(announcements){
-            $('.posted-msg-content').template('teacher-posted-message', { announcements: announcements });
+            $(placeOpt).template('teacher-posted-message', { announcements: announcements });
             removeMessage();
         }
 
