@@ -187,6 +187,10 @@ module.exports = class Restrouter {
 		// Update one instance by id
 		this.app.put(this.baseRoute + ':id', (req, res) => {
 			if(!this.rights(req, res)) {return;}
+			if(req.body.password){ // fix for pre.save not triggering on update in Mongoose
+				// hash the password when it is changed
+				req.body.password = sha1(req.body.password + global.passwordSalt);
+			}
 			this._class.update({_id:req.params.id}, req.body, (err, result) => {
 				this.json(res, err, result);
 			});

@@ -12,7 +12,6 @@ class BookingInfoModal{
 			}
 
 			if(user.username === booking.bookedBy || user.role === "Admin"){
-				console.log('Du har makten');
 				deleteRights = true;
 			}
 
