@@ -27,6 +27,7 @@ class AdminEdit {
 
 		$('.admin-search-container').on('click', 'button.cancel-item', function() {
 			$(this).closest('item').remove();
+			$('.edit-mode').removeClass('edit-mode');
 		});
 
 		$('.admin-search-container').on('keyup', '[bind-key]', function() {
@@ -158,9 +159,6 @@ class AdminEdit {
 	}
 
 	removeFromEntity(entity, obj, mainItem, mainItemType) {
-		// var upperMainItemType = mainItemType.charAt(0).toUpperCase() + mainItemType.slice(1);
-		// console.log(upperMainItemType);
-		// var plEntity = entity.toLowerCase() + 's';
 		if(entity === "Student" || entity === "Teacher") {
 			obj.courses = obj.courses.filter(function(course) {
 				return mainItem._id.indexOf(course) == -1;

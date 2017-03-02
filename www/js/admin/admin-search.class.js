@@ -37,6 +37,9 @@ class AdminSearch {
     		if(e.target != $(this).children('a')[0])
 				return;
 
+			$('.edit-mode').removeClass('edit-mode');
+			$(this).addClass('edit-mode');
+
 			let item = that.getItemIdFromElement($(this));
 
 			$('.admin-search-container item').remove();

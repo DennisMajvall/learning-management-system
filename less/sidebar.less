@@ -15,14 +15,17 @@
 	letter-spacing: 1px;
 	z-index: 3;
 
-	header a {
+
+	a {
 		color: @custom-color-white;
 		&:hover {
 			text-decoration: none;
+			color: @custom-color-grey-lighter;
+		}
+		&:link, &:active, &:visited {
+			text-decoration: none;
 		}
 	}
-
-	a {color: @custom-color-white;}
 
 
 	.menu {
