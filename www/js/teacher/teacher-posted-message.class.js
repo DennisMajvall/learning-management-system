@@ -1,6 +1,6 @@
 class TeacherPostedMessage {
 
-    constructor() {
+    constructor(placeOpt) {
 
         let userCourses = user.courses.map( course => '"' + course + '"' );
         let announcementQuery = 'find/{ courses: { $in: [' + userCourses + '] } }';
@@ -8,8 +8,6 @@ class TeacherPostedMessage {
         Announcement.find(announcementQuery, announcementsFound);
         
         function announcementsFound(announcements) {
-
-            console.log(announcements);
 
             announcements = announcements.filter((announcement) => {                
                 return announcement.author._id == user._id;
@@ -66,7 +64,7 @@ class TeacherPostedMessage {
         }
 
         function createPosts(announcements){
-            $('.posted-msg-content').template('teacher-posted-message', { announcements: announcements });
+            $(placeOpt).template('teacher-posted-message', { announcements: announcements });
             removeMessage();
         }
 
