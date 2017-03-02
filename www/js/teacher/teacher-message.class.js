@@ -33,6 +33,10 @@ class TeacherMessage {
             // Select All Courses
             $('.teacher-messages-container').on('click', '.select-all', function(e) {
 
+            	$('.select-option').toggleClass('remove-all select-all');
+
+            	$('.select-option.remove-all a').text('Remove all');
+
                 $('.course-list').find('span').addClass('glyphicon glyphicon-ok checked-course');
 
                 $('.course-list').each(function() {
@@ -40,6 +44,23 @@ class TeacherMessage {
                 });
 
                 e.stopPropagation();
+            });
+
+            // Remove All Courses
+            $('.teacher-messages-container').on('click', '.remove-all', function(e) {
+
+            	$('.select-option').toggleClass('remove-all select-all');
+
+            	$('.select-option.select-all a').text('Select all');
+
+            	$('.course-list').find('span').removeClass('glyphicon glyphicon-ok checked-course');
+
+                $('.course-list').each(function() {
+                    changeValue($(this).attr('course-id'));
+                });
+
+            	e.stopPropagation();
+
             });
 
             function changeValue(courseId) {
