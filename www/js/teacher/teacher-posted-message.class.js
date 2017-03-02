@@ -64,7 +64,7 @@ class TeacherPostedMessage {
         }
 
         function createPosts(announcements){
-            $(placeOpt).template('teacher-posted-message', { announcements: announcements });
+            $(placeOpt).empty().template('teacher-posted-message', { announcements: announcements });
             removeMessage();
         }
 
