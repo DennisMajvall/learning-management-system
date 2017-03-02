@@ -76,7 +76,14 @@ class TeacherPostedMessage {
                 Announcement.delete(postToDelete, function() {
                     location.reload();
                 });
+            });
 
+            $('.history-container').on('click', '.remove-button', function(){
+                let postToDelete = $(this).closest('.posted-msg').attr('post-id');
+
+                Announcement.delete(postToDelete, function() {
+                    location.reload();
+                });
             });
         }
     }
