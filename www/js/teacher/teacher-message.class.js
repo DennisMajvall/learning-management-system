@@ -16,21 +16,18 @@ class TeacherMessage {
         }
 
         function createTemplate(courses) {
-            $('.teacher-messages-container').empty().template('teacher-message', { courses: courses });
+            $('.teacher-messages-container').off().empty().template('teacher-message', { courses: courses });
         }
 
         function createEventListeners() {
             $('.teacher-messages-container')
-            .off('click', '.send-button', makeAnnouncement)
              .on('click', '.send-button', makeAnnouncement);
 
             // Select a Course
             $('.teacher-messages-container')
-            .off('click', 'li', toggleIconOne)
              .on('click', 'li', toggleIconOne);
 
             $('.teacher-messages-container')
-            .off('click', '.select-all', toggleIconAll)
              .on('click', '.select-all', toggleIconAll);
 
 
