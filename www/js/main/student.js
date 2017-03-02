@@ -4,6 +4,7 @@ function loadStudent(callback) {
 		$('.sidebar-slide').removeClass('visible');
 		$('section.course-page').empty();
 		$('.profile-page-container').empty();
+		$('.message-container').empty();
 		$('.booking-page-container').empty();
 		$('.week-planner-container').empty();
 		$('.course-page-container').empty();
@@ -17,6 +18,12 @@ function loadStudent(callback) {
 		new Profile();
 	};
 
+	routes['/message'] = () => {
+		console.log('test');
+		$('.sidebar-slide').removeClass('visible');
+		new Message();
+	};
+
 	routes['/bookings'] = () => {
 		$('.sidebar-slide').removeClass('visible');
 		$('section.course-page').empty();
@@ -25,6 +32,7 @@ function loadStudent(callback) {
 		$('.front-course-container').empty();
 		$('.profile-page-container').empty();
 		$('.course-page-container').empty();
+		$('.message-container').empty();
 		new WeekPlanner();
 		new BookingPage();
 	};
@@ -45,6 +53,7 @@ function loadStudent(callback) {
 		'listed-profile',
 		'sidebar',
 		'profile',
+		'message',
 		'booking-page',
 		'bookingpage/week-planner',
 		'bookingpage/booking-modal',
