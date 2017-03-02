@@ -8,8 +8,9 @@ function loadTeacher(callback) {
 		$('.week-planner-container').empty();
 		$('.course-page-container').empty();
 		$('.message-container').empty();
+		$('.history-container').empty();
 		new TeacherMessage();
-		new TeacherPostedMessage();
+		new TeacherPostedMessage('.posted-msg-content');
 		new CoursesOnFrontpage();
 	};
 
@@ -47,9 +48,8 @@ function loadTeacher(callback) {
 		$('.course-page-container').empty();
 		$('.booking-page-container').empty();
 		$('.week-planner-container').empty();
-		new TeacherMessage();
-		new TeacherPostedMessage();
-	}
+		new TeacherPostedMessage('.history-container');
+	};
 
 	user.courses.forEach((val) => {
 		routes['/course-page-' + val] = () => {
