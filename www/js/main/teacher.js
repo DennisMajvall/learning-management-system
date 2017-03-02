@@ -34,6 +34,7 @@ function loadTeacher(callback) {
 		$('.profile-page-container').empty();
 		$('.course-page-container').empty();
 		$('.message-container').empty();
+		$('.history-container').empty();
 		new WeekPlanner();
 		new BookingPage();
 	};
@@ -48,6 +49,7 @@ function loadTeacher(callback) {
 		$('.course-page-container').empty();
 		$('.booking-page-container').empty();
 		$('.week-planner-container').empty();
+		$('.history-container').empty();
 		new TeacherPostedMessage('.history-container');
 	};
 
