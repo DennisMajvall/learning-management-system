@@ -1,6 +1,7 @@
 class TeacherMessage {
 
     constructor() {
+        this.eventListenersAdded = false;
         let coursesToPublishTo = [];
         populateCourses(user.courses);
 
@@ -19,20 +20,27 @@ class TeacherMessage {
         }
 
         function createEventListeners() {
-            $('.teacher-messages-container').on('click', '.send-button', makeAnnouncement);
+            $('.teacher-messages-container')
+            .off('click', '.send-button', makeAnnouncement)
+             .on('click', '.send-button', makeAnnouncement);
 
             // Select a Course
-            $('.teacher-messages-container').on('click', 'li', function(e) {
+            $('.teacher-messages-container')
+            .off('click', 'li', toggleIconOne)
+             .on('click', 'li', toggleIconOne);
 
+            $('.teacher-messages-container')
+            .off('click', '.select-all', toggleIconAll)
+             .on('click', '.select-all', toggleIconAll);
+
+
+            function toggleIconOne(e){
                 $(this).find('span').toggleClass('glyphicon glyphicon-ok checked-course');
-
                 changeValue($(this).closest('li').attr('course-id'));
                 e.stopPropagation();
-            });
+            }
 
-            // Select All Courses
-            $('.teacher-messages-container').on('click', '.select-all', function(e) {
-
+            function toggleIconAll(e){
                 $('.course-list').find('span').addClass('glyphicon glyphicon-ok checked-course');
 
                 $('.course-list').each(function() {
@@ -40,7 +48,8 @@ class TeacherMessage {
                 });
 
                 e.stopPropagation();
-            });
+            }
+
 
             function changeValue(courseId) {
 				if (!courseId)
