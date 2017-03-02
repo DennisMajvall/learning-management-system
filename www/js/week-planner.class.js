@@ -263,7 +263,6 @@ class WeekPlanner{
 
 	  		$('body').on('click', '.delete-button', function(){
 	  			let clickedBookingId = $(this).closest('.modal-content').attr('data-booking-id');
-	  			console.log('x:' ,clickedBookingId);
 	  			Booking.delete(clickedBookingId, function(){
 	  				loadWeek();
 	  			});
@@ -331,13 +330,17 @@ class WeekPlanner{
 
 	  		// Bring up the booking modal when clicking a row
 	  		$('.page-content').on('click', '.week-schedule-row', function(e){
+	  			e.stopPropagation();
+
+		  		// If the alert is open, close it by removing it when clicking anything. 
+		  		$(document).on('click', 'body', onBodyClick);
 
 	  			let clickedRow = $(this),
 	  				clickedDate = clickedRow.data('timestamp'),
 	  				error;
 
 	  			if ( selectedRoom.type === 'classroom' && user.role === 'Student'){
-	  				$('.alert').remove();
+	  				$('.alert > .close').trigger('click');
 	  				$('.week-planner').append(
 	  				'<div class="alert alert-danger alert-dismissible" role="alert">' + 
 						'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
@@ -349,6 +352,17 @@ class WeekPlanner{
 	  				prepareModal(clickedDate, clickedRow);
 	  			}
 	  		});
+
+	  		function onBodyClick(e){
+	  			e.preventDefault();
+	  			e.stopPropagation();
+
+	  			if( $('.alert-danger').length > 0){
+	  				$('.alert > .close').trigger('click');
+	  			}
+
+		  		$(document).off('click', 'body', onBodyClick);
+		  	}
 	  	}
 	}
 }
