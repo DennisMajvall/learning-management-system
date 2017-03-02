@@ -27,6 +27,7 @@ class AdminEdit {
 
 		$('.admin-search-container').on('click', 'button.cancel-item', function() {
 			$(this).closest('item').remove();
+			$('.edit-mode').removeClass('edit-mode');
 		});
 
 		$('.admin-search-container').on('keyup', '[bind-key]', function() {
