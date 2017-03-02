@@ -158,9 +158,6 @@ class AdminEdit {
 	}
 
 	removeFromEntity(entity, obj, mainItem, mainItemType) {
-		// var upperMainItemType = mainItemType.charAt(0).toUpperCase() + mainItemType.slice(1);
-		// console.log(upperMainItemType);
-		// var plEntity = entity.toLowerCase() + 's';
 		if(entity === "Student" || entity === "Teacher") {
 			obj.courses = obj.courses.filter(function(course) {
 				return mainItem._id.indexOf(course) == -1;
