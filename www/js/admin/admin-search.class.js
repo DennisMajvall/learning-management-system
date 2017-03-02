@@ -30,12 +30,16 @@ class AdminSearch {
 	}
 
 	addEventListeners() {
+
 		let that = this;
 
 		// on item click
 		this.container.on('click', '.search-list li', function(e) {
     		if(e.target != $(this).children('a')[0])
 				return;
+
+			$('.edit-mode').removeClass('edit-mode');
+			$(this).addClass('edit-mode');
 
 			let item = that.getItemIdFromElement($(this));
 
@@ -112,18 +116,23 @@ class AdminSearch {
 			}, 300);
 		});
 
+
+		// only add body event listeners  once
+		if(this.addEventListeners.hasRun){return;}
+		this.addEventListeners.hasRun = true;
+
+
 		$('body').on('click', 'a.increase-limit', function() {
 			that.filter.increaseLimit();
 			that.filter.run($('input[type="search"]').val().trim(), that.displayItems, that);
 		});
 
 		$('body').on('click', 'help-button', function(e) {
-			e.stopPropagation();
-			$(this).children().toggle();
+			var isVisible = $(this).children().offset().top !== 0;
+			setTimeout(()=>{$(this).children()[isVisible ? 'hide' : 'show']();},0);
 		});
 
 		$('body').on('click', function(e) {
-			e.stopPropagation();
 			$('help-button span').hide();
 		});
 	}
