@@ -7,6 +7,14 @@ class TeacherPostedMessage {
 
         Announcement.find(announcementQuery, announcementsFound);
         
+        $('.teacher-posted-messages-container').on('click', '.remove-button', function(){
+            let postToDelete = $(this).closest('.posted-msg').attr('post-id');
+
+            Announcement.delete(postToDelete, () => {
+                $(this).closest('.posted-msg').remove();
+            });
+        });
+
         function announcementsFound(announcements) {
 
             announcements = announcements.filter((announcement) => {                
@@ -65,19 +73,6 @@ class TeacherPostedMessage {
 
         function createPosts(announcements){
             $('.teacher-posted-messages-container').empty().template('teacher-posted-message', { announcements: announcements });
-            removeMessage();
-        }
-
-        function removeMessage(){
-
-            $('.teacher-messages-container').on('click', '.remove-button', function(){
-                let postToDelete = $(this).closest('.posted-msg').attr('post-id');
-
-                Announcement.delete(postToDelete, function() {
-                    location.reload();
-                });
-
-            });
         }
     }
 }
