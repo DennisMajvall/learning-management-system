@@ -8,9 +8,9 @@ function loadTeacher(callback) {
 		$('.week-planner-container').empty();
 		$('.course-page-container').empty();
 		$('.message-container').empty();
-		$('.history-container').empty();
+		$('.teacher-posted-messages-container').empty();
 		new TeacherMessage();
-		new TeacherPostedMessage('.posted-msg-content');
+		new TeacherPostedMessage();
 		new CoursesOnFrontpage();
 	};
 
@@ -34,23 +34,9 @@ function loadTeacher(callback) {
 		$('.profile-page-container').empty();
 		$('.course-page-container').empty();
 		$('.message-container').empty();
-		$('.history-container').empty();
+		$('.teacher-posted-messages-container').empty();
 		new WeekPlanner();
 		new BookingPage();
-	};
-
-	routes['/announcements'] = () => {
-		$('.sidebar-slide').removeClass('visible');
-		$('section.course-page').empty();
-		$('.teacher-messages-container').empty();
-		$('.student-announcement-container').empty();
-		$('.front-course-container').empty();
-		$('.profile-page-container').empty();
-		$('.course-page-container').empty();
-		$('.booking-page-container').empty();
-		$('.week-planner-container').empty();
-		$('.history-container').empty();
-		new TeacherPostedMessage('.history-container');
 	};
 
 	user.courses.forEach((val) => {

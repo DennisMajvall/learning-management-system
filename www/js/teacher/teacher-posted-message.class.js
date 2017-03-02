@@ -1,6 +1,6 @@
 class TeacherPostedMessage {
 
-    constructor(placeOpt) {
+    constructor() {
 
         let userCourses = user.courses.map( course => '"' + course + '"' );
         let announcementQuery = 'find/{ courses: { $in: [' + userCourses + '] } }';
@@ -64,7 +64,7 @@ class TeacherPostedMessage {
         }
 
         function createPosts(announcements){
-            $(placeOpt).empty().template('teacher-posted-message', { announcements: announcements });
+            $('.teacher-posted-messages-container').empty().template('teacher-posted-message', { announcements: announcements });
             removeMessage();
         }
 
