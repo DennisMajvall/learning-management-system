@@ -4,15 +4,15 @@
 			<div class="icon-box-course" style="background-color: ${course.icon_bg}">
 				<img src="../images/icons/${course.icon_image}" alt="">
 			</div>
-			<h1 class="page-header-course">${course.name} <br><span>${course.period}</span></h1>
+			<h1 class="page-header-course">${course.name} <br><span>${course.period || 'Unknown period.'}</span></h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-6">
 			<div class="about-course"><h2>About this course</h2>
-				${course.about}
+				${course.description || 'Description not available.'}
 			</div>
-			<div class="teacher-course">
+			<div class="teacher-course user-list">
 				<h2>Teachers</h2>
 				[repeat course.teachers, user]
 					<profile>
@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="students-course">
+			<div class="user-list">
 				<h2>Students</h2>
 				<div class="row">
 					[repeat course.students, user]
@@ -42,16 +42,19 @@
 						</div>
 					[endrepeat]
 				</div>
+
+				<div class="row">
+					<div class="col-xs-12">
+						[if role === "Teacher"]
+							<h2>Add student to course</h2>
+
+							<input type="search" class="form-control add-student-input" placeholder="Search" autofocus></input>
+							<button type="button" class="btn btn-success add-student">Add student</button>
+						[endif]
+					</div>
+				</div>
 			</div>
 
-
-		<!-- 	[if role === "Teacher"]
-				<h2>Add student to course</h2>
-
-				<input type="search" class="form-control add-student-input" placeholder="Search" autofocus></input>
-				<ul class="search-list"></ul>
-				<button type="button" class="btn btn-success add-student">Add student</button>
-			[endif] -->
 
 		</div>
 	</div>

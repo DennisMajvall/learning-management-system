@@ -1,43 +1,37 @@
 [{
 	"name": "Archeology",
-	"description": "An archeology course.",
 	"icon_image": "temple-icon@2x.png",
 	"icon_bg": "#616161",
 	"period": "Fall of 2016 - Spring of 2017",
-	"about": "Archaeology, or archeology, is the study of human activity through the recovery and analysis of material culture. The archaeological record consists of artifacts, architecture, biofacts or ecofacts, and cultural landscapes."
+	"description": "Archaeology, or archeology, is the study of human activity through the recovery and analysis of material culture. The archaeological record consists of artifacts, architecture, biofacts or ecofacts, and cultural landscapes."
 },{
 	"name": "Programming 1",
-	"description": "A programming course.",
 	"icon_image": "calc-icon@2x.png",
 	"icon_bg": "#EF5350",
 	"period": "Fall of 2016 - Spring of 2017",
-	"about": "Computer programming (often shortened to programming) is a process that leads from an original formulation of a computing problem to executable computer programs. Programming involves activities such as analysis, developing understanding, generating algorithms, verification of requirements of algorithms including their correctness and resources consumption, and implementation (commonly referred to as coding) of algorithms in a target programming language. Source code is written in one or more programming languages. "
+	"description": "Computer programming (often shortened to programming) is a process that leads from an original formulation of a computing problem to executable computer programs. Programming involves activities such as analysis, developing understanding, generating algorithms, verification of requirements of algorithms including their correctness and resources consumption, and implementation (commonly referred to as coding) of algorithms in a target programming language. Source code is written in one or more programming languages. "
 },{
 	"name": "Anthropology",
-	"description": "Human studies.",
 	"icon_image": "character-icon@2x.png",
 	"icon_bg": "#BDBDBD",
 	"period": "Fall of 2016 - Spring of 2017",
-	"about": "Anthropology is the study of various aspects of humans within past and present societies. Social anthropology and cultural anthropology study the norms and values of societies. Linguistic anthropology studies how language affects social life. Biological or physical anthropology studies the biological development of humans."
+	"description": "Anthropology is the study of various aspects of humans within past and present societies. Social anthropology and cultural anthropology study the norms and values of societies. Linguistic anthropology studies how language affects social life. Biological or physical anthropology studies the biological development of humans."
 },{
 	"name": "Ornithology",
-	"description": "Study of birds.",
 	"icon_image": "temple-icon@2x.png",
 	"icon_bg": "#BDBDBD",
 	"period": "Fall of 2016 - Spring of 2017",
-	"about": "Ornithology is a branch of zoology that concerns the study of birds. The word ornithology derives from the ancient Greek ὄρνις ornis and λόγος logos. Several aspects of ornithology differ from related disciplines, due partly to the high visibility and the aesthetic appeal of birds. Most marked among these is the extent of studies undertaken by amateurs working within the parameters of strict scientific methodology."
+	"description": "Ornithology is a branch of zoology that concerns the study of birds. The word ornithology derives from the ancient Greek ὄρνις ornis and λόγος logos. Several aspects of ornithology differ from related disciplines, due partly to the high visibility and the aesthetic appeal of birds. Most marked among these is the extent of studies undertaken by amateurs working within the parameters of strict scientific methodology."
 },{
 	"name": "Social studies",
-	"description": "Study of social sciences, humanities & history.",
 	"icon_image": "temple-icon@2x.png",
 	"icon_bg": "#EF5350",
 	"period": "Fall of 2016 - Spring of 2017",
-	"about": "Social studies is the integrated study of the social sciences, humanities and history. Within the school program, social studies provides coordinated, systematic study drawing upon such disciplines as anthropology, archaeology, economics, geography, history, jurisprudence, philosophy, political science, psychology, religion, and sociology, as well as appropriate content from the humanities, mathematics, and natural sciences."
+	"description": "Social studies is the integrated study of the social sciences, humanities and history. Within the school program, social studies provides coordinated, systematic study drawing upon such disciplines as anthropology, archaeology, economics, geography, history, jurisprudence, philosophy, political science, psychology, religion, and sociology, as well as appropriate content from the humanities, mathematics, and natural sciences."
 },{
 	"name": "Electronics",
-	"description": "Study of... electronics.",
 	"icon_image": "temple-icon@2x.png",
 	"icon_bg": "#BDBDBD",
 	"period": "Fall of 2016 - Spring of 2017",
-	"about": "Electronics is the science of controlling electrical energy electrically, in which the electrons have a fundamental role. Electronics deals with electrical circuits that involve active electrical components such as vacuum tubes, transistors, diodes, integrated circuits, associated passive electrical components, and interconnection technologies. Commonly, electronic devices contain circuitry consisting primarily or exclusively of active semiconductors supplemented with passive elements; such a circuit is described as an electronic circuit."
+	"description": "Electronics is the science of controlling electrical energy electrically, in which the electrons have a fundamental role. Electronics deals with electrical circuits that involve active electrical components such as vacuum tubes, transistors, diodes, integrated circuits, associated passive electrical components, and interconnection technologies. Commonly, electronic devices contain circuitry consisting primarily or exclusively of active semiconductors supplemented with passive elements; such a circuit is described as an electronic circuit."
 }]

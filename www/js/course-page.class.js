@@ -1,9 +1,7 @@
 class CoursePage{
 
 	constructor(courseId) {
-		let that = this;
-		let courseObj;
-		let announcementQuery;
+		this.course = null;
 
 		$('.teacher-messages-container').empty();
 		$('.student-announcement-container').empty();
@@ -15,27 +13,27 @@ class CoursePage{
 		$('.teacher-posted-messages-container').empty();
 
 		Course.find(courseId, (course) => {
+			this.course = course;
+
+			// Load the course info
 			$('.front-course-container').empty().template('course-page', {
 				course: course,
 				role: user.role
 			});
 
+			this.addEventListeners();
 
-			$('.add-student').on('click', addStudent);
+			this.loadAnnouncements();
+		});
+	}
 
-			courseObj = course;
+	loadAnnouncements() {
+		Announcement.find('find/{ courses: { $in: ["' + this.course._id + '"] } }', (announcements) => {
+			prepareDate(announcements);
 
-			announcementQuery = 'find/{ courses: { $in: ["' + courseObj._id + '"] } }';
-
-			Announcement.find(announcementQuery, announcementsFound);
-
-			function announcementsFound(announcements) {
-				prepareDate(announcements);
-
-				$('.course-page-container')
-					.empty()
-					.template('course-announcement', { announcements: announcements, course: courseObj });
-			}
+			$('.course-page-container')
+				.empty()
+				.template('course-announcement', { announcements: announcements, course: this.course });
 
 			function prepareDate(announcements) {
 				var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -47,86 +45,88 @@ class CoursePage{
 					announcement.dateString = date.getDate() + ' ' + monthNames[date.getMonth()];
 				});
 			}
-
 		});
+	}
 
+	addEventListeners() {
+		let that = this;
 
 		$('.front-course-container').on('click', 'button.remove-item', function() {
 			let id = $(this).attr('list-item-id');
 
-			that.removeById(id, courseObj, that, this);
+			that.removeById.call(that, id, this);
 		});
 
-		function addStudent(){
+		$('.add-student').on('click', () => {
 			// Get the username from the textbox
 			let username = $('.add-student-input').val();
-
-			// Find student in database
-			Student.find('find/{ username: "' + username + '" }', function(result) {
-
-				// If student exists in the database
-				if (result.length) {
-					let student = result[0];
-					let studentsInCourse = courseObj.students;
-					let studentIsAlreadyInCourse = false;
-
-					// Loop through the course's students and check if
-					// a student with the specified username is already in there.
-					studentsInCourse.forEach(function(obj) {
-						if(obj.username == username) {
-							studentIsAlreadyInCourse = true;
-						}
-					});
-
-					if (studentIsAlreadyInCourse) {
-						// show error msg, student already in course
-					} else {
-						// Add student to course.
-						studentsInCourse.push(student);
-
-						// Add course to student.
-						student.courses.push(courseObj);
-
-						// Update the course in the database
-						Course.update(courseObj._id, { students: studentsInCourse }, function(){
-
-							// Update the student in the database.
-							Student.update(student._id, { courses: student.courses }, function(){
-
-								// Reload the page.
-								location.reload();
-							});
-
-						})
-					}
-				} else {
-					// show error msg, wrong username
-				}
-			});
-		}
+			that.addStudent(username);
+		});
 	}
 
-	removeById(id, mainItem, that, domThis) {
-		mainItem.students = mainItem.students.filter(function(item) {
+	addStudent(username) {
+		let course = this.course;
+
+		// Find student in database
+		Student.find('find/{ username: "' + username + '" }', function(result) {
+
+			// If student exists in the database
+			if (result.length) {
+				let student = result[0];
+				let studentIsAlreadyInCourse = false;
+
+				// Loop through the course's students and check if
+				// a student with the specified username is already in there.
+				course.students.forEach(function(obj) {
+					if(obj.username == username) {
+						studentIsAlreadyInCourse = true;
+					}
+				});
+
+				if (studentIsAlreadyInCourse) {
+					// show error msg, student already in course
+				} else {
+					// Add course to student.
+					// Then update the student in the database.
+					student.courses.push(course._id);
+					Student.update(student._id, { courses: student.courses });
+
+					// Add student to course.
+					// Then update the course in the database
+					course.students.push(student._id);
+					Course.update(course._id, { students: course.students }, function(){
+
+						// Reload the page when the course has finished updating.
+						location.reload();
+					});
+				}
+			} else {
+				// show error msg, wrong username
+			}
+		});
+	}
+
+	removeById(id, clickedElement) {
+		this.course.students = this.course.students.filter((item) => {
 			let shouldKeep = id !== item._id;
 
 			if(!shouldKeep) {
-				that.removeCourseFromEntity(item, mainItem);
+				this.removeCourseFromEntity(item);
 			}
 
 			return shouldKeep;
 		});
 
-		var updateObj = { students: mainItem.students };
+		var updateObj = { students: this.course.students };
 
-		Course.update(mainItem._id, updateObj, function() {
-			$(domThis).closest('.profile-content').remove();
+		Course.update(this.course._id, updateObj, function() {
+			$(clickedElement).closest('.profile-content').remove();
 		});
 	}
 
-	removeCourseFromEntity(obj, mainItem) {
-		obj.courses = obj.courses.filter(function(course) {
-			return mainItem._id.indexOf(course) == -1;
+	removeCourseFromEntity(obj) {
+		obj.courses = obj.courses.filter((course) => {
+			return this.course._id.indexOf(course) == -1;
 		});
 
 		Student.update(obj._id, {courses: obj.courses});
