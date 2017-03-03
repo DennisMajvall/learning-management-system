@@ -50,6 +50,14 @@ button.margin {
 
 .increase-limit {
 	cursor: pointer;
+
+	&.disabled,
+	&.disabled:hover,
+	&.disabled:active {
+		cursor: default;
+		color: black;
+		text-decoration: none;
+	}
 }
 
 help-button {

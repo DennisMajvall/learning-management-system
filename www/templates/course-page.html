@@ -9,10 +9,10 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6">
-			<div class="about-course"><h2>About this course</h2>
+			<div class="about-course padded-box"><h2>About this course</h2>
 				${course.description || 'Description not available.'}
 			</div>
-			<div class="teacher-course user-list">
+			<div class="teacher-course padded-box">
 				<h2>Teachers</h2>
 				[repeat course.teachers, user]
 					<profile>
@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="user-list">
+			<div class="padded-box">
 				<h2>Students</h2>
 				<div class="row">
 					[repeat course.students, user]

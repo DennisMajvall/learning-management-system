@@ -16,7 +16,7 @@ class TeacherMessage {
         }
 
         function createTemplate(courses) {
-            $('.teacher-messages-container').off().empty().template('teacher-message', { courses: courses });
+            $('.teacher-messages-container').empty().template('teacher-message', { courses: courses });
         }
 
         function createEventListeners() {

@@ -43,7 +43,11 @@ class Router {
 		// find the function corresponding to the route
 		var func = routes[route] || routes['/'];
 
-		if (func)
+		if (func) {
+			$('.sidebar-slide').removeClass('visible');
+			$('.page-content').children().empty().off();
+
 			func();
+		}
 	}
 }

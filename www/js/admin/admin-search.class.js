@@ -7,10 +7,10 @@ class AdminSearch {
 		this.dbType = dbType;
 		this.container = $('.admin-search-container');
 		this.previousInput = '';
+		this.numSearchResults = 0;
 	}
 
 	init() {
-		this.container.off();
 		this.dbSchema = this.getDbSchema();
 		adminSearchHashMap = {};
 		this.filter = new AdminFilter(this.dbType);
@@ -55,7 +55,7 @@ class AdminSearch {
 
 				courseIds = item.courses.map( course => '"' + course._id + '"' );
 				queryStringCourses = 'find/{ _id: { $nin: [' + courseIds + '] } }';
-				
+
 				if(item.role === "Student") {
 					let queryStringEducations;
 
@@ -84,7 +84,7 @@ class AdminSearch {
 						});
 					});
 				}
-			} else {				
+			} else {
 				$(this).template('admin-edit', {
 					type: that.dbType,
 					item: item
@@ -116,23 +116,17 @@ class AdminSearch {
 			}, 300);
 		});
 
-
-		// only add body event listeners  once
-		if(this.addEventListeners.hasRun){return;}
-		this.addEventListeners.hasRun = true;
-
-
-		$('body').on('click', 'a.increase-limit', function() {
+		$('.admin-search-container').on('click', 'a.increase-limit:not(.disabled)', function() {
 			that.filter.increaseLimit();
 			that.filter.run($('input[type="search"]').val().trim(), that.displayItems, that);
 		});
 
-		$('body').on('click', 'help-button', function(e) {
+		$('.admin-search-container').on('click', 'help-button', function(e) {
 			var isVisible = $(this).children().offset().top !== 0;
-			setTimeout(()=>{$(this).children()[isVisible ? 'hide' : 'show']();},0);
+			setTimeout(()=>{ $(this).children()[isVisible ? 'hide' : 'show'](); }, 0);
 		});
 
-		$('body').on('click', function(e) {
+		$('.admin-search-container').on('click', function(e) {
 			$('help-button span').hide();
 		});
 	}
@@ -146,6 +140,26 @@ class AdminSearch {
 			mainType: getDbTypeAsPlural(that.dbType),
 			type: that.dbType,
 		});
+
+		that.updateIncreaseLimitText.call(that);
+	}
+
+	updateIncreaseLimitText() {
+		let oldNumSearchResults = this.numSearchResults;
+
+		this.numSearchResults = Object.keys(adminSearchHashMap).length +
+			Object.keys(adminSearchHashMapPopulated).length;
+
+		if (this.numSearchResults == 0) {
+			$('a.increase-limit').addClass('disabled')
+				.text('No results found.');
+		} else if (oldNumSearchResults != this.numSearchResults) {
+			$('a.increase-limit').removeClass('disabled')
+				.text('Get more..');
+		} else {
+			$('a.increase-limit').addClass('disabled')
+				.text('Can\'t find more results.');
+		}
 	}
 
 	getItemIdFromElement(elem) {

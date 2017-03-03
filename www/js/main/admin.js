@@ -11,16 +11,11 @@ function loadAdmin(callback) {
 		"announcement"
 	].forEach((category) => {
 		routes['/' + category] = () => {
-			$('.admin-create-container').empty();
-			$('.admin-search-container').empty();
 			new AdminSearch(category).init();
 		};
 	});
 
 	routes['/'] = () => {
-		$('.sidebar-slide').removeClass('visible');
-		$('.admin-create-container').empty();
-		$('.admin-search-container').empty();
 		new AdminFrontpage();
 	};
 
