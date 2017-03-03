@@ -1,19 +1,17 @@
-<section class="front-course-section">
-	<div class="row">
-		<div class="col-xs-12">
-			<h2 class="page-header">Courses</h2>
-		</div>
+<div class="row">
+	<div class="col-xs-12">
+		<h2 class="page-header">Courses</h2>
 	</div>
-	<div class="row">
-		[repeat courses, course]
-		<div class="col-xs-12">
-			<a href="/course-page-${course._id}" class="show-course">
-				<div class="shell" style="background-color: ${course.icon_bg}">
-					<div class="icon-box"><img src="/images/icons/${course.icon_image}" class="img-responsive" /></div>
-					<span>${course.name}</span>
-				</div>
-			</a>
-		</div>
-		[endrepeat]
+</div>
+<div class="row">
+	[repeat courses, course]
+	<div class="col-xs-12">
+		<a href="/course-page-${course._id}" class="show-course">
+			<div class="shell" style="background-color: ${course.icon_bg}">
+				<div class="icon-box"><img src="/images/icons/${course.icon_image}" class="img-responsive" /></div>
+				<span>${course.name}</span>
+			</div>
+		</a>
 	</div>
-</section>
+	[endrepeat]
+</div>
