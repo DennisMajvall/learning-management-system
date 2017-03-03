@@ -26,15 +26,15 @@
 				<h2>Students</h2>
 				<div class="row">
 					[repeat course.students, user]
-						<div class="profile-content">
-							<div class="col-xs-2">
+						<div class="profile-content flex-vert">
+							<div class="col-xs-1 col-md-2">
 								[if role === "Teacher"]
-									<button class="btn-xs btn-danger remove-item" list-item-id="${user._id}">
+									<button class="btn-xs btn-danger remove-item" list-item-id="${user._id}" title="Remove">
 										<span class="glyphicon glyphicon-remove"></span>
 									</button>
 								[endif]
 							</div>
-							<div class="col-xs-10">
+							<div class="col-xs-11 col-md-10">
 								<profile>
 									[template listed-profile, user]
 								</profile>
