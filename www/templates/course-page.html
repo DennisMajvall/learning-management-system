@@ -24,16 +24,24 @@
 		<div class="col-md-6">
 			<div class="students-course">
 				<h2>Students</h2>
-				[repeat course.students, user]
-					<profile>
-						[template listed-profile, user]
-						[if role === "Teacher"]
-							<button class="btn-xs btn-danger remove-item" list-item-id="${user._id}">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
-						[endif]
-					</profile>
-				[endrepeat]
+				<div class="row">
+					[repeat course.students, user]
+						<div class="profile-content">
+							<div class="col-xs-2">
+								[if role === "Teacher"]
+									<button class="btn-xs btn-danger remove-item" list-item-id="${user._id}">
+										<span class="glyphicon glyphicon-remove"></span>
+									</button>
+								[endif]
+							</div>
+							<div class="col-xs-10">
+								<profile>
+									[template listed-profile, user]
+								</profile>
+							</div>
+						</div>
+					[endrepeat]
+				</div>
 			</div>
 
 

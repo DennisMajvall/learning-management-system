@@ -120,7 +120,7 @@ class CoursePage{
 		var updateObj = { students: mainItem.students };
 
 		Course.update(mainItem._id, updateObj, function() {
-			$(domThis).closest('profile').remove();
+			$(domThis).closest('.profile-content').remove();
 		});
 	}
 
