@@ -30,10 +30,19 @@ class CoursePage{
 	loadAnnouncements() {
 		Announcement.find('find/{ courses: { $in: ["' + this.course._id + '"] } }', (announcements) => {
 			prepareDate(announcements);
+			sortByTime(announcements);
 
 			$('.course-page-container')
 				.empty()
 				.template('course-announcement', { announcements: announcements, course: this.course });
+
+	        function sortByTime(announcements) {
+	            announcements.sort(function(a, b) {
+	                var timeA = moment(a.timeCreated);
+	                var timeB = moment(b.timeCreated);
+	                return timeB - timeA;
+	            });
+	        }
 
 			function prepareDate(announcements) {
 				var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
