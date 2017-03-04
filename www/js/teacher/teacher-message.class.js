@@ -3,6 +3,7 @@ class TeacherMessage {
     constructor() {
         this.eventListenersAdded = false;
         let coursesToPublishTo = [];
+        let populatedCourses;
         populateCourses(user.courses);
 
         function populateCourses(courses) {
@@ -10,6 +11,7 @@ class TeacherMessage {
             let queryString = 'find/{ _id: { $in: [' + coursesIds + '] } }';
 
             Course.find(queryString, (courses, err) => {
+                populatedCourses = courses;
                 createTemplate(courses);
                 createEventListeners();
             });
@@ -25,30 +27,38 @@ class TeacherMessage {
 
             // Select a Course
             $('.teacher-messages-container')
-             .on('click', 'li', toggleIconOne);
+             .on('click', 'li.course-list', toggleIconOne);
 
             $('.teacher-messages-container')
-             .on('click', '.select-all', toggleIconAll);
+             .on('click', 'li.select-all', toggleIconAll);
 
 
             function toggleIconOne(e){
                 $(this).find('span').toggleClass('glyphicon glyphicon-ok checked-course');
-                changeValue($(this).closest('li').attr('course-id'));
+                addOrRemove($(this).attr('course-id'));
                 e.stopPropagation();
             }
 
             function toggleIconAll(e){
                 $('.course-list').find('span').addClass('glyphicon glyphicon-ok checked-course');
-
-                $('.course-list').each(function() {
-                    changeValue($(this).attr('course-id'));
-                });
-
+                addAll($('.dropdown-menu .course-list'));
                 e.stopPropagation();
             }
 
+            function addAll(courses){
+                courses.each(function() {
+                    let courseId = $(this).attr('course-id');
+                    let foundIndex = coursesToPublishTo.indexOf(courseId);
 
-            function changeValue(courseId) {
+                    if (foundIndex > -1) {
+                        return;
+                    } else {
+                        coursesToPublishTo.push(courseId);
+                    }
+                });
+            }
+
+            function addOrRemove(courseId) {
 				if (!courseId)
 					return;
 
@@ -72,7 +82,9 @@ class TeacherMessage {
                 message: textInput,
                 courses: coursesToPublishTo
             }, function() {
-                location.reload();
+                coursesToPublishTo = [];
+                createTemplate(populatedCourses);
+                new TeacherPostedMessage();
             });
 
             $('textarea').val('');
