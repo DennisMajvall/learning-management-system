@@ -58,7 +58,7 @@ class TeacherPostedMessage {
             var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
             ];
-            var dayArr = ['.','Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+            var dayArr = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
             announcements.forEach((announcement) => {
                 let date = new Date(announcement.timeCreated);
