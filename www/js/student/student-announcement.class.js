@@ -7,12 +7,16 @@ class AnnouncementOnFrontpage {
 		Announcement.find(announcementQuery, announcementsFound);
 
 		function announcementsFound(announcements) {
-			prepareCourseNames(announcements);
-			prepareDate(announcements);
+			
+			sortByTime(announcements);
+			let limitAnnouncements = announcements.splice(0,2);
+
+			prepareCourseNames(limitAnnouncements);
+			prepareDate(limitAnnouncements);
 
 			$('.student-announcement-container')
 				.empty()
-				.template('student-announcement', { announcements: announcements });
+				.template('student-announcement', { announcements: limitAnnouncements });
 		}
 
 		function prepareCourseNames(announcements) {
@@ -40,6 +44,15 @@ class AnnouncementOnFrontpage {
 				announcement.dateString = date.getDate() + ' ' + monthNames[date.getMonth()];
 			});
 		}
+
+        function sortByTime(announcements) {
+
+            announcements.sort(function(a, b) {
+                var timeA = moment(a.timeCreated);
+                var timeB = moment(b.timeCreated);
+                return timeB - timeA;
+            });
+        }
 
 	}
 }
