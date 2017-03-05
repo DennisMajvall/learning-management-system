@@ -27,35 +27,50 @@ class TeacherMessage {
             // Select a Course
             $('.teacher-messages-container').on('click', 'li.course-list', toggleIconOne);
 
-            $('.teacher-messages-container').on('click', 'li.select-all', toggleIconAll);
+            $('.teacher-messages-container').on('click', 'li.all-courses', toggleIconAll);
 
 
             function toggleIconOne(e){
                 $(this).find('span').toggleClass('glyphicon glyphicon-ok checked-course');
-                addOrRemove($(this).attr('course-id'));
+                addOrRemoveOne($(this).attr('course-id'));
                 e.stopPropagation();
             }
 
             function toggleIconAll(e){
-                $('.course-list').find('span').addClass('glyphicon glyphicon-ok checked-course');
-                addAll($('.dropdown-menu .course-list'));
+                let add = $('.teacher-messages-container li.all-courses').hasClass('select-all');
+                addOrRemoveAll($('.dropdown-menu .course-list'), add);
+
+                if(add) {
+                    $('.course-list').find('span').addClass('glyphicon glyphicon-ok checked-course');
+                    $('.teacher-messages-container li.all-courses a').text('Remove All');
+                } else {
+                    $('.course-list').find('span').removeClass('glyphicon glyphicon-ok checked-course');
+                    $('.teacher-messages-container li.all-courses a').text('Select All');
+                }
+
+                $('.teacher-messages-container li.all-courses').toggleClass('select-all remove-all');
                 e.stopPropagation();
             }
 
-            function addAll(courses){
+            function addOrRemoveAll(courses, add){
                 courses.each(function() {
                     let courseId = $(this).attr('course-id');
                     let foundIndex = coursesToPublishTo.indexOf(courseId);
 
                     if (foundIndex > -1) {
-                        return;
+                        if(add){
+                            return;
+                        }
+                        coursesToPublishTo.splice(foundIndex, 1);
                     } else {
-                        coursesToPublishTo.push(courseId);
+                        if(add){
+                            coursesToPublishTo.push(courseId)
+                        }
                     }
                 });
             }
 
-            function addOrRemove(courseId) {
+            function addOrRemoveOne(courseId) {
 				if (!courseId)
 					return;
 
