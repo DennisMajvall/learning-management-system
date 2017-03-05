@@ -107,6 +107,7 @@ class AdminEdit {
 			let teachersToRemove = [];
 			let coursesToRemove = [];
 			let itemsToRemove = $('.admin-search-container a.active');
+			let itemJQuery = $(this).closest('.1234');
 
 			// use .edit-buttons as a referens point to get course
 			let mainItem = getItemIdFromElement($(this));
@@ -115,13 +116,13 @@ class AdminEdit {
 			that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove);
 
 			if(studentsToRemove.length > 0) {
-				that.removeById("Student", studentsToRemove, mainItem, mainItemType, that);
+				that.removeById("Student", studentsToRemove, mainItem, mainItemType, that, itemJQuery);
 			}
 			if(teachersToRemove.length > 0) {
-				that.removeById("Teacher", teachersToRemove, mainItem, mainItemType, that);
+				that.removeById("Teacher", teachersToRemove, mainItem, mainItemType, that, itemJQuery);
 			}
 			if(coursesToRemove.length > 0) {
-				that.removeById("Course", coursesToRemove, mainItem, mainItemType, that);
+				that.removeById("Course", coursesToRemove, mainItem, mainItemType, that, itemJQuery);
 			}
 		});
 	}
@@ -141,7 +142,7 @@ class AdminEdit {
 		});
 	}
 
-	removeById(entity, ids, mainItem, mainItemType, that) {
+	removeById(entity, ids, mainItem, mainItemType, that, itemJQuery) {
 		var plEntity = entity.toLowerCase() + 's';
 		mainItem[plEntity] = mainItem[plEntity].filter(function(item) {
 			let shouldKeep = ids.indexOf(item._id) == -1;
@@ -154,7 +155,7 @@ class AdminEdit {
 		updateObj[plEntity] = mainItem[plEntity];
 
 		window[mainItemType].update(mainItem._id, updateObj, function() {
-			that.reprintTemplate(mainItem, mainItemType);
+			that.reprintTemplate(mainItem, mainItemType, itemJQuery);
 		});
 	}
 
@@ -178,10 +179,12 @@ class AdminEdit {
 		}
 	}
 
-	reprintTemplate(item, itemType) {
+	reprintTemplate(item, itemType, itemJQuery) {
 		// dropdown and courselist creater
 		let haveCourses = (item.courses ? true : false);
 		let haveEducation = (item.education ? true : false);
+
+		console.log("Reprint!");
 
 		if(haveCourses) {
 			let courseIds, queryStringCourses;
@@ -195,7 +198,7 @@ class AdminEdit {
 
 				Course.find(queryStringCourses, (courses, err) => {
 					Education.find(queryStringEducations, (educations, err) => {
-						$('.admin-search-container item').remove().template('admin-edit', {
+						itemJQuery.empty().template('admin-edit', {
 							type: itemType,
 							item: item,
 							dropdowncourses: courses,
@@ -205,18 +208,24 @@ class AdminEdit {
 				});
 			} else {
 				Course.find(queryStringCourses, (courses, err) => {
-					$('.admin-search-container item').remove().template('admin-edit', {
+					itemJQuery.empty().template('admin-edit', {
 						type: itemType,
 						item: item,
 						dropdowncourses: courses
 					});
 				});
 			}
-		} else {				
-			$('.admin-search-container item').remove().template('admin-edit', {
+		} else {	
+			console.log("itemType: ", itemType);
+			console.log("item: ",item);
+			console.log("jQuery: ", itemJQuery);
+
+			itemJQuery.empty().template('admin-edit', {
 				type: itemType,
 				item: item
 			});
+			console.log(itemType);
+			console.log("jQuery2: ", itemJQuery);
 		}
 	}
 }

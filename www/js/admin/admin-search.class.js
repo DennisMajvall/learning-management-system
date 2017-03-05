@@ -38,6 +38,8 @@ class AdminSearch {
     		if(e.target != $(this).children('a')[0])
 				return;
 
+			let templatePlace = $(this).find('.1234');
+
 			$('.edit-mode').removeClass('edit-mode');
 			$(this).addClass('edit-mode');
 
@@ -67,7 +69,7 @@ class AdminSearch {
 
 					Course.find(queryStringCourses, (courses, err) => {
 						Education.find(queryStringEducations, (educations, err) => {
-							$(this).template('admin-edit', {
+							templatePlace.template('admin-edit', {
 								type: that.dbType,
 								item: item,
 								dropdowncourses: courses,
@@ -77,7 +79,7 @@ class AdminSearch {
 					});
 				} else {
 					Course.find(queryStringCourses, (courses, err) => {
-						$(this).template('admin-edit', {
+						templatePlace.template('admin-edit', {
 							type: that.dbType,
 							item: item,
 							dropdowncourses: courses
@@ -85,7 +87,7 @@ class AdminSearch {
 					});
 				}
 			} else {
-				$(this).template('admin-edit', {
+				templatePlace.template('admin-edit', {
 					type: that.dbType,
 					item: item
 				});
