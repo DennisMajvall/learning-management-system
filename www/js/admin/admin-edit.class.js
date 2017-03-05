@@ -7,7 +7,7 @@ class AdminEdit {
 			let item = getItemIdFromElement($(this));
 
 			dbSchema.delete(item._id, () => {
-				location.reload();
+				$(this).closest('li').remove();
 			});
 		});
 
@@ -115,13 +115,13 @@ class AdminEdit {
 			that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove);
 
 			if(studentsToRemove.length > 0) {
-				that.removeById("Student", studentsToRemove, mainItem, mainItemType, that, $(this));
+				that.removeById("Student", studentsToRemove, mainItem, mainItemType, that);
 			}
 			if(teachersToRemove.length > 0) {
-				that.removeById("Teacher", teachersToRemove, mainItem, mainItemType, that, $(this));
+				that.removeById("Teacher", teachersToRemove, mainItem, mainItemType, that);
 			}
 			if(coursesToRemove.length > 0) {
-				that.removeById("Course", coursesToRemove, mainItem, mainItemType, that, $(this));
+				that.removeById("Course", coursesToRemove, mainItem, mainItemType, that);
 			}
 		});
 	}
@@ -141,7 +141,7 @@ class AdminEdit {
 		});
 	}
 
-	removeById(entity, ids, mainItem, mainItemType, that, buttonClicked) {
+	removeById(entity, ids, mainItem, mainItemType, that) {
 		var plEntity = entity.toLowerCase() + 's';
 		mainItem[plEntity] = mainItem[plEntity].filter(function(item) {
 			let shouldKeep = ids.indexOf(item._id) == -1;
@@ -152,16 +152,9 @@ class AdminEdit {
 		});
 		var updateObj = {};
 		updateObj[plEntity] = mainItem[plEntity];
-		let closestItem = elem.closest('item');
-		let aTag = closestItem.parent().children('a');
 
 		window[mainItemType].update(mainItem._id, updateObj, function() {
-			// Close the edit panel.
-			closestItem.remove();
-			$('.edit-mode').removeClass('edit-mode');
-
-			// Re-open the edit panel.
-			aTag.trigger('click');
+			$('a.list-group-item.active').remove();
 		});
 	}
 
