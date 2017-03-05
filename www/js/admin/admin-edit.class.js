@@ -115,13 +115,13 @@ class AdminEdit {
 			that.sortItemsToRemove(itemsToRemove, studentsToRemove, teachersToRemove, coursesToRemove);
 
 			if(studentsToRemove.length > 0) {
-				that.removeById("Student", studentsToRemove, mainItem, mainItemType, that);
+				that.removeById("Student", studentsToRemove, mainItem, mainItemType, that, $(this));
 			}
 			if(teachersToRemove.length > 0) {
-				that.removeById("Teacher", teachersToRemove, mainItem, mainItemType, that);
+				that.removeById("Teacher", teachersToRemove, mainItem, mainItemType, that, $(this));
 			}
 			if(coursesToRemove.length > 0) {
-				that.removeById("Course", coursesToRemove, mainItem, mainItemType, that);
+				that.removeById("Course", coursesToRemove, mainItem, mainItemType, that, $(this));
 			}
 		});
 	}
@@ -141,7 +141,7 @@ class AdminEdit {
 		});
 	}
 
-	removeById(entity, ids, mainItem, mainItemType, that) {
+	removeById(entity, ids, mainItem, mainItemType, that, buttonClicked) {
 		var plEntity = entity.toLowerCase() + 's';
 		mainItem[plEntity] = mainItem[plEntity].filter(function(item) {
 			let shouldKeep = ids.indexOf(item._id) == -1;
@@ -152,9 +152,16 @@ class AdminEdit {
 		});
 		var updateObj = {};
 		updateObj[plEntity] = mainItem[plEntity];
+		let closestItem = elem.closest('item');
+		let aTag = closestItem.parent().children('a');
 
 		window[mainItemType].update(mainItem._id, updateObj, function() {
-			that.reprintTemplate(mainItem, mainItemType);
+			// Close the edit panel.
+			closestItem.remove();
+			$('.edit-mode').removeClass('edit-mode');
+
+			// Re-open the edit panel.
+			aTag.trigger('click');
 		});
 	}
 
@@ -175,48 +182,6 @@ class AdminEdit {
 			});
 			window[entity].update(obj._id, {students: obj.students});
 			window[entity].update(obj._id, {teachers: obj.teachers});
-		}
-	}
-
-	reprintTemplate(item, itemType) {
-		// dropdown and courselist creater
-		let haveCourses = (item.courses ? true : false);
-		let haveEducation = (item.education ? true : false);
-
-		if(haveCourses) {
-			let courseIds, queryStringCourses;
-
-			courseIds = item.courses.map( course => '"' + course._id + '"' );
-			queryStringCourses = 'find/{ _id: { $nin: [' + courseIds + '] } }';
-			
-			if(haveEducation) {
-				let educationId = item.education._id;
-				let queryStringEducations = 'find/{ _id: { $ne: "' + educationId + '" } }';
-
-				Course.find(queryStringCourses, (courses, err) => {
-					Education.find(queryStringEducations, (educations, err) => {
-						$('.admin-search-container item').remove().template('admin-edit', {
-							type: itemType,
-							item: item,
-							dropdowncourses: courses,
-							dropdowneducations: educations
-						});
-					});
-				});
-			} else {
-				Course.find(queryStringCourses, (courses, err) => {
-					$('.admin-search-container item').remove().template('admin-edit', {
-						type: itemType,
-						item: item,
-						dropdowncourses: courses
-					});
-				});
-			}
-		} else {				
-			$('.admin-search-container item').remove().template('admin-edit', {
-				type: itemType,
-				item: item
-			});
 		}
 	}
 }
