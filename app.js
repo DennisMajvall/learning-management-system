@@ -35,7 +35,6 @@ var classesToLoad = {
 	Lesswatch: true,
 	Session: 'module',
 	User: 'module',
-	Owner: 'module',
 	Course: 'module',
 	Teacher: 'module',
 	Admin: 'module',
@@ -80,7 +79,6 @@ app.use((req, res, next)=>{
 });
 
 // Create restroutes to selected classes/mongoose models
-new Restrouter(app, Owner);
 new Restrouter(app, Teacher);
 new Restrouter(app, Student);
 new Restrouter(app, Course);
