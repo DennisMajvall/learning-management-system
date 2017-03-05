@@ -8,6 +8,7 @@ class AdminSearch {
 		this.container = $('.admin-search-container');
 		this.previousInput = '';
 		this.numSearchResults = 0;
+		this.adminEdit = null;
 	}
 
 	init() {
@@ -22,7 +23,8 @@ class AdminSearch {
 
 		this.filter.run('', this.displayItems, this);
 
-		new AdminEdit(this.dbSchema, this.getItemIdFromElement);
+
+		this.adminEdit = new AdminEdit(this.dbSchema, this.getItemIdFromElement);
 
 		new AdminCreate(this.dbSchema, this.dbType);
 
@@ -34,7 +36,7 @@ class AdminSearch {
 		let that = this;
 
 		// on item click
-		this.container.on('click', '.search-list li', function(e) {
+		this.container.on('click', '.search-list > li', function(e) {
     		if(e.target != $(this).children('a')[0])
 				return;
 
@@ -73,6 +75,7 @@ class AdminSearch {
 								dropdowncourses: courses,
 								dropdowneducations: educations
 							});
+							that.adminEdit.initDropdowns(item);
 						});
 					});
 				} else {
@@ -82,6 +85,7 @@ class AdminSearch {
 							item: item,
 							dropdowncourses: courses
 						});
+						that.adminEdit.initDropdowns(item);
 					});
 				}
 			} else {
@@ -89,6 +93,7 @@ class AdminSearch {
 					type: that.dbType,
 					item: item
 				});
+				that.adminEdit.initDropdowns(item);
 			}
 		});
 
@@ -173,12 +178,13 @@ class AdminSearch {
 	getDbSchema() {
 		let schemas = {
 			admin: Admin,
+			announcement: Announcement,
+			booking: Booking,
 			course: Course,
 			education: Education,
 			room: Room,
 			student: Student,
-			teacher: Teacher,
-			booking: Booking
+			teacher: Teacher
 		};
 
 		return schemas[this.dbType];

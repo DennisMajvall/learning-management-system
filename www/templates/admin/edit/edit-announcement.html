@@ -1,5 +1,24 @@
-<input class="form-control " rows="3" bind-key="message"    placeholder="Message content"    value="${item.message}">
-<input type="text" class="form-control" bind-key="timeCreated"   placeholder="Message time"   value="${item.timeCreated}">
-<input type="text" class="form-control" bind-key="author"    placeholder="Author id"    value="${item.author}">
-<input type="text" class="form-control" bind-key="courses" placeholder="Course id" value="${item.courses}">
+<div class="form-group">
+	<textarea cols="100" class="form-control" bind-key="message" placeholder="Message content">${item.message}</textarea>
+</div>
 
+<input type="text" class="form-control" bind-key="timeCreated" placeholder="Message time" value="${item.timeCreated}">
+
+<div>
+	<select class="dropdown-toggle dropdown-single" bind-change="author" dropdown-database="Teacher" data-style="btn btn-default">
+		<option data-id="${item.author._id}">${item.author.firstname} ${item.author.lastname}</option>
+	</select>
+</div>
+
+<div>
+	<button id="dropdown-button" type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+		Select Course &nbsp;<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" dropdown-database="Course" bind-toggle="courses">
+		[repeat item.courses, course]
+			<li bind-toggle="courses" data-id="${course._id}">
+				<a>${course.name}<span class="glyphicon glyphicon-ok checked-course"></span></a>
+			</li>
+		[endrepeat]
+	</ul>
+</div>

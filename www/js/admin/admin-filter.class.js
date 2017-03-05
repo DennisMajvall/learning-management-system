@@ -58,7 +58,6 @@ class AdminFilter {
 	}
 
 	booking(input, callback) {
-
 		return [
 			() => { this.queryWrapper('Booking', `find/{ _limit: ` + this.limit + `, $or: [
 				{ bookedBy: { $regex: /.*` + input + `.*/, $options: "i" } },
@@ -70,8 +69,8 @@ class AdminFilter {
 
 	announcement(input, callback) {
 		return [
-			() => { this.queryWrapper('Booking', `find/{ _limit: ` + this.limit + `, $or: [
-				{ author: { $regex: /.*` + input + `.*/, $options: "i" } }
+			() => { this.queryWrapper('Announcement', `find/{ _limit: ` + this.limit + `, $or: [
+				{ message: { $regex: /.*` + input + `.*/, $options: "i" } }
 				]}`, callback); }
 		];
 	}

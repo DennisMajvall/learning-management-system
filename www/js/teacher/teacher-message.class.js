@@ -22,15 +22,12 @@ class TeacherMessage {
         }
 
         function createEventListeners() {
-            $('.teacher-messages-container')
-             .on('click', '.send-button', makeAnnouncement);
+            $('.teacher-messages-container').on('click', '.send-button', makeAnnouncement);
 
             // Select a Course
-            $('.teacher-messages-container')
-             .on('click', 'li.course-list', toggleIconOne);
+            $('.teacher-messages-container').on('click', 'li.course-list', toggleIconOne);
 
-            $('.teacher-messages-container')
-             .on('click', 'li.select-all', toggleIconAll);
+            $('.teacher-messages-container').on('click', 'li.select-all', toggleIconAll);
 
 
             function toggleIconOne(e){

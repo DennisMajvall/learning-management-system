@@ -15,7 +15,7 @@
 			<p>${item.date.substring(0,10)} From: ${(item.timeFrom.substring(11,16))} To ${item.timeTo.substring(11,16)}</p>
 		[else if type == "announcement"]
 			<a>${item.message.substring(0,25)} ...</a>
-			<p>${item.courses[0].name} , ${item.timeCreated.substring(0,10)}</p>
+			<span>${item.timeCreated.substring(0,10)}</span>
 		[endif]
 	</li>
 [endrepeat]
@@ -36,6 +36,9 @@
 			[else if type == "booking"]
 				<a>${itemArray.name}</a>
 				<p>${item.date.substring(0,10)} From: ${(item.timeFrom.substring(11,16))} To ${item.timeTo.substring(11,16)}</p>
+			[else if type == "announcement"]
+				<a>${item.message.substring(0,25)} ...</a>
+				<span>${item.timeCreated.substring(0,10)}</span>
 			[endif]
 		</li>
 	[endrepeat]

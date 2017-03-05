@@ -1,7 +1,12 @@
-<input type="text" class="form-control" bind-key="room"    placeholder="Room id"    value="${item.room}">
-<input type="text" class="form-control" bind-key="course"   placeholder="Course id"   value="${item.course}">
-<input type="text" class="form-control" bind-key="date"    placeholder="Booking date"    value="${item.date}">
+<div><select class="dropdown-toggle dropdown-single" bind-change="room" dropdown-database="Room" data-style="btn btn-default">
+	<option data-id="${item.room._id}">${item.room.name}</option>
+</select></div>
+<div><select class="dropdown-toggle dropdown-single" bind-change="course" dropdown-database="Course" data-style="btn btn-default">
+	<option data-id="${item.course._id}">${item.course.name}</option>
+</select></div>
+
+<input type="text" class="form-control" bind-key="date" placeholder="Booking date" value="${item.date}">
 <input type="text" class="form-control" bind-key="timeFrom" placeholder="Booking start time" value="${item.timeFrom}">
-<input type="text" class="form-control" bind-key="timeTo"    placeholder="Booking end time"      value="${item.timeTo}">
-<input type="text" class="form-control" bind-key="bookedBy"    placeholder="Booked by"    value="${item.bookedBy}">
-<input type="text" class="form-control" bind-key="type"    placeholder="Type of activity"    value="${item.type}">
+<input type="text" class="form-control" bind-key="timeTo" placeholder="Booking end time" value="${item.timeTo}">
+<input type="text" class="form-control" bind-key="bookedBy" placeholder="Booked by" value="${item.bookedBy}">
+<input type="text" class="form-control" bind-key="type" placeholder="Type of activity" value="${item.type}">
